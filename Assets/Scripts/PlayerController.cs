@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
 
-    private bool isInWaypoint;
+    bool isInWaypoint = true;
 
     Rigidbody2D rb2D;
 
@@ -30,14 +29,15 @@ public class PlayerController : MonoBehaviour
     private GameObject arrowiks;
 
 
-    public float ejectForce = 1;
+    [SerializeField]
+    private float ejectForce = 1;
+
     Vector3 kekVec = new Vector3(0, 0.46f, 0);
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        isInWaypoint = false;
     }
 
     // Update is called once per frame
@@ -67,8 +67,9 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if (Input.GetKey(KeyCode.Space) || Input.touchCount == 1)
+        if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 1) && isInWaypoint)
         {
+            isInWaypoint = !isInWaypoint;
             arrowiks.SetActive(false);
 
             rb2D.constraints = RigidbodyConstraints2D.None;
@@ -120,11 +121,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
+        //collision.GetComponent<GameObject>().SetActive(false);
         arrowiks.SetActive(true);
         rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
         AdjustStartingPoint();
         isInWaypoint = true;
 	}
+
 	private void OnCollisionEnter(Collision collision)
 	{
 
