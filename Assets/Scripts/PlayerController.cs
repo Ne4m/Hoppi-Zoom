@@ -125,5 +125,13 @@ public class PlayerController : MonoBehaviour
         AdjustStartingPoint();
         isInWaypoint = true;
 	}
+	private void OnCollisionEnter(Collision collision)
+	{
+
+        //Vector3 reflect = Vector3.Reflect(Vector3.right, collision.contacts[0].normal);
+        //float rot = 90 - Mathf.Atan2(reflect.z, reflect.x) * Mathf.Rad2Deg;
+        //transform.eulerAngles = new Vector3(0, 0, rot);
+
+	}
 
 }
