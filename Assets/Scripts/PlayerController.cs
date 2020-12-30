@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Z: " + transform.rotation.z +"\n");
 
         if (tr.rotation.z == -0.0008726012) atMid = true;
-        moveArrow();
+        
 
         if (Input.GetKey(KeyCode.R) || Input.touchCount == 2)
         {
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        moveArrow();
         getCast();
     }
 
