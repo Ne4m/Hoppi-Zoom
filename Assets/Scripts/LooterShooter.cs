@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LooterShooter : MonoBehaviour
 {
-   // [SerializeField]
+
+
     public float rotateSpeed = 100;
 
 
     public Vector3 rot;
+
 
     public bool atMid = true;
     public bool goingLeft = true;
@@ -19,19 +21,27 @@ public class LooterShooter : MonoBehaviour
     private Transform tr;
 
     [SerializeField]
+    private Transform character;
+
+    [SerializeField]
     private Rigidbody2D rb2D;
 
 
     public float ejectForce = 1;
-
-    public Vector3 kekVec = new Vector3(0, 0.46f, 0);
+    Vector3 kekVec = new Vector3(0, 0.46f, 0);
 
 
 
     // Start is called before the first frame update
     void Start()
     {
- 
+
+    }
+
+   public void setStartingVec()
+    {
+        Debug.LogWarning("X: " + character.transform.position.x + " Y: " + character.transform.position.y);
+        transform.transform.position = new Vector3(character.transform.position.x, character.transform.position.y + 0.19f, 0);
     }
 
     // Update is called once per frame
@@ -56,7 +66,7 @@ public class LooterShooter : MonoBehaviour
 
     void getCast()
     {
-
+        
         Vector3 upVector = tr.TransformDirection(Vector2.up) * 10;
         Debug.DrawRay(tr.position, upVector, Color.green);
 
@@ -64,6 +74,8 @@ public class LooterShooter : MonoBehaviour
         {
             upVector = upVector - kekVec;
             rb2D.AddForce(upVector * ejectForce * Time.fixedDeltaTime);
+
+
         }
 
     }
@@ -96,4 +108,6 @@ public class LooterShooter : MonoBehaviour
         Debug.Log("Going Left: " + goingLeft + " Going Right " + goingRight);
 
     }
+
+
 }
