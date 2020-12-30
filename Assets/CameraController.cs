@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
 
 		if (!isInDistance)
 		this.transform.position = new Vector3(this.transform.position.x, Mathf.Lerp(this.transform.position.y, desiredPos.y, Time.fixedDeltaTime * cameraFollowSpeed), this.transform.position.z);
-		Debug.Log("IS IN THE DISTANCE " + isInDistance);
+		//Debug.Log("IS IN THE DISTANCE " + isInDistance);
 	}
 
 }

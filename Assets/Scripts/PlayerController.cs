@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class PlayerController : MonoBehaviour
 {
 
@@ -28,16 +27,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject arrowiks;
 
-
-    [SerializeField]
-    private float ejectForce = 1;
-
     Vector3 kekVec = new Vector3(0, 0.46f, 0);
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    #region Speed Variables
+    [SerializeField]
+    private float ejectForce = 1;
+    [SerializeField]
+    private float playerRotSpeed=10;
+	#endregion
+
+	private void Awake()
+	{
         rb2D = GetComponent<Rigidbody2D>();
+    }
+
+	void Start()
+    {
+        AdjustStartingPoint();
+        isInWaypoint = true;
     }
 
     // Update is called once per frame
@@ -56,12 +63,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        moveArrow();
-        getCast();
+        MoveArrow();
+        GetCast();
+        GetRotAccordingtoVelocity();
     }
 
     Quaternion slowRot;
-    void getCast()
+    void GetCast()
     {
 
         Vector3 upVector = tr.TransformDirection(Vector2.up) * 10;
@@ -77,13 +85,14 @@ public class PlayerController : MonoBehaviour
             upVector = upVector - kekVec;
             rb2D.AddForce(upVector * ejectForce * Time.fixedDeltaTime);
 
-            slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * 10);
+            slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
             rb2D.MoveRotation(slowRot);
+
         }
 
     }
 
-    void moveArrow()
+    void MoveArrow()
     {
         if (goingLeft && !goingRight)
         {
@@ -108,7 +117,7 @@ public class PlayerController : MonoBehaviour
             else tr.Rotate(0, 0, rotateSpeed * Time.deltaTime * -1);
         }
 
-        Debug.Log("Going Left: " + goingLeft + " Going Right " + goingRight);
+        //Debug.Log("Going Left: " + goingLeft + " Going Right " + goingRight);
 
     }
 
@@ -131,11 +140,31 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-
-        //Vector3 reflect = Vector3.Reflect(Vector3.right, collision.contacts[0].normal);
-        //float rot = 90 - Mathf.Atan2(reflect.z, reflect.x) * Mathf.Rad2Deg;
-        //transform.eulerAngles = new Vector3(0, 0, rot);
+		//vector3 reflect = vector3.reflect(vector3.right, collision.contacts[0].normal);
+		//float rot = 90 - mathf.atan2(reflect.z, reflect.x) * mathf.rad2deg;
+		//transform.eulerangles = new vector3(0, 0, rot);
 
 	}
 
+    void GetRotAccordingtoVelocity()
+	{
+		if (!isInWaypoint)
+		{
+            Vector2 velocity = rb2D.velocity;
+            float desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
+            Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle, Vector3.forward);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, rotateSpeed * Time.fixedDeltaTime);
+
+        }
+        else if (isInWaypoint)
+		{
+            Quaternion stopRot = Quaternion.Euler(0, 0,90);
+            transform.rotation = Quaternion.Lerp(transform.rotation, stopRot, playerRotSpeed*2*Time.fixedDeltaTime);
+            //Debug.Log("Accessed");
+		}
+
+        //Debug.Log("Is In Waypoint" +isInWaypoint);
+
+    }
 }
