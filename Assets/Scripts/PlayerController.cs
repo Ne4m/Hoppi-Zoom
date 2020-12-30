@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void readJustStartingPoint()
+    void AdjustStartingPoint()
     {
         ejector.transform.position = new Vector3(rb2D.transform.position.x, rb2D.transform.position.y + 0.19f, 0);
         transform.rotation = new Quaternion(0,0,0,0);
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 	{
         arrowiks.SetActive(true);
         rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        readJustStartingPoint();
+        AdjustStartingPoint();
         isInWaypoint = true;
 	}
 
