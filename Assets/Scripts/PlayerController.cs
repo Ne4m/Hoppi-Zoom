@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (tr.rotation.z == -0.0008726012) atMid = true;
         moveArrow();
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R) || Input.touchCount == 2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.touchCount == 1)
         {
             arrowiks.SetActive(false);
 
