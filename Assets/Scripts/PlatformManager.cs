@@ -14,24 +14,53 @@ public class PlatformManager : MonoBehaviour
         */
 	}
 
-    private List<Transform> easyPlatforms = new List<Transform>();
-    private List<Transform> normalPlatforms = new List<Transform>();
-    private List<Transform> hardPlatforms = new List<Transform>();
+    #region Platform #1 Parents
+    private List<Transform> easyPlatformOneParents = new List<Transform>();
+    private List<Transform> normalPlatformOneParents = new List<Transform>();
+    private List<Transform> hardPlatformOneParents = new List<Transform>();
+    #endregion
+
+    #region Difficulty
+    [SerializeField]
+    private float easyOneDistance;
+    [SerializeField]
+    private float normalOneDistance;
+    [SerializeField]
+    private float hardOneDistance;
+    //------------------------------
+    [SerializeField]
+    private float easyOnePlatformSpeed = 5f;
+
+
+    #endregion
+
+    private Transform[] easyPlatformsOne;
+    private Transform[] normalPlatformsOne;
+    private Transform[] hardPlatformsOne;
 
     [HideInInspector]
     public float childrenRefreshTime =5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	private void Awake()
+	{
         GetAllChildren();
+        easyPlatformsOne = new Transform[2];
+        normalPlatformsOne = new Transform[2];
+        hardPlatformsOne = new Transform[2];
+    }
+	// Start is called before the first frame update
+	void Start()
+    {
+        
+        GetEasyOneChildren();
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        //MoveEasyOne();
+        //GetEasyOne();
+        MoveEasyOne();
     }
     void GetAllChildren()
 	{
@@ -41,15 +70,18 @@ public class PlatformManager : MonoBehaviour
             child = transform.GetChild(i);
             if (child.tag.Contains("Easy"))
             {
-                easyPlatforms.Add(child);
+                if(child.tag.Contains("1"))
+                easyPlatformOneParents.Add(child);
             }
             else if (child.tag.Contains("Normal"))
             {
-                normalPlatforms.Add(child);
+                if (child.tag.Contains("1"))
+                normalPlatformOneParents.Add(child);
             }
             else if (child.tag.Contains("Hard"))
             {
-                hardPlatforms.Add(child);
+                if (child.tag.Contains("1"))
+                hardPlatformOneParents.Add(child);
             }
             else
             {
@@ -60,23 +92,75 @@ public class PlatformManager : MonoBehaviour
     }
 
 
-    void MoveEasyOne()
+    void GetEasyOneChildren()
 	{
-        
-        if (easyPlatforms.Count <= 0)
+        if (easyPlatformOneParents.Count <= 0)
             return;
         
-        Transform childTransform;
-        for (int i =0; i< easyPlatforms.Count+1; i++)
+        for (int i =0; i< easyPlatformOneParents.Count+1; i++)
 		{
-            for(int z = 0; z < easyPlatforms[i].childCount; z++)
+            for(int z = 0; z < easyPlatformOneParents[i].childCount; z++)
 			{
-                childTransform = easyPlatforms[i].GetChild(z);
-                print(childTransform);
+                easyPlatformsOne[0] = easyPlatformOneParents[i].GetChild(0);
+                easyPlatformsOne[1] = easyPlatformOneParents[i].GetChild(1);
             }
-            
 		}
 	}
+
+    private bool moveEasyOneIsClosingGap;
+    void MoveEasyOne()
+	{
+        //bool isClosingGap;
+
+        if (easyPlatformsOne[0] == null || easyPlatformsOne[1] == null || easyPlatformsOne == null)
+		{
+            GetEasyOneChildren();
+            Debug.LogError("Platforms Retrieved");
+        }
+        Vector3 left = easyPlatformsOne[0].position;
+        Vector3 right = easyPlatformsOne[1].position;
+
+        float distance = Vector2.Distance(left, right);
+        Vector3 leftScreenPos = Camera.main.WorldToScreenPoint(left);
+        Vector3 rightScreenPos = Camera.main.WorldToScreenPoint(right); // -Screen.width
+        Debug.Log("LEFT  " + leftScreenPos);
+        Debug.Log("RIGHT  " + rightScreenPos);
+
+        if(leftScreenPos.x < 100 && rightScreenPos.x - Screen.width < 100)
+		{
+            moveEasyOneIsClosingGap = true; 
+        }
+        else if(distance < easyOneDistance)
+		{
+            moveEasyOneIsClosingGap = false;	
+		}
+		
+        if (moveEasyOneIsClosingGap)
+		{
+            left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
+            right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
+		}
+		else
+		{
+            left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
+            right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
+        }
+
+        easyPlatformsOne[0].position = left;
+        easyPlatformsOne[1].position = right;
+    }
+
+    void GetMostLeftSide()
+	{
+        //Gets the most left side of the visible screen
+
+	}
+
+    void GetMostRightSide()
+    {
+        //Gets the most right side of the visible screen
+
+    }
 
     /*
     IEnumerator GetAllChildrenCoroutine()
