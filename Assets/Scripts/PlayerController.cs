@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform backgrounds;
+    int count;
 
     bool isInWaypoint = true;
 
@@ -39,6 +41,9 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
         rb2D = GetComponent<Rigidbody2D>();
+
+        backgrounds = GetComponent<Transform>();
+        count = backgrounds.childCount;
     }
 
 	void Start()
@@ -131,20 +136,30 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-        //collision.GetComponent<GameObject>().SetActive(false);
-        arrowiks.SetActive(true);
-        rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
-        AdjustStartingPoint();
-        isInWaypoint = true;
+        if (collision.tag == "Checkpoint")
+        {
+            arrowiks.SetActive(true);
+            rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+            AdjustStartingPoint();
+            isInWaypoint = true;
+        }
+
+        if(collision.tag == "Background")
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), backgrounds.GetChild(i).GetComponent<Collider2D>());
+            }
+        }
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		//vector3 reflect = vector3.reflect(vector3.right, collision.contacts[0].normal);
-		//float rot = 90 - mathf.atan2(reflect.z, reflect.x) * mathf.rad2deg;
-		//transform.eulerangles = new vector3(0, 0, rot);
+        //vector3 reflect = vector3.reflect(vector3.right, collision.contacts[0].normal);
+        //float rot = 90 - mathf.atan2(reflect.z, reflect.x) * mathf.rad2deg;
+        //transform.eulerangles = new vector3(0, 0, rot);
 
-	}
+    }
 
     void GetRotAccordingtoVelocity()
 	{
