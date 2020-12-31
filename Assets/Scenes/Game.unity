@@ -1177,6 +1177,8 @@ MonoBehaviour:
   normalOneDistance: 1
   hardOneDistance: 1
   easyOnePlatformSpeed: 0.5
+  normalOnePlatformSpeed: 1
+  hardOnePlatformSpeed: 1
   childrenRefreshTime: 5
 --- !u!1 &1209170967
 GameObject:
@@ -2020,7 +2022,7 @@ GameObject:
   - component: {fileID: 1880487560}
   m_Layer: 0
   m_Name: P_Normal_1
-  m_TagString: P_Easy_1
+  m_TagString: P_Normal_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2133,7 +2135,7 @@ GameObject:
   - component: {fileID: 2003853225}
   m_Layer: 0
   m_Name: P_Hard_1
-  m_TagString: P_Easy_1
+  m_TagString: P_Hard_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
