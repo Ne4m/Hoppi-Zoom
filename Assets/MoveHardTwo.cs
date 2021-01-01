@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveEasyTwo : MonoBehaviour
+public class MoveHardTwo : MonoBehaviour
 {
     private Transform[] children = new Transform[2];
     private bool isMovingRight;
@@ -18,7 +18,7 @@ public class MoveEasyTwo : MonoBehaviour
     private void Start()
     {
         GetChildren();
-        
+
         firstMove = Random.Range(0, 1);
 
         ArrangeDistanceAtStart();
@@ -26,7 +26,7 @@ public class MoveEasyTwo : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
         MoveChildren();
     }
 
@@ -46,28 +46,29 @@ public class MoveEasyTwo : MonoBehaviour
         Vector3 leftScreenPos = Camera.main.WorldToScreenPoint(left);
         Vector3 rightScreenPos = Camera.main.WorldToScreenPoint(right);
 
-        if(firstMove != 0)
-		{
+        if (firstMove != 0)
+        {
             Debug.Log(firstMove);
             isMovingRight = true;
-		}
+        }
 
-        if (Mathf.Abs(rightScreenPos.x - Screen.width)< 100 )
+        if (Mathf.Abs(rightScreenPos.x - Screen.width) < 100)
         {
             isMovingRight = false;
-        }else if(leftScreenPos.x < 100)
-		{
+        }
+        else if (leftScreenPos.x < 100)
+        {
             isMovingRight = true;
-		}
+        }
 
-		if (isMovingRight)
-		{
+        if (isMovingRight)
+        {
             left += new Vector3(platformSpeed * Time.fixedDeltaTime, 0, 0);
             right += new Vector3(platformSpeed * Time.fixedDeltaTime, 0, 0);
-		}
-		else
-		{
-            left += new Vector3(platformSpeed * Time.fixedDeltaTime * -1 , 0, 0);
+        }
+        else
+        {
+            left += new Vector3(platformSpeed * Time.fixedDeltaTime * -1, 0, 0);
             right += new Vector3(platformSpeed * Time.fixedDeltaTime * -1, 0, 0);
         }
 
