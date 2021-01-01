@@ -81,13 +81,8 @@ public class MoveEasyTwo : MonoBehaviour
 
         if (manualDistance < moveDistance)
         {
-            children[0].position = new Vector3((moveDistance / 2) * -1, children[1].position.y, 0);
+            children[0].position = new Vector3(moveDistance / 2 * -1, children[1].position.y, 0);
             children[1].position = new Vector3(moveDistance / 2, children[1].position.y, 0);
-        }
-        else if (manualDistance > moveDistance)
-        {
-            children[0].position = new Vector3(moveDistance / 2, children[1].position.y, 0);
-            children[1].position = new Vector3((moveDistance / 2) * -1, children[1].position.y, 0);
         }
     }
 }
