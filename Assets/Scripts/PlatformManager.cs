@@ -16,8 +16,6 @@ public class PlatformManager : MonoBehaviour
 
     #region Platform #1 Parents
     private List<Transform> easyPlatformOneParents = new List<Transform>();
-    private List<Transform> easyOneLefts = new List<Transform>();
-    private List<Transform> easyOneRights = new List<Transform>();
     private List<Transform> normalPlatformOneParents = new List<Transform>();
     private List<Transform> hardPlatformOneParents = new List<Transform>();
     #endregion
@@ -69,7 +67,7 @@ public class PlatformManager : MonoBehaviour
     void Update()
     {
         //GetEasyOne();
-        //MoveEasyOne();
+        MoveEasyOne();
         MoveNormalOne();
         MoveHardOne();
     }
@@ -161,7 +159,7 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    /*
+
     private bool moveEasyOneIsClosingGap;
     void MoveEasyOne()
 	{
@@ -172,31 +170,8 @@ public class PlatformManager : MonoBehaviour
             Debug.LogError("Platforms Retrieved");
         }
         if (easyPlatformsOne.Count > 2)
-		{
             Debug.LogError("Excessive Count");
 
-            //assign the first one and the one + 2 to the left
-			for(int i = 0; i < easyPlatformsOne.Count; i+=2 )
-			{
-                easyOneLefts.Add(easyPlatformsOne[i]);
-			}
-
-            //assign the second one and the one +2 to the right
-            for (int i = 1; i < easyPlatformsOne.Count; i += 2)
-            {
-                easyOneRights.Add(easyPlatformsOne[i]);
-            }
-
-        }
-
-        for(int i =0; i< easyOneRights.Count; i++)
-		{
-            
-        }
-        
-
-
-        //-------------------------------------------------------------------------------------------
         Vector3 left = easyPlatformsOne[0].position;
         Vector3 right = easyPlatformsOne[1].position;
 
@@ -217,51 +192,19 @@ public class PlatformManager : MonoBehaviour
 		
         if (moveEasyOneIsClosingGap)
 		{
-            foreach (Transform transform in easyOneRights)
-			{
-                //transform.position = 
-            }
-            foreach(Transform transform1 in easyOneLefts)
-			{
-                //transform1.position = 
-            }
-
-            for(int i = 0; i<easyOneLefts.Count; i++)
-			{
-                easyOneLefts[i].position += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
-                print("Srlamın aleyküm" + easyOneLefts[2].position);
-            }
-
-            for (int i = 0; i < easyOneLefts.Count; i++)
-            {
-                easyOneLefts[i].position += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
-            }
-
-            //------
-            //left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
-            //right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
-        }
+            left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
+            right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
+		}
 		else
 		{
-            foreach (Transform transform in easyOneRights)
-            {
-                transform.position+= new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
-            }
-            foreach (Transform transform1 in easyOneLefts)
-            {
-                transform1.position += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
-            }
-
-            
-            //------------
-            //left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
-            //right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
+            left += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime * -1, 0, 0);
+            right += new Vector3(easyOnePlatformSpeed * Time.fixedDeltaTime, 0, 0);
         }
 
         easyPlatformsOne[0].position = left;
         easyPlatformsOne[1].position = right;
     }
-    */
+
     private bool moveNormalOneIsClosingGap;
     void MoveNormalOne()
 	{
