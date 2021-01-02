@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     private GameObject arrowiks;
 
     Vector3 kekVec = new Vector3(0, 0.46f, 0);
-    LevelManager LM;
 
     #region Speed Variables
     [SerializeField]
@@ -49,10 +48,8 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
     {
-        LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
         AdjustStartingPoint();
         isInWaypoint = true;
-        LM.playerUpdate(true);
     }
 
     // Update is called once per frame
@@ -84,9 +81,8 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 1) && LM.playerCheck()) // isInWaypoint
+        if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 1) && isInWaypoint)
         {
-            LM.playerUpdate(false);
             isInWaypoint = !isInWaypoint;
             arrowiks.SetActive(false);
 
@@ -146,9 +142,6 @@ public class PlayerController : MonoBehaviour
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
             AdjustStartingPoint();
             isInWaypoint = true;
-
-            LM.playerUpdate(true);
-            LM.playerCollided();
         }
 
         if(collision.tag == "Background")
@@ -170,8 +163,8 @@ public class PlayerController : MonoBehaviour
 
     void GetRotAccordingtoVelocity()
 	{
-		if (!LM.playerCheck()) //!isInWaypoint
-        {
+		if (!isInWaypoint)
+		{
             Vector2 velocity = rb2D.velocity;
             float desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
             Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle, Vector3.forward);
@@ -179,7 +172,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, rotateSpeed * Time.fixedDeltaTime);
 
         }
-        else if (LM.playerCheck()) // isInWayPoint
+        else if (isInWaypoint)
 		{
             Quaternion stopRot = Quaternion.Euler(0, 0,90);
             transform.rotation = Quaternion.Lerp(transform.rotation, stopRot, playerRotSpeed*2*Time.fixedDeltaTime);
