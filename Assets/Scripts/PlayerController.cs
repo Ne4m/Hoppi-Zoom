@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour
         LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
         AdjustStartingPoint();
         isInWaypoint = true;
-        LM.playerUpdate(true);
+        //LM.playerUpdate(true);
+        LM.playerControl.setPlayerCheckPoint(true);
     }
 
     // Update is called once per frame
@@ -84,9 +85,10 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 1) && LM.playerCheck()) // isInWaypoint
+        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && LM.playerControl.IsPlayerInCheckPoint()) // isInWaypoint LM.playerCheck()
         {
-            LM.playerUpdate(false);
+            //LM.playerUpdate(false);
+            LM.playerControl.setPlayerCheckPoint(false);
             isInWaypoint = !isInWaypoint;
             arrowiks.SetActive(false);
 
@@ -142,13 +144,18 @@ public class PlayerController : MonoBehaviour
 	{
         if (collision.tag == "Checkpoint")
         {
+            
             arrowiks.SetActive(true);
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
             AdjustStartingPoint();
             isInWaypoint = true;
 
-            LM.playerUpdate(true);
-            LM.playerCollided();
+            Collider2D collider = collision.GetComponent<Collider2D>();
+            collider.enabled = false;
+
+            //LM.playerUpdate(true);
+            LM.playerControl.setPlayerCheckPoint(true);
+            LM.player_EnteredCheckpoint();
         }
 
         if(collision.tag == "Background")
@@ -170,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
     void GetRotAccordingtoVelocity()
 	{
-		if (!LM.playerCheck()) //!isInWaypoint
+		if (!LM.playerControl.IsPlayerInCheckPoint()) //!isInWaypoint !LM.playerCheck()
         {
             Vector2 velocity = rb2D.velocity;
             float desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
@@ -179,7 +186,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, rotateSpeed * Time.fixedDeltaTime);
 
         }
-        else if (LM.playerCheck()) // isInWayPoint
+        else if (LM.playerControl.IsPlayerInCheckPoint()) // isInWayPoint
 		{
             Quaternion stopRot = Quaternion.Euler(0, 0,90);
             transform.rotation = Quaternion.Lerp(transform.rotation, stopRot, playerRotSpeed*2*Time.fixedDeltaTime);
