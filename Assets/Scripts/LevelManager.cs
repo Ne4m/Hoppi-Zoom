@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.UI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -15,12 +16,19 @@ public class LevelManager : MonoBehaviour
     private GameObject new_CheckPoint;
     private GameObject last_CheckPoint;
 
+    [SerializeField]
+    private GameObject deathScreen;
+
+    [SerializeField]
+    private GameObject playerEjectorArrow;
+
     public TMP_Text point_text;
+    public TMP_Text death_text;
 
     private bool isINCP;
 
-    [SerializeField]
-    private int point = 0;
+    //[SerializeField]
+    //private int point = 0;
 
     private GameObject[] spawnedObjects = new GameObject[2];
 
@@ -28,6 +36,7 @@ public class LevelManager : MonoBehaviour
     public struct GameInfo
     {
         private bool isINCP;
+        private bool isDead;
         private int point;
         private int level;
         private int health;
@@ -43,6 +52,16 @@ public class LevelManager : MonoBehaviour
         public void setPlayerCheckPoint(bool c)
         {
             this.isINCP = c;
+        }
+
+        public void setPlayerDeadStatus(bool isDead)
+        {
+            this.isDead = isDead;
+        }
+
+        public bool isPlayerDead()
+        {
+            return isDead;
         }
 
         // Point & Level Stuff
@@ -101,6 +120,15 @@ public class LevelManager : MonoBehaviour
 
             if(amount > 0 && amount < 100) this.health -= amount;
         }
+
+        // Game Restart
+        public void restartPlayerStats()
+        {
+            this.point = 0;
+            this.level = 0;
+            this.isINCP = true;
+            this.health = 100;
+        }
     }
 
     public GameInfo playerControl;
@@ -115,11 +143,12 @@ public class LevelManager : MonoBehaviour
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
 
         point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
+
+        playerControl.setPlayerDeadStatus(false);
     }
 
     private void Awake()
     {
-        //isINCP = true;
 
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
@@ -130,32 +159,35 @@ public class LevelManager : MonoBehaviour
     {
 
         //playerControl.addPoint(5);
-        Debug.Log("Current Point is: " + playerControl.getPoint().ToString());
+        //Debug.Log("Current Point is: " + playerControl.getPoint().ToString());
 
-        point_text.text = ("Point: " + playerControl.getPoint().ToString());
+        point_text.text = ("Score: " + playerControl.getPoint().ToString());
 
-        //if(point >= 0)
-        //{
-        //    point_text.SetText("Point : " + point.ToString());
-        //}
+        if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead())
+        {
+            playerControl.setPlayerDeadStatus(true);
+            player.GetComponent<SpriteRenderer>().enabled = false;
+            if(playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
+            if(deathScreen != null) deathScreen.SetActive(true);
 
-        //point_text.SetText("Mahmut");
-
+            death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
+            death_text.text = "Score: " + playerControl.getPoint().ToString();
+        }
     }
 
 
+    public void restartGame()
+    {
+        playerControl.setPlayerDeadStatus(false);
+        if (deathScreen != null) deathScreen.SetActive(false);
+        player.GetComponent<SpriteRenderer>().enabled = true;
+        if (playerEjectorArrow != null) playerEjectorArrow.SetActive(true);
 
-    //public void playerUpdate(bool CP_Status)
-    //{
-    //    //isINCP = CP_Status;
-    //    playerControl.setPlayerCheckPoint(CP_Status);
-    //    Debug.Log("Check Point Status: " + isINCP);
-    //}
+        // SAVE PLAYER STATS HERE
+        playerControl.restartPlayerStats();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
-    //public bool playerCheck()
-    //{
-    //    return isINCP;
-    //}
 
     public void player_EnteredCheckpoint()
     {
@@ -163,12 +195,9 @@ public class LevelManager : MonoBehaviour
 
         playerControl.addPoint(1);
 
+        
     }
 
-    //public float get_Player_Point()
-    //{
-    //    return point;
-    //}
 
     void spawn_NextCheckpoint()
     {

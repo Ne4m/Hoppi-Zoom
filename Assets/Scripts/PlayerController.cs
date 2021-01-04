@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool atMid = true;
     public bool goingLeft = true;
     public bool goingRight = false;
+    public bool isPlayerDead;
 
     [SerializeField]
     private Transform tr;
@@ -68,6 +69,8 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        isPlayerDead = LM.playerControl.isPlayerDead();
     }
 
     private void FixedUpdate()
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && LM.playerControl.IsPlayerInCheckPoint()) // isInWaypoint LM.playerCheck()
+        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && LM.playerControl.IsPlayerInCheckPoint() && !isPlayerDead) // isInWaypoint LM.playerCheck()
         {
             //LM.playerUpdate(false);
             LM.playerControl.setPlayerCheckPoint(false);
