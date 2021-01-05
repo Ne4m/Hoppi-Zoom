@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 
 public class LevelManager : MonoBehaviour
@@ -38,6 +39,7 @@ public class LevelManager : MonoBehaviour
         private bool isINCP;
         private bool isDead;
         private int point;
+        private int highScore;
         private int level;
         private int health;
         private int body, reflexes, intelligence, technical_ability, cool, constitution;
@@ -133,6 +135,14 @@ public class LevelManager : MonoBehaviour
 
     public GameInfo playerControl;
 
+    private void Awake()
+    {
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
+
+        playerControl.setPlayerCheckPoint(true);
+        playerControl.setPoint(0);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -145,14 +155,20 @@ public class LevelManager : MonoBehaviour
         point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
 
         playerControl.setPlayerDeadStatus(false);
+
+        //Social.localUser.Authenticate(
+        //        (bool success) =>
+        //        {
+
+        //        }
+        //    );
+
+        //playerControl.setPoint(PlayerPrefs.GetInt("point", 0));
+
+        Debug.Log("Your Highest Score Was " + PlayerPrefs.GetInt("highScore", 0));
     }
 
-    private void Awake()
-    {
 
-        playerControl.setPlayerCheckPoint(true);
-        playerControl.setPoint(0);
-    }
 
 
     void Update()
@@ -161,9 +177,15 @@ public class LevelManager : MonoBehaviour
         //playerControl.addPoint(5);
         //Debug.Log("Current Point is: " + playerControl.getPoint().ToString());
 
-        point_text.text = ("Score: " + playerControl.getPoint().ToString());
+        if (Input.GetKey(KeyCode.Y) && !playerControl.isPlayerDead())
+        {
+            PlayerPrefs.DeleteKey("highScore");
+            print("High Score Cleared");
+        }
 
-        if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead())
+            point_text.text = ("Score: " + playerControl.getPoint().ToString());
+
+        if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead()) // Future Death Detection
         {
             playerControl.setPlayerDeadStatus(true);
             player.GetComponent<SpriteRenderer>().enabled = false;
@@ -172,6 +194,16 @@ public class LevelManager : MonoBehaviour
 
             death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
             death_text.text = "Score: " + playerControl.getPoint().ToString();
+
+
+            // SAVE PLAYER STATS HERE
+            if (playerControl.getPoint() > PlayerPrefs.GetInt("highScore", 0))
+            {
+                PlayerPrefs.SetInt("highScore", playerControl.getPoint());
+                PlayerPrefs.Save();
+                Debug.Log("New Highscore!!! " + playerControl.getPoint());
+
+            }
         }
     }
 
@@ -183,9 +215,9 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = true;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(true);
 
-        // SAVE PLAYER STATS HERE
+
         playerControl.restartPlayerStats();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //.buildIndex
     }
 
 
