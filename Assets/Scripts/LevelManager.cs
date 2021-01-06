@@ -185,28 +185,42 @@ public class LevelManager : MonoBehaviour
 
             point_text.text = ("Score: " + playerControl.getPoint().ToString());
 
+        checkDeathMenu();
+    }
+    
+    public void checkDeathMenu()
+    {
         if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead()) // Future Death Detection
         {
-            playerControl.setPlayerDeadStatus(true);
-            player.GetComponent<SpriteRenderer>().enabled = false;
-            if(playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
-            if(deathScreen != null) deathScreen.SetActive(true);
-
-            death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
-            death_text.text = "Score: " + playerControl.getPoint().ToString();
-
-
-            // SAVE PLAYER STATS HERE
-            if (playerControl.getPoint() > PlayerPrefs.GetInt("highScore", 0))
-            {
-                PlayerPrefs.SetInt("highScore", playerControl.getPoint());
-                PlayerPrefs.Save();
-                Debug.Log("New Highscore!!! " + playerControl.getPoint());
-
-            }
+            bringDeathMenu();
         }
     }
 
+    public void bringDeathMenu()
+    {
+        playerControl.setPlayerDeadStatus(true);
+        player.GetComponent<SpriteRenderer>().enabled = false;
+        if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
+        if (deathScreen != null) deathScreen.SetActive(true);
+
+        death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
+        death_text.text = "Score: " + playerControl.getPoint().ToString();
+
+
+        // SAVE PLAYER STATS HERE
+        if (playerControl.getPoint() > PlayerPrefs.GetInt("highScore", 0))
+        {
+            PlayerPrefs.SetInt("highScore", playerControl.getPoint());
+            PlayerPrefs.Save();
+            Debug.Log("New Highscore!!! " + playerControl.getPoint());
+
+        }
+    }
+
+    public void goBackMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 
     public void restartGame()
     {
