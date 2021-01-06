@@ -13,9 +13,13 @@ public class MovePlatformTwo : MonoBehaviour
 	private float platformSpeed;
 	private void Start()
 	{
-		platformMovement = GetComponent<PlatformMovement>();
+        //LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
 
-		platformMovement.GetChildren(2);
+        //platformMovement = GetComponent<PlatformMovement>();
+
+        platformMovement = gameObject.AddComponent(typeof(PlatformMovement)) as PlatformMovement;
+
+        platformMovement.GetChildren(2);
 		platformMovement.GetPlatformInfo(2);
 
 		platformMovement.ArrangeDistanceAtStart(cornerDistance);

@@ -117,14 +117,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cfd703fef2c9c46baec7520341f412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgrounds: {fileID: 0}
   rotateSpeed: 100
   atMid: 1
   goingLeft: 1
   goingRight: 0
+  isPlayerDead: 0
   tr: {fileID: 0}
   ejector: {fileID: 0}
   arrowiks: {fileID: 0}
   ejectForce: 2500
+  playerRotSpeed: 10
 --- !u!70 &8458353442322120645
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

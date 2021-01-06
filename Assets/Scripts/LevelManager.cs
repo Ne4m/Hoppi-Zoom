@@ -156,9 +156,9 @@ public class LevelManager : MonoBehaviour
         rb2D = player.GetComponent<Rigidbody2D>();
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
 
-
-
-        point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
+        //Button btn = dieButton.GetComponent<Button>();
+       // btn.onClick.AddListener(bringDeathMenu);
+        //point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
 
         playerControl.setPlayerDeadStatus(false);
 
@@ -170,6 +170,8 @@ public class LevelManager : MonoBehaviour
         //    );
 
         //playerControl.setPoint(PlayerPrefs.GetInt("point", 0));
+
+        
 
         Debug.Log("Your Highest Score Was " + PlayerPrefs.GetInt("highScore", 0));
     }
@@ -204,6 +206,7 @@ public class LevelManager : MonoBehaviour
 
     public void bringDeathMenu()
     {
+        
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
@@ -211,6 +214,7 @@ public class LevelManager : MonoBehaviour
 
         death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
         death_text.text = "Score: " + playerControl.getPoint().ToString();
+        Debug.Log("Button Score:" + death_text.text);
 
 
         // SAVE PLAYER STATS HERE
@@ -248,6 +252,16 @@ public class LevelManager : MonoBehaviour
         playerControl.addPoint(1);
 
         
+    }
+
+    public void getPlayerPos()
+    {
+
+    }
+
+    public void setPlayerPos()
+    {
+        player.transform.position = new Vector3(player.transform.position.x, new_CheckPoint.transform.position.y, 0);
     }
 
 

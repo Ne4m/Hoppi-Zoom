@@ -248,7 +248,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "C:/Users/hun59/OneDrive/Masa\xFCst\xFC/UNITY KEY/kekkurudisk.keystore"
+  AndroidKeystoreName: '{inproject}: kekkurudisk.keystore'
   AndroidKeyaliasName: deti
   AndroidBuildApkPerCpuArchitecture: 1
   AndroidTVCompatibility: 0
