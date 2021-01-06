@@ -9,6 +9,12 @@ TagManager:
   - P_Hard_1
   - Checkpoint
   - Background
+  - P_Easy_2
+  - P_Normal_2
+  - P_Hard_2
+  - P_Easy_3
+  - P_Normal_3
+  - P_Hard_3
   layers:
   - Default
   - TransparentFX

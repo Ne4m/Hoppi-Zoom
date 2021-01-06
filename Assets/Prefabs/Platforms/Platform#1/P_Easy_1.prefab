@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7042225680901418556}
   - component: {fileID: 7042225680901418558}
+  - component: {fileID: 357370020}
   m_Layer: 0
   m_Name: P_Easy_1
   m_TagString: P_Easy_1
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7042225680901418547}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -47,6 +48,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 3
   platformSpeed: 1
+--- !u!114 &357370020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042225680901418547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf39dbd18ecf63743a81a571ac26140f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7042225681353876418
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +131,7 @@ SpriteRenderer:
   m_SortingLayerID: 1865121131
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd478a49ee0b5194e9b13284b4ed1bd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d625e3bb9a4728429a8c390ce8e9907, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

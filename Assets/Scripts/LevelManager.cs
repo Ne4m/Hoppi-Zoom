@@ -21,6 +21,10 @@ public class LevelManager : MonoBehaviour
     private GameObject deathScreen;
 
     [SerializeField]
+    private float spawnDistance = 5;
+
+
+    [SerializeField]
     private GameObject playerEjectorArrow;
 
     public TMP_Text point_text;
@@ -152,6 +156,8 @@ public class LevelManager : MonoBehaviour
         rb2D = player.GetComponent<Rigidbody2D>();
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
 
+
+
         point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
 
         playerControl.setPlayerDeadStatus(false);
@@ -247,25 +253,34 @@ public class LevelManager : MonoBehaviour
 
     void spawn_NextCheckpoint()
     {
+
         new_CheckPoint = Instantiate(checkPoint_Prefab) as GameObject;
-        new_CheckPoint.transform.position = transform.position;
-        new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + 5.25f, 0);
-
-
+  //      if(new_CheckPoint.transform.position != checkPoint_Prefab.transform.position)
+		//{
+  //          new_CheckPoint.transform.position = checkPoint_Prefab.transform.position;
+  //      }
+        new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + spawnDistance, 0);
+        
         if (spawnedObjects[0] == null)
         {
             spawnedObjects[0] = new_CheckPoint;
+            //just started man
+            
         }
         else if (spawnedObjects[1] == null)
         {
+            new_CheckPoint.transform.position = new Vector3 (0, spawnedObjects[0].transform.position.y+spawnDistance,0) ;
             spawnedObjects[1] = new_CheckPoint;
         }
         else if (spawnedObjects[0] != null)
         {
             Destroy(spawnedObjects[0]);
 
+            new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[1].transform.position.y + spawnDistance, 0);
+
             spawnedObjects[0] = spawnedObjects[1];
             spawnedObjects[1] = new_CheckPoint;
         }
+        
     }
 }
