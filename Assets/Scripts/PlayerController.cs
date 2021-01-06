@@ -39,12 +39,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float playerRotSpeed=10;
 	#endregion
-
+    
+    
 	private void Awake()
 	{
         _rb2D = GetComponent<Rigidbody2D>();
 
         backgrounds = GetComponent<Transform>();
+        
     }
 
 	void Start()
@@ -168,13 +170,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (collision.CompareTag("Background"))
-        {
-            for (int i = 0; i < backgrounds.childCount; i++)
-            {
-                Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), backgrounds.GetChild(i).GetComponent<Collider2D>());
-            }
-        }
+        // if (collision.CompareTag("Background"))
+        // {
+        //     for (int i = 0; i < _count; i++)
+        //     {
+        //         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), backgrounds.GetChild(i).GetComponent<Collider2D>());
+        //     }
+        // }
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -182,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log("Collision: " + collision.gameObject.tag);
 
-        if (collision.collider.tag.Contains("Untagged"))
+        if (collision.collider.tag.Contains("Untagged") && _colliderCp != null)
 
         {
             if (_colliderCp.enabled == false)
