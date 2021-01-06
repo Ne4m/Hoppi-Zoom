@@ -204,19 +204,25 @@ public class PlayerController : MonoBehaviour
 	{
 		if (!LM.playerControl.IsPlayerInCheckPoint())
         {
+            //transform.rotation = Quaternion.EulerRotation(0, Quaternion.identity.y, Quaternion.identity.z);
+            //Vector2 motionDirection = rb2D.velocity.normalized;
+            //transform.rotation = Quaternion.LookRotation(motionDirection, Vector3.forward);
+            
+
             Vector2 velocity = rb2D.velocity;
             desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
-            Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle, Vector3.forward);
-
+            Debug.Log("Mahmut " + desiredAngle);
+            Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle - 90, Vector3.forward);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, playerRotSpeed * Time.fixedDeltaTime);
 
         }
         else if (LM.playerControl.IsPlayerInCheckPoint())
 		{
+            
             //Quaternion stopRot = Quaternion.Euler(0, 0, 90);
             //transform.rotation = Quaternion.Lerp(transform.rotation, stopRot, playerRotSpeed*100 * Time.fixedDeltaTime);
             //Debug.Log("Accessed");
-		}
+        }
 
         //Debug.Log("Is In Waypoint" +isInWaypoint);
 
