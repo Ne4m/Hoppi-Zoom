@@ -142,32 +142,30 @@ public class PlayerController : MonoBehaviour
         transform.rotation = new Quaternion(0,0,0,0);
     }
 
-    Collider2D collider;
+    Collider2D collider_CP;
     private void OnTriggerEnter2D(Collider2D collision)
 	{
         if (collision.tag == "Checkpoint")
         {
             
             arrowiks.SetActive(true);
-            //rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
             AdjustStartingPoint();
 
-            //rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
             rb2D.velocity = Vector2.zero;
             rb2D.angularVelocity = 0f;
-            //rb2D.constraints = RigidbodyConstraints2D.FreezePositionX;
-            //rb2D.constraints = RigidbodyConstraints2D.FreezePositionY;
+
             Vector3 kek = new Vector3(rb2D.transform.position.x, collision.transform.position.y, 0);
             rb2D.transform.SetPositionAndRotation(kek, transform.rotation);
-            //rb2D.constraints = RigidbodyConstraints2D.None;
 
 
-            collider = collision.GetComponent<Collider2D>();
-            collider.enabled = false;
+
+            collider_CP = collision.GetComponent<Collider2D>();
+            collider_CP.enabled = false;
 
             LM.playerControl.setPlayerCheckPoint(true);
             LM.player_EnteredCheckpoint();
 
+            Debug.Log("Instance ID: " + collider_CP.GetInstanceID());
         }
 
 
@@ -182,36 +180,28 @@ public class PlayerController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-        //vector3 reflect = vector3.reflect(vector3.right, collision.contacts[0].normal);
-        //float rot = 90 - mathf.atan2(reflect.z, reflect.x) * mathf.rad2deg;
-        //transform.eulerangles = new vector3(0, 0, rot);
 
         //Debug.Log("Collision: " + collision.gameObject.tag);
 
-        //if (collision.collider.tag.Contains("Untagged"))
+        if (collision.collider.tag.Contains("Untagged"))
 
-        //{
-        //    if (collider.enabled == false)
-        //    {
-        //        collider.enabled = true;
-        //    }
+        {
+            if (collider_CP.enabled == false)
+            {
+                collider_CP.enabled = true;
+            }
 
-        //}
+        }
 
     }
 
     void GetRotAccordingtoVelocity()
 	{
 		if (!LM.playerControl.IsPlayerInCheckPoint())
-        {
-            //transform.rotation = Quaternion.EulerRotation(0, Quaternion.identity.y, Quaternion.identity.z);
-            //Vector2 motionDirection = rb2D.velocity.normalized;
-            //transform.rotation = Quaternion.LookRotation(motionDirection, Vector3.forward);
-            
+        {     
 
             Vector2 velocity = rb2D.velocity;
             desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
-            Debug.Log("Mahmut " + desiredAngle);
             Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle - 90, Vector3.forward);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, playerRotSpeed * Time.fixedDeltaTime);
 
@@ -219,12 +209,9 @@ public class PlayerController : MonoBehaviour
         else if (LM.playerControl.IsPlayerInCheckPoint())
 		{
             
-            //Quaternion stopRot = Quaternion.Euler(0, 0, 90);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, stopRot, playerRotSpeed*100 * Time.fixedDeltaTime);
-            //Debug.Log("Accessed");
+            
         }
 
-        //Debug.Log("Is In Waypoint" +isInWaypoint);
 
     }
 }

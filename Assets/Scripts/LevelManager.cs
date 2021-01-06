@@ -254,27 +254,16 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void getPlayerPos()
-    {
-
-    }
-
-    public void setPlayerPos()
-    {
-        player.transform.position = new Vector3(player.transform.position.x, new_CheckPoint.transform.position.y, 0);
-    }
 
 
     void spawn_NextCheckpoint()
     {
 
         new_CheckPoint = Instantiate(checkPoint_Prefab) as GameObject;
-  //      if(new_CheckPoint.transform.position != checkPoint_Prefab.transform.position)
-		//{
-  //          new_CheckPoint.transform.position = checkPoint_Prefab.transform.position;
-  //      }
         new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + spawnDistance, 0);
-        
+
+
+
         if (spawnedObjects[0] == null)
         {
             spawnedObjects[0] = new_CheckPoint;
@@ -283,7 +272,7 @@ public class LevelManager : MonoBehaviour
         }
         else if (spawnedObjects[1] == null)
         {
-            new_CheckPoint.transform.position = new Vector3 (0, spawnedObjects[0].transform.position.y+spawnDistance,0) ;
+            new_CheckPoint.transform.position = new Vector3 (0, spawnedObjects[0].transform.position.y + spawnDistance,0) ;
             spawnedObjects[1] = new_CheckPoint;
         }
         else if (spawnedObjects[0] != null)
