@@ -6,10 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Transform backgrounds;
-    int count;
 
 
-    Rigidbody2D rb2D;
+    Rigidbody2D _rb2D;
 
 
     public float rotateSpeed = 100;
@@ -31,8 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject arrowiks;
 
-    Vector3 kekVec = new Vector3(0, 0.46f, 0);
-    LevelManager LM;
+    readonly Vector3 _kekVec = new Vector3(0, 0.46f, 0);
+    LevelManager _levelManager;
 
     #region Speed Variables
     [SerializeField]
@@ -43,19 +42,18 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-        rb2D = GetComponent<Rigidbody2D>();
+        _rb2D = GetComponent<Rigidbody2D>();
 
         backgrounds = GetComponent<Transform>();
-        count = backgrounds.childCount;
     }
 
 	void Start()
     {
         //LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
-        LM = gameObject.GetComponent<LevelManager>();
+        _levelManager = gameObject.GetComponent<LevelManager>();
         AdjustStartingPoint();
         //LM.playerUpdate(true);
-        LM.playerControl.setPlayerCheckPoint(true);
+        _levelManager.playerControl.setPlayerCheckPoint(true);
     }
 
     // Update is called once per frame
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        isPlayerDead = LM.playerControl.isPlayerDead();
+        isPlayerDead = _levelManager.playerControl.isPlayerDead();
     }
 
     private void FixedUpdate()
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
         GetRotAccordingtoVelocity();
     }
 
-    Quaternion slowRot;
+    Quaternion _slowRot;
     void GetCast()
     {
 
@@ -89,17 +87,17 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && LM.playerControl.IsPlayerInCheckPoint() && !isPlayerDead) // isInWaypoint LM.playerCheck()
+        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead) // isInWaypoint LM.playerCheck()
         {
-            LM.playerControl.setPlayerCheckPoint(false);
+            _levelManager.playerControl.setPlayerCheckPoint(false);
             arrowiks.SetActive(false);
 
 
-            upVector = upVector - kekVec;
-            rb2D.AddForce(upVector * ejectForce * Time.fixedDeltaTime);
+            upVector = upVector - _kekVec;
+            _rb2D.AddForce(upVector * (ejectForce * Time.fixedDeltaTime));
 
-            slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
-            rb2D.MoveRotation(slowRot);
+            _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
+            _rb2D.MoveRotation(_slowRot);
 
            //rb2D.constraints = RigidbodyConstraints2D.None;
         }
@@ -138,40 +136,41 @@ public class PlayerController : MonoBehaviour
 
     void AdjustStartingPoint()
     {
-        ejector.transform.position = new Vector3(rb2D.transform.position.x, rb2D.transform.position.y + 0.19f, 0);
+        var position = _rb2D.transform.position;
+        ejector.transform.position = new Vector3(position.x, position.y + 0.19f, 0);
         transform.rotation = new Quaternion(0,0,0,0);
     }
 
-    Collider2D collider_CP;
+    Collider2D _colliderCp;
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.tag == "Checkpoint")
+        if (collision.CompareTag("Checkpoint"))
         {
             
             arrowiks.SetActive(true);
             AdjustStartingPoint();
 
-            rb2D.velocity = Vector2.zero;
-            rb2D.angularVelocity = 0f;
+            _rb2D.velocity = Vector2.zero;
+            _rb2D.angularVelocity = 0f;
 
-            Vector3 kek = new Vector3(rb2D.transform.position.x, collision.transform.position.y, 0);
-            rb2D.transform.SetPositionAndRotation(kek, transform.rotation);
+            Vector3 kek = new Vector3(_rb2D.transform.position.x, collision.transform.position.y, 0);
+            _rb2D.transform.SetPositionAndRotation(kek, transform.rotation);
 
 
 
-            collider_CP = collision.GetComponent<Collider2D>();
-            collider_CP.enabled = false;
+            _colliderCp = collision.GetComponent<Collider2D>();
+            _colliderCp.enabled = false;
 
-            LM.playerControl.setPlayerCheckPoint(true);
-            LM.player_EnteredCheckpoint();
+            _levelManager.playerControl.setPlayerCheckPoint(true);
+            _levelManager.player_EnteredCheckpoint();
 
-            Debug.Log("Instance ID: " + collider_CP.GetInstanceID());
+            Debug.Log("Instance ID: " + _colliderCp.GetInstanceID());
         }
 
 
-        if (collision.tag == "Background")
+        if (collision.CompareTag("Background"))
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < backgrounds.childCount; i++)
             {
                 Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), backgrounds.GetChild(i).GetComponent<Collider2D>());
             }
@@ -186,9 +185,9 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag.Contains("Untagged"))
 
         {
-            if (collider_CP.enabled == false)
+            if (_colliderCp.enabled == false)
             {
-                collider_CP.enabled = true;
+                _colliderCp.enabled = true;
             }
 
         }
@@ -197,16 +196,16 @@ public class PlayerController : MonoBehaviour
 
     void GetRotAccordingtoVelocity()
 	{
-		if (!LM.playerControl.IsPlayerInCheckPoint())
+		if (!_levelManager.playerControl.IsPlayerInCheckPoint())
         {     
 
-            Vector2 velocity = rb2D.velocity;
+            Vector2 velocity = _rb2D.velocity;
             desiredAngle = (Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg);
             Quaternion desiredRot = Quaternion.AngleAxis(desiredAngle - 90, Vector3.forward);
             transform.rotation = Quaternion.Lerp(transform.rotation, desiredRot, playerRotSpeed * Time.fixedDeltaTime);
 
         }
-        else if (LM.playerControl.IsPlayerInCheckPoint())
+        else if (_levelManager.playerControl.IsPlayerInCheckPoint())
 		{
             
             
