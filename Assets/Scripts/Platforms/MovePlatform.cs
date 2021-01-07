@@ -13,19 +13,23 @@ namespace Platforms
 		private float cornerDistance;
 		[SerializeField]
 		private float platformSpeed;
+
+		[Header("Platform #4")] [SerializeField]
+		private float transitionTime;
+
+		[SerializeField] private float stayTime;
 		private void Start()
 		{
 			_platformMovement = gameObject.GetComponent<PlatformMovement>();
 			if (_platformMovement is null) return;
-			_platformMovement.GetChildren();
 			_platformMovement.GetPlatformInfo();
-			
+			_platformMovement.GetChildren(stayTime);
 			_platformMovement.ArrangeDistanceAtStart(cornerDistance);
 		}
 
 		private void FixedUpdate()
 		{
-			_platformMovement.MoveChildren(platformSpeed, moveDistance);
+			_platformMovement.MoveChildren(platformSpeed, moveDistance,transitionTime);
 		}
 
 	}

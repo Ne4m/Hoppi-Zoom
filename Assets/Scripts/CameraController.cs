@@ -77,5 +77,4 @@ public class CameraController : MonoBehaviour
         background2 = temp;
     }
 
-
 }

@@ -15,6 +15,9 @@ TagManager:
   - P_Easy_3
   - P_Normal_3
   - P_Hard_3
+  - P_Easy_4
+  - P_Normal_4
+  - P_Hard_4
   layers:
   - Default
   - TransparentFX
