@@ -144,6 +144,7 @@ public class PlayerController : MonoBehaviour
     }
 
     Collider2D _colliderCp;
+    int[] cPInstanceID = new int[2];
     private void OnTriggerEnter2D(Collider2D collision)
 	{
         if (collision.CompareTag("Checkpoint"))
@@ -167,6 +168,15 @@ public class PlayerController : MonoBehaviour
             _levelManager.player_EnteredCheckpoint();
 
             Debug.Log("Instance ID: " + _colliderCp.GetInstanceID());
+
+            if(cPInstanceID[0] == null)
+			{
+                cPInstanceID[0] = _colliderCp.GetInstanceID();
+			}else if(cPInstanceID != null)
+			{
+
+			}
+
         }
 
 

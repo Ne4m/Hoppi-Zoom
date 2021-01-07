@@ -226,6 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6113694088707185609}
   - component: {fileID: 9086394634850092689}
+  - component: {fileID: 715293594}
   m_Layer: 0
   m_Name: P_Hard_1
   m_TagString: P_Hard_1
@@ -261,5 +262,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05aa711bc8cac814a89d35a6f5e3bea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 2
-  platformSpeed: 2
+  moveDistance: 0.1
+  cornerDistance: 0
+  platformSpeed: 3
+--- !u!114 &715293594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113694088707185608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf39dbd18ecf63743a81a571ac26140f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
