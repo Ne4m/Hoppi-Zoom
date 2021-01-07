@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 	private GameObject Playerobject;
 
 	private Transform t;
-	private Vector2 centerofScreen;
+	private Vector2 _centerofScreen;
 	[SerializeField]
 	private float distanceThreshold;
 	[SerializeField]
@@ -40,12 +40,12 @@ public class CameraController : MonoBehaviour
 	private void CameraFollow()
 	{
 		//Get Center of Screen
-		centerofScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2, Screen.height / 2));
+		_centerofScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2, Screen.height / 2));
 		Vector3 desiredPos = t.position + camOffset;
 
 		//Get the distance between player and the center
 		float distance;
-		distance = Vector2.Distance(desiredPos, centerofScreen);
+		distance = Vector2.Distance(desiredPos, _centerofScreen);
 
 		if (distance > distanceThreshold)
 		{
