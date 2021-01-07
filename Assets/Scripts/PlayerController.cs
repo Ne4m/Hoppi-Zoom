@@ -9,15 +9,11 @@ public class PlayerController : MonoBehaviour
 
 
     Rigidbody2D _rb2D;
-
-
-    public float rotateSpeed = 100;
-
-
-    public bool atMid = true;
-    public bool goingLeft = true;
-    public bool goingRight = false;
-    public bool isPlayerDead;
+    
+    //private bool atMid = true;
+    private bool goingLeft = true;
+    private bool goingRight = false;
+    private bool isPlayerDead;
 
     public float desiredAngle;
 
@@ -38,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float ejectForce = 1;
     [SerializeField]
     private float playerRotSpeed=10;
+    [SerializeField]
+    private float rotateSpeed = 100;
 	#endregion
     
     
@@ -63,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log("Z: " + transform.rotation.z +"\n");
 
-        if (tr.rotation.z == -0.0008726012) atMid = true;
+        //if (tr.rotation.z == -0.0008726012) atMid = true;
         
 
         if (Input.GetKey(KeyCode.R) || Input.touchCount == 2)
@@ -86,10 +84,10 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector3 upVector = tr.TransformDirection(Vector2.up) * 10;
-        Debug.DrawRay(tr.position, upVector, Color.green);
+        //Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead) // isInWaypoint LM.playerCheck()
+        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
         {
             _levelManager.playerControl.setPlayerCheckPoint(false);
             arrowiks.SetActive(false);
@@ -100,8 +98,7 @@ public class PlayerController : MonoBehaviour
 
             _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
             _rb2D.MoveRotation(_slowRot);
-
-           //rb2D.constraints = RigidbodyConstraints2D.None;
+            
         }
 
     }
@@ -130,8 +127,6 @@ public class PlayerController : MonoBehaviour
             }
             else tr.Rotate(0, 0, rotateSpeed * Time.deltaTime * -1);
         }
-
-        //Debug.Log("Going Left: " + goingLeft + " Going Right " + goingRight);
 
     }
 
@@ -173,8 +168,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            arrowiks.SetActive(true);
-            AdjustStartingPoint();
+
 
             _rb2D.velocity = Vector2.zero;
             _rb2D.angularVelocity = 0f;
@@ -183,15 +177,12 @@ public class PlayerController : MonoBehaviour
             _rb2D.transform.SetPositionAndRotation(kek, transform.rotation);
 
 
-
-            
-            _colliderCp.enabled = false;
-
+           // _colliderCp.enabled = false;
             _levelManager.playerControl.setPlayerCheckPoint(true);
             
-
-            Debug.Log("Instance ID: " + _colliderCp.GetInstanceID());
-
+            
+            arrowiks.SetActive(true);
+            AdjustStartingPoint();
             
 
         }
@@ -211,15 +202,15 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log("Collision: " + collision.gameObject.tag);
 
-        if (collision.collider.tag.Contains("Untagged") && _colliderCp != null)
-
-        {
-            if (_colliderCp.enabled == false)
-            {
-                _colliderCp.enabled = true;
-            }
-
-        }
+        // if (collision.collider.tag.Contains("Untagged") && _colliderCp != null)
+        //
+        // {
+        //     if (_colliderCp.enabled == false)
+        //     {
+        //         _colliderCp.enabled = true;
+        //     }
+        //
+        // }
 
     }
 

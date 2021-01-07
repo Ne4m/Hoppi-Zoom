@@ -27,6 +27,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject playerEjectorArrow;
 
+    #region Level Stuff
+    [SerializeField]
+    private int playerLevel;
+    [SerializeField]
+    private int perPointToLevelThreshold = 5;
+    [SerializeField]
+    private int levelMultiplier = 2;
+    #endregion
+
     public TMP_Text point_text;
     public TMP_Text death_text;
 
@@ -38,6 +47,7 @@ public class LevelManager : MonoBehaviour
     private GameObject[] spawnedObjects = new GameObject[2];
 
 
+
     public struct GameInfo
     {
         private bool isINCP;
@@ -46,7 +56,6 @@ public class LevelManager : MonoBehaviour
         private int highScore;
         private int level;
         private int health;
-        private int body, reflexes, intelligence, technical_ability, cool, constitution;
 
 
         public bool IsPlayerInCheckPoint()
@@ -89,7 +98,11 @@ public class LevelManager : MonoBehaviour
         public void setLevel(int level)
         {
             this.level = level;
+        }
 
+        public void levelUp()
+        {
+            level++;
         }
 
 
@@ -172,7 +185,7 @@ public class LevelManager : MonoBehaviour
         //playerControl.setPoint(PlayerPrefs.GetInt("point", 0));
 
         
-
+        playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + PlayerPrefs.GetInt("highScore", 0));
     }
 
@@ -193,6 +206,7 @@ public class LevelManager : MonoBehaviour
 
             point_text.text = ("Score: " + playerControl.getPoint().ToString());
 
+        playerLevel = playerControl.getLevel();
         checkDeathMenu();
     }
     
@@ -250,8 +264,18 @@ public class LevelManager : MonoBehaviour
         spawn_NextCheckpoint();
 
         playerControl.addPoint(1);
+        checkLevelStatus();
+    }
 
-        
+
+
+    private void checkLevelStatus()
+    {
+        if (playerControl.getPoint() >= perPointToLevelThreshold)
+        {
+            playerControl.levelUp();
+            perPointToLevelThreshold *= levelMultiplier;
+        }
     }
 
 
