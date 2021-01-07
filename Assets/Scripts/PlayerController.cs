@@ -149,7 +149,30 @@ public class PlayerController : MonoBehaviour
 	{
         if (collision.CompareTag("Checkpoint"))
         {
-            
+            _colliderCp = collision.GetComponent<Collider2D>();
+            if(cPInstanceID[0] == 0)
+            {
+                cPInstanceID[0] = _colliderCp.GetInstanceID();
+                _levelManager.player_EnteredCheckpoint();
+            }
+            else if(cPInstanceID[1] == 0)
+            {
+                cPInstanceID[1] = _colliderCp.GetInstanceID();
+                if (cPInstanceID[0] != cPInstanceID[1])
+                {
+                    _levelManager.player_EnteredCheckpoint();
+                }
+            }
+            else if (cPInstanceID[0] != 0)
+            {
+                cPInstanceID[0] = cPInstanceID[1];
+                cPInstanceID[1] = _colliderCp.GetInstanceID();
+                if (cPInstanceID[0] != cPInstanceID[1])
+                {
+                    _levelManager.player_EnteredCheckpoint();
+                }
+            }
+
             arrowiks.SetActive(true);
             AdjustStartingPoint();
 
@@ -161,21 +184,15 @@ public class PlayerController : MonoBehaviour
 
 
 
-            _colliderCp = collision.GetComponent<Collider2D>();
+            
             _colliderCp.enabled = false;
 
             _levelManager.playerControl.setPlayerCheckPoint(true);
-            _levelManager.player_EnteredCheckpoint();
+            
 
             Debug.Log("Instance ID: " + _colliderCp.GetInstanceID());
 
-            if(cPInstanceID[0] == null)
-			{
-                cPInstanceID[0] = _colliderCp.GetInstanceID();
-			}else if(cPInstanceID != null)
-			{
-
-			}
+            
 
         }
 
