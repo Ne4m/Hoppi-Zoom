@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Platforms;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,9 +26,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject arrowiks;
+    
+    [SerializeField] private PlatformSpawnManager platformManager;
 
     readonly Vector3 _kekVec = new Vector3(0, 0.46f, 0);
     LevelManager _levelManager;
+    
 
     #region Speed Variables
     [SerializeField]
@@ -167,8 +171,8 @@ public class PlayerController : MonoBehaviour
                     _levelManager.player_EnteredCheckpoint();
                 }
             }
-
-
+            
+            platformManager.GetDifficultyAndSpawn();
 
             _rb2D.velocity = Vector2.zero;
             _rb2D.angularVelocity = 0f;

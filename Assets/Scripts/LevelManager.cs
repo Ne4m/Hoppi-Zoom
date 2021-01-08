@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
 
     public struct GameInfo
     {
-        private bool isINCP;
+        private bool isInCP;
         private bool isDead;
         private int point;
         private int highScore;
@@ -60,13 +60,18 @@ public class LevelManager : MonoBehaviour
 
         public bool IsPlayerInCheckPoint()
         {
-            return isINCP;
+            return isInCP;
         }
 
 
         public void setPlayerCheckPoint(bool c)
         {
-            this.isINCP = c;
+            this.isInCP = c;
+        }
+
+        public bool getPlayerCheckpoint()
+        {
+            return this.isInCP;
         }
 
         public void setPlayerDeadStatus(bool isDead)
@@ -145,7 +150,7 @@ public class LevelManager : MonoBehaviour
         {
             this.point = 0;
             this.level = 0;
-            this.isINCP = true;
+            this.isInCP = true;
             this.health = 100;
         }
     }

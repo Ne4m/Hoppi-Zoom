@@ -83,17 +83,17 @@ public class PlatformManager : MonoBehaviour
             if (child.tag.Contains("Easy"))
             {
                 if(child.tag.Contains("1"))
-                easyPlatformOneParents.Add(child);
+                    easyPlatformOneParents.Add(child);
             }
             else if (child.tag.Contains("Normal"))
             {
                 if (child.tag.Contains("1"))
-                normalPlatformOneParents.Add(child);
+                    normalPlatformOneParents.Add(child);
             }
             else if (child.tag.Contains("Hard"))
             {
                 if (child.tag.Contains("1"))
-                hardPlatformOneParents.Add(child);
+                    hardPlatformOneParents.Add(child);
             }
             else
             {
