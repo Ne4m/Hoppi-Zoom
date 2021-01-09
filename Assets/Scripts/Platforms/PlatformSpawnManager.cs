@@ -158,8 +158,11 @@ namespace Platforms
             int random = Random.Range(1, _totalPlatforms);
             lastSpawned.Add(Instantiate(desiredSpawn[random], _lastSpawnLocation + spawnOffset,quaternion.identity, this.transform));
             SetDifficulty();
-            if(this.transform.childCount >3)
+            if (this.transform.childCount > 3)
+            {
                 DestroyLastSpawn(lastSpawned[_lastDestroyed++]);
+            }
+            
         }
         
         void SetDifficulty()

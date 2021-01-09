@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject arrowiks;
-    
-    [SerializeField] private PlatformSpawnManager platformManager;
 
     readonly Vector3 _kekVec = new Vector3(0, 0.46f, 0);
     LevelManager _levelManager;
@@ -172,7 +170,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            platformManager.GetDifficultyAndSpawn();
+            
 
             _rb2D.velocity = Vector2.zero;
             _rb2D.angularVelocity = 0f;

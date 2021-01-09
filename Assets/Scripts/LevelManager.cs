@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using GooglePlayGames;
+using Platforms;
 using UnityEngine.SocialPlatforms;
 
 
@@ -46,7 +47,7 @@ public class LevelManager : MonoBehaviour
 
     private GameObject[] spawnedObjects = new GameObject[2];
 
-
+    [SerializeField] private PlatformSpawnManager platformManager;
 
     public struct GameInfo
     {
@@ -169,7 +170,6 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         player = GetComponent<Transform>();
         rb2D = player.GetComponent<Rigidbody2D>();
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
@@ -267,7 +267,8 @@ public class LevelManager : MonoBehaviour
     public void player_EnteredCheckpoint()
     {
         spawn_NextCheckpoint();
-
+        platformManager.GetDifficultyAndSpawn();
+        
         playerControl.addPoint(1);
         checkLevelStatus();
     }

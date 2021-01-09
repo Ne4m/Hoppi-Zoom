@@ -230,6 +230,7 @@ MonoBehaviour:
   levelMultiplier: 2
   point_text: {fileID: 1385993100}
   death_text: {fileID: 1206468329}
+  platformManager: {fileID: 984462745}
 --- !u!1 &229408694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,16 +2877,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615802299042405802, guid: ae10c7e37565e414a9588ef25a11f327,
-        type: 3}
-      propertyPath: levelManager
-      value: 
-      objectReference: {fileID: 73175939}
-    - target: {fileID: 5615802299042405802, guid: ae10c7e37565e414a9588ef25a11f327,
-        type: 3}
-      propertyPath: probabilitiyDecrease
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae10c7e37565e414a9588ef25a11f327, type: 3}
