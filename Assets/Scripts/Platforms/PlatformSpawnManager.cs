@@ -149,6 +149,13 @@ namespace Platforms
                 //spawn hard
                 SpawnPlatform(hardPlatforms);
             }
+            else
+            {
+                //Go to the Next Theme 
+                _easySpawnProbability = 100;
+                _normalSpawnProbability = 100;
+                _hardSpawnProbability = 100;
+            }
 
         }
 
