@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour
     private GameObject new_CheckPoint;
     private GameObject last_CheckPoint;
 
+    public GameObject blurScreen;
+
     [SerializeField]
     private GameObject deathScreen;
 
@@ -229,10 +231,14 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
-        if (deathScreen != null) deathScreen.SetActive(true);
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(true);
+            blurScreen.SetActive(true);
+        }
 
-        death_text = GameObject.Find("Death Score").GetComponent<TMP_Text>();
-        death_text.text = "Score: " + playerControl.getPoint().ToString();
+        death_text = GameObject.Find("Score Point").GetComponent<TMP_Text>();
+        death_text.text = playerControl.getPoint().ToString();
         Debug.Log("Button Score:" + death_text.text);
 
 
@@ -254,7 +260,11 @@ public class LevelManager : MonoBehaviour
     public void restartGame()
     {
         playerControl.setPlayerDeadStatus(false);
-        if (deathScreen != null) deathScreen.SetActive(false);
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(false);
+            blurScreen.SetActive(false);
+        }
         player.GetComponent<SpriteRenderer>().enabled = true;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(true);
 
