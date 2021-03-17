@@ -9,11 +9,16 @@ public class CharacterMenuController : MonoBehaviour
     private string[] playableCharacters = {"Default Guy", "Mahmut", "Kubat", "Ozan", "Samet", "Cavo"};
     private string selectedCharacter;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
+    private int characterHealth, characterSpeed;
 
     [Header("Buttons")] 
     [SerializeField] private Button swipeLeftButton;
     [SerializeField] private Button swipeRightButton;
     [SerializeField] private TMP_Text characterName;
+
+    [Header("Character Bars")] 
+    [SerializeField] private Image healthBar;
+    [SerializeField] private Image speedBar;
 
 
     void Awake()
@@ -51,8 +56,11 @@ public class CharacterMenuController : MonoBehaviour
     private void updateCharacter(int index)
     {
         characterName.text = playableCharacters[index];
+
+
+
     }
-    
+
     private int getCurrentIndex()
     {
         // Player Prefs Stuff - Get Last Character And Return Index Based On That.. Implement Later.
