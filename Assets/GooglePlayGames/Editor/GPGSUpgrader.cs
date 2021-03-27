@@ -101,14 +101,14 @@ namespace GooglePlayGames.Editor
                 GPGSUtil.GenerateAndroidManifest();
             }
 
-            try
-            {
-                AssetDatabase.Refresh();
-            }
-            catch(UnityException e)
-            {
-                Debug.LogWarning(e);
-            }
+            // try
+            // {
+            //     AssetDatabase.Refresh();
+            // }
+            // catch(UnityException e)
+            // {
+            //     Debug.LogWarning(e);
+            // }
 
            // Debug.Log("GPGSUpgrader done");
         }
