@@ -67,3 +67,6 @@ TagManager:
   - name: Player
     uniqueID: 2102860123
     locked: 0
+  - name: Hats
+    uniqueID: 2243215445
+    locked: 0
