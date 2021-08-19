@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
     {
         if (transform.position.y >= background2.position.y)
         {
-            background1.GetComponent<SpriteRenderer>().sprite = background2.GetComponent<SpriteRenderer>().sprite; 
+            background1.GetComponent<SpriteRenderer>().sprite = background2.GetComponent<SpriteRenderer>().sprite;
             background1.position = new Vector3(background1.position.x, background2.position.y + bg_size - .37169f, background1.position.z);
             switchBackGround();
         }

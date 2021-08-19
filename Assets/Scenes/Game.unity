@@ -548,7 +548,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240770443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 9.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 229408695}
@@ -3094,14 +3094,14 @@ RectTransform:
   m_GameObject: {fileID: 2021645480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 229408695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.01, y: 0.0252}
+  m_AnchoredPosition: {x: 0, y: 0.025}
   m_SizeDelta: {x: 5.223599, y: 9.796832}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &2021645482
@@ -3178,7 +3178,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.881356, y: 10.037166}
+  m_Size: {x: 4.881356, y: 10.04717}
   m_EdgeRadius: 0
 --- !u!1001 &2041940067
 PrefabInstance:
@@ -3563,6 +3563,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8889834672512617817, guid: ea7b15ff29e12874ca7e48ab60e19e1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea7b15ff29e12874ca7e48ab60e19e1a, type: 3}
 --- !u!1001 &5136721867960730507
@@ -3632,6 +3637,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: purp
       objectReference: {fileID: 0}
+    - target: {fileID: 4715467575489503332, guid: faaddb60aa9e91343acb1196f863bfda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faaddb60aa9e91343acb1196f863bfda, type: 3}
 --- !u!1001 &7143764611005633933
@@ -3700,6 +3710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: yell
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040973272969002550, guid: 2a6e68391efe05244a317ed11c92dd7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6e68391efe05244a317ed11c92dd7e, type: 3}
