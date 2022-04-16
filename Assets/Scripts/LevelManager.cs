@@ -49,8 +49,6 @@ public class LevelManager : MonoBehaviour
 
     private GameObject[] spawnedObjects = new GameObject[2];
 
-    [SerializeField] private PlatformSpawnManager platformManager;
-
     public struct GameInfo
     {
         private bool isInCP;
@@ -277,7 +275,6 @@ public class LevelManager : MonoBehaviour
     public void player_EnteredCheckpoint()
     {
         spawn_NextCheckpoint();
-        platformManager.GetDifficultyAndSpawn();
         
         playerControl.addPoint(1);
         checkLevelStatus();
