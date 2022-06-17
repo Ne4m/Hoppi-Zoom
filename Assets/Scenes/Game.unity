@@ -238,6 +238,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8308591489993446405}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &73175934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8308591490057635719, guid: f6a28820b4afda5418e74dddccf8fed9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8308591489993446405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &73175939 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8308591490057635718, guid: f6a28820b4afda5418e74dddccf8fed9,
@@ -3510,6 +3516,11 @@ PrefabInstance:
       objectReference: {fileID: 240770443}
     - target: {fileID: 1484876908072670790, guid: 9f9542301a0893549afdf7085c432380,
         type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 73175934}
+    - target: {fileID: 1484876908072670790, guid: 9f9542301a0893549afdf7085c432380,
+        type: 3}
       propertyPath: background1
       value: 
       objectReference: {fileID: 2021645481}
@@ -3531,12 +3542,12 @@ PrefabInstance:
     - target: {fileID: 1484876908072670790, guid: 9f9542301a0893549afdf7085c432380,
         type: 3}
       propertyPath: cameraFollowSpeed
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1484876908072670790, guid: 9f9542301a0893549afdf7085c432380,
         type: 3}
       propertyPath: distanceThreshold
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1484876908213230673, guid: 9f9542301a0893549afdf7085c432380,
         type: 3}

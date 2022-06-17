@@ -23,10 +23,21 @@ public class CameraController : MonoBehaviour
 
 	public Transform camTransform;
 
+
+	[SerializeField]
+	private Transform target;
+
+
+	private Vector3 background1TargetPos = new Vector3();
+	private Vector3 background2TargetPos = new Vector3();
+	private Vector3 cameraTargetPos = new Vector3();
+
+
 	private void Awake()
 	{
 		t = Playerobject.GetComponent<Transform>();
 		camTransform = GetComponent<Transform>();
+
 	}
 
     private void Start()
@@ -39,8 +50,9 @@ public class CameraController : MonoBehaviour
 
     private void FixedUpdate()
 	{
-        backGroundFollow();
-        CameraFollow();
+		CameraFollow();
+		backGroundFollow();
+
     }
 
     //private void Update()
@@ -50,6 +62,12 @@ public class CameraController : MonoBehaviour
     //}
 
 
+	private void CameraFollow2()
+    {
+		Vector3 targetPos = new Vector3(target.position.x, target.position.y, target.position.z);
+
+		transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
+    }
 
     private void CameraFollow()
 	{
@@ -80,13 +98,14 @@ public class CameraController : MonoBehaviour
         if (transform.position.y >= background2.position.y)
         {
             background1.GetComponent<SpriteRenderer>().sprite = background2.GetComponent<SpriteRenderer>().sprite;
-            background1.position = new Vector3(background1.position.x, background2.position.y + bg_size, background1.position.z); //  - .37169f
+			//background1.position = new Vector3(background1.position.x, background2.position.y + bg_size, background1.position.z); //  - .37169f
+			background1.position = SetPosition(background1TargetPos,background1.position.x, background2.position.y + bg_size, background1.position.z);
 			switchBackGround();
         }
 
 		if(transform.position.y < background1.position.y)
         {
-			background2.position = new Vector3(background2.position.x, background1.position.y - bg_size, background2.position.z);
+			background2.position = SetPosition(background2TargetPos, background2.position.x, background1.position.y - bg_size, background2.position.z);
 			switchBackGround();
 		}
     }
@@ -98,4 +117,12 @@ public class CameraController : MonoBehaviour
         background2 = temp;
     }
 
+
+	private Vector3 SetPosition(Vector3 pos, float x, float y, float z)
+    {
+		pos.x = x;
+		pos.y = y;
+		pos.z = z;
+		return pos;
+    }
 }
