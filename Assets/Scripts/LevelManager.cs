@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     private GameObject deathScreen;
 
     [SerializeField]
-    private float spawnDistance = 5;
+    private float spawnDistance = 10;
 
 
     [SerializeField]
@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
     //private int point = 0;
 
     private GameObject[] spawnedObjects = new GameObject[2];
+
+    PlatformSpawner platformSpawner;
 
     public struct GameInfo
     {
@@ -174,8 +176,10 @@ public class LevelManager : MonoBehaviour
         rb2D = player.GetComponent<Rigidbody2D>();
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
 
+        platformSpawner = gameObject.GetComponent<PlatformSpawner>();
+
         //Button btn = dieButton.GetComponent<Button>();
-       // btn.onClick.AddListener(bringDeathMenu);
+        // btn.onClick.AddListener(bringDeathMenu);
         //point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
 
         playerControl.setPlayerDeadStatus(false);
@@ -229,6 +233,8 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
+
+
         if (deathScreen != null)
         {
             deathScreen.SetActive(true);
@@ -250,8 +256,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void onContinue()
+    {
+        deathScreen.SetActive(false);
+        blurScreen.SetActive(false);
+
+        playerControl.setPlayerDeadStatus(false);
+        player.GetComponent<SpriteRenderer>().enabled = true;
+        playerEjectorArrow.SetActive(true);
+    }
+
     public void goBackMainMenu()
     {
+        onContinue();
+        restartGame();
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -274,10 +292,14 @@ public class LevelManager : MonoBehaviour
 
     public void player_EnteredCheckpoint()
     {
+
+
         spawn_NextCheckpoint();
         
         playerControl.addPoint(1);
         checkLevelStatus();
+
+        platformSpawner.initiateSpawn();
     }
 
 
@@ -296,8 +318,10 @@ public class LevelManager : MonoBehaviour
     void spawn_NextCheckpoint()
     {
 
+
         new_CheckPoint = Instantiate(checkPoint_Prefab) as GameObject;
         new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + spawnDistance, 0);
+        new_CheckPoint.tag = "Checkpoint";
 
 
 
@@ -305,11 +329,11 @@ public class LevelManager : MonoBehaviour
         {
             spawnedObjects[0] = new_CheckPoint;
             //just started man
-            
+
         }
         else if (spawnedObjects[1] == null)
         {
-            new_CheckPoint.transform.position = new Vector3 (0, spawnedObjects[0].transform.position.y + spawnDistance,0) ;
+            new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[0].transform.position.y + spawnDistance, 0);
             spawnedObjects[1] = new_CheckPoint;
         }
         else if (spawnedObjects[0] != null)
@@ -321,6 +345,6 @@ public class LevelManager : MonoBehaviour
             spawnedObjects[0] = spawnedObjects[1];
             spawnedObjects[1] = new_CheckPoint;
         }
-        
+
     }
 }

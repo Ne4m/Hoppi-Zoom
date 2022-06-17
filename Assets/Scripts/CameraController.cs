@@ -19,29 +19,44 @@ public class CameraController : MonoBehaviour
 
     public Transform background1, background2;
     private float bg_size;
+	private Vector2 bg_size2;
+
+	public Transform camTransform;
 
 	private void Awake()
 	{
 		t = Playerobject.GetComponent<Transform>();
+		camTransform = GetComponent<Transform>();
 	}
 
     private void Start()
     {
         bg_size = background1.GetComponent<BoxCollider2D>().size.y;
-    }
+		//bg_size2.x = background2.GetComponent<BoxCollider2D>().size.x;
+		//bg_size2.y = background2.GetComponent<BoxCollider2D>().size.y;
+
+	}
 
     private void FixedUpdate()
 	{
-		CameraFollow();
         backGroundFollow();
-
+        CameraFollow();
     }
 
-	private void CameraFollow()
+    //private void Update()
+    //{
+
+    //    camTransform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    //}
+
+
+
+    private void CameraFollow()
 	{
 		//Get Center of Screen
 		_centerofScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2, Screen.height / 2));
-		Vector3 desiredPos = t.position + camOffset;
+		//_centerofScreen = Camera.main.ScreenToWorldPoint(new Vector2(bg_size2.x / 2, bg_size2.y / 2));
+		Vector2 desiredPos = t.position + camOffset;
 
 		//Get the distance between player and the center
 		float distance;
@@ -55,8 +70,8 @@ public class CameraController : MonoBehaviour
 			isInDistance = true;
 		}
 
-		if (!isInDistance)
-		this.transform.position = new Vector3(this.transform.position.x, Mathf.Lerp(this.transform.position.y, desiredPos.y, Time.fixedDeltaTime * cameraFollowSpeed), this.transform.position.z);
+		if (!isInDistance) 
+			this.transform.position = new Vector3(this.transform.position.x, Mathf.Lerp(this.transform.position.y, desiredPos.y, Time.fixedDeltaTime * cameraFollowSpeed), this.transform.position.z);
 		//Debug.Log("IS IN THE DISTANCE " + isInDistance);
 	}
 
@@ -65,9 +80,15 @@ public class CameraController : MonoBehaviour
         if (transform.position.y >= background2.position.y)
         {
             background1.GetComponent<SpriteRenderer>().sprite = background2.GetComponent<SpriteRenderer>().sprite;
-            background1.position = new Vector3(background1.position.x, background2.position.y + bg_size - .37169f, background1.position.z);
-            switchBackGround();
+            background1.position = new Vector3(background1.position.x, background2.position.y + bg_size, background1.position.z); //  - .37169f
+			switchBackGround();
         }
+
+		if(transform.position.y < background1.position.y)
+        {
+			background2.position = new Vector3(background2.position.x, background1.position.y - bg_size, background2.position.z);
+			switchBackGround();
+		}
     }
 
     private void switchBackGround()

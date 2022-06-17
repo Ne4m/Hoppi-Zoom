@@ -169,8 +169,8 @@ public class PlayerController : MonoBehaviour
                     _levelManager.player_EnteredCheckpoint();
                 }
             }
-            
-            
+
+            Debug.Log("Collision: " + collision.gameObject.tag);
 
             _rb2D.velocity = Vector2.zero;
             _rb2D.angularVelocity = 0f;
@@ -188,6 +188,8 @@ public class PlayerController : MonoBehaviour
             
 
         }
+
+
 
 
         // if (collision.CompareTag("Background"))
@@ -214,6 +216,15 @@ public class PlayerController : MonoBehaviour
         //
         // }
 
+        //if (collision.collider.tag.Contains("Platform")){
+
+        //}
+        //Debug.Log("Collision: " + collision.gameObject.tag);
+
+        if (collision.collider.tag.Contains("Spike"))
+        {
+           // _levelManager.bringDeathMenu();
+        }
     }
 
     void GetRotAccordingtoVelocity()
