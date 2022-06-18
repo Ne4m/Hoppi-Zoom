@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using GooglePlayGames;
-using Platforms;
 using UnityEngine.SocialPlatforms;
 
 

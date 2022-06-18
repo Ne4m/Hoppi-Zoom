@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Spike
   - Boundary
+  - Magnet
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
 
 	private Vector3 background1TargetPos = new Vector3();
 	private Vector3 background2TargetPos = new Vector3();
-	private Vector3 cameraTargetPos = new Vector3();
+	//private Vector3 cameraTargetPos = new Vector3();
 
 
 	private void Awake()
