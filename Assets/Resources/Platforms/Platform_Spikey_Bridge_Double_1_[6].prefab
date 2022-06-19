@@ -375,10 +375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 6
-  hasChilds: 1
   moveSpeed: 1
   rotationSpeed: 15
   objectProperties:
+    isSpecial: 1
     moveable: 0
     moveableX: 0
     moveableY: 0
@@ -388,6 +388,41 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 1
+  childrenProps:
+  - isSpecial: 0
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX: []
+    moveY: []
+    setPosition: 1
+    startPositionX: -2.385
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  - isSpecial: 0
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX: []
+    moveY: []
+    setPosition: 1
+    startPositionX: 2.385
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
 --- !u!1 &292036859495736225
 GameObject:
   m_ObjectHideFlags: 0

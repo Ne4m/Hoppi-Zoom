@@ -159,10 +159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 8
-  hasChilds: 1
   moveSpeed: 1
   rotationSpeed: 50
   objectProperties:
+    isSpecial: 1
     moveable: 0
     moveableX: 0
     moveableY: 0
@@ -172,6 +172,15 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    setPosition: 1
+    startPositionX: 0
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []
 --- !u!1 &419873472471819919
 GameObject:
   m_ObjectHideFlags: 0

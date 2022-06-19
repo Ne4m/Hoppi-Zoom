@@ -490,7 +490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: -1
-  hasChilds: 0
   moveSpeed: 1
   rotationSpeed: 1
   objectProperties:
@@ -503,6 +502,15 @@ MonoBehaviour:
     moveY:
     - 3
     - -3
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []
 --- !u!1 &7283689492289108647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1150,7 @@ GameObject:
   - component: {fileID: 7283689493535521362}
   - component: {fileID: 7283689493535521361}
   m_Layer: 0
-  m_Name: Platform_Kinetic_Magnet_1_[9]
+  m_Name: Platform_Kinetic_Magnet_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 9
-  hasChilds: 1
   moveSpeed: 1
   rotationSpeed: 1
   objectProperties:
@@ -1194,3 +1201,12 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    setPosition: 1
+    startPositionX: 0
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []

@@ -30,35 +30,54 @@ public class LevelManager : MonoBehaviour
     private GameObject playerEjectorArrow;
 
     #region Level Stuff
-    [SerializeField]
-    private int playerLevel;
-    [SerializeField]
-    private int perPointToLevelThreshold = 5;
-    [SerializeField]
-    private int levelMultiplier = 2;
+    [Header ("Level Stuff")]
+    [SerializeField] private int playerLevel;
+    [SerializeField] private int perPointToLevelThreshold = 5;
+    [SerializeField] private int levelMultiplier = 2;
     #endregion
 
-    public TMP_Text point_text;
-    public TMP_Text death_text;
+    [Header ("Text Boxes")]
+    [SerializeField] private TMP_Text point_text;
+    [SerializeField] private TMP_Text death_text;
+    [SerializeField] private TMP_Text health_text;
 
     private bool isINCP;
 
     //[SerializeField]
     //private int point = 0;
 
+
     private GameObject[] spawnedObjects = new GameObject[2];
 
     PlatformSpawner platformSpawner;
 
-    public struct GameInfo
+
+    //public struct Test
+    //{
+    //    private float hp;
+    //    public Test(float a)
+    //    {
+    //        this.hp = a;
+    //    }
+    //}
+
+    public playerInfo playerControl = new playerInfo(1000);
+
+    public class playerInfo
     {
         private bool isInCP;
         private bool isDead;
         private int point;
         private int highScore;
         private int level;
-        private int health;
+        private float currentHealth;
+        private float maxHealth;
 
+        public playerInfo(float maxHealth)
+        {
+            this.currentHealth = maxHealth;
+            this.maxHealth = maxHealth;
+        }
 
         public bool IsPlayerInCheckPoint()
         {
@@ -120,31 +139,47 @@ public class LevelManager : MonoBehaviour
         }
 
         // HP Stuff
-        public int getHealth()
+        public float getHealth()
         {
-            return health;
+            return currentHealth;
+        }
+
+        public float getMaxHealth()
+        {
+            return maxHealth;
         }
         
-        public void setHealth(int hp)
+        public void setHealth(float hp)
         {
-            health = hp;
+            currentHealth = hp;
+
+            if(currentHealth < 0) currentHealth = 0;
+            if(currentHealth > maxHealth) currentHealth = maxHealth;
         }
 
-        public void heal(int amount)
+        public void heal(float amount)
         {
-            if (amount > 100) this.health = 100;
-            else if (amount > 0 && amount < 100) this.health += amount;
+            if (amount > maxHealth) setHealth(maxHealth);
+            else if (amount > 0 && amount < maxHealth) setHealth(currentHealth+amount);
         }
 
-        public void damage(int amount)
+        public void percentageHeal(float percentage)
         {
-            if(amount > 100)
+            float tempHP = maxHealth;
+
+            tempHP = currentHealth + (tempHP / 100) * percentage;
+
+            setHealth(tempHP);
+        }
+
+        public void damage(float amount)
+        {
+            if(amount > maxHealth)
             {
-                health = 0;
-                // Kill player end game
+                this.setHealth(0);
             }
 
-            if(amount > 0 && amount < 100) this.health -= amount;
+            if(amount > 0 && amount < maxHealth) setHealth(currentHealth-amount);
         }
 
         // Game Restart
@@ -153,11 +188,11 @@ public class LevelManager : MonoBehaviour
             this.point = 0;
             this.level = 0;
             this.isInCP = true;
-            this.health = 100;
+            this.currentHealth = maxHealth;
         }
     }
 
-    public GameInfo playerControl;
+
 
     private void Awake()
     {
@@ -166,6 +201,7 @@ public class LevelManager : MonoBehaviour
 
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
+
     }
 
     // Start is called before the first frame update
@@ -216,8 +252,24 @@ public class LevelManager : MonoBehaviour
 
         playerLevel = playerControl.getLevel();
         checkDeathMenu();
+
+        health_text.text = ($"HP: {playerControl.getHealth()}");
     }
-    
+
+    public void getHit(float amount)
+    {
+        playerControl.damage(amount);
+    }
+    public void getHeal(float amount)
+    {
+        playerControl.heal(amount);
+    }
+
+    public void percHeal(float perc)
+    {
+        playerControl.percentageHeal(perc);
+    }
+
     public void checkDeathMenu()
     {
         if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead()) // Future Death Detection
