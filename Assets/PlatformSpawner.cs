@@ -13,11 +13,12 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField]
     private float spawnDistance = 5f;
 
-    GameObject platformToSpawn;
-    GameObject newPlatform;
+    private GameObject platformToSpawn;
+    private GameObject newPlatform;
     private GameObject[] platformsSpawnCap = new GameObject[5];
 
-    private int initiatedCount = 0;
+    private int initiatedCount = 0;    
+    public GameObject lastSpawnedPlatform;
 
 
     void Start()
@@ -32,6 +33,7 @@ public class PlatformSpawner : MonoBehaviour
             Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
         }
 
+        Debug.Log($"Total Platform Count {platformList.Count}");
        // StartCoroutine(ExampleCoroutine());
     }
 
@@ -66,9 +68,26 @@ public class PlatformSpawner : MonoBehaviour
         }
         else initiatedCount = 0;
 
-        Debug.Log($"Initiated count {initiatedCount}\n");
+        //Debug.Log($"Initiated count {initiatedCount}\n");
     }
 
+    int randomNumber;
+    int lastNumber;
+    int maxAttempts = 5;
+
+    public int selectUniqueRandomNumber(int limit)
+    {
+
+        for (int i = 0; randomNumber == lastNumber && i < maxAttempts; i++)
+        {
+            randomNumber = Random.Range(0, limit);
+        }
+        lastNumber = randomNumber;
+
+        //if(randomNumber > 10) Debug.LogWarning($"Generated Number {randomNumber} \n");
+
+        return randomNumber;
+    }
 
     public void spawnRandomPlatform()
     {
@@ -81,13 +100,13 @@ public class PlatformSpawner : MonoBehaviour
         }
 
 
-
-
         for (int i=0; i < platformsSpawnCap.Length; i++)
         {
-            platformToSpawn = platformList[Random.Range(0, platformList.Count)];
+           
+            platformToSpawn = platformList[selectUniqueRandomNumber(platformList.Count)];
 
             newPlatform = Instantiate(platformToSpawn) as GameObject;
+            lastSpawnedPlatform = newPlatform;
 
             newPlatform.transform.position = new Vector3(0, tr.position.y + spawnDistance, 0);
             newPlatform.tag = "Platform";
@@ -95,6 +114,8 @@ public class PlatformSpawner : MonoBehaviour
 
 
             platformsSpawnCap[i] = newPlatform;
+
+
         }
 
     }

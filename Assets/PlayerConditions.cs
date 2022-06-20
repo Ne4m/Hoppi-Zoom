@@ -37,6 +37,7 @@ public class PlayerConditions : MonoBehaviour
     {
         if (collision.collider.tag.Contains("Spike"))
         {
+            Debug.Log("Got Hit By A Spike!! \n");
             blinkCharacter();
         }
     }
@@ -73,7 +74,6 @@ public class PlayerConditions : MonoBehaviour
             yield return new WaitForSeconds(gracePeriod);
             graceEnabled = false;
             routineStarted = false;
-            Debug.Log("Grace Period Ended! \n");
         }
 
     }
@@ -96,8 +96,6 @@ public class PlayerConditions : MonoBehaviour
             sr.enabled = true;
 
             yield return new WaitForSeconds(graceSpeed);
-
-            Debug.Log("On Grace Period! \n");
 
         }
 

@@ -10,9 +10,12 @@ public class PlatformMovements : MonoBehaviour
 
     private Transform tr;
 
-    [Header ("Speed Values")]
+    [Header("Speed Values")]
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float rotationSpeed = 1f;
+    [SerializeField] private float[] specialRotationSpeed;
+    [SerializeField] private float[] specialMoveSpeed;
+    [SerializeField] private GameObject[] specialChilds;
 
     [Header("Object Props")]
     [SerializeField] private objectProps objectProperties = new objectProps();
@@ -24,11 +27,16 @@ public class PlatformMovements : MonoBehaviour
 
     private Vector3 transformTargetPos = new Vector3();
 
+    private Vector3 platformStartPosition = new Vector3();
+
+
+
     void Start()
     {
         this.tr = GetComponent<Transform>();
 
-
+        platformStartPosition = tr.position;
+        //Debug.Log($"Platform Spawn Position Y : {platformStartPosition.y}");
 
         if (!hasChilds)
         {
@@ -45,7 +53,18 @@ public class PlatformMovements : MonoBehaviour
             }
         }
 
- 
+        // Array Initializations
+        specialChilds = new GameObject[tr.childCount];
+        specialRotationSpeed = new float[tr.childCount];
+        specialMoveSpeed = new float[tr.childCount];
+
+        for(int i=0; i<specialRotationSpeed.Length; i++)
+        {
+            specialChilds[i] = tr.GetChild(i).gameObject;
+            specialRotationSpeed[i] = rotationSpeed;
+            specialMoveSpeed[i] = moveSpeed;
+        }
+
     }
 
     private void FixedUpdate()
@@ -74,8 +93,10 @@ public class PlatformMovements : MonoBehaviour
 
                 if (objectProperties.moveableY)
                 {
-                    float boundaryY_Up = objectProperties.moveY[0];
-                    float boundaryY_Down = objectProperties.moveY[1];
+                    float boundaryY_Up = objectProperties.moveY[0] + platformStartPosition.y;
+                    float boundaryY_Down = platformStartPosition.y + objectProperties.moveY[1];
+
+                    tr.Translate(0, moveSpeed * Time.deltaTime, 0);
 
                     if (tr.position.y > boundaryY_Up)
                     {
@@ -86,7 +107,7 @@ public class PlatformMovements : MonoBehaviour
                         moveSpeed *= -1;
                     }
 
-                    tr.Translate(0, moveSpeed * Time.deltaTime, 0);
+
                 }
             }
         }
@@ -95,112 +116,254 @@ public class PlatformMovements : MonoBehaviour
             if (MovementTypeID == 3) // Platform_Spikey_Kinetic_[3]
             {
 
-
-                if (tr.GetChild(0).position.x < -3.65)
+                if (specialChilds[0] != null)
                 {
-                    moveSpeed *= -1;
-                }
-                else if (tr.GetChild(0).position.x >= -1.48)
-                {
-                    moveSpeed *= -1;
+                    if (specialChilds[0].transform.position.x < -3.65)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+                    else if (specialChilds[0].transform.position.x >= -1.48)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+
+                    specialChilds[0].transform.Translate(-1 * specialMoveSpeed[0] * Time.deltaTime, 0, 0);
                 }
 
-                tr.GetChild(0).Translate(-1 * moveSpeed * Time.deltaTime, 0, 0);
-                tr.GetChild(1).Translate(moveSpeed * Time.deltaTime, 0, 0);
+                if (specialChilds[1] != null)
+                {
+                    if (specialChilds[1].transform.position.x < 1.48)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+                    else if (specialChilds[1].transform.position.x >= 3.65)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+
+                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime, 0, 0);
+                }
+
+
+
             }
 
             if (MovementTypeID == 5) // Platform_Spikey_Kinetic_[5]
             {
 
-
-                if (tr.GetChild(0).position.x > -1.13)
+                if(specialChilds[0] != null)
                 {
-                    moveSpeed *= -1;
-                }
-                else if (tr.GetChild(0).position.x <= -2.39)
-                {
-                    moveSpeed *= -1;
+                    if (specialChilds[0].transform.position.x < -2.39)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+                    else if (specialChilds[0].transform.position.x > -1.13)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+
+                    specialChilds[0].transform.Translate(-1 * specialMoveSpeed[0] * Time.deltaTime, 0, 0);
                 }
 
-                tr.GetChild(0).Translate(-1 * moveSpeed * Time.deltaTime, 0, 0);
-                tr.GetChild(1).Translate(moveSpeed * Time.deltaTime, 0, 0);
+                if (specialChilds[1] != null)
+                {
+                    if (specialChilds[1].transform.position.x < 1.13)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+                    else if (specialChilds[1].transform.position.x > 2.39)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+
+                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime, 0, 0);
+                }
+
+
+
             }
 
             if (MovementTypeID == 6) // Platform_Spikey_Bridge_Double_1_[6]
             {
 
 
-                if (tr.GetChild(0).rotation.eulerAngles.z >= 60)
+                if(specialChilds[0] != null)
                 {
-                    rotationSpeed *= -1;
+                    if (specialChilds[0].transform.rotation.eulerAngles.z >= 60)
+                    {
+                        specialRotationSpeed[0] *= -1;
 
+                    }
+
+                    if (specialChilds[0].transform.rotation.eulerAngles.z >= 300)
+                    {
+                        specialRotationSpeed[0] *= -1;
+
+                    }
+
+                    specialChilds[0].transform.Rotate(0, 0, specialRotationSpeed[0] * Time.fixedDeltaTime);
                 }
 
-                if (tr.GetChild(0).rotation.eulerAngles.z >= 300)
-                {
-                    rotationSpeed *= -1;
 
+
+                if (specialChilds[1] != null)
+                {
+                    if (specialChilds[1].transform.rotation.eulerAngles.z >= 60)
+                    {
+                        specialRotationSpeed[1] *= -1;
+
+                    }
+
+                    if (specialChilds[1].transform.rotation.eulerAngles.z >= 300)
+                    {
+                        specialRotationSpeed[1] *= -1;
+
+                    }
+
+                    specialChilds[1].transform.Rotate(0, 0, specialRotationSpeed[1] * Time.fixedDeltaTime * -1);
                 }
+
 
 
                 //Debug.Log($"Rotation is [LOCAL] {tr.GetChild(0).localEulerAngles.z}\n");
                 //Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(0).eulerAngles.z}\n");
 
-                tr.GetChild(0).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
-                tr.GetChild(1).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime * -1);
+
+
 
             }
 
             if (MovementTypeID == 7) // Platform_Spikey_Bridge_2_[7]
             {
 
+                // PRE INITIALIZE CHILDS !!!
 
-                if (tr.GetChild(0).rotation.eulerAngles.z >= 60)
+
+                if (specialChilds[0] != null)
                 {
-                    rotationSpeed *= -1;
+                    if (specialChilds[0].transform.rotation.eulerAngles.z >= 60)
+                    {
+                        specialRotationSpeed[0] *= -1;
 
+                    }
+
+                    if (specialChilds[0].transform.rotation.eulerAngles.z < 0)
+                    {
+                        specialRotationSpeed[0] *= -1;
+
+                    }
+
+                    //Debug.Log($"Rotation is [LOCAL] {tr.GetChild(0).localEulerAngles.z}\n");
+                    //Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(0).eulerAngles.z}\n");
+
+                    specialChilds[0].transform.Rotate(0, 0, specialRotationSpeed[0] * Time.fixedDeltaTime);
                 }
 
-                if (tr.GetChild(0).rotation.eulerAngles.z < 0)
-                {
-                    rotationSpeed *= -1;
 
+                if (specialChilds[1] != null)
+                {
+                    if (specialChilds[1].transform.rotation.z < -0.5f)
+                    {
+                        specialRotationSpeed[1] *= -1;
+
+                    }
+
+                    if (specialChilds[1].transform.rotation.z > 0)
+                    {
+                        specialRotationSpeed[1] *= -1;
+
+                    }
+
+                    //Debug.Log($"Rotation is [LOCAL] {tr.GetChild(1).localEulerAngles.z}\n");
+                    //Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(1).eulerAngles.z}\n");
+                    //Debug.Log($"Rotation is  {tr.GetChild(1).rotation.z}\n");
+
+
+                    specialChilds[1].transform.Rotate(0, 0, specialRotationSpeed[1] * Time.fixedDeltaTime * -1);
                 }
 
 
-                //Debug.Log($"Rotation is [LOCAL] {tr.GetChild(0).localEulerAngles.z}\n");
-                //Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(0).eulerAngles.z}\n");
-
-                tr.GetChild(0).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
-                tr.GetChild(1).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime * -1);
 
             }
 
-            if (MovementTypeID == 8) // Platform_Spikey_Bridge_2_[7]
+            if (MovementTypeID == 8) // Platform_Spikey_Bridge_3_[8]
             {
 
-
-                if (tr.GetChild(0).rotation.eulerAngles.z >= 300)
+                if(specialChilds[0] != null)
                 {
-                    rotationSpeed *= -1;
+
+                    specialChilds[0].transform.Rotate(0, 0, specialRotationSpeed[0] * Time.fixedDeltaTime);
 
                 }
-
-                if (tr.GetChild(0).rotation.eulerAngles.z < 0)
-                {
-                    rotationSpeed *= -1;
-
-                }
-
-
-                Debug.Log($"Rotation is [LOCAL] {tr.GetChild(0).localEulerAngles.z}\n");
-                Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(0).eulerAngles.z}\n");
-
-                tr.GetChild(0).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
-                tr.GetChild(1).Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
 
             }
 
+            if (MovementTypeID == 9) // Platform_Spikey_Bridge_4_[9]
+            {
+
+                if (specialChilds[1] != null)
+                {
+
+                    specialChilds[1].transform.Rotate(0, 0, specialRotationSpeed[1] * Time.fixedDeltaTime * -1);
+
+                }
+
+            }
+
+
+            if (MovementTypeID == 10) // Platform_Spikey_Bridge_3_[8]
+            {
+
+                if (specialChilds[0] != null)
+                {
+
+                    specialChilds[0].transform.Rotate(0, 0, specialRotationSpeed[0] * Time.fixedDeltaTime);
+
+                }
+
+                if (specialChilds[1] != null)
+                {
+                    if (specialChilds[1].transform.position.x < 2.385)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+                    else if (specialChilds[1].transform.position.x > 3.50)
+                    {
+                        specialMoveSpeed[1] *= -1;
+                    }
+
+                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime * -1, 0, 0);
+                }
+
+            }
+
+            if (MovementTypeID == 11) // Platform_Spikey_Bridge_3_[8]
+            {
+
+                
+
+                if (specialChilds[0] != null)
+                {
+                    if (specialChilds[0].transform.position.x < -3.50)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+                    else if (specialChilds[0].transform.position.x > -2.385)
+                    {
+                        specialMoveSpeed[0] *= -1;
+                    }
+
+                    specialChilds[0].transform.Translate(specialMoveSpeed[0] * Time.deltaTime, 0, 0);
+                }
+
+                if (specialChilds[1] != null)
+                {
+
+                    specialChilds[1].transform.Rotate(0, 0, specialRotationSpeed[1] * Time.fixedDeltaTime * -1);
+
+                }
+
+            }
 
         }
         

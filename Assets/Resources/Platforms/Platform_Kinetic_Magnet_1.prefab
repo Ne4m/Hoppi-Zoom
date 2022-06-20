@@ -492,7 +492,11 @@ MonoBehaviour:
   MovementTypeID: -1
   moveSpeed: 1
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
+    isSpecial: 0
     moveable: 1
     moveableX: 1
     moveableY: 0
@@ -1188,10 +1192,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementTypeID: 9
+  MovementTypeID: 0
   moveSpeed: 1
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
+    isSpecial: 0
     moveable: 0
     moveableX: 0
     moveableY: 0
