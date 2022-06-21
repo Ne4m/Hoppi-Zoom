@@ -27,8 +27,9 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if(tr.position.y > startPosition.y + 10)
+        if(Vector2.Distance(tr.position, startPosition) > 10) // tr.position.y > startPosition.y + 10
         {
+            
             Destroy(gameObject);
         }
     }

@@ -24,13 +24,19 @@ public class CameraController : MonoBehaviour
 	public Transform camTransform;
 
 
-	[SerializeField]
-	private Transform target;
+	[SerializeField] private Transform target;
 
 
-	private Vector3 background1TargetPos = new Vector3();
+
+
+
+
+
+
+private Vector3 background1TargetPos = new Vector3();
 	private Vector3 background2TargetPos = new Vector3();
 	//private Vector3 cameraTargetPos = new Vector3();
+
 
 
 	private void Awake()
@@ -115,7 +121,10 @@ public class CameraController : MonoBehaviour
         Transform temp = background1;
         background1 = background2;
         background2 = temp;
-    }
+
+	}
+
+
 
 
 	private Vector3 SetPosition(Vector3 pos, float x, float y, float z)

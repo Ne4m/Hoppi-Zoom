@@ -46,11 +46,18 @@ public class LevelManager : MonoBehaviour
     //[SerializeField]
     //private int point = 0;
 
+    [Header ("Cloud Spawn Stuff")]
+    private GameObject[] cloudSpawnerCap = new GameObject[2];
+    [SerializeField] private GameObject cloudSpawner;
+    [SerializeField] private float cloudSpawnDistance;
+    private GameObject newCloudSpawner;
+    private GameObject lastCloudSpawned;
+
 
     private GameObject[] spawnedObjects = new GameObject[2];
 
     PlatformSpawner platformSpawner;
-
+    CameraController camCont;
 
     //public struct Test
     //{
@@ -212,6 +219,7 @@ public class LevelManager : MonoBehaviour
         checkPoint_Prefab = Resources.Load("Checkpoint_Bar") as GameObject;
 
         platformSpawner = gameObject.GetComponent<PlatformSpawner>();
+        camCont = gameObject.GetComponent<CameraController>();
 
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
@@ -350,9 +358,27 @@ public class LevelManager : MonoBehaviour
         playerControl.addPoint(1);
         checkLevelStatus();
 
+
+
+
+        spawnClouds();
         platformSpawner.initiateSpawn();
     }
 
+
+
+    public void spawnClouds()
+    {
+        // WTF
+        if (lastCloudSpawned != null)
+        {
+            Destroy((GameObject)lastCloudSpawned);
+        }
+
+        Vector3 addedDist = transform.position + new Vector3(0, cloudSpawnDistance, 0);
+        newCloudSpawner = Instantiate(cloudSpawner, addedDist, Quaternion.identity);
+        lastCloudSpawned = newCloudSpawner;
+    }
 
 
     private void checkLevelStatus()
