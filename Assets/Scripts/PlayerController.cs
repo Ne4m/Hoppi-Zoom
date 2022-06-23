@@ -220,10 +220,10 @@ public class PlayerController : MonoBehaviour
         //}
         //Debug.Log("Collision: " + collision.gameObject.tag);
 
-        if (collision.collider.tag.Contains("Spike"))
-        {
-           // _levelManager.bringDeathMenu();
-        }
+        //if (collision.collider.tag.Contains("Spike"))
+        //{
+        //   // _levelManager.bringDeathMenu();
+        //}
     }
 
     void GetRotAccordingtoVelocity()

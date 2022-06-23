@@ -42,6 +42,17 @@ public class PlayerConditions : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Spike"))
+        {
+            Debug.Log("Got Hit By A Spike!! \n");
+            blinkCharacter();
+        }
+    }
+
+
+
     private void Update()
     {
         if(!routineStarted && graceEnabled)

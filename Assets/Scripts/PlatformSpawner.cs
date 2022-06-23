@@ -28,12 +28,12 @@ public class PlatformSpawner : MonoBehaviour
         platformListArr = Resources.LoadAll<GameObject>("Platforms");
         platformList = platformListArr.ToList();
 
-        for(int i=0; i < platformListArr.Length; i++)
-        {
-            Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
-        }
+        //for(int i=0; i < platformListArr.Length; i++)
+        //{
+        //    Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
+        //}
 
-        Debug.Log($"Total Platform Count {platformList.Count}");
+        //Debug.Log($"Total Platform Count {platformList.Count}");
        // StartCoroutine(ExampleCoroutine());
     }
 

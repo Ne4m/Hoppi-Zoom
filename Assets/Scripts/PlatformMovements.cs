@@ -110,6 +110,12 @@ public class PlatformMovements : MonoBehaviour
 
                 }
             }
+
+
+            if (objectProperties.canFade)
+            {
+                StartCoroutine(FadePlatform(objectProperties));
+            }
         }
         else
         {
@@ -378,6 +384,10 @@ public class PlatformMovements : MonoBehaviour
         public bool moveableX;
         public bool moveableY;
 
+        public bool canFade;
+        public float fadeDuration;
+        public float fadeSpeed;
+
         public float[] moveX = new float[2];
         public float[] moveY = new float[2];
 
@@ -393,6 +403,41 @@ public class PlatformMovements : MonoBehaviour
         public float startRotationW;
 
 
+    }
+
+
+
+    private IEnumerator FadePlatform(objectProps platform)
+    {
+
+
+        float duration = platform.fadeDuration;
+        float speed = platform.fadeSpeed;
+
+        yield return new WaitForSeconds(duration);
+
+        Renderer renderer = tr.GetComponent<Renderer>();
+        Color platformColor = renderer.material.color;
+
+        float fadeAmount = platformColor.a - (speed * Time.deltaTime);
+        if(fadeAmount < 0) fadeAmount = 0;
+        platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount);
+
+        renderer.material.color = platformColor;
+
+
+
+
+        yield return new WaitForSeconds(duration);
+
+        float fadeAmount1 = platformColor.a + (speed * Time.deltaTime);
+        if (fadeAmount > 1) fadeAmount1 = 1;
+        platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount1);
+        renderer.material.color = platformColor;
+
+
+        Debug.Log($"Object has Faded for {duration} seconds!!");
+        Debug.Log($"Object is Fading..... at {platformColor.a}");
     }
 
     private Vector3 SetPosition(Vector3 pos, float x, float y, float z)
