@@ -9,33 +9,63 @@ using Random = UnityEngine.Random;
 public class CharacterMenuController : MonoBehaviour
 {
     private string[] playableCharacters = {"Default Guy", "Mahmut", "Kubat", "Ozan", "Samet", "Cavo"};
-    private string selectedCharacter;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
-    private int characterHealth, characterSpeed;
+    private float characterHealth, characterSpeed;
+
+    private float baseHealth = 2000;
+    private float baseSpeed = 2000;
+
+    [SerializeField] private Transform characterOnScreen;
 
     [Header("Buttons")] 
     [SerializeField] private Button swipeLeftButton;
     [SerializeField] private Button swipeRightButton;
-    [SerializeField] private TMP_Text characterName;
+    [SerializeField] private Button selectButton;
 
     [Header("Character Bars")] 
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider speedBar;
 
+    [Header("Texts")]
+    [SerializeField] private TMP_Text characterName;
+    [SerializeField] private TMP_Text titleText;
 
-    void Awake()
-    {
-        currentCharacterIndex = getCurrentIndex();
-        updateCharacter(currentCharacterIndex);
-    }
-    // Start is called before the first frame update
+
+    private Image characterImg;
+    private Sprite[] characterSkins;
+
+
     void Start()
     {
+        characterImg = characterOnScreen.GetComponent<Image>();
+        characterSkins = Resources.LoadAll<Sprite>("Characters");
+
+        currentCharacterIndex = getCurrentIndex();
+        updateCharacter(currentCharacterIndex);
+
+
+
         minCharacterIndex = 0;
         maxCharacterIndex = playableCharacters.Length-1;
 
         if(!(swipeLeftButton is null)) swipeLeftButton.onClick.AddListener(swipeLeftButtonClicked);
         if(!(swipeRightButton is null)) swipeRightButton.onClick.AddListener(swipeRightButtonClicked);
+        if (!(selectButton is null)) selectButton.onClick.AddListener(selectButtonClicked);
+
+
+    }
+
+    private void selectButtonClicked()
+    {
+        // 
+        Debug.Log($"Current Index = {currentCharacterIndex}");
+        titleText.text = "SELECTED CHARACTER";
+        titleText.color = Color.green;
+        setCurrentIndex(currentCharacterIndex);
+
+
+        PlayerPrefs.SetFloat("playerHealth", characterHealth);
+        PlayerPrefs.SetFloat("playerSpeed", characterSpeed);
     }
 
     private void swipeLeftButtonClicked()
@@ -59,6 +89,18 @@ public class CharacterMenuController : MonoBehaviour
     private void updateCharacter(int index)
     {
         characterName.text = playableCharacters[index];
+        characterImg.sprite = characterSkins[currentCharacterIndex];
+
+        if (currentCharacterIndex == getCurrentIndex())
+        {
+            titleText.text = "SELECTED CHARACTER";
+            titleText.color = Color.green;
+        }
+        else
+        {
+            titleText.text = "choose your character";
+            titleText.color = Color.white;
+        }
 
         // var number = Random.Range(0f, 1f);
         // healthBar.value = number;
@@ -68,42 +110,50 @@ public class CharacterMenuController : MonoBehaviour
         switch (index)
         {
             case 0:
-                print($"Case is 0 Expected Char Name is -Default Guy- is it tho ? {characterName.text}");
+
                 setHpByPercentage(50);
                 setSpeedByPercentage(50);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
                 break;
             case 1:
-                print($"Case is 1 Expected Char Name is -Mahmut- is it tho ? {characterName.text}");
+
                 setHpByPercentage(75);
                 setSpeedByPercentage(35);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
                 break;
             case 2:
-                print($"Case is 2 Expected Char Name is -Kubat- is it tho ? {characterName.text}");
+
                 setHpByPercentage(100);
                 setSpeedByPercentage(50);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
+
                 break;
             case 3:
-                print($"Case is 3 Expected Char Name is -Ozan- is it tho ? {characterName.text}");
+
                 setHpByPercentage(80);
                 setSpeedByPercentage(30);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
                 break;
             case 4:
-                print($"Case is 4 Expected Char Name is -Samet- is it tho ? {characterName.text}");
+
                 setHpByPercentage(30);
                 setSpeedByPercentage(100);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
                 break;
             case 5:
-                print($"Case is 5 Expected Char Name is -Cavo- is it tho ? {characterName.text}");
+
                 setHpByPercentage(100);
                 setSpeedByPercentage(100);
-                print($"HP : {healthBar.value*100} - Speed: {speedBar.value*100}");
                 break;
         }
+    }
+
+    private void adjustCharacterStats(int type, float percentage)
+    {
+        if(type == 0)
+        {
+            characterHealth = baseHealth * (percentage / 100);
+        }
+        else if(type == 1)
+        {
+            characterSpeed = baseSpeed * (percentage / 100);
+        }
+
     }
 
 
@@ -114,6 +164,8 @@ public class CharacterMenuController : MonoBehaviour
         
         
         healthBar.value = val / 100;
+
+        adjustCharacterStats(0, val);
     }
     
     private void setSpeedByPercentage(float val)
@@ -123,12 +175,19 @@ public class CharacterMenuController : MonoBehaviour
         
         
         speedBar.value = val / 100;
+
+        adjustCharacterStats(1, val);
     }
     
 
+    private void setCurrentIndex(int index)
+    {
+        PlayerPrefs.SetInt("LastSelectedCharacterIndex", index);
+    }
+
     private int getCurrentIndex()
     {
-        // Player Prefs Stuff - Get Last Character And Return Index Based On That.. Implement Later.
-        return 0;
+        int tmpIndex = PlayerPrefs.GetInt("LastSelectedCharacterIndex", 0);
+        return tmpIndex;
     }
 }

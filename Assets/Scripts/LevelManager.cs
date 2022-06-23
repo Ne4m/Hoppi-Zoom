@@ -9,6 +9,7 @@ using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 
 
+
 public class LevelManager : MonoBehaviour
 {
     public Transform player;
@@ -68,7 +69,7 @@ public class LevelManager : MonoBehaviour
     //    }
     //}
 
-    public playerInfo playerControl = new playerInfo(1000);
+    public playerInfo playerControl;
 
     public class playerInfo
     {
@@ -80,10 +81,15 @@ public class LevelManager : MonoBehaviour
         private float currentHealth;
         private float maxHealth;
 
-        public playerInfo(float maxHealth)
+        private float speed;
+        private float rotateSpeed;
+
+        public playerInfo(float maxHealth, float speed, float rotateSpeed)
         {
             this.currentHealth = maxHealth;
             this.maxHealth = maxHealth;
+            this.speed = speed;
+            this.rotateSpeed = rotateSpeed;
         }
 
         public bool IsPlayerInCheckPoint()
@@ -136,6 +142,25 @@ public class LevelManager : MonoBehaviour
         public void levelUp()
         {
             level++;
+        }
+
+        public float getPlayerSpeed()
+        {
+            return this.speed;
+        }
+
+        public void setPlayerSpeed(float speed)
+        {
+            this.speed = speed;
+        }
+
+        public float getPlayerPointerSpeed()
+        {
+            return this.rotateSpeed;
+        }
+        public void setPlayerPointerSpeed(float speed)
+        {
+            this.rotateSpeed = speed;
         }
 
 
@@ -206,6 +231,10 @@ public class LevelManager : MonoBehaviour
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
+        playerControl = new playerInfo(PlayerPrefs.GetFloat("playerHealth", 1000),
+                                                     PlayerPrefs.GetFloat("playerSpeed", 1000),
+                                                     PlayerPrefs.GetFloat("rotateSpeed", 100));
+
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
 
@@ -236,7 +265,8 @@ public class LevelManager : MonoBehaviour
 
         //playerControl.setPoint(PlayerPrefs.GetInt("point", 0));
 
-        
+        // Update Player Controller Variables On Start
+
         playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + PlayerPrefs.GetInt("highScore", 0));
     }
@@ -261,7 +291,9 @@ public class LevelManager : MonoBehaviour
         playerLevel = playerControl.getLevel();
         checkDeathMenu();
 
-        health_text.text = ($"HP: {playerControl.getHealth()}");
+        health_text.text = ($"HP: {playerControl.getHealth()}\n" +
+                            $"SPEED: {playerControl.getPlayerSpeed()}\n" +
+                            $"POINTER SPD. {playerControl.getPlayerPointerSpeed()}");
     }
 
     public void getHit(float amount)

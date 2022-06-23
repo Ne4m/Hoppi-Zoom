@@ -20,6 +20,10 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private GameObject characterMenu;
     [SerializeField] private GameObject shopMenu;
 
+    [Header ("Info Page Stuff")]
+    [SerializeField] private GameObject infoPage;
+    [SerializeField] private Button closeInfoPageButton;
+
     [Header("Middle Buttons")] 
     [SerializeField] private Button playButton;
     [SerializeField] private Button characterButton;
@@ -52,9 +56,12 @@ public class MainMenu_Controller : MonoBehaviour
         
         if(!(characterMenuBack is null)) characterMenuBack.onClick.AddListener(canvasBackMainMenu);
         if(!(shopMenuBack is null)) shopMenuBack.onClick.AddListener(canvasBackMainMenu);
-        
+
+        // Info Page Stuff
+        if(!(closeInfoPageButton is null)) closeInfoPageButton.onClick.AddListener(closeInfoPageButtonClicked);
+
         // Middle Menu Stuff
-        if(!(infoButton is null)) playButton.onClick.AddListener(playButtonClicked);
+        if (!(infoButton is null)) playButton.onClick.AddListener(playButtonClicked);
         if(!(infoButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
         if(!(infoButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
         
@@ -127,6 +134,11 @@ public class MainMenu_Controller : MonoBehaviour
         
     }
 
+    private void closeInfoPageButtonClicked()
+    {
+        infoPage.SetActive(false);
+    }
+
     private void shareButtonClicked()
     {
         print("Clicked Share Button!\n");
@@ -134,6 +146,7 @@ public class MainMenu_Controller : MonoBehaviour
 
     private void infoButtonClicked()
     {
+        infoPage.SetActive(true);
         print("Clicked Info Button!\n");
     }
 

@@ -28,19 +28,21 @@ public class PlayerController : MonoBehaviour
 
     readonly Vector3 _kekVec = new Vector3(0, 0.46f, 0);
     LevelManager _levelManager;
-    
 
-    #region Speed Variables
+
+    [SerializeField] private float playerRotSpeed = 10;
+
+    [Header ("Speed Variables")]
     [SerializeField]
     private float ejectForce = 1;
     [SerializeField]
-    private float playerRotSpeed=10;
-    [SerializeField]
     private float rotateSpeed = 100;
-	#endregion
-    
-    
-	private void Awake()
+
+
+
+
+
+    private void Awake()
 	{
         _rb2D = GetComponent<Rigidbody2D>();
 
@@ -55,6 +57,8 @@ public class PlayerController : MonoBehaviour
         AdjustStartingPoint();
         //LM.playerUpdate(true);
         _levelManager.playerControl.setPlayerCheckPoint(true);
+
+        StartCoroutine(checkVariables());
     }
 
     // Update is called once per frame
@@ -85,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector3 upVector = tr.TransformDirection(Vector2.up) * 10;
-        //Debug.DrawRay(tr.position, upVector, Color.green);
+        Debug.DrawRay(tr.position, upVector, Color.green);
 
 
         if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
@@ -200,31 +204,8 @@ public class PlayerController : MonoBehaviour
         // }
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
 
-        //Debug.Log("Collision: " + collision.gameObject.tag);
 
-        // if (collision.collider.tag.Contains("Untagged") && _colliderCp != null)
-        //
-        // {
-        //     if (_colliderCp.enabled == false)
-        //     {
-        //         _colliderCp.enabled = true;
-        //     }
-        //
-        // }
-
-        //if (collision.collider.tag.Contains("Platform")){
-
-        //}
-        //Debug.Log("Collision: " + collision.gameObject.tag);
-
-        //if (collision.collider.tag.Contains("Spike"))
-        //{
-        //   // _levelManager.bringDeathMenu();
-        //}
-    }
 
     void GetRotAccordingtoVelocity()
 	{
@@ -244,5 +225,26 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void setEjectForce(float force)
+    {
+        this.ejectForce = force;
+    }
+
+    public void setArrowRotationSpeed(float speed)
+    {
+        this.rotateSpeed = speed;
+    }
+
+    private IEnumerator checkVariables()
+    {
+        while (!isPlayerDead)
+        {
+            setEjectForce(_levelManager.playerControl.getPlayerSpeed());
+            setArrowRotationSpeed(_levelManager.playerControl.getPlayerPointerSpeed());
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
