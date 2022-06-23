@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlatformMovements : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     public int MovementTypeID;
 
@@ -65,6 +64,9 @@ public class PlatformMovements : MonoBehaviour
             specialMoveSpeed[i] = moveSpeed;
         }
 
+
+        if(objectProperties.canFade) StartCoroutine(FadeIn());
+        //if (objectProperties.canFade) StartCoroutine(FadeOut());
     }
 
     private void FixedUpdate()
@@ -111,12 +113,8 @@ public class PlatformMovements : MonoBehaviour
                 }
             }
 
-
-            if (objectProperties.canFade)
-            {
-                StartCoroutine(FadePlatform(objectProperties));
-            }
         }
+        #region Special Platforms Start
         else
         {
             if (MovementTypeID == 3) // Platform_Spikey_Kinetic_[3]
@@ -372,26 +370,28 @@ public class PlatformMovements : MonoBehaviour
             }
 
         }
-        
+        #endregion
 
     }
 
     [System.Serializable]
     public class objectProps
     {
+        [Header ("Platform Move Settings")]
         public bool isSpecial = false;
         public bool moveable;
         public bool moveableX;
         public bool moveableY;
 
+        public float[] moveX = new float[2];
+        public float[] moveY = new float[2];
+
+        [Header("Fade In/Out Settings")]
         public bool canFade;
         public float fadeDuration;
         public float fadeSpeed;
 
-        public float[] moveX = new float[2];
-        public float[] moveY = new float[2];
-
-
+        [Header ("Platform Starting Position")]
         public bool setPosition;
 
         public float startPositionX = -1337;
@@ -407,37 +407,73 @@ public class PlatformMovements : MonoBehaviour
 
 
 
-    private IEnumerator FadePlatform(objectProps platform)
+    public IEnumerator FadeIn()
     {
+        float duration = objectProperties.fadeDuration;
+        float speed = objectProperties.fadeSpeed;
 
+        float fadeAmount;
 
-        float duration = platform.fadeDuration;
-        float speed = platform.fadeSpeed;
-
-        yield return new WaitForSeconds(duration);
 
         Renderer renderer = tr.GetComponent<Renderer>();
         Color platformColor = renderer.material.color;
 
-        float fadeAmount = platformColor.a - (speed * Time.deltaTime);
-        if(fadeAmount < 0) fadeAmount = 0;
-        platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount);
+        while (platformColor.a > 0)
+        {
+            fadeAmount = platformColor.a - (speed * Time.deltaTime);
+            platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount);
 
-        renderer.material.color = platformColor;
+            renderer.material.color = platformColor;
+
+            if(platformColor.a < 0)
+            {
+                platformColor.a = 0;
+                
+                tr.GetComponent<Collider2D>().enabled = false;
+
+                yield return new WaitForSeconds(duration);
+                StartCoroutine(FadeOut());
+            }
+
+           // Debug.Log($"Platform Alpha : {platformColor.a}");
+            yield return new WaitForSeconds(0f);
+        }
+
+       
+    }
+
+    public IEnumerator FadeOut()
+    {
+
+        float duration = objectProperties.fadeDuration;
+        float speed = objectProperties.fadeSpeed;
+        float fadeAmount;
+
+        Renderer renderer = tr.GetComponent<Renderer>();
+        Color platformColor = renderer.material.color;
+
+        while (platformColor.a < 1)
+        {
+            fadeAmount = platformColor.a + (speed * Time.deltaTime);
+            platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount);
+
+            renderer.material.color = platformColor;
+
+            if (platformColor.a > 1)
+            {
+                platformColor.a = 1;
+
+                tr.GetComponent<Collider2D>().enabled = enabled;
+
+                yield return new WaitForSeconds(duration);
+                StartCoroutine(FadeIn());
+            }
+
+           // Debug.Log($"Platform Alpha : {platformColor.a}");
+            yield return new WaitForSeconds(0f);
+        }
 
 
-
-
-        yield return new WaitForSeconds(duration);
-
-        float fadeAmount1 = platformColor.a + (speed * Time.deltaTime);
-        if (fadeAmount > 1) fadeAmount1 = 1;
-        platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount1);
-        renderer.material.color = platformColor;
-
-
-        Debug.Log($"Object has Faded for {duration} seconds!!");
-        Debug.Log($"Object is Fading..... at {platformColor.a}");
     }
 
     private Vector3 SetPosition(Vector3 pos, float x, float y, float z)
