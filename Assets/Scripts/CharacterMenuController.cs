@@ -66,6 +66,7 @@ public class CharacterMenuController : MonoBehaviour
 
         PlayerPrefs.SetFloat("playerHealth", characterHealth);
         PlayerPrefs.SetFloat("playerSpeed", characterSpeed);
+        PlayerPrefs.Save();
     }
 
     private void swipeLeftButtonClicked()
@@ -183,6 +184,7 @@ public class CharacterMenuController : MonoBehaviour
     private void setCurrentIndex(int index)
     {
         PlayerPrefs.SetInt("LastSelectedCharacterIndex", index);
+        PlayerPrefs.Save();
     }
 
     private int getCurrentIndex()

@@ -59,6 +59,8 @@ public class LevelManager : MonoBehaviour
 
     PlatformSpawner platformSpawner;
     CameraController camCont;
+    Shooting shooting;
+    UIMessager messager;
 
     //public struct Test
     //{
@@ -249,6 +251,8 @@ public class LevelManager : MonoBehaviour
 
         platformSpawner = gameObject.GetComponent<PlatformSpawner>();
         camCont = gameObject.GetComponent<CameraController>();
+        shooting = gameObject.GetComponent<Shooting>();
+        messager = gameObject.GetComponent<UIMessager>();
 
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
@@ -293,7 +297,9 @@ public class LevelManager : MonoBehaviour
 
         health_text.text = ($"HP: {playerControl.getHealth()}\n" +
                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
-                            $"POINTER SPD. {playerControl.getPlayerPointerSpeed()}");
+                            $"AMMO: {shooting.GetCurrentAmmo()}");
+
+
     }
 
     public void getHit(float amount)
@@ -313,6 +319,12 @@ public class LevelManager : MonoBehaviour
     public void checkDeathMenu()
     {
         if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead()) // Future Death Detection
+        {
+            bringDeathMenu();
+        }
+
+
+        if(!playerControl.isPlayerDead() && playerControl.getHealth() <= 0)
         {
             bringDeathMenu();
         }
@@ -352,6 +364,7 @@ public class LevelManager : MonoBehaviour
         deathScreen.SetActive(false);
         blurScreen.SetActive(false);
 
+        playerControl.setHealth(playerControl.getMaxHealth());
         playerControl.setPlayerDeadStatus(false);
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerEjectorArrow.SetActive(true);
@@ -388,13 +401,23 @@ public class LevelManager : MonoBehaviour
         spawn_NextCheckpoint();
         
         playerControl.addPoint(1);
+
         checkLevelStatus();
-
-
 
 
         spawnClouds();
         platformSpawner.initiateSpawn();
+
+
+
+
+        if (playerControl.getPoint() % 3 == 0)
+        {
+            shooting.AddAmmo(1);
+
+            messager.startMsg("Ammo Received!", 2, Vector3.zero);
+
+        }
     }
 
 
