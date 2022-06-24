@@ -24,7 +24,7 @@ public class Shooting : MonoBehaviour
   
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && levelManager.playerControl.IsPlayerInCheckPoint() && !levelManager.playerControl.isPlayerDead())
+        if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 2) && levelManager.playerControl.IsPlayerInCheckPoint() && !levelManager.playerControl.isPlayerDead())
         {
             if (Time.time > fireRate + lastShot)
             {

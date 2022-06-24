@@ -33,7 +33,7 @@ public class PlatformSpawner : MonoBehaviour
         //    Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
         //}
 
-        //Debug.Log($"Total Platform Count {platformList.Count}");
+        Debug.Log($"Total Platform Count {platformList.Count}");
        // StartCoroutine(ExampleCoroutine());
     }
 

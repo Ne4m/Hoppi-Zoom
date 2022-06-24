@@ -245,13 +245,13 @@ public class PlatformMovements : MonoBehaviour
 
                 if (specialChilds[0] != null)
                 {
-                    if (specialChilds[0].transform.rotation.eulerAngles.z >= 60)
+                    if (specialChilds[0].transform.rotation.z > 0.5372996)
                     {
                         specialRotationSpeed[0] *= -1;
 
                     }
 
-                    if (specialChilds[0].transform.rotation.eulerAngles.z < 0)
+                    if (specialChilds[0].transform.rotation.z < 0)
                     {
                         specialRotationSpeed[0] *= -1;
 
@@ -259,6 +259,7 @@ public class PlatformMovements : MonoBehaviour
 
                     //Debug.Log($"Rotation is [LOCAL] {tr.GetChild(0).localEulerAngles.z}\n");
                     //Debug.Log($"Rotation is [GLOBAL] {tr.GetChild(0).eulerAngles.z}\n");
+                    //Debug.Log($"Rotation is  {tr.GetChild(0).rotation.z}\n");
 
                     specialChilds[0].transform.Rotate(0, 0, specialRotationSpeed[0] * Time.fixedDeltaTime);
                 }
@@ -266,7 +267,7 @@ public class PlatformMovements : MonoBehaviour
 
                 if (specialChilds[1] != null)
                 {
-                    if (specialChilds[1].transform.rotation.z < -0.5f)
+                    if (specialChilds[1].transform.rotation.z < -0.5372996)
                     {
                         specialRotationSpeed[1] *= -1;
 

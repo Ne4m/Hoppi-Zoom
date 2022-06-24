@@ -10,6 +10,7 @@ TagManager:
   - Spike
   - Boundary
   - Magnet
+  - Untouchable
   layers:
   - Default
   - TransparentFX

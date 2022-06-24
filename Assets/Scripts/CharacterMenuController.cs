@@ -13,7 +13,7 @@ public class CharacterMenuController : MonoBehaviour
     private float characterHealth, characterSpeed;
 
     private float baseHealth = 2000;
-    private float baseSpeed = 2000;
+    private float baseSpeed = 1000;
 
     [SerializeField] private Transform characterOnScreen;
 

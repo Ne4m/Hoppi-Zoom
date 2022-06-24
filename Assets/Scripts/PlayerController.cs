@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         //if (tr.rotation.z == -0.0008726012) atMid = true;
         
 
-        if (Input.GetKey(KeyCode.R) || Input.touchCount == 2)
+        if (Input.GetKey(KeyCode.R) || Input.touchCount == 3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -85,25 +85,73 @@ public class PlayerController : MonoBehaviour
     }
 
     Quaternion _slowRot;
+    RaycastHit2D hit;
     void GetCast()
     {
+
+        // Fix
 
         Vector3 upVector = tr.TransformDirection(Vector2.up) * 10;
         Debug.DrawRay(tr.position, upVector, Color.green);
 
 
-        if ((Input.GetKey(KeyCode.A) || Input.touchCount == 1) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
+        #region touch to move broken
+        //if(Input.GetKey(KeyCode.Mouse0) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
+        //{
+
+
+
+        //    _levelManager.playerControl.setPlayerCheckPoint(false);
+        //    arrowiks.SetActive(false);
+
+
+        //    //upVector = upVector - _kekVec;
+        //    //_rb2D.AddForce(upVector * (ejectForce * Time.fixedDeltaTime));
+
+        //    _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
+        //    _rb2D.MoveRotation(_slowRot);
+
+        //    //Vector3 vectorUp = tr.TransformDirection(Vector2.up);
+        //    _rb2D.velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) * 1 * Time.deltaTime);
+        //}
+        #endregion
+
+        if ((Input.GetKey(KeyCode.A) || Input.touchCount > 0) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
         {
+            //if(Input.touchCount == 1)
+            //{
+            //    Touch touch = Input.touches[0];
+            //    hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), Vector2.zero);
+
+            //    if (hit.transform != null && hit.collider.tag == "Untouchable")
+            //    {
+            //        Debug.Log("Target name: " + hit.collider.name + " " + hit.collider.tag);
+            //        return;
+            //    }
+
+                
+            //}
+
+
+
+
             _levelManager.playerControl.setPlayerCheckPoint(false);
             arrowiks.SetActive(false);
 
 
-            upVector = upVector - _kekVec;
-            _rb2D.AddForce(upVector * (ejectForce * Time.fixedDeltaTime));
+            //upVector = upVector - _kekVec;
+            //_rb2D.AddForce(upVector * (ejectForce * Time.fixedDeltaTime));
 
             _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
             _rb2D.MoveRotation(_slowRot);
+
+            Vector3 vectorUp = tr.TransformDirection(Vector2.up);
+            _rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
+
+
             
+
+
         }
 
     }

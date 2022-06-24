@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using GooglePlayGames;
+using TMPro;
 
 public class MainMenu_Controller : MonoBehaviour
 {
@@ -40,7 +42,9 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private Button musicButton;
     [SerializeField] private Button shareButton;
     [SerializeField] private Button infoButton;
-    
+
+    [Header("Username Google Play Test")]
+    [SerializeField] private TMP_Text usernameTxt;
     
     private bool audio_ON, music_ON;
 
@@ -73,12 +77,13 @@ public class MainMenu_Controller : MonoBehaviour
         if (!(musicButton is null)) musicButton.onClick.AddListener(changeMusicButton);
         if(!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
         if(!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
-        
+
 
     }
 
     void Awake()
     {
+        PlayGamesPlatform.Activate();
         playerModelSkin = PlayerPrefs.GetString("playerModelSkin", "Default");
         playerArrowSkin = PlayerPrefs.GetString("playerArrowSkin", "Default");
     }
@@ -86,7 +91,12 @@ public class MainMenu_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (PlayGamesPlatform.Instance.GetUserDisplayName() != null || PlayGamesPlatform.Instance.GetUserDisplayName() != String.Empty)
+        {
+            usernameTxt.text = ($"({PlayGamesPlatform.Instance.GetUserId()})-{PlayGamesPlatform.Instance.GetUserDisplayName()}");
+        }
+
     }
 
     private void changeActive_Menu(string s)
