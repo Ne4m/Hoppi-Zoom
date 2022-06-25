@@ -14,9 +14,12 @@ public class Shooting : MonoBehaviour
     [SerializeField] private int maxAmmo = 3;
     [SerializeField] private int currentAmmo = 3;
 
+    UIMessager messager;
+
     void Start()
     {
         levelManager = gameObject.GetComponent<LevelManager>();
+        messager = gameObject.GetComponent<UIMessager>();
 
         currentAmmo = maxAmmo;
     }
@@ -48,6 +51,8 @@ public class Shooting : MonoBehaviour
     public void ReplenishAmmo()
     {
         currentAmmo = maxAmmo;
+
+        messager.startMsg($"All Ammo Replenished!", 2, Vector3.zero);
     }
 
     public void AddAmmo(int amount)
@@ -55,6 +60,8 @@ public class Shooting : MonoBehaviour
         if (currentAmmo == maxAmmo) return;
 
         currentAmmo += amount;
+
+        messager.startMsg($"{amount} Ammo Received!", 2, Vector3.zero);
     }
 
     public int GetCurrentAmmo()

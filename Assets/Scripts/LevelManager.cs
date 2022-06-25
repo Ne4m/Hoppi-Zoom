@@ -12,11 +12,14 @@ using UnityEngine.SocialPlatforms;
 
 public class LevelManager : MonoBehaviour
 {
-    public Transform player;
-    public Rigidbody2D rb2D;
+    private Transform player;
+    private Rigidbody2D rb2D;
     private GameObject checkPoint_Prefab;
     private GameObject new_CheckPoint;
     private GameObject last_CheckPoint;
+
+
+    [SerializeField] Button shootButton;
 
     public GameObject blurScreen;
 
@@ -56,6 +59,8 @@ public class LevelManager : MonoBehaviour
 
 
     private GameObject[] spawnedObjects = new GameObject[2];
+
+    private Vector3 lastCheckpoint;
 
     PlatformSpawner platformSpawner;
     CameraController camCont;
@@ -336,7 +341,7 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
-
+        shootButton.gameObject.SetActive(false);
 
         if (deathScreen != null)
         {
@@ -357,10 +362,19 @@ public class LevelManager : MonoBehaviour
             Debug.Log("New Highscore!!! " + playerControl.getPoint());
 
         }
+
+        PauseGame();
     }
 
     public void onContinue()
     {
+        rb2D.velocity = Vector2.zero;
+        rb2D.angularVelocity = 0f;
+        rb2D.transform.position = lastCheckpoint;
+        //player.position = lastCheckpoint;
+
+        shootButton.gameObject.SetActive(true);
+
         deathScreen.SetActive(false);
         blurScreen.SetActive(false);
 
@@ -368,6 +382,8 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerDeadStatus(false);
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerEjectorArrow.SetActive(true);
+
+        ResumeGame();
     }
 
     public void goBackMainMenu()
@@ -396,7 +412,7 @@ public class LevelManager : MonoBehaviour
 
     public void player_EnteredCheckpoint()
     {
-
+        if(new_CheckPoint != null) lastCheckpoint = new_CheckPoint.transform.position;
 
         spawn_NextCheckpoint();
         
@@ -415,12 +431,18 @@ public class LevelManager : MonoBehaviour
         {
             shooting.AddAmmo(1);
 
-            messager.startMsg("Ammo Received!", 2, Vector3.zero);
-
         }
     }
 
 
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
 
     public void spawnClouds()
     {

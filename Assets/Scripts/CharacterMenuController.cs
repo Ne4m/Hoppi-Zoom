@@ -12,8 +12,8 @@ public class CharacterMenuController : MonoBehaviour
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
     private float characterHealth, characterSpeed;
 
-    private float baseHealth = 2000;
-    private float baseSpeed = 1000;
+    private float baseHealth = 1000;
+    private float baseSpeed = 400;
 
     [SerializeField] private Transform characterOnScreen;
 
@@ -148,11 +148,11 @@ public class CharacterMenuController : MonoBehaviour
     {
         if(type == 0)
         {
-            characterHealth = baseHealth * (percentage / 100);
+            characterHealth = baseHealth + (baseHealth * (percentage / 100));
         }
         else if(type == 1)
         {
-            characterSpeed = baseSpeed * (percentage / 100);
+            characterSpeed = baseSpeed + (baseSpeed * (percentage / 100));
         }
 
     }

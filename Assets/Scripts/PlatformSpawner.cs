@@ -15,7 +15,7 @@ public class PlatformSpawner : MonoBehaviour
 
     private GameObject platformToSpawn;
     private GameObject newPlatform;
-    private GameObject[] platformsSpawnCap = new GameObject[5];
+    private GameObject[] platformsSpawnCap = new GameObject[3];
 
     private int initiatedCount = 0;    
     public GameObject lastSpawnedPlatform;
@@ -56,7 +56,7 @@ public class PlatformSpawner : MonoBehaviour
     public void initiateSpawn()
     {
        
-        if(initiatedCount != 4)
+        if(initiatedCount != platformsSpawnCap.Length-1)
         {
             if (initiatedCount < 1)
             {
