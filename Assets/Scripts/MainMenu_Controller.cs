@@ -48,6 +48,8 @@ public class MainMenu_Controller : MonoBehaviour
     
     private bool audio_ON, music_ON;
 
+    PlayGamesPlatform platform;
+                
 
     // Start is called before the first frame update
     void Start()
@@ -78,12 +80,13 @@ public class MainMenu_Controller : MonoBehaviour
         if(!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
         if(!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
 
-
+        PlayGamesPlatform.DebugLogEnabled = true;
+        platform = PlayGamesPlatform.Activate();
     }
 
     void Awake()
     {
-        PlayGamesPlatform.Activate();
+        
         playerModelSkin = PlayerPrefs.GetString("playerModelSkin", "Default");
         playerArrowSkin = PlayerPrefs.GetString("playerArrowSkin", "Default");
     }
@@ -92,10 +95,9 @@ public class MainMenu_Controller : MonoBehaviour
     void Update()
     {
 
-        if (PlayGamesPlatform.Instance.GetUserDisplayName() != null || PlayGamesPlatform.Instance.GetUserDisplayName() != String.Empty)
-        {
-            usernameTxt.text = ($"({PlayGamesPlatform.Instance.GetUserId()})-{PlayGamesPlatform.Instance.GetUserDisplayName()}");
-        }
+
+            usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
+
 
     }
 
@@ -215,13 +217,13 @@ public class MainMenu_Controller : MonoBehaviour
         }
     }
 
-    private void canvasBackMainMenu()
+    public void canvasBackMainMenu()
     {
         canvasChangeUI("main");
     }
 
     private void changeScene()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("InputSelect");
     }
 }

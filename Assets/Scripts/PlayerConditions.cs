@@ -37,7 +37,7 @@ public class PlayerConditions : MonoBehaviour
     {
         if (collision.collider.tag.Contains("Spike"))
         {
-            Debug.Log("Got Hit By A Spike!! \n");
+            Debug.Log("Got Hit By A Spike!! [COLLISION] \n" + transform.tag);
             blinkCharacter();
         }
     }
@@ -46,7 +46,7 @@ public class PlayerConditions : MonoBehaviour
     {
         if (collision.CompareTag("Spike"))
         {
-            Debug.Log("Got Hit By A Spike!! \n");
+            Debug.Log("Got Hit By A Spike!! [TRIGGER]\n" + transform.tag);
             blinkCharacter();
         }
     }

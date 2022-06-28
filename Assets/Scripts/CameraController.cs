@@ -118,10 +118,14 @@ private Vector3 background1TargetPos = new Vector3();
 
     private void switchBackGround()
     {
-        Transform temp = background1;
+		Transform temp = background1;
         background1 = background2;
         background2 = temp;
 
+
+		var tempID = background1.GetComponent<SpriteRenderer>().sortingOrder;
+		background1.GetComponent<SpriteRenderer>().sortingOrder = background2.GetComponent<SpriteRenderer>().sortingOrder;
+		background2.GetComponent<SpriteRenderer>().sortingOrder = tempID;
 	}
 
 

@@ -239,8 +239,8 @@ public class LevelManager : MonoBehaviour
         PlayGamesPlatform.Activate();
 
         playerControl = new playerInfo(PlayerPrefs.GetFloat("playerHealth", 1000),
-                                                     PlayerPrefs.GetFloat("playerSpeed", 1000),
-                                                     PlayerPrefs.GetFloat("rotateSpeed", 100));
+                                       PlayerPrefs.GetFloat("playerSpeed", 1000),
+                                       PlayerPrefs.GetFloat("rotateSpeed", 100));
 
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
@@ -258,6 +258,8 @@ public class LevelManager : MonoBehaviour
         camCont = gameObject.GetComponent<CameraController>();
         shooting = gameObject.GetComponent<Shooting>();
         messager = gameObject.GetComponent<UIMessager>();
+
+        shooting.SetMaxAmmo(PlayerPrefs.GetInt("playerAmmo", 1));
 
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
@@ -341,7 +343,7 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
-        shootButton.gameObject.SetActive(false);
+        //shootButton.gameObject.SetActive(false);
 
         if (deathScreen != null)
         {
@@ -373,7 +375,7 @@ public class LevelManager : MonoBehaviour
         rb2D.transform.position = lastCheckpoint;
         //player.position = lastCheckpoint;
 
-        shootButton.gameObject.SetActive(true);
+        //shootButton.gameObject.SetActive(true);
 
         deathScreen.SetActive(false);
         blurScreen.SetActive(false);

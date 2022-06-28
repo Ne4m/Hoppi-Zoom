@@ -7,6 +7,17 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public int inputMode = 0;
+
+
+    [SerializeField] private GameObject shootingArea;
+    private SpriteRenderer shootingAreaSpriteRenderer;
+    [SerializeField] private GameObject crosshair;
+
+    [SerializeField] private float shootingRotVal;
+
+
+
     public Transform backgrounds;
 
 
@@ -42,28 +53,51 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text debugtxt;
 
+    Shooting shooting;
 
+    public float arrowTouchRotateOffset = -90f;
+    public float inputModeOffset;
+
+    (int, string) wasIsDast;
 
     private void Awake()
 	{
         _rb2D = GetComponent<Rigidbody2D>();
 
         backgrounds = GetComponent<Transform>();
-        
+
+        inputMode = PlayerPrefs.GetInt("ControlInput", 0);
     }
 
 	void Start()
     {
         //LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
         _levelManager = gameObject.GetComponent<LevelManager>();
+        shooting = gameObject.GetComponent<Shooting>();
+        shootingAreaSpriteRenderer = shootingArea.GetComponent<SpriteRenderer>();
         //AdjustStartingPoint();
         //LM.playerUpdate(true);
         _levelManager.playerControl.setPlayerCheckPoint(true);
 
+        if (inputMode == 0)
+        {
+            tr.gameObject.SetActive(true);
+            crosshair.gameObject.SetActive(false);
+        }
+        else
+        {
+            ejector.position = new Vector3(ejector.position.x, ejector.position.y + inputModeOffset, ejector.position.z);
+            tr.gameObject.SetActive(false);
+            crosshair.gameObject.SetActive(false);
+
+            shooting.SetShootingPoint(crosshair.transform);
+        }
+
+
         StartCoroutine(checkVariables());
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Debug.Log("Z: " + transform.rotation.z +"\n");
@@ -78,33 +112,27 @@ public class PlayerController : MonoBehaviour
 
         isPlayerDead = _levelManager.playerControl.isPlayerDead();
 
+ 
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+
+                BackButtonPressed();
+                
+            }
+        }
+
         CheckJumpInput();
     }
 
     [SerializeField] private float jumpRate = 1.0f;
     [SerializeField] private float lastJump = 0.0f;
+    private bool holdingShoot;
     private void CheckJumpInput()
     {
-        #region touch to move broken
-        //if(Input.GetKey(KeyCode.Mouse0) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
-        //{
-
-
-
-        //    _levelManager.playerControl.setPlayerCheckPoint(false);
-        //    arrowiks.SetActive(false);
-
-
-        //    //upVector = upVector - _kekVec;
-        //    //_rb2D.AddForce(upVector * (ejectForce * Time.fixedDeltaTime));
-
-        //    _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
-        //    _rb2D.MoveRotation(_slowRot);
-
-        //    //Vector3 vectorUp = tr.TransformDirection(Vector2.up);
-        //    _rb2D.velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) * 1 * Time.deltaTime);
-        //}
-        #endregion
 
         if ((Input.GetKey(KeyCode.A)) && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
         {
@@ -112,24 +140,136 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.touchCount == 1 && _levelManager.playerControl.IsPlayerInCheckPoint() && !isPlayerDead)
         {
-
- 
             Touch touch = Input.touches[0];
-            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), Vector2.zero);
+            bool touchEnded = touch.phase == TouchPhase.Ended;
 
-            if (hit.transform != null && hit.collider.tag == "Untouchable")
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), Vector2.zero);
+            Vector2 direction = Camera.main.ScreenToWorldPoint(touch.position) - crosshair.transform.position; // 
+
+            //var tempPos = direction;
+            //tempPos = new Vector3(Mathf.Abs(tempPos.x), Mathf.Abs(tempPos.y));
+            direction.Normalize();
+
+            if (hit.collider != null && hit.collider.tag == "NoTouch")
             {
-                Debug.Log("Target name: " + hit.collider.name + " " + hit.collider.tag);
+
+                //Vector2 pos = Camera.main.ScreenToWorldPoint(touch.position);
+
+                //crosshair.transform.position = new Vector3(pos.x, pos.y + 3, crosshair.transform.position.z);
+                //crosshair.gameObject.SetActive(true);
+
+                if(inputMode == 1)
+                {
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    //crosshair.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1)); // tr  * Time.fixedDeltaTime * 50f
+
+                    var tempRot = Quaternion.Slerp(crosshair.transform.rotation, Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1)), Time.deltaTime * shootingRotVal);
+                    crosshair.transform.rotation = tempRot;
+
+                    //crosshair.transform.Rotate(Vector3.forward, (angle + arrowTouchRotateOffset * -1) * Time.fixedDeltaTime * shootingRotVal);
+
+                    //var newRot = Quaternion.Slerp(crosshair.transform.rotation, tr.rotation, Time.fixedDeltaTime);
+                    //crosshair.transform.rotation = newRot;
+
+                    //tr.gameObject.SetActive(true);
+
+
+                    
+
+
+                    //debugtxt.text = tr.rotation.ToString();
+                    Debug.Log("Target name: " + hit.collider.name + " " + hit.collider.tag);
+                    if (!touchEnded)
+                    {
+                        if (!crosshair.gameObject.activeSelf)
+                        {
+                            crosshair.gameObject.SetActive(true);
+                            shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 143);
+                            Debug.Log("I'm here!!");
+
+                        }
+
+                        holdingShoot = true;
+                    }
+                    else
+                    {
+                        //if (tr.rotation.w >= 0.75f)
+                        //{
+
+                        //}
+
+
+                        tr.gameObject.SetActive(false);
+                        crosshair.gameObject.SetActive(false);
+                        shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
+                        holdingShoot = false;
+
+                        shooting.SendShoot();
+                    }
+                }
+                else
+                {
+                    if (touchEnded)
+                    {
+                        if (tr.rotation.w >= 0.75f)
+                        {
+                            shooting.SendShoot();
+                        }
+
+                        holdingShoot = false;
+                    }
+                }
+
+
+
                 return;
             }
+            else
+            {
+                if (touchEnded)
+                {
+                    shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
+                    holdingShoot = false;
+                    tr.gameObject.SetActive(false);
+                    crosshair.gameObject.SetActive(false);
+                    return;
+                }
+            }
 
-            if (Time.time > jumpRate + lastJump) JumpPlayer();
+            
+            if (inputMode == 1 && !holdingShoot)
+            {
+               
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                tr.rotation = Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1));
+
+
+                if (Time.time > jumpRate + lastJump && tr.rotation.w >= 0.75f)
+                {
+                    tr.gameObject.SetActive(false);
+                    crosshair.gameObject.SetActive(false);
+                    shootingAreaSpriteRenderer.color = new Color32(140,140,140, 0);
+
+                    JumpPlayer();
+                }
+                //Debug.Log($"Touched @ {tr.rotation}");
+            }
+
+            if (inputMode == 0 && !holdingShoot)
+            {
+                if (Time.time > jumpRate + lastJump) JumpPlayer();
+            }
+
+
+
         }
     }
 
     private void FixedUpdate()
     {
-        MoveArrow();
+        if(inputMode == 0 ) MoveArrow();
+
+        
         GetCast();
         GetRotAccordingtoVelocity();
     }
@@ -142,7 +282,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(tr.position, upVector, Color.green);
     }
 
-    private void JumpPlayer()
+    public void JumpPlayer()
     {
 
         Vector3 vectorUp = tr.TransformDirection(Vector2.up);
@@ -315,5 +455,12 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    private void BackButtonPressed()
+    {
+        //Application.Quit();
+
+        SceneManager.LoadScene("Main Menu");
     }
 }

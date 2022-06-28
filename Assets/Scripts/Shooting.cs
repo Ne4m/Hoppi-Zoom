@@ -37,6 +37,19 @@ public class Shooting : MonoBehaviour
 
     }
 
+
+    public void SetShootingPoint(Transform sp)
+    {
+        shootingPoint = sp;
+    }
+    public void SendShoot()
+    {
+        if (Time.time > fireRate + lastShot)
+        {
+            Shoot();
+        }
+    }
+
     public void Shoot()
     {
         if (currentAmmo <= 0) return;

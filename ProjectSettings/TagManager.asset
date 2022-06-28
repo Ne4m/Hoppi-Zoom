@@ -11,6 +11,8 @@ TagManager:
   - Boundary
   - Magnet
   - Untouchable
+  - NoTouch
+  - Release
   layers:
   - Default
   - TransparentFX

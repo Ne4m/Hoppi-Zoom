@@ -416,6 +416,7 @@ public class PlatformMovements : MonoBehaviour
         float fadeAmount;
 
 
+
         Renderer renderer = tr.GetComponent<Renderer>();
         Color platformColor = renderer.material.color;
 
