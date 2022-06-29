@@ -133,6 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3130e66f4af235240a85225ca791a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
+  bulletSpeed: 700
   bulletDamage: 0
-  shooter: {fileID: 0}
+  particleFX: {fileID: 1058325498707994, guid: 8333d50130027574ca8b4e0268fdd047, type: 3}

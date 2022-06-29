@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         backgrounds = GetComponent<Transform>();
 
-        inputMode = PlayerPrefs.GetInt("ControlInput", 0);
+        //inputMode = PlayerPrefs.GetInt("ControlInput", 0);
     }
 
 	void Start()

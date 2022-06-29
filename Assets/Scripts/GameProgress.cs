@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameProgress : MonoBehaviour
 {
     [Header ("Backgrounds")]
@@ -9,17 +10,33 @@ public class GameProgress : MonoBehaviour
     [SerializeField] private GameObject background2;
     [SerializeField] private Sprite[] spritesToChange;
 
-    LevelManager levelManager;
+    public LevelManager levelManager;
+    UIMessager messager;
 
-    float lastPoint = 0;
+    public static GameProgress instance;
+
+    (float BgPoint, float SpeedPoint) last;
+
+    [Header ("Speed Threshold Values")]
+    [SerializeField] float speedChangeThreshold = 2;
+    [SerializeField] float backgroundChangeThreshold = 5;
+
+    private float speedIncrease;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         levelManager = GetComponent<LevelManager>();
+        messager = GetComponent<UIMessager>();
+
     }
 
     int randomNumber;
     int lastNumber;
-    int maxAttempts = 10;
+    int maxAttempts = 5;
     public int selectUniqueRandomNumber(int limit)
     {
 
@@ -34,16 +51,33 @@ public class GameProgress : MonoBehaviour
         return randomNumber;
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if(levelManager.playerControl.getPoint() > lastPoint + 10)
+        if(levelManager.playerControl.getPoint() >= last.BgPoint + backgroundChangeThreshold)
         {
             int number = selectUniqueRandomNumber(spritesToChange.Length);
             background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[number];
             background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[number];
 
-            lastPoint = levelManager.playerControl.getPoint();
+            last.BgPoint = levelManager.playerControl.getPoint();
+
+            messager.startMsg($"Background changed!", 2, Vector3.zero);
         }
+
+        if (levelManager.playerControl.getPoint() >= last.SpeedPoint + speedChangeThreshold)
+        {
+            last.SpeedPoint = levelManager.playerControl.getPoint();
+
+            speedIncrease += Random.Range(0.01f, 0.1f);
+
+            messager.startMsg($"Speed Increased {speedIncrease}!", 2, Vector3.zero);
+        }
+    }
+
+    public float GetSpeedIncrease()
+    {
+        return speedIncrease;
     }
 }

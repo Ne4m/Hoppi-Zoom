@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float bulletDamage;
 
+    [Header("Particle Effect")]
+    [SerializeField] private GameObject particleFX;
+
 
     private Transform tr;
 
@@ -38,7 +41,7 @@ public class Bullet : MonoBehaviour
     {
         Vector3 vectorUp = tr.TransformDirection(Vector2.up);
 
-        rb.velocity = (vectorUp * bulletSpeed);
+        rb.velocity = (vectorUp * bulletSpeed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +49,8 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Platform"))
         {
             Debug.Log($"Hit platform : {collision.gameObject.name}");
+
+            Instantiate(particleFX, transform.position, Quaternion.identity);
 
             Destroy(collision.gameObject);
             Destroy(gameObject);

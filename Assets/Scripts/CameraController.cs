@@ -54,6 +54,26 @@ private Vector3 background1TargetPos = new Vector3();
 
 	}
 
+    private void Update()
+    {
+		(float height_1, float height_2) background;
+		background.height_1 = background1.transform.position.y;
+		background.height_2 = background2.transform.position.y;
+
+		if(background.height_1 > background.height_2)
+        {
+			background1.GetComponent<SpriteRenderer>().sortingOrder = 0;
+			background2.GetComponent<SpriteRenderer>().sortingOrder = 1;
+		}
+		else if(background.height_2 > background.height_1)
+        {
+			background1.GetComponent<SpriteRenderer>().sortingOrder = 1;
+			background2.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+		}
+
+	}
+
     private void FixedUpdate()
 	{
 		CameraFollow();
@@ -123,9 +143,9 @@ private Vector3 background1TargetPos = new Vector3();
         background2 = temp;
 
 
-		var tempID = background1.GetComponent<SpriteRenderer>().sortingOrder;
-		background1.GetComponent<SpriteRenderer>().sortingOrder = background2.GetComponent<SpriteRenderer>().sortingOrder;
-		background2.GetComponent<SpriteRenderer>().sortingOrder = tempID;
+		//var tempID = background2.GetComponent<SpriteRenderer>().sortingOrder;
+		//background2.GetComponent<SpriteRenderer>().sortingOrder = background1.GetComponent<SpriteRenderer>().sortingOrder;
+		//background1.GetComponent<SpriteRenderer>().sortingOrder = tempID;
 	}
 
 

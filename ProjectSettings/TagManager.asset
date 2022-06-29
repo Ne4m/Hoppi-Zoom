@@ -13,6 +13,8 @@ TagManager:
   - Untouchable
   - NoTouch
   - Release
+  - Laser
+  - Platform Non-Destructable
   layers:
   - Default
   - TransparentFX

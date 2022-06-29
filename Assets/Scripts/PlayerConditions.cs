@@ -49,6 +49,12 @@ public class PlayerConditions : MonoBehaviour
             Debug.Log("Got Hit By A Spike!! [TRIGGER]\n" + transform.tag);
             blinkCharacter();
         }
+
+        if (collision.CompareTag("Laser"))
+        {
+            Debug.Log("Got Hit By A Laser! [TRIGGER]\n" + transform.tag);
+            blinkCharacter();
+        }
     }
 
 

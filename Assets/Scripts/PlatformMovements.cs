@@ -9,6 +9,8 @@ public class PlatformMovements : MonoBehaviour
 
     private Transform tr;
 
+    [SerializeField] private bool isDestructable = true;
+
     [Header("Speed Values")]
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float rotationSpeed = 1f;
@@ -28,11 +30,12 @@ public class PlatformMovements : MonoBehaviour
 
     private Vector3 platformStartPosition = new Vector3();
 
-
+    GameProgress gameProgress;
 
     void Start()
     {
         this.tr = GetComponent<Transform>();
+        gameProgress = GameProgress.instance;
 
         platformStartPosition = tr.position;
         //Debug.Log($"Platform Spawn Position Y : {platformStartPosition.y}");
@@ -67,6 +70,10 @@ public class PlatformMovements : MonoBehaviour
 
         if(objectProperties.canFade) StartCoroutine(FadeIn());
         //if (objectProperties.canFade) StartCoroutine(FadeOut());
+
+        IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
+        IncreaseRotationSpeed(gameProgress.GetSpeedIncrease());
+        IncreaseFadeSpeed(gameProgress.GetSpeedIncrease());
     }
 
     private void FixedUpdate()
@@ -486,13 +493,39 @@ public class PlatformMovements : MonoBehaviour
         return pos;
     }
 
-    public float getMoveSpeed()
+    public float GetMoveSpeed()
     {
         return this.moveSpeed;
     }
 
-    public void setMoveSpeed(float moveSpeed)
+    public void SetMoveSpeed(float moveSpeed)
     {
         this.moveSpeed = moveSpeed;
+    }
+
+    public void IncreaseMoveSpeed(float amount)
+    {
+        this.moveSpeed += amount;
+
+        for (int i = 0; i < specialRotationSpeed.Length; i++)
+        {
+            this.specialMoveSpeed[i] += amount;
+        }
+
+    }
+
+    public void IncreaseRotationSpeed(float amount)
+    {
+        this.rotationSpeed += amount;
+
+        for (int i = 0; i < specialRotationSpeed.Length; i++)
+        {
+            this.specialRotationSpeed[i] += amount;
+        }
+    }
+
+    public void IncreaseFadeSpeed(float amount)
+    {
+        this.objectProperties.fadeSpeed += amount;
     }
 }
