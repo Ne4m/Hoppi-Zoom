@@ -67,6 +67,8 @@ public class LevelManager : MonoBehaviour
     Shooting shooting;
     UIMessager messager;
 
+    public static LevelManager instance;
+
     //public struct Test
     //{
     //    private float hp;
@@ -245,6 +247,7 @@ public class LevelManager : MonoBehaviour
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
 
+        instance = this;
     }
 
     // Start is called before the first frame update

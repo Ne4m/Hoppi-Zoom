@@ -16,12 +16,36 @@ public class GameProgress : MonoBehaviour
     public static GameProgress instance;
 
     (float BgPoint, float SpeedPoint) last;
+    (string Sprite, string Spawner) loaded;
 
     [Header ("Speed Threshold Values")]
-    [SerializeField] float speedChangeThreshold = 2;
-    [SerializeField] float backgroundChangeThreshold = 5;
+    [SerializeField] float speedChangeThreshold = 10;
+    [SerializeField] float backgroundChangeThreshold = 1;
 
     private float speedIncrease;
+    private int bgChangeCounter = 0;
+    //string loadedSprite = string.Empty;
+    //string loadedSpawner = string.Empty;
+
+    enum SpawnerNames
+    {
+        Cloudsets,
+        Starsets,
+        Planetsets
+
+    }
+    enum SpriteNames
+    {
+        Clouds = 5,
+        Stars = 6,
+        Planets = 10
+    }
+
+    enum BackGroundThresholds
+    {
+        BG_1,
+
+    }
 
     private void Awake()
     {
@@ -57,9 +81,14 @@ public class GameProgress : MonoBehaviour
     {
         if(levelManager.playerControl.getPoint() >= last.BgPoint + backgroundChangeThreshold)
         {
-            int number = selectUniqueRandomNumber(spritesToChange.Length);
-            background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[number];
-            background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[number];
+            bgChangeCounter++;
+            if (bgChangeCounter > spritesToChange.Length) return;
+
+ 
+            background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
+            background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
+
+
 
             last.BgPoint = levelManager.playerControl.getPoint();
 
@@ -74,10 +103,35 @@ public class GameProgress : MonoBehaviour
 
             messager.startMsg($"Speed Increased {speedIncrease}!", 2, Vector3.zero);
         }
+
+        int point = levelManager.playerControl.getPoint();
+        switch (point)
+        {
+            case var _ when point <= (int)SpriteNames.Clouds:
+                loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+                loaded.Sprite = SpriteNames.Clouds.ToString();
+                break;
+            case var _ when point <= (int)SpriteNames.Planets:
+                loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+                loaded.Sprite = SpriteNames.Planets.ToString();
+                break;
+
+        }
     }
 
     public float GetSpeedIncrease()
     {
         return speedIncrease;
+    }
+
+    public string GetSpawnSets()
+    {
+
+        return loaded.Spawner;
+    }
+
+    public string GetSkySprites()
+    {
+        return loaded.Sprite;
     }
 }

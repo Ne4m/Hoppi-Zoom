@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
   specialRotationSpeed: []
@@ -274,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
   specialRotationSpeed: []
@@ -348,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
   specialRotationSpeed: []
@@ -416,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 9058411724342287119, guid: 5a8933892118c154d876d435b4fbcf91,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001971834
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058411724342287119, guid: 5a8933892118c154d876d435b4fbcf91,
         type: 3}
@@ -506,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 9058411724342287119, guid: 5a8933892118c154d876d435b4fbcf91,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001971834
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058411724342287119, guid: 5a8933892118c154d876d435b4fbcf91,
         type: 3}
@@ -591,7 +594,7 @@ PrefabInstance:
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}

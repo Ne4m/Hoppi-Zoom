@@ -8,16 +8,19 @@ public class CloudSpawner : MonoBehaviour
     public static GameObject lastSpawned;
     public static GameObject newSpawned;
 
-    public GameObject[] cloudResource;
-    public Sprite[] cloudSpritesArray;
+    public GameObject[] spawnerResource;
+    public Sprite[] spritesArray;
 
     [SerializeField] private bool isSpawner;
 
     int randomNumber;
     int lastNumber;
-    int maxAttempts = 10;
+    int maxAttempts = 15;
 
+    GameProgress gameProgress;
     SpriteRenderer sr;
+
+
 
     public int selectUniqueRandomNumber(int limit)
     {
@@ -32,22 +35,36 @@ public class CloudSpawner : MonoBehaviour
 
         return randomNumber;
     }
+
+
     private void Start()
     {
         sr = this.GetComponent<SpriteRenderer>();
 
+        gameProgress = GameProgress.instance;
+
+
+
+        //loadedSpawner = gameProgress.GetSpawnSets();
+        //loadedSprite = gameProgress.GetSkySprites();
+
+        //int point = levelManager.playerControl.getPoint();
+
+
 
         if (isSpawner)
         {
-            cloudResource = Resources.LoadAll<GameObject>("Cloudsets");
-            SpawnCloudsets();
+            spawnerResource = Resources.LoadAll<GameObject>($"ObjectSpawning/Sets/{gameProgress.GetSpawnSets()}");
+            SpawnSpawner();
         }
         else
         {
-            cloudSpritesArray = Resources.LoadAll<Sprite>("Cloud_Sprites");
-            SpawnClouds();
-        }
 
+            spritesArray = Resources.LoadAll<Sprite>($"ObjectSpawning/Sprites/{gameProgress.GetSkySprites()}");
+
+            //Debug.Log($"Loaded Sprite : {loadedSprite} and Point is {point}");
+            SpawnSprites();
+        }
 
 
 
@@ -55,23 +72,23 @@ public class CloudSpawner : MonoBehaviour
 
 
 
-    private void SpawnCloudsets()
+    private void SpawnSpawner()
     {
-        int uniqueNumber = selectUniqueRandomNumber(cloudResource.Length);
+        int uniqueNumber = selectUniqueRandomNumber(spawnerResource.Length);
 
         if(lastSpawned != null)
         {
             Destroy((GameObject)lastSpawned);
         }
-        newSpawned = Instantiate(cloudResource[uniqueNumber], transform.position, Quaternion.identity);
+        newSpawned = Instantiate(spawnerResource[uniqueNumber], transform.position, Quaternion.identity);
         lastSpawned = newSpawned;
 
     }
 
-    private void SpawnClouds()
+    private void SpawnSprites()
     {
-        int uniqueNumber = selectUniqueRandomNumber(cloudSpritesArray.Length);
-        sr.sprite = cloudSpritesArray[uniqueNumber];
+        int uniqueNumber = selectUniqueRandomNumber(spritesArray.Length);
+        sr.sprite = spritesArray[uniqueNumber];
 
     }
 

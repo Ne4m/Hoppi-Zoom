@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
     public float arrowTouchRotateOffset = -90f;
     public float inputModeOffset;
 
-    (int, string) wasIsDast;
 
     private void Awake()
 	{
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         backgrounds = GetComponent<Transform>();
 
-        //inputMode = PlayerPrefs.GetInt("ControlInput", 0);
+        inputMode = PlayerPrefs.GetInt("ControlInput", 0);
     }
 
 	void Start()
