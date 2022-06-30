@@ -55,6 +55,11 @@ public class PlatformMovements : MonoBehaviour
             }
         }
 
+        IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
+        IncreaseRotationSpeed(gameProgress.GetSpeedIncrease());
+        IncreaseFadeSpeed(gameProgress.GetSpeedIncrease());
+
+
         // Array Initializations
         specialChilds = new GameObject[tr.childCount];
         specialRotationSpeed = new float[tr.childCount];
@@ -71,9 +76,7 @@ public class PlatformMovements : MonoBehaviour
         if(objectProperties.canFade) StartCoroutine(FadeIn());
         //if (objectProperties.canFade) StartCoroutine(FadeOut());
 
-        IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
-        IncreaseRotationSpeed(gameProgress.GetSpeedIncrease());
-        IncreaseFadeSpeed(gameProgress.GetSpeedIncrease());
+
     }
 
     private void FixedUpdate()

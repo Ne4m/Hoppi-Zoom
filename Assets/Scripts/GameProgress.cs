@@ -18,9 +18,9 @@ public class GameProgress : MonoBehaviour
     (float BgPoint, float SpeedPoint) last;
     (string Sprite, string Spawner) loaded;
 
-    [Header ("Speed Threshold Values")]
-    [SerializeField] float speedChangeThreshold = 10;
-    [SerializeField] float backgroundChangeThreshold = 1;
+
+    float speedChangeThreshold = 5;
+    float backgroundChangeThreshold = 10;
 
     private float speedIncrease;
     private int bgChangeCounter = 0;
@@ -79,39 +79,43 @@ public class GameProgress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(levelManager.playerControl.getPoint() >= last.BgPoint + backgroundChangeThreshold)
+        int point = levelManager.playerControl.getPoint();
+
+
+
+        if (point >= last.BgPoint + backgroundChangeThreshold)
         {
             bgChangeCounter++;
-            if (bgChangeCounter > spritesToChange.Length) return;
+            if (bgChangeCounter > spritesToChange.Length-1) return;
 
- 
+
             background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
             background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
 
 
 
-            last.BgPoint = levelManager.playerControl.getPoint();
+            last.BgPoint = point;
 
-            messager.startMsg($"Background changed!", 2, Vector3.zero);
+            //messager.startMsg($"Area Level Changed!", 2, Vector3.zero);
         }
 
-        if (levelManager.playerControl.getPoint() >= last.SpeedPoint + speedChangeThreshold)
+        if (point >= last.SpeedPoint + speedChangeThreshold)
         {
-            last.SpeedPoint = levelManager.playerControl.getPoint();
+            last.SpeedPoint = point;
 
             speedIncrease += Random.Range(0.01f, 0.1f);
 
-            messager.startMsg($"Speed Increased {speedIncrease}!", 2, Vector3.zero);
+            //messager.startMsg($"Area Speed Increased!", 2, Vector3.zero);
         }
 
-        int point = levelManager.playerControl.getPoint();
+
         switch (point)
         {
-            case var _ when point <= (int)SpriteNames.Clouds:
+            case var _ when point >= 0 && point < (int)SpriteNames.Clouds:
                 loaded.Spawner = SpawnerNames.Cloudsets.ToString();
                 loaded.Sprite = SpriteNames.Clouds.ToString();
                 break;
-            case var _ when point <= (int)SpriteNames.Planets:
+            case var _ when bgChangeCounter == spritesToChange.Length-1: // point >= (int)SpriteNames.Clouds &&  point <= (int)SpriteNames.Planets
                 loaded.Spawner = SpawnerNames.Cloudsets.ToString();
                 loaded.Sprite = SpriteNames.Planets.ToString();
                 break;
