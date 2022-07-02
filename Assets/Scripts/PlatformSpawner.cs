@@ -20,6 +20,8 @@ public class PlatformSpawner : MonoBehaviour
     private int initiatedCount = 0;    
     public GameObject lastSpawnedPlatform;
 
+    [Header("Platform Sprites")]
+    [SerializeField] private Sprite platformSprites;
 
     void Start()
     {
@@ -111,6 +113,23 @@ public class PlatformSpawner : MonoBehaviour
             newPlatform.transform.position = new Vector3(0, tr.position.y + spawnDistance, 0);
             newPlatform.tag = "Platform";
             spawnDistance += 10;
+
+
+            // PLATFORM SPRITE CHANGE
+            //if(newPlatform.transform.childCount > 0)
+            //{
+            //    for(int j=0; j< newPlatform.transform.childCount; j++)
+            //    {
+            //        if(newPlatform.transform.GetChild(j).tag == "Platform")
+            //        {
+            //            newPlatform.transform.GetChild(j).GetComponent<SpriteRenderer>().sprite = platformSprites;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    newPlatform.transform.GetComponent<SpriteRenderer>().sprite = platformSprites;
+            //}
 
 
             platformsSpawnCap[i] = newPlatform;

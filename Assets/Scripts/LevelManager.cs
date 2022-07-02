@@ -23,12 +23,15 @@ public class LevelManager : MonoBehaviour
 
     public GameObject blurScreen;
 
-    [SerializeField]
-    private GameObject deathScreen;
+    [SerializeField] private GameObject deathScreen;
 
-    [SerializeField]
-    private float spawnDistance = 10;
+    [SerializeField] private float spawnDistance = 10;
 
+
+    [Header("Currency Stuff")]
+    [SerializeField] private int earnPercent;
+    [SerializeField] private int totalCurrency;
+    [SerializeField] private int currentCurrency;
 
     [SerializeField]
     private GameObject playerEjectorArrow;
@@ -44,6 +47,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text point_text;
     [SerializeField] private TMP_Text death_text;
     [SerializeField] private TMP_Text health_text;
+    [SerializeField] private TMP_Text debug_text;
 
     private bool isINCP;
 
@@ -248,6 +252,8 @@ public class LevelManager : MonoBehaviour
         playerControl.setPoint(0);
 
         instance = this;
+
+        totalCurrency = PlayerPrefs.GetInt("gameCurrency", 0);
     }
 
     // Start is called before the first frame update
@@ -359,6 +365,13 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Button Score:" + death_text.text);
 
 
+        currentCurrency = (playerControl.getPoint() * earnPercent) / 100;
+        debug_text.text = currentCurrency.ToString();
+
+        Debug.Log($"Currency Earned {currentCurrency}");
+        debug_text.text = currentCurrency.ToString();
+
+
         // SAVE PLAYER STATS HERE
         if (playerControl.getPoint() > PlayerPrefs.GetInt("highScore", 0))
         {
@@ -393,6 +406,11 @@ public class LevelManager : MonoBehaviour
 
     public void goBackMainMenu()
     {
+        totalCurrency += currentCurrency;
+        PlayerPrefs.SetInt("gameCurrency", totalCurrency);
+        PlayerPrefs.Save();
+
+
         onContinue();
         restartGame();
         SceneManager.LoadScene("Main Menu");
@@ -400,6 +418,8 @@ public class LevelManager : MonoBehaviour
 
     public void restartGame()
     {
+        currentCurrency = 0;
+
         playerControl.setPlayerDeadStatus(false);
         if (deathScreen != null)
         {

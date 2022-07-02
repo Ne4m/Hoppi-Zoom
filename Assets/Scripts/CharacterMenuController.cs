@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class CharacterMenuController : MonoBehaviour
 {
     private string[] playableCharacters = {"Default Guy", "Mahmut", "Kubat", "Ozan", "Samet", "Cavo"};
+    private string[] unlockedCharacters;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
     private float characterHealth, characterSpeed;
     private int characterAmmo;
@@ -26,6 +27,7 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private Button swipeLeftButton;
     [SerializeField] private Button swipeRightButton;
     [SerializeField] private Button selectButton;
+    [SerializeField] private Button unlockButton;
 
     [Header("Character Bars")] 
     [SerializeField] private Slider healthBar;
@@ -35,6 +37,7 @@ public class CharacterMenuController : MonoBehaviour
     [Header("Texts")]
     [SerializeField] private TMP_Text characterName;
     [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text currencyText;
 
 
     private Image characterImg;
@@ -48,6 +51,22 @@ public class CharacterMenuController : MonoBehaviour
         characterImg = characterOnScreen.GetComponent<Image>();
         characterSkins = Resources.LoadAll<Sprite>("Characters");
         mainMenu = GetComponent<MainMenu_Controller>();
+        unlockedCharacters = new string[characterSkins.Length];
+
+
+        //Default Character
+        PlayerPrefs.SetString("character_" + 0, "unlocked");
+        PlayerPrefs.Save();
+
+        LockAllCharacters();
+
+        for (int i = 0; i < characterSkins.Length; i++)
+        {
+            unlockedCharacters[i] = PlayerPrefs.GetString("character_" + i, "locked");
+        }
+
+
+
 
         currentCharacterIndex = getCurrentIndex();
         updateCharacter(currentCharacterIndex);
@@ -60,8 +79,30 @@ public class CharacterMenuController : MonoBehaviour
         if(!(swipeLeftButton is null)) swipeLeftButton.onClick.AddListener(swipeLeftButtonClicked);
         if(!(swipeRightButton is null)) swipeRightButton.onClick.AddListener(swipeRightButtonClicked);
         if (!(selectButton is null)) selectButton.onClick.AddListener(selectButtonClicked);
+        if (!(unlockButton is null)) unlockButton.onClick.AddListener(unlockButtonClicked);
 
+        
+    }
 
+    private void LockAllCharacters()
+    {
+        for (int i = 1; i < characterSkins.Length; i++)
+        {
+            PlayerPrefs.SetString("character_" + i, "locked");
+        }
+        PlayerPrefs.Save();
+    }
+   
+
+    private void RefreshCurrency()
+    {
+        currencyText.text = PlayerPrefs.GetInt("gameCurrency", 0).ToString();
+
+        int number = Convert.ToInt32(currencyText.text);
+        if (number > 9999999)
+        {
+            number = 9999999;
+        }
     }
 
     private void Update()
@@ -78,6 +119,9 @@ public class CharacterMenuController : MonoBehaviour
                 mainMenu.canvasBackMainMenu();
             }
         }
+
+        RefreshCurrency();
+
     }
 
     Vector2 lastPos;
@@ -127,6 +171,15 @@ public class CharacterMenuController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    private void unlockButtonClicked()
+    {
+        if (unlockedCharacters[currentCharacterIndex] == "unlocked") return;
+
+        UnlockCharacter(currentCharacterIndex);
+        updateCharacter(currentCharacterIndex);
+
+    }
+
     private void swipeLeftButtonClicked()
     {
         if (currentCharacterIndex > minCharacterIndex)
@@ -150,16 +203,37 @@ public class CharacterMenuController : MonoBehaviour
         characterName.text = playableCharacters[index];
         characterImg.sprite = characterSkins[currentCharacterIndex];
 
+        Debug.Log($"Character Info: {unlockedCharacters[index]}");
+
+        if (unlockedCharacters[index] == "locked")
+        {
+            //characterImg.color = Color.black;
+            titleText.text = "LOCKED CHARACTER";
+            titleText.color = Color.grey;
+
+            selectButton.gameObject.SetActive(false);
+            unlockButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            characterImg.color = Color.white;
+            titleText.text = "choose your character";
+            titleText.color = Color.white;
+
+            selectButton.gameObject.SetActive(true);
+            unlockButton.gameObject.SetActive(false);
+        }
+
         if (currentCharacterIndex == getCurrentIndex())
         {
             titleText.text = "SELECTED CHARACTER";
             titleText.color = Color.green;
         }
-        else
-        {
-            titleText.text = "choose your character";
-            titleText.color = Color.white;
-        }
+        //else
+        //{
+        //    titleText.text = "choose your character";
+        //    titleText.color = Color.white;
+        //}
 
         // var number = Random.Range(0f, 1f);
         // healthBar.value = number;
@@ -273,5 +347,12 @@ public class CharacterMenuController : MonoBehaviour
     {
         int tmpIndex = PlayerPrefs.GetInt("LastSelectedCharacterIndex", 0);
         return tmpIndex;
+    }
+
+    private void UnlockCharacter(int index)
+    {
+        unlockedCharacters[index] = "unlocked";
+        PlayerPrefs.SetString("character_" + index, "unlocked");
+        PlayerPrefs.Save();
     }
 }
