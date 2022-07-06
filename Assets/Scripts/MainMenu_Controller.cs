@@ -21,6 +21,7 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject characterMenu;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject accessoryMenu;
 
     [Header ("Info Page Stuff")]
     [SerializeField] private GameObject infoPage;
@@ -30,6 +31,7 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button characterButton;
     [SerializeField] private Button shopButton;
+    [SerializeField] private Button accessoriesButton;
     
     [Header("Down Menu IMG Resources")]
     [SerializeField] private Sprite audioOnImg;
@@ -49,13 +51,12 @@ public class MainMenu_Controller : MonoBehaviour
     private bool audio_ON, music_ON;
 
     PlayGamesPlatform platform;
-                
+    public static MainMenu_Controller instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        setPlayerSkin("modelSkin", playerModelSkin);
-        setPlayerSkin("arrowSkin", playerArrowSkin);
+        instance = this;
 
         // Canvas UI Elements Stuff
         canvasBackMainMenu();
@@ -67,11 +68,11 @@ public class MainMenu_Controller : MonoBehaviour
         if(!(closeInfoPageButton is null)) closeInfoPageButton.onClick.AddListener(closeInfoPageButtonClicked);
 
         // Middle Menu Stuff
-        if (!(infoButton is null)) playButton.onClick.AddListener(playButtonClicked);
-        if(!(infoButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
-        if(!(infoButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
-        
-        
+        if (!(playButton is null)) playButton.onClick.AddListener(playButtonClicked);
+        if(!(characterButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
+        if(!(shopButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
+        if (!(accessoriesButton is null)) accessoriesButton.onClick.AddListener(accessoryButtonClicked);
+
         // Down Menu Stuff
         audio_ON = true;
         music_ON = true;
@@ -84,12 +85,6 @@ public class MainMenu_Controller : MonoBehaviour
         platform = PlayGamesPlatform.Activate();
     }
 
-    void Awake()
-    {
-        
-        playerModelSkin = PlayerPrefs.GetString("playerModelSkin", "Default");
-        playerArrowSkin = PlayerPrefs.GetString("playerArrowSkin", "Default");
-    }
 
     // Update is called once per frame
     void Update()
@@ -179,20 +174,10 @@ public class MainMenu_Controller : MonoBehaviour
         canvasChangeUI("shop");
     }
 
-    private void setPlayerSkin(string type, string skinName)
+    private void accessoryButtonClicked()
     {
-        if (type == "modelSkin")
-        {
-            PlayerPrefs.SetString("playerModelSkin", skinName);
-            // Change Canvas Stuff HERE
-        }
-        else if (type == "arrowSkin")
-        {
-            PlayerPrefs.SetString("playerSkin", skinName);
-            // Change Canvas Stuff HERE
-        }
+        canvasChangeUI("accessory");
     }
-
 
 
     private void canvasChangeUI(string IN)
@@ -203,16 +188,25 @@ public class MainMenu_Controller : MonoBehaviour
                 mainMenu.SetActive(true);
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
+                accessoryMenu.SetActive(false);
                 break;
             case "character":
                 mainMenu.SetActive(false);
                 characterMenu.SetActive(true);
                 shopMenu.SetActive(false);
+                accessoryMenu.SetActive(false);
                 break;
             case "shop":
                 mainMenu.SetActive(false);
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(true);
+                accessoryMenu.SetActive(false);
+                break;
+            case "accessory":
+                mainMenu.SetActive(false);
+                characterMenu.SetActive(false);
+                shopMenu.SetActive(false);
+                accessoryMenu.SetActive(true);
                 break;
         }
     }

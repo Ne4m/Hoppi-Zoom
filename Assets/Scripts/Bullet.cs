@@ -15,8 +15,9 @@ public class Bullet : MonoBehaviour
 
 
     private Transform tr;
-
     private Rigidbody2D rb;
+
+    private bool canDestroy;
 
     private Vector3 startPosition;
 
@@ -24,6 +25,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
+
 
         startPosition = tr.position;
     }
@@ -50,10 +52,31 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log($"Hit platform : {collision.gameObject.name}");
 
+            
+            if(collision.GetComponent<PlatformMovements>() != null)
+            {
+                canDestroy = collision.GetComponent<PlatformMovements>().GetIsDestructable();
+            }
+            else
+            {
+                canDestroy = true;
+            }
+
+
+
+
+            if (!canDestroy)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             Instantiate(particleFX, transform.position, Quaternion.identity);
 
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
+
         }
     }
 

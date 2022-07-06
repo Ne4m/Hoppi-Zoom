@@ -47,10 +47,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
     isSpecial: 0
+    moveLocally: 0
     moveable: 0
     moveableX: 0
     moveableY: 0
@@ -60,6 +65,15 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 1
     startPositionX: 0
     startPositionY: -1337
@@ -70,11 +84,21 @@ MonoBehaviour:
   hasChilds: 1
   childrenProps:
   - isSpecial: 0
+    moveLocally: 0
     moveable: 0
     moveableX: 0
     moveableY: 0
     moveX: []
     moveY: []
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 1
     startPositionX: -1.607
     startPositionY: -1337
@@ -83,11 +107,21 @@ MonoBehaviour:
     startRotationZ: 0
     startRotationW: 0
   - isSpecial: 0
+    moveLocally: 0
     moveable: 0
     moveableX: 0
     moveableY: 0
     moveX: []
     moveY: []
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 1
     startPositionX: 0
     startPositionY: -1337
@@ -96,11 +130,21 @@ MonoBehaviour:
     startRotationZ: 0
     startRotationW: 0
   - isSpecial: 0
+    moveLocally: 0
     moveable: 0
     moveableX: 0
     moveableY: 0
     moveX: []
     moveY: []
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 1
     startPositionX: 1.607
     startPositionY: -1337
@@ -108,6 +152,10 @@ MonoBehaviour:
     startRotationY: 0
     startRotationZ: 0
     startRotationW: 0
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &3929195376644903573
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,10 +278,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 1.5
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
     isSpecial: 0
+    moveLocally: 1
     moveable: 1
     moveableX: 0
     moveableY: 1
@@ -243,6 +296,15 @@ MonoBehaviour:
     moveY:
     - 1.25
     - -1.25
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 0
     startPositionX: -1337
     startPositionY: -1337
@@ -252,6 +314,10 @@ MonoBehaviour:
     startRotationW: 0
   hasChilds: 0
   childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &3929195376822827350
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,10 +440,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 0.125
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
     isSpecial: 0
+    moveLocally: 1
     moveable: 1
     moveableX: 1
     moveableY: 0
@@ -387,6 +458,15 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 0
     startPositionX: -1337
     startPositionY: -1337
@@ -396,6 +476,10 @@ MonoBehaviour:
     startRotationW: 0
   hasChilds: 0
   childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &3929195377318394782
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,10 +602,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
+  isDestructable: 1
   moveSpeed: 0.125
   rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
   objectProperties:
     isSpecial: 0
+    moveLocally: 1
     moveable: 1
     moveableX: 1
     moveableY: 0
@@ -531,6 +620,15 @@ MonoBehaviour:
     moveY:
     - 0
     - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
     setPosition: 0
     startPositionX: -1337
     startPositionY: -1337
@@ -540,3 +638,7 @@ MonoBehaviour:
     startRotationW: 0
   hasChilds: 0
   childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}

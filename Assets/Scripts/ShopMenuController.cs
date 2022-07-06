@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class ShopMenuController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Currency Text")]
+    [SerializeField] private TMP_Text currencyText;
+
+
+    private void Start()
     {
-        
+        UpdateText();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateText()
     {
-        
+        currencyText.text = PlayerPrefs.GetInt("gameCurrency", 0).ToString();
     }
 }

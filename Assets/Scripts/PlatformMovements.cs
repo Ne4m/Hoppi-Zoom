@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlatformMovements : MonoBehaviour
 {
@@ -30,14 +31,22 @@ public class PlatformMovements : MonoBehaviour
 
     private Vector3 platformStartPosition = new Vector3();
 
+    public TMP_Text debugtxt;
+    public float angle;
+    public float angle2;
+    public Vector3 platformStartEuler;
+
     GameProgress gameProgress;
+
 
     void Start()
     {
         this.tr = GetComponent<Transform>();
         gameProgress = GameProgress.instance;
 
-        platformStartPosition = tr.position;
+        if (objectProperties.startClockwise) rotationSpeed *= -1;
+
+
         //Debug.Log($"Platform Spawn Position Y : {platformStartPosition.y}");
 
         if (!hasChilds)
@@ -54,6 +63,10 @@ public class PlatformMovements : MonoBehaviour
 
             }
         }
+
+        platformStartPosition = tr.position;
+
+        platformStartEuler = tr.eulerAngles;
 
         IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
         IncreaseRotationSpeed(gameProgress.GetSpeedIncrease());
@@ -79,6 +92,7 @@ public class PlatformMovements : MonoBehaviour
 
     }
 
+
     private void FixedUpdate()
     {
         if (!objectProperties.isSpecial)
@@ -91,16 +105,34 @@ public class PlatformMovements : MonoBehaviour
                     float boundaryX_Left = objectProperties.moveX[0];
                     float boundaryX_Right = objectProperties.moveX[1];
 
-                    if (tr.position.x > boundaryX_Right)
+                    if (!objectProperties.moveLocally)
                     {
-                        moveSpeed *= -1;
+                        if (tr.localPosition.x > boundaryX_Right)
+                        {
+                            moveSpeed *= -1;
+                        }
+                        else if (tr.localPosition.x < boundaryX_Left)
+                        {
+                            moveSpeed *= -1;
+                        }
+
+                        tr.Translate(moveSpeed * Time.deltaTime, 0, 0, Space.World);
                     }
-                    else if (tr.position.x < boundaryX_Left)
+                    else
                     {
-                        moveSpeed *= -1;
+                        if (tr.position.x > boundaryX_Right)
+                        {
+                            moveSpeed *= -1;
+                        }
+                        else if (tr.position.x < boundaryX_Left)
+                        {
+                            moveSpeed *= -1;
+                        }
+
+                        tr.Translate(moveSpeed * Time.deltaTime, 0, 0);
                     }
 
-                    tr.Translate(moveSpeed * Time.deltaTime, 0, 0);
+
                 }
 
                 if (objectProperties.moveableY)
@@ -108,19 +140,75 @@ public class PlatformMovements : MonoBehaviour
                     float boundaryY_Up = objectProperties.moveY[0] + platformStartPosition.y;
                     float boundaryY_Down = platformStartPosition.y + objectProperties.moveY[1];
 
-                    tr.Translate(0, moveSpeed * Time.deltaTime, 0);
+                    //debugtxt.text = $"Local Pos: {tr.localPosition} \nGlobal Pos: {tr.position}";
 
-                    if (tr.position.y > boundaryY_Up)
+                    if (!objectProperties.moveLocally)
                     {
-                        moveSpeed *= -1;
+                        if (tr.localPosition.y > boundaryY_Up)
+                        {
+                            moveSpeed *= -1;
+                        }
+                        else if (tr.localPosition.y < boundaryY_Down)
+                        {
+                            moveSpeed *= -1;
+                        }
+
+                        tr.Translate(0, moveSpeed * Time.deltaTime, 0, Space.World);
                     }
-                    else if (tr.position.y < boundaryY_Down)
+                    else
                     {
-                        moveSpeed *= -1;
+                        if (tr.position.y > boundaryY_Up)
+                        {
+                            moveSpeed *= -1;
+                        }
+                        else if (tr.position.y < boundaryY_Down)
+                        {
+                            moveSpeed *= -1;
+                        }
+
+                        tr.Translate(0, moveSpeed * Time.deltaTime, 0);
                     }
 
 
                 }
+            }
+
+            if (objectProperties.rotatable)
+            {
+
+                if (!objectProperties.rotateFreely)
+                {
+                    float Rotation;
+                    if (tr.eulerAngles.z <= 180f)
+                    {
+                        Rotation = tr.eulerAngles.z;
+                    }
+                    else
+                    {
+                        Rotation = tr.eulerAngles.z - 360f;
+                    }
+                    Rotation -= platformStartEuler.z;
+
+
+                    if (Rotation > objectProperties.rotateAngle[0])
+                    {
+                        rotationSpeed *= -1;
+                    }
+
+                    if (Rotation < objectProperties.rotateAngle[1] * -1)
+                    {
+                        rotationSpeed *= -1;
+                    }
+
+                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
+                    //debugtxt.text = $"{Rotation}";
+                }
+                else
+                {
+                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
+                }
+
+
             }
 
         }
@@ -388,14 +476,24 @@ public class PlatformMovements : MonoBehaviour
     [System.Serializable]
     public class objectProps
     {
-        [Header ("Platform Move Settings")]
         public bool isSpecial = false;
+
+        [Header("Platform Move Settings")]
+        public bool moveLocally = true;
         public bool moveable;
         public bool moveableX;
         public bool moveableY;
-
         public float[] moveX = new float[2];
         public float[] moveY = new float[2];
+
+        [Header("Platform Rotation Settings")]
+        public bool rotatable;
+        public bool startClockwise;
+        public bool rotateFreely;
+        public float[] rotateAngle = new float[2];
+
+
+
 
         [Header("Fade In/Out Settings")]
         public bool canFade;
@@ -437,6 +535,19 @@ public class PlatformMovements : MonoBehaviour
 
             renderer.material.color = platformColor;
 
+            if(tr.childCount > 0)
+            {
+                for (int i = 0; i < tr.childCount; i++)
+                {
+                    tr.GetChild(i).GetComponent<Renderer>().material.color = platformColor;
+
+                    if (platformColor.a < 0)
+                    {
+                        tr.GetChild(i).GetComponent<Collider2D>().enabled = false;
+                    }
+                }
+            }
+
             if(platformColor.a < 0)
             {
                 platformColor.a = 0;
@@ -470,6 +581,21 @@ public class PlatformMovements : MonoBehaviour
             platformColor = new Color(platformColor.r, platformColor.g, platformColor.b, fadeAmount);
 
             renderer.material.color = platformColor;
+
+            if (tr.childCount > 0)
+            {
+                for (int i = 0; i < tr.childCount; i++)
+                {
+                    tr.GetChild(i).GetComponent<Renderer>().material.color = platformColor;
+
+                    if (platformColor.a > 1)
+                    {
+                        tr.GetChild(i).GetComponent<Collider2D>().enabled = true;
+                    }
+                }
+
+
+            }
 
             if (platformColor.a > 1)
             {
@@ -530,5 +656,10 @@ public class PlatformMovements : MonoBehaviour
     public void IncreaseFadeSpeed(float amount)
     {
         this.objectProperties.fadeSpeed += amount;
+    }
+
+    public bool GetIsDestructable()
+    {
+        return this.isDestructable ;
     }
 }

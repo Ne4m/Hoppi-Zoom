@@ -12,6 +12,8 @@ public class PlayerConditions : MonoBehaviour
     Transform tr;
     SpriteRenderer sr;
 
+    [SerializeField] private GameObject playerSkins;
+
     [Header("Values")]
     [SerializeField] private float gracePeriod;
     [SerializeField] private float graceSpeed;
@@ -101,8 +103,13 @@ public class PlayerConditions : MonoBehaviour
         {
             srColor = new Color(186, 186, 186);
             sr.color = srColor;
-
             sr.enabled = false;
+
+            for(int i=0; i< playerSkins.transform.childCount; i++)
+            {
+                playerSkins.transform.GetChild(i).GetComponent<SpriteRenderer>().color = srColor;
+                playerSkins.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = false;
+            }
 
             yield return new WaitForSeconds(graceSpeed);
 
@@ -111,6 +118,12 @@ public class PlayerConditions : MonoBehaviour
             sr.color = srColor;
 
             sr.enabled = true;
+
+            for (int i = 0; i < playerSkins.transform.childCount; i++)
+            {
+                playerSkins.transform.GetChild(i).GetComponent<SpriteRenderer>().color = srColor;
+                playerSkins.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+            }
 
             yield return new WaitForSeconds(graceSpeed);
 
