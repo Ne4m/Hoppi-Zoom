@@ -18,6 +18,6 @@ public class ShopMenuController : MonoBehaviour
 
     private void UpdateText()
     {
-        currencyText.text = PlayerPrefs.GetInt("gameCurrency", 0).ToString();
+        currencyText.text = SPrefs.GetInt("gameCurrency", 0).ToString();
     }
 }

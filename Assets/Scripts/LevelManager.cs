@@ -244,16 +244,16 @@ public class LevelManager : MonoBehaviour
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
-        playerControl = new playerInfo(PlayerPrefs.GetFloat("playerHealth", 1000),
-                                       PlayerPrefs.GetFloat("playerSpeed", 1000),
-                                       PlayerPrefs.GetFloat("rotateSpeed", 100));
+        playerControl = new playerInfo(SPrefs.GetFloat("playerHealth", 1000),
+                                       SPrefs.GetFloat("playerSpeed", 1000),
+                                       SPrefs.GetFloat("rotateSpeed", 100));
 
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
 
         instance = this;
 
-        totalCurrency = PlayerPrefs.GetInt("gameCurrency", 0);
+        totalCurrency = SPrefs.GetInt("gameCurrency", 0);
     }
 
     // Start is called before the first frame update
@@ -268,7 +268,7 @@ public class LevelManager : MonoBehaviour
         shooting = gameObject.GetComponent<Shooting>();
         messager = gameObject.GetComponent<UIMessager>();
 
-        shooting.SetMaxAmmo(PlayerPrefs.GetInt("playerAmmo", 1));
+        shooting.SetMaxAmmo(SPrefs.GetInt("playerAmmo", 1));
 
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
@@ -283,12 +283,12 @@ public class LevelManager : MonoBehaviour
         //        }
         //    );
 
-        //playerControl.setPoint(PlayerPrefs.GetInt("point", 0));
+        //playerControl.setPoint(SPrefs.GetInt("point", 0));
 
         // Update Player Controller Variables On Start
 
         playerControl.setLevel(0);
-        Debug.Log("Your Highest Score Was " + PlayerPrefs.GetInt("highScore", 0));
+        Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
     }
 
 
@@ -304,7 +304,7 @@ public class LevelManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Y) && !playerControl.isPlayerDead())
         {
-            PlayerPrefs.DeleteKey("highScore");
+            SPrefs.DeleteKey("highScore");
             print("High Score Cleared");
         }
 
@@ -375,10 +375,10 @@ public class LevelManager : MonoBehaviour
 
 
         // SAVE PLAYER STATS HERE
-        if (playerControl.getPoint() > PlayerPrefs.GetInt("highScore", 0))
+        if (playerControl.getPoint() > SPrefs.GetInt("highScore", 0))
         {
-            PlayerPrefs.SetInt("highScore", playerControl.getPoint());
-            PlayerPrefs.Save();
+            SPrefs.SetInt("highScore", playerControl.getPoint());
+            SPrefs.Save();
             Debug.Log("New Highscore!!! " + playerControl.getPoint());
 
         }
@@ -409,8 +409,8 @@ public class LevelManager : MonoBehaviour
     public void goBackMainMenu()
     {
         totalCurrency += currentCurrency;
-        PlayerPrefs.SetInt("gameCurrency", totalCurrency);
-        PlayerPrefs.Save();
+        SPrefs.SetInt("gameCurrency", totalCurrency);
+        SPrefs.Save();
 
 
         onContinue();

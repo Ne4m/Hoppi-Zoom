@@ -55,14 +55,14 @@ public class CharacterMenuController : MonoBehaviour
 
 
         //Default Character
-        PlayerPrefs.SetString("character_" + 0, "unlocked");
-        PlayerPrefs.Save();
-
+        SPrefs.SetString("character_" + 0, "unlocked");
+        SPrefs.Save();
+        
         LockAllCharacters();
 
         for (int i = 0; i < characterSkins.Length; i++)
         {
-            unlockedCharacters[i] = PlayerPrefs.GetString("character_" + i, "locked");
+            unlockedCharacters[i] = SPrefs.GetString("character_" + i, "locked");
         }
 
 
@@ -88,15 +88,15 @@ public class CharacterMenuController : MonoBehaviour
     {
         for (int i = 1; i < characterSkins.Length; i++)
         {
-            PlayerPrefs.SetString("character_" + i, "locked");
+            SPrefs.SetString("character_" + i, "locked");
         }
-        PlayerPrefs.Save();
+        SPrefs.Save();
     }
    
 
     private void RefreshCurrency()
     {
-        currencyText.text = PlayerPrefs.GetInt("gameCurrency", 0).ToString();
+        currencyText.text = SPrefs.GetInt("gameCurrency", 0).ToString();
 
         int number = Convert.ToInt32(currencyText.text);
         if (number > 9999999)
@@ -165,10 +165,10 @@ public class CharacterMenuController : MonoBehaviour
         setCurrentIndex(currentCharacterIndex);
 
 
-        PlayerPrefs.SetFloat("playerHealth", characterHealth);
-        PlayerPrefs.SetFloat("playerSpeed", characterSpeed);
-        PlayerPrefs.SetInt("playerAmmo", characterAmmo);
-        PlayerPrefs.Save();
+        SPrefs.SetFloat("playerHealth", characterHealth);
+        SPrefs.SetFloat("playerSpeed", characterSpeed);
+        SPrefs.SetInt("playerAmmo", characterAmmo);
+        SPrefs.Save();
     }
 
     private void unlockButtonClicked()
@@ -339,20 +339,20 @@ public class CharacterMenuController : MonoBehaviour
 
     private void setCurrentIndex(int index)
     {
-        PlayerPrefs.SetInt("LastSelectedCharacterIndex", index);
-        PlayerPrefs.Save();
+        SPrefs.SetInt("LastSelectedCharacterIndex", index);
+        SPrefs.Save();
     }
 
     private int getCurrentIndex()
     {
-        int tmpIndex = PlayerPrefs.GetInt("LastSelectedCharacterIndex", 0);
+        int tmpIndex = SPrefs.GetInt("LastSelectedCharacterIndex", 0);
         return tmpIndex;
     }
 
     private void UnlockCharacter(int index)
     {
         unlockedCharacters[index] = "unlocked";
-        PlayerPrefs.SetString("character_" + index, "unlocked");
-        PlayerPrefs.Save();
+        SPrefs.SetString("character_" + index, "unlocked");
+        SPrefs.Save();
     }
 }

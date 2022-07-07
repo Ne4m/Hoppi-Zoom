@@ -39,7 +39,7 @@ public class AccessoryButtons : MonoBehaviour
 
             description.text = spriteName.ToUpper();
 
-            PlayerPrefs.SetString("PlayerHat", spriteName);
+            SPrefs.SetString("PlayerHat", spriteName);
         }
         else
         {
@@ -50,10 +50,10 @@ public class AccessoryButtons : MonoBehaviour
 
             description.text = spriteName.ToUpper();
 
-            PlayerPrefs.SetString("PlayerBody", spriteName);
+            SPrefs.SetString("PlayerBody", spriteName);
         }
 
-        PlayerPrefs.Save();
+        SPrefs.Save();
     }
 
 }

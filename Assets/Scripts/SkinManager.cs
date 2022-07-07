@@ -45,7 +45,7 @@ public class SkinManager : MonoBehaviour
 
     private void Update()
     {
-        if(isUI) currencyTxt.text = PlayerPrefs.GetInt("gameCurrency", 0).ToString();
+        if(isUI) currencyTxt.text = SPrefs.GetInt("gameCurrency", 0).ToString();
 
         RefreshUI();
     }
@@ -55,7 +55,7 @@ public class SkinManager : MonoBehaviour
         if (isUI)
         {
             characterSkins = Resources.LoadAll<Sprite>("Characters");
-            selectedCharacter.GetComponent<Image>().sprite = characterSkins[PlayerPrefs.GetInt("LastSelectedCharacterIndex", 0)];
+            selectedCharacter.GetComponent<Image>().sprite = characterSkins[SPrefs.GetInt("LastSelectedCharacterIndex", 0)];
 
             characterHatImg = characterHat.GetComponent<Image>();
             characterBodyImg = characterBody.GetComponent<Image>();
@@ -84,11 +84,11 @@ public class SkinManager : MonoBehaviour
 
             characterSkins = Resources.LoadAll<Sprite>("Characters");
 
-            sr.sprite = characterSkins[PlayerPrefs.GetInt("LastSelectedCharacterIndex", 0)];
+            sr.sprite = characterSkins[SPrefs.GetInt("LastSelectedCharacterIndex", 0)];
         }
 
-        EquipHeadAccessory(PlayerPrefs.GetString("PlayerHat", "none"));
-        EquipBodyAccessory(PlayerPrefs.GetString("PlayerBody", "none"));
+        EquipHeadAccessory(SPrefs.GetString("PlayerHat", "none"));
+        EquipBodyAccessory(SPrefs.GetString("PlayerBody", "none"));
 
     }
 
