@@ -297,8 +297,8 @@ public class PlayerController : MonoBehaviour
         _rb2D.MoveRotation(_slowRot);
 
         lastJump = Time.time;
- 
 
+        FindObjectOfType<AudioManager>().Play("Jump");
         //_rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
     }
 
@@ -408,7 +408,6 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
         // if (collision.CompareTag("Background"))
         // {
         //     for (int i = 0; i < _count; i++)
@@ -416,8 +415,12 @@ public class PlayerController : MonoBehaviour
         //         Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), backgrounds.GetChild(i).GetComponent<Collider2D>());
         //     }
         // }
-	}
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FindObjectOfType<AudioManager>().Play("Bounce");
+    }
 
 
 

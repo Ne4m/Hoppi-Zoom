@@ -56,6 +56,8 @@ public class Shooting : MonoBehaviour
 
         Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 
+        FindObjectOfType<AudioManager>().Play("Shoot");
+
         lastShot = Time.time;
         currentAmmo--;
     }

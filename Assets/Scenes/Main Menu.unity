@@ -3501,6 +3501,7 @@ GameObject:
   - component: {fileID: 420676055}
   - component: {fileID: 420676054}
   - component: {fileID: 420676057}
+  - component: {fileID: 420676058}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3606,6 +3607,25 @@ MonoBehaviour:
   shareButton: {fileID: 1724896953}
   infoButton: {fileID: 1265385137}
   usernameTxt: {fileID: 877035223}
+--- !u!114 &420676058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420676053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552b8d9c7e36fe847a37ed90bf70db94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Main
+    clip: {fileID: 8300000, guid: 1cc56887adc539a4285da84cbf04ab20, type: 3}
+    volume: 0.25
+    pitch: 1.55
+    loop: 1
+    source: {fileID: 0}
 --- !u!1 &421111674
 GameObject:
   m_ObjectHideFlags: 0
