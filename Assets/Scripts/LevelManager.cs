@@ -294,6 +294,8 @@ public class LevelManager : MonoBehaviour
 
 
 
+
+
     void Update()
     {
 
@@ -440,9 +442,7 @@ public class LevelManager : MonoBehaviour
         if(new_CheckPoint != null) lastCheckpoint = new_CheckPoint.transform.position;
 
         spawn_NextCheckpoint();
-        
         playerControl.addPoint(1);
-
         checkLevelStatus();
 
 

@@ -163,59 +163,6 @@ MonoBehaviour:
   angle: 0
   angle2: 0
   platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &2534755325926450628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4530301312942665794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isDestructable: 1
-  moveSpeed: 1
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 0
-    moveableX: 0
-    moveableY: 0
-    moveX:
-    - 0
-    - 0
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 1
-    fadeDuration: 3
-    fadeSpeed: 15
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &2534755326323781677
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,13 +188,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2534755326323781677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.75, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.003, y: -1.74, z: 0}
   m_LocalScale: {x: 0.9784615, y: 0.98889065, z: 0.9784616}
   m_Children: []
   m_Father: {fileID: 2981767552596285114}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &2534755326323781680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -386,13 +333,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2534755327088669939}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.75, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.004, y: 1.71, z: 0}
   m_LocalScale: {x: 0.9784615, y: 0.98889065, z: 0.9784616}
   m_Children: []
   m_Father: {fileID: 3641278707775528339}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &2534755327088669942
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -469,112 +416,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.21482277, y: 0.6874329}
   m_EdgeRadius: 0
---- !u!114 &2534755327336098096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7540238810488579420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isDestructable: 1
-  moveSpeed: 0
-  rotationSpeed: 100
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 0
-    moveableX: 0
-    moveableY: 0
-    moveX:
-    - 0
-    - 0
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 2
-    fadeSpeed: 3
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &2534755327516178797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4530301312371946383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isDestructable: 1
-  moveSpeed: 1
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 0
-    moveableX: 0
-    moveableY: 0
-    moveX:
-    - 0
-    - 0
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 1
-    fadeDuration: 3
-    fadeSpeed: 15
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &3100116456908860324
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,14 +658,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3288949743967467293}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.75, z: 0}
   m_LocalScale: {x: 0.33399, y: 0.33399, z: 0.33399}
   m_Children:
   - {fileID: 2534755326323781678}
   m_Father: {fileID: 2534755326505218667}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6276245726081271045
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -864,7 +705,7 @@ SpriteRenderer:
   m_SortingLayerID: -1981790537
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd478a49ee0b5194e9b13284b4ed1bd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2defe483c4aba024fa702e6cc99a1ef5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -892,14 +733,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.29, y: 0.68}
+    oldSize: {x: 0.68, y: 3.29}
     newSize: {x: 3.29, y: 0.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.29, y: 0.68}
+  m_Size: {x: 0.68, y: 3.29}
   m_EdgeRadius: 0
 --- !u!114 &3288949743967467294
 MonoBehaviour:
@@ -922,7 +763,7 @@ MonoBehaviour:
   specialChilds: []
   objectProperties:
     isSpecial: 0
-    moveLocally: 0
+    moveLocally: 1
     moveable: 1
     moveableX: 0
     moveableY: 1
@@ -980,14 +821,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3912928953943473204}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 0.33399, y: 0.33399, z: 0.33399}
   m_Children:
   - {fileID: 2534755327088669940}
   m_Father: {fileID: 2534755326505218667}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5544074383222214188
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1027,7 +868,7 @@ SpriteRenderer:
   m_SortingLayerID: -1981790537
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd478a49ee0b5194e9b13284b4ed1bd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2defe483c4aba024fa702e6cc99a1ef5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1055,14 +896,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.29, y: 0.68}
+    oldSize: {x: 0.68, y: 3.29}
     newSize: {x: 3.29, y: 0.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.29, y: 0.68}
+  m_Size: {x: 0.68, y: 3.29}
   m_EdgeRadius: 0
 --- !u!114 &3912928953943473205
 MonoBehaviour:
@@ -1085,7 +926,7 @@ MonoBehaviour:
   specialChilds: []
   objectProperties:
     isSpecial: 0
-    moveLocally: 0
+    moveLocally: 1
     moveable: 1
     moveableX: 0
     moveableY: 1
@@ -1104,6 +945,112 @@ MonoBehaviour:
     canFade: 0
     fadeDuration: 0
     fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
+--- !u!114 &2534755327516178797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530301312371946383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isDestructable: 1
+  moveSpeed: 1
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX:
+    - 0
+    - 0
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 1
+    fadeDuration: 3
+    fadeSpeed: 15
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
+--- !u!114 &2534755325926450628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530301312942665794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isDestructable: 1
+  moveSpeed: 1
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX:
+    - 0
+    - 0
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 1
+    fadeDuration: 3
+    fadeSpeed: 15
     setPosition: 0
     startPositionX: -1337
     startPositionY: -1337
@@ -1280,6 +1227,59 @@ MonoBehaviour:
   angle: 0
   angle2: 0
   platformStartEuler: {x: 0, y: 0, z: 0}
+--- !u!114 &2534755327336098096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7540238810488579420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isDestructable: 1
+  moveSpeed: 0
+  rotationSpeed: 100
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX:
+    - 0
+    - 0
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 2
+    fadeSpeed: 3
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &2534755326483955486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ PrefabInstance:
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6409955
+      value: 1.8295459
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
@@ -1411,12 +1411,12 @@ PrefabInstance:
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.051879533
+      value: 0.063028
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08258848
+      value: -0.093737
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
@@ -1492,7 +1492,7 @@ PrefabInstance:
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.6409954
+      value: 1.8005002
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
@@ -1507,12 +1507,12 @@ PrefabInstance:
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0154432645
+      value: 0.024877
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04615228
+      value: -0.036719
       objectReference: {fileID: 0}
     - target: {fileID: 2158244021917382686, guid: a7ae4fbed9f28ca4ba1e42c492f47294,
         type: 3}
