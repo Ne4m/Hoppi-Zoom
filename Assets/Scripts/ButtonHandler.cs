@@ -44,7 +44,7 @@ public class ButtonHandler : MonoBehaviour
         btn1.image.color = new Color32(229, 213, 33, 255);
         btn2.image.color = Color.white;
         anyBtnClicked = true;
-        PlayerPrefs.SetInt("ControlInput", 0);
+        SPrefs.SetInt("ControlInput", 0);
     }
 
     private void btn2_Clicked()
@@ -52,14 +52,14 @@ public class ButtonHandler : MonoBehaviour
         btn1.image.color = Color.white;
         btn2.image.color = new Color32(229, 213, 33, 255);
         anyBtnClicked = true;
-        PlayerPrefs.SetInt("ControlInput", 1);
+        SPrefs.SetInt("ControlInput", 1);
     }
 
     private void selectButton_Clicked()
     {
         if (!anyBtnClicked) return;
 
-        PlayerPrefs.Save();
+        SPrefs.Save();
         SceneManager.LoadScene("Game");
     }
 }

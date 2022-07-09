@@ -867,7 +867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83dbc1efcc7f78249ab0e6fb4bce5e6b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5493bd3cbf8b60a43bd2ddd97dda469d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3621,9 +3621,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Main
-    clip: {fileID: 8300000, guid: 1cc56887adc539a4285da84cbf04ab20, type: 3}
+    clip: {fileID: 8300000, guid: b90de4556f7bd3f4bb579ef7422fea7f, type: 3}
     volume: 0.25
-    pitch: 1.55
+    pitch: 1
     loop: 1
     source: {fileID: 0}
 --- !u!1 &421111674

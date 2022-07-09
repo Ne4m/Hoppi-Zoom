@@ -13,15 +13,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject shootingArea;
     private SpriteRenderer shootingAreaSpriteRenderer;
     [SerializeField] private GameObject crosshair;
-
     [SerializeField] private float shootingRotVal;
 
 
 
-    public Transform backgrounds;
-
-
-    Rigidbody2D _rb2D;
+    private Rigidbody2D _rb2D;
 
     private bool isAtMid;
     private bool goingLeft = true;
@@ -30,46 +26,36 @@ public class PlayerController : MonoBehaviour
 
     public float desiredAngle;
 
-    [SerializeField]
-    private Transform tr;
+    [SerializeField]private Transform tr;
+    [SerializeField]private Transform ejector;
+    [SerializeField]private GameObject arrowiks;
 
-    [SerializeField]
-    private Transform ejector;
-
-    [SerializeField]
-    private GameObject arrowiks;
-
-    readonly Vector3 _kekVec = new Vector3(0, 0.46f, 0);
     LevelManager _levelManager;
 
 
-    [SerializeField] private float playerRotSpeed = 10;
 
     [Header ("Speed Variables")]
-    [SerializeField]
-    private float ejectForce = 1;
-    [SerializeField]
-    private float rotateSpeed = 100;
+    [SerializeField] private float ejectForce = 1f;
+    [SerializeField] private float rotateSpeed = 100;
+    [SerializeField] private float fallSpeed = 1.5f;
+    [SerializeField] private float playerRotSpeed = 10;
 
     public TMP_Text debugtxt;
 
     Shooting shooting;
 
-    public float arrowTouchRotateOffset = -90f;
-    public float inputModeOffset;
-
+    [SerializeField] private float arrowTouchRotateOffset = -90f;
+    [SerializeField] private float inputModeOffset;
 
     private void Awake()
 	{
-        _rb2D = GetComponent<Rigidbody2D>();
-
-        backgrounds = GetComponent<Transform>();
-
         inputMode = SPrefs.GetInt("ControlInput", 0);
     }
 
 	void Start()
     {
+        _rb2D = GetComponent<Rigidbody2D>();
+
         //LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
         _levelManager = gameObject.GetComponent<LevelManager>();
         shooting = gameObject.GetComponent<Shooting>();
@@ -93,8 +79,10 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        StartCoroutine(checkVariables());
+        //StartCoroutine(checkVariables());
 
+        setEjectForce(_levelManager.playerControl.getPlayerSpeed());
+        setArrowRotationSpeed(_levelManager.playerControl.getPlayerPointerSpeed());
     }
 
     void Update()
@@ -125,6 +113,40 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckJumpInput();
+
+        //debugtxt.text= $"Speed: {_rb2D.velocity.y}\n" +
+        //               $"Magnt: {_rb2D.velocity.magnitude}\n" +
+        //               $"Fix: {_rb2D.velocity * ejectForce * Time.fixedDeltaTime}";
+
+
+        if (_rb2D.velocity.y < 0)
+        {
+            //_rb2D.velocity = new Vector2(_rb2D.velocity.x, (fallSpeed));
+            SetGravity.On(_rb2D, fallSpeed);
+        }
+        else
+        {
+            SetGravity.Off(_rb2D);
+        }
+    }
+
+    public class SetGravity
+    {
+
+        public static void On(Rigidbody2D rigidBody, float initialValue)
+        {
+            SetGravityScale(initialValue, rigidBody);
+        }
+
+        public static void Off(Rigidbody2D rigidBody)
+        {
+            SetGravityScale(0, rigidBody);
+        }
+
+        private static void SetGravityScale(float val, Rigidbody2D rigidBody)
+        {
+            rigidBody.gravityScale = val;
+        }
     }
 
     [SerializeField] private float jumpRate = 1.0f;
@@ -291,7 +313,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-        //upVector = upVector - _kekVec;
         _rb2D.AddForce(vectorUp * ejectForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
         _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
         _rb2D.MoveRotation(_slowRot);
@@ -393,6 +414,7 @@ public class PlayerController : MonoBehaviour
 
             _rb2D.velocity = Vector2.zero;
             _rb2D.angularVelocity = 0f;
+            SetGravity.Off(_rb2D);
 
             Vector3 kek = new Vector3(_rb2D.transform.position.x, collision.transform.position.y, 0);
             _rb2D.transform.SetPositionAndRotation(kek, Quaternion.identity);
@@ -440,6 +462,7 @@ public class PlayerController : MonoBehaviour
 
     public void setEjectForce(float force)
     {
+        Debug.Log("Got Ejectforce Value from Level Manager : " + force);
         this.ejectForce = force;
     }
 

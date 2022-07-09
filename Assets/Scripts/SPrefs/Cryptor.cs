@@ -4,7 +4,7 @@ using System.Text;
 
 public class Cryptor
 {
-    // Please replace this key (32 chars, [a-z, 0-9])
+    
     private const string ENCRYPTION_KEY = "19ms2783901mn23v91023hdk012983du";
 
     public static string Hash(string value)
@@ -51,11 +51,20 @@ public class Cryptor
     {
         byte[] keyArray = UTF8Encoding.UTF8.GetBytes(ENCRYPTION_KEY);
         byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
-        RijndaelManaged rijn = new RijndaelManaged();
-        rijn.Key = keyArray;
-        rijn.Mode = CipherMode.ECB;
-        rijn.Padding = PaddingMode.PKCS7;
-        ICryptoTransform cTransform = rijn.CreateEncryptor();
+        //RijndaelManaged rijn = new RijndaelManaged();
+
+        AesManaged aes = new AesManaged();
+        aes.Key = keyArray;
+        aes.Mode = CipherMode.ECB;
+        aes.Padding = PaddingMode.PKCS7;
+
+        //rijn.Key = keyArray;
+        //rijn.Mode = CipherMode.ECB;
+        //rijn.Padding = PaddingMode.PKCS7;
+
+        // ICryptoTransform cTransform = rijn.CreateEncryptor();
+
+        ICryptoTransform cTransform = aes.CreateEncryptor();
         byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
         return Convert.ToBase64String(resultArray, 0, resultArray.Length);
     }
@@ -64,11 +73,18 @@ public class Cryptor
     {
         byte[] keyArray = UTF8Encoding.UTF8.GetBytes(ENCRYPTION_KEY);
         byte[] toEncryptArray = Convert.FromBase64String(toDecrypt);
-        RijndaelManaged rijn = new RijndaelManaged();
-        rijn.Key = keyArray;
-        rijn.Mode = CipherMode.ECB;
-        rijn.Padding = PaddingMode.PKCS7;
-        ICryptoTransform cTransform = rijn.CreateDecryptor();
+        AesManaged aes = new AesManaged();
+
+        aes.Key = keyArray;
+        aes.Mode = CipherMode.ECB;
+        aes.Padding = PaddingMode.PKCS7;
+        ICryptoTransform cTransform = aes.CreateDecryptor();
+
+        //RijndaelManaged rijn = new RijndaelManaged();
+        //rijn.Key = keyArray;
+        //rijn.Mode = CipherMode.ECB;
+        //rijn.Padding = PaddingMode.PKCS7;
+        //ICryptoTransform cTransform = rijn.CreateDecryptor();
         byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
         return UTF8Encoding.UTF8.GetString(resultArray);
     }

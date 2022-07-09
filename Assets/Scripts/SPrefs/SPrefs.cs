@@ -3,10 +3,10 @@ using System;
 
 public class SPrefs
 {
-    public const string STRING_SALT = "7Snc1Lso";
-    public const string INT_SALT = "t5HqItbY";
-    public const string FLOAT_SALT = "ZieZO5cM";
-    public const string BOOL_SALT = "E9LvW12n";
+    private const string STRING_SALT = "7Snc1Lso";
+    private const string INT_SALT = "t5HqItbY";
+    private const string FLOAT_SALT = "ZieZO5cM";
+    private const string BOOL_SALT = "E9LvW12n";
 
     /// <summary>
     /// Sets the value of the preference identified by key

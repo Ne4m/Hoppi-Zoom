@@ -283,6 +283,19 @@ public class LevelManager : MonoBehaviour
         //        }
         //    );
 
+        Social.localUser.Authenticate( (bool success) => {
+
+            if (success)
+            {
+                Debug.Log("AUTHENTICATION SUCCESSFULL!!");
+                debug_text.text = Social.localUser.userName;
+            }
+            else
+            {
+                Debug.Log("AUTHENTICATION FAILED!!!");
+            }
+        });
+
         //playerControl.setPoint(SPrefs.GetInt("point", 0));
 
         // Update Player Controller Variables On Start
@@ -316,7 +329,6 @@ public class LevelManager : MonoBehaviour
         health_text.text = ($"HP: {playerControl.getHealth()}\n" +
                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
                             $"AMMO: {shooting.GetCurrentAmmo()}");
-
 
     }
 
@@ -368,10 +380,10 @@ public class LevelManager : MonoBehaviour
 
 
         currentCurrency = (playerControl.getPoint() * earnPercent) / 100;
-        debug_text.text = currentCurrency.ToString();
+        //debug_text.text = currentCurrency.ToString();
 
         Debug.Log($"Currency Earned {currentCurrency}");
-        debug_text.text = currentCurrency.ToString();
+       // debug_text.text = currentCurrency.ToString();
 
 
         // SAVE PLAYER STATS HERE

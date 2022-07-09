@@ -23,6 +23,7 @@ public class GameProgress : MonoBehaviour
     float backgroundChangeThreshold = 10;
 
     private float speedIncrease;
+    private float rotateSpeedIncrease;
     private int bgChangeCounter = 0;
     //string loadedSprite = string.Empty;
     //string loadedSpawner = string.Empty;
@@ -101,9 +102,12 @@ public class GameProgress : MonoBehaviour
 
         if (point >= last.SpeedPoint + speedChangeThreshold)
         {
+
+            // PLATFORMS SPEED MANIPULATION BASED ON EARNED POINTS
             last.SpeedPoint = point;
 
             speedIncrease += Random.Range(0.01f, 0.1f);
+            rotateSpeedIncrease += Random.Range(0.1f, 1f);
 
             //messager.startMsg($"Area Speed Increased!", 2, Vector3.zero);
         }
@@ -126,6 +130,11 @@ public class GameProgress : MonoBehaviour
     public float GetSpeedIncrease()
     {
         return speedIncrease;
+    }
+
+    public float GetRotateSpeedIncrease()
+    {
+        return rotateSpeedIncrease;
     }
 
     public string GetSpawnSets()

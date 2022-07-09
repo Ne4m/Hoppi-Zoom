@@ -69,7 +69,7 @@ public class PlatformMovements : MonoBehaviour
         platformStartEuler = tr.eulerAngles;
 
         IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
-        IncreaseRotationSpeed(gameProgress.GetSpeedIncrease());
+        IncreaseRotationSpeed(gameProgress.GetRotateSpeedIncrease());
         IncreaseFadeSpeed(gameProgress.GetSpeedIncrease());
 
 
