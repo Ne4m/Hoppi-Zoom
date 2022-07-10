@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rb2D;
 
-    private bool isAtMid;
+   // private bool isAtMid;
     private bool goingLeft = true;
     private bool goingRight = false;
     private bool isPlayerDead;
@@ -353,14 +353,16 @@ public class PlayerController : MonoBehaviour
 
             var displacement = Quaternion.Angle(tr.rotation, transform.rotation);
 
-            if (displacement == 0)
-            {
-                isAtMid = true;
-            }
-            else
-            {
-                isAtMid = false;
-            }
+            //if (displacement == 0)
+            //{
+            //    isAtMid = true;
+            //}
+            //else
+            //{
+            //    isAtMid = false;
+            //}
+
+            //Debug.Log($"At Mid {isAtMid}");
         }
         
 

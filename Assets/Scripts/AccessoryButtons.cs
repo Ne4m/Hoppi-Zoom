@@ -56,4 +56,14 @@ public class AccessoryButtons : MonoBehaviour
         SPrefs.Save();
     }
 
+
+    //private void OnDrawGizmos()
+    //{
+    //    characterHead = character.transform.GetChild(0).GetComponent<Image>();
+    //    characterBody = character.transform.GetChild(1).GetComponent<Image>();
+
+    //    characterHead.GetComponent<RectTransform>().pivot = characterHead.sprite.pivot / characterHead.sprite.rect.size;
+    //    characterBody.GetComponent<RectTransform>().pivot = characterBody.sprite.pivot / characterBody.sprite.rect.size;
+
+    //}
 }

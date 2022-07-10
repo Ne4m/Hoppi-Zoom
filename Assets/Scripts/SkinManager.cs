@@ -63,7 +63,7 @@ public class SkinManager : MonoBehaviour
             characterAllHeadAccessories = Resources.LoadAll<Sprite>("Accessories/Hats");
             characterAllBodyAccessories = Resources.LoadAll<Sprite>("Accessories/Body");
 
-            for (int i = 0; i < hatContainer.transform.childCount; i++)
+            for (int i = 0; i < hatContainer.transform.childCount-1; i++)
             {
                 hatContainer.transform.GetChild(i).GetComponent<Image>().sprite = characterAllHeadAccessories[i];
             }
@@ -90,6 +90,18 @@ public class SkinManager : MonoBehaviour
         EquipHeadAccessory(SPrefs.GetString("PlayerHat", "none"));
         EquipBodyAccessory(SPrefs.GetString("PlayerBody", "none"));
 
+    }
+
+    public void UnequipHeadAccessory()
+    {
+        SPrefs.SetString("PlayerHat", "none");
+        EquipHeadAccessory(SPrefs.GetString("PlayerHat", "none"));
+    }
+
+    public void UnequipBodyAccessory()
+    {
+        SPrefs.SetString("PlayerBody", "none");
+        EquipBodyAccessory(SPrefs.GetString("PlayerBody", "none"));
     }
 
     private void backBtnClicked()

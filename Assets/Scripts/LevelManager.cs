@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
     CameraController camCont;
     Shooting shooting;
     UIMessager messager;
+    UI_Animations uiAnimations;
 
     public static LevelManager instance;
 
@@ -270,6 +271,8 @@ public class LevelManager : MonoBehaviour
 
         shooting.SetMaxAmmo(SPrefs.GetInt("playerAmmo", 1));
 
+        uiAnimations = UI_Animations.instance;
+
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
         //point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
@@ -393,7 +396,16 @@ public class LevelManager : MonoBehaviour
             SPrefs.Save();
             Debug.Log("New Highscore!!! " + playerControl.getPoint());
 
+            uiAnimations.SetHighScoreState(true);
         }
+        else
+        {
+            uiAnimations.SetHighScoreState(false);
+        }
+
+
+        uiAnimations.SwitchTitleImage();
+        uiAnimations.SetAnimations();
 
         PauseGame();
     }
@@ -415,6 +427,8 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerEjectorArrow.SetActive(true);
 
+
+        uiAnimations.ResetAnimations();
         ResumeGame();
     }
 
