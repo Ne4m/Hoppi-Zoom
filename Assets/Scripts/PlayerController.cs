@@ -464,7 +464,7 @@ public class PlayerController : MonoBehaviour
 
     public void setEjectForce(float force)
     {
-        Debug.Log("Got Ejectforce Value from Level Manager : " + force);
+       // Debug.Log("Got Ejectforce Value from Level Manager : " + force);
         this.ejectForce = force;
     }
 

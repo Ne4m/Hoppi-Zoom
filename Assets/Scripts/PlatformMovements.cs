@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class PlatformMovements : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlatformMovements : MonoBehaviour
     public int MovementTypeID;
 
     private Transform tr;
+
+    [SerializeField] private bool isTweenable = false;
 
     [SerializeField] private bool isDestructable = true;
 
@@ -21,6 +24,7 @@ public class PlatformMovements : MonoBehaviour
 
     [Header("Object Props")]
     [SerializeField] private objectProps objectProperties = new objectProps();
+    [SerializeField] private TweenProps tweenProperties = new TweenProps();
 
     [Header("Child Configuration")]
     [SerializeField] private bool hasChilds;
@@ -66,12 +70,20 @@ public class PlatformMovements : MonoBehaviour
 
         platformStartPosition = tr.position;
 
-        platformStartEuler = tr.eulerAngles;
+        platformStartEuler = tr.localEulerAngles;
+
+
+
 
         IncreaseMoveSpeed(gameProgress.GetSpeedIncrease());
         IncreaseRotationSpeed(gameProgress.GetRotateSpeedIncrease());
         IncreaseFadeSpeed(gameProgress.GetSpeedIncrease());
 
+
+        if (isTweenable)
+        {
+            LeanTweenActions();
+        }
 
         // Array Initializations
         specialChilds = new GameObject[tr.childCount];
@@ -93,8 +105,207 @@ public class PlatformMovements : MonoBehaviour
     }
 
 
+    [System.Serializable]
+    public class TweenProps
+    {
+        [Header("Move Variables")]
+        public float moveSpeed;
+        public Vector3 startPoint;
+        public Vector3[] movePoints;
+        public Vector3 endPoint;
+        public bool isPingPongMove = true;
+        public LeanTweenType moveEaseType;
+
+        [Header("Liner Move Variables")]
+        public float linearMoveSpeed;
+        public Vector3 destinationCoords;
+        public bool isPingPongLinearMove = true;
+
+        [Header ("Rotate Variables")]
+        public float rotateSpeed;
+        public float rotateAngle;
+        public bool clockWise = false;
+        public LeanTweenType rotateEaseType;
+        public bool isPingPongRotation = true;
+
+
+        [Header ("Fade Variables")]
+        public float fadeSpeed;
+        public float fadeAlphaMin;
+        public bool disableCollision = true;
+        [HideInInspector] public bool isFaded = false;
+        public LeanTweenType fadeEaseType;
+        public bool isPingPongFading = true;
+
+        [Header("Scale Variables")]
+        public float scaleSpeed;
+        [Range(0f, 100.0f)] public float scalePercent;
+        public LeanTweenType scaleEaseType;
+        public bool isPingPongScaling = true;
+
+        [Header("Color Change Variables")]
+        public Color color;
+        public float colorChangeSpeed;
+        public LeanTweenType colorChangeEaseType;
+        public bool isPingPongColorChange = true;
+        public enum BEHAVIOUR
+        {
+            NONE,
+            MOVE,
+            LINEAR_MOVE,
+            ROTATE,
+            FADE,
+            SCALE,
+            COLOR
+        }
+
+        public BEHAVIOUR[] BEHAVIOURS;
+
+    
+    }
+
+    public void LeanTweenActions()
+    {
+
+        foreach(var BEHAVIOUR in tweenProperties.BEHAVIOURS)
+        {
+            switch (BEHAVIOUR)
+            {
+                case TweenProps.BEHAVIOUR.NONE:
+                    Debug.Log("DEFAULT NONE BEHAVIOUR!");
+                    break;
+                case TweenProps.BEHAVIOUR.MOVE:
+                    Move();
+                    break;
+                case TweenProps.BEHAVIOUR.LINEAR_MOVE:
+                    MoveLinear();
+                    break;
+                case TweenProps.BEHAVIOUR.ROTATE:
+                    Rotate();
+                    break;
+                case TweenProps.BEHAVIOUR.FADE:
+                    Fading();
+                    break;
+                case TweenProps.BEHAVIOUR.SCALE:
+                    Scale();
+                    break;
+                case TweenProps.BEHAVIOUR.COLOR:
+                    Color();
+                    break;
+                default:
+                    Debug.Log("HAS NO BEHAVIOUR!");
+                    break;
+            }
+        }
+
+        void Move()
+        {
+            // Moving Stuff
+
+            int allocationSize = (2 + tweenProperties.movePoints.Length);
+            Vector3[] moveVec = new Vector3[allocationSize];
+
+
+            moveVec[0] = tweenProperties.startPoint;
+            moveVec[allocationSize - 1] = tweenProperties.endPoint;
+
+            for(int i=1; i< allocationSize - 1; i++)
+            {
+                moveVec[i] = tweenProperties.movePoints[i-1];
+            }
+
+
+            for (int i = 0; i < moveVec.Length; i++)
+            {
+                //Debug.Log($"Move Vector is ({i}) : {moveVec[i]}");
+
+                moveVec[i] += tr.position;
+            }
+
+
+            LeanTween.moveSplineLocal(gameObject, moveVec, 0f)
+                .setLoopType(tweenProperties.isPingPongMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.moveSpeed)
+                .setEase(tweenProperties.moveEaseType);
+        }
+
+        void MoveLinear()
+        {
+            tweenProperties.destinationCoords += tr.position;
+
+            LeanTween.moveLocal(gameObject, tweenProperties.destinationCoords, 0f)
+                .setLoopType(tweenProperties.isPingPongLinearMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.moveSpeed)
+                .setEase(tweenProperties.moveEaseType);
+        }
+
+        void Rotate()
+        {
+            Debug.Log("ROTATE BEHAVIOUR");
+
+            LeanTween.rotateLocal(gameObject, new Vector3(0, 0, tweenProperties.rotateAngle * (tweenProperties.clockWise ? -1f : 1f)), 0f)
+                 .setLoopType(tweenProperties.isPingPongScaling ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                 .setSpeed(tweenProperties.rotateSpeed)
+                 .setEase(tweenProperties.rotateEaseType);
+
+            //LeanTween.rotateAroundLocal(gameObject, new Vector3(0, 0, 60), -60f, 1f).setLoopPingPong();
+        }
+
+
+
+        void Scale()
+        {
+            Debug.Log("SCALE BEHAVIOUR");
+
+            LeanTween.scale(gameObject, Vector3.one + (Vector3.one * tweenProperties.scalePercent / 100), 0)
+                .setLoopType(tweenProperties.isPingPongScaling ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.scaleSpeed)
+                .setEase(tweenProperties.scaleEaseType);
+        }
+
+        void Fading()
+        {
+            Debug.Log("FADE BEHAVIOUR");
+
+            LeanTween.alpha(gameObject, tweenProperties.fadeAlphaMin, 0f)
+                .setLoopType(tweenProperties.isPingPongFading ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.fadeSpeed)
+                .setEase(tweenProperties.fadeEaseType)
+                .setOnCompleteOnRepeat(true)
+                .setOnComplete(() =>
+                {
+                    if(!tweenProperties.isFaded)
+                    {
+                        tweenProperties.isFaded = true;
+                        if(tweenProperties.disableCollision) tr.GetComponent<Collider2D>().enabled = false;
+                    }
+                    else
+                    {
+                        tweenProperties.isFaded = false;
+                        tr.GetComponent<Collider2D>().enabled = true;
+                    }
+                });
+        }
+
+        void Color()
+        {
+            Debug.Log("COLOR BEHAVIOUR");
+
+            LeanTween.color(gameObject, tweenProperties.color, 0)
+                .setLoopType(tweenProperties.isPingPongColorChange ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.colorChangeSpeed)
+                .setEase(tweenProperties.colorChangeEaseType);
+        }
+
+       
+    }
+
+
+
     private void FixedUpdate()
     {
+        
+
         if (!objectProperties.isSpecial)
         {
             if (objectProperties.moveable)
@@ -179,13 +390,13 @@ public class PlatformMovements : MonoBehaviour
                 if (!objectProperties.rotateFreely)
                 {
                     float Rotation;
-                    if (tr.eulerAngles.z <= 180f)
+                    if (tr.localEulerAngles.z <= 180f)
                     {
-                        Rotation = tr.eulerAngles.z;
+                        Rotation = tr.localEulerAngles.z;
                     }
                     else
                     {
-                        Rotation = tr.eulerAngles.z - 360f;
+                        Rotation = tr.localEulerAngles.z - 360f;
                     }
                     Rotation -= platformStartEuler.z;
 
@@ -200,12 +411,12 @@ public class PlatformMovements : MonoBehaviour
                         rotationSpeed *= -1;
                     }
 
-                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
+                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime, Space.Self);
                     //debugtxt.text = $"{Rotation}";
                 }
                 else
                 {
-                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
+                    tr.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime, Space.Self);
                 }
 
 
@@ -493,8 +704,6 @@ public class PlatformMovements : MonoBehaviour
         public float[] rotateAngle = new float[2];
 
 
-
-
         [Header("Fade In/Out Settings")]
         public bool canFade;
         public float fadeDuration;
@@ -634,6 +843,12 @@ public class PlatformMovements : MonoBehaviour
 
     public void IncreaseMoveSpeed(float amount)
     {
+        if (isTweenable)
+        {
+            tweenProperties.moveSpeed += amount;
+
+        }
+
         this.moveSpeed += amount;
 
         for (int i = 0; i < specialRotationSpeed.Length; i++)
@@ -645,6 +860,11 @@ public class PlatformMovements : MonoBehaviour
 
     public void IncreaseRotationSpeed(float amount)
     {
+        if (isTweenable)
+        {
+            tweenProperties.rotateSpeed += amount;
+        }
+
         this.rotationSpeed += amount;
 
         for (int i = 0; i < specialRotationSpeed.Length; i++)
@@ -655,6 +875,11 @@ public class PlatformMovements : MonoBehaviour
 
     public void IncreaseFadeSpeed(float amount)
     {
+        if (isTweenable)
+        {
+            tweenProperties.fadeSpeed += amount;
+        }
+
         this.objectProperties.fadeSpeed += amount;
     }
 

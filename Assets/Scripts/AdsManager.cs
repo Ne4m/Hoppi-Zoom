@@ -20,7 +20,7 @@ public class AdsManager : MonoBehaviour
     private enum AD_Location
     {
         MainMenu,
-        Game_Death_Continue
+        GameMenu
     }
 
     [SerializeField] private AD_Location adLocation = new AD_Location();
@@ -29,7 +29,7 @@ public class AdsManager : MonoBehaviour
     private void Start()
     {
 
-        Debug.Log($"AD LOCATION IS NOW : {adLocation} STR {adLocation.ToString()}");
+        //Debug.Log($"AD LOCATION IS NOW : {adLocation} STR {adLocation.ToString()}");
 
         MobileAds.Initialize(initStatus => { });
 
@@ -38,7 +38,8 @@ public class AdsManager : MonoBehaviour
             case "MainMenu":
                 RequestBanner();
                 break;
-            case "Game_Death_Continue":
+            case "GameMenu":
+                if (bannerView != null) bannerView.Hide();
                 RequestRewarded();
                 break;
         }
@@ -109,7 +110,7 @@ public class AdsManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, EventArgs args)
     {
-        if(adLocation.ToString() == "Game_Death_Continue")
+        if(adLocation.ToString() == "GameMenu")
         {
             Debug.Log("REWARD FROM CONTINUE TOKEN");
             FindObjectOfType<LevelManager>().onContinue();
@@ -124,7 +125,7 @@ public class AdsManager : MonoBehaviour
     private void OnDestroy()
     {
 
-        if (adLocation.ToString() == "Game_Death_Continue")
+        if (adLocation.ToString() == "GameMenu")
         {
             rewardedAd.OnUserEarnedReward -= HandleUserEarnedReward;
             rewardedAd.OnAdClosed -= HandleRewardedAdClosed;

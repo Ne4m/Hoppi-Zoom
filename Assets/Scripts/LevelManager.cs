@@ -286,18 +286,18 @@ public class LevelManager : MonoBehaviour
         //        }
         //    );
 
-        Social.localUser.Authenticate( (bool success) => {
+        //Social.localUser.Authenticate( (bool success) => {
 
-            if (success)
-            {
-                Debug.Log("AUTHENTICATION SUCCESSFULL!!");
-                debug_text.text = Social.localUser.userName;
-            }
-            else
-            {
-                Debug.Log("AUTHENTICATION FAILED!!!");
-            }
-        });
+        //    if (success)
+        //    {
+        //        Debug.Log("AUTHENTICATION SUCCESSFULL!!");
+        //        debug_text.text = Social.localUser.userName;
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("AUTHENTICATION FAILED!!!");
+        //    }
+        //});
 
         //playerControl.setPoint(SPrefs.GetInt("point", 0));
 
