@@ -57,6 +57,12 @@ public class PlayerConditions : MonoBehaviour
             Debug.Log("Got Hit By A Laser! [TRIGGER]\n" + transform.tag);
             blinkCharacter();
         }
+
+        if (collision.CompareTag("Wood"))
+        {
+            Debug.Log("Got Hit By A Wood [TRIGGER]\n" + transform.tag);
+            blinkCharacter();
+        }
     }
 
 

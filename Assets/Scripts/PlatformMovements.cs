@@ -120,6 +120,7 @@ public class PlatformMovements : MonoBehaviour
         public float linearMoveSpeed;
         public Vector3 destinationCoords;
         public bool isPingPongLinearMove = true;
+        public LeanTweenType linearMoveEasyType;
 
         [Header ("Rotate Variables")]
         public float rotateSpeed;
@@ -139,7 +140,7 @@ public class PlatformMovements : MonoBehaviour
 
         [Header("Scale Variables")]
         public float scaleSpeed;
-        [Range(0f, 100.0f)] public float scalePercent;
+        [Range(0f, 1000.0f)] public float scalePercent;
         public LeanTweenType scaleEaseType;
         public bool isPingPongScaling = true;
 
@@ -202,19 +203,21 @@ public class PlatformMovements : MonoBehaviour
         {
             // Moving Stuff
 
-            int allocationSize = (2 + tweenProperties.movePoints.Length);
+            int allocationSize = (4 + tweenProperties.movePoints.Length);
             Vector3[] moveVec = new Vector3[allocationSize];
 
 
             moveVec[0] = tweenProperties.startPoint;
+            moveVec[1] = tweenProperties.startPoint;
             moveVec[allocationSize - 1] = tweenProperties.endPoint;
+            moveVec[allocationSize - 2] = tweenProperties.endPoint;
 
-            for(int i=1; i< allocationSize - 1; i++)
+            for (int i=2; i< allocationSize - 2; i++)
             {
-                moveVec[i] = tweenProperties.movePoints[i-1];
+                moveVec[i] = tweenProperties.movePoints[i-2];
             }
 
-
+            // Adjusting Pivot Positions
             for (int i = 0; i < moveVec.Length; i++)
             {
                 //Debug.Log($"Move Vector is ({i}) : {moveVec[i]}");
@@ -223,10 +226,12 @@ public class PlatformMovements : MonoBehaviour
             }
 
 
-            LeanTween.moveSplineLocal(gameObject, moveVec, 0f)
+            int _id = LeanTween.moveSplineLocal(gameObject, moveVec, 0f)
                 .setLoopType(tweenProperties.isPingPongMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
                 .setSpeed(tweenProperties.moveSpeed)
-                .setEase(tweenProperties.moveEaseType);
+                .setEase(tweenProperties.moveEaseType).id;
+
+            // LeanTween.drawBezierPath(moveVec[0], moveVec[1], moveVec[2], moveVec[3], 5f);
         }
 
         void MoveLinear()
@@ -234,9 +239,9 @@ public class PlatformMovements : MonoBehaviour
             tweenProperties.destinationCoords += tr.position;
 
             LeanTween.moveLocal(gameObject, tweenProperties.destinationCoords, 0f)
-                .setLoopType(tweenProperties.isPingPongLinearMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
-                .setSpeed(tweenProperties.moveSpeed)
-                .setEase(tweenProperties.moveEaseType);
+                 .setLoopType(tweenProperties.isPingPongLinearMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                 .setSpeed(tweenProperties.linearMoveSpeed)
+                 .setEase(tweenProperties.linearMoveEasyType);
         }
 
         void Rotate()
@@ -244,7 +249,7 @@ public class PlatformMovements : MonoBehaviour
             Debug.Log("ROTATE BEHAVIOUR");
 
             LeanTween.rotateLocal(gameObject, new Vector3(0, 0, tweenProperties.rotateAngle * (tweenProperties.clockWise ? -1f : 1f)), 0f)
-                 .setLoopType(tweenProperties.isPingPongScaling ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                 .setLoopType(tweenProperties.isPingPongRotation ? LeanTweenType.pingPong : LeanTweenType.notUsed)
                  .setSpeed(tweenProperties.rotateSpeed)
                  .setEase(tweenProperties.rotateEaseType);
 
@@ -257,10 +262,14 @@ public class PlatformMovements : MonoBehaviour
         {
             Debug.Log("SCALE BEHAVIOUR");
 
-            LeanTween.scale(gameObject, Vector3.one + (Vector3.one * tweenProperties.scalePercent / 100), 0)
+            var initialScale = gameObject.transform.localScale;
+
+            LeanTween.scale(gameObject, initialScale + (initialScale * tweenProperties.scalePercent / 100), 0)
                 .setLoopType(tweenProperties.isPingPongScaling ? LeanTweenType.pingPong : LeanTweenType.notUsed)
                 .setSpeed(tweenProperties.scaleSpeed)
                 .setEase(tweenProperties.scaleEaseType);
+
+
         }
 
         void Fading()
@@ -461,40 +470,6 @@ public class PlatformMovements : MonoBehaviour
 
             }
 
-            if (MovementTypeID == 5) // Platform_Spikey_Kinetic_[5]
-            {
-
-                if(specialChilds[0] != null)
-                {
-                    if (specialChilds[0].transform.position.x < -2.39)
-                    {
-                        specialMoveSpeed[0] *= -1;
-                    }
-                    else if (specialChilds[0].transform.position.x > -1.13)
-                    {
-                        specialMoveSpeed[0] *= -1;
-                    }
-
-                    specialChilds[0].transform.Translate(-1 * specialMoveSpeed[0] * Time.deltaTime, 0, 0);
-                }
-
-                if (specialChilds[1] != null)
-                {
-                    if (specialChilds[1].transform.position.x < 1.13)
-                    {
-                        specialMoveSpeed[1] *= -1;
-                    }
-                    else if (specialChilds[1].transform.position.x > 2.39)
-                    {
-                        specialMoveSpeed[1] *= -1;
-                    }
-
-                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime, 0, 0);
-                }
-
-
-
-            }
 
             if (MovementTypeID == 6) // Platform_Spikey_Bridge_Double_1_[6]
             {
@@ -863,6 +838,7 @@ public class PlatformMovements : MonoBehaviour
         if (isTweenable)
         {
             tweenProperties.rotateSpeed += amount;
+            tweenProperties.linearMoveSpeed += amount;
         }
 
         this.rotationSpeed += amount;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     public TMP_Text debugtxt;
 
+    public TMP_Dropdown comboBox, comboBox2;
+
     Shooting shooting;
 
     [SerializeField] private float arrowTouchRotateOffset = -90f;
@@ -52,7 +54,12 @@ public class PlayerController : MonoBehaviour
         inputMode = SPrefs.GetInt("ControlInput", 0);
     }
 
-	void Start()
+    private int scaleID_1, scaleID_2;
+    private Vector3 initialScale;
+    public LeanTweenType _type, _type2;
+
+
+    void Start()
     {
         _rb2D = GetComponent<Rigidbody2D>();
 
@@ -78,11 +85,20 @@ public class PlayerController : MonoBehaviour
             shooting.SetShootingPoint(crosshair.transform);
         }
 
+        initialScale = _rb2D.gameObject.transform.localScale;
 
         //StartCoroutine(checkVariables());
 
         setEjectForce(_levelManager.playerControl.getPlayerSpeed());
         setArrowRotationSpeed(_levelManager.playerControl.getPlayerPointerSpeed());
+
+
+
+        comboBox.ClearOptions();
+        comboBox.AddOptions(LeanTween.GetTweenTypes());
+
+        comboBox2.ClearOptions();
+        comboBox2.AddOptions(LeanTween.GetTweenTypes());
     }
 
     void Update()
@@ -114,15 +130,25 @@ public class PlayerController : MonoBehaviour
 
         CheckJumpInput();
 
-        //debugtxt.text= $"Speed: {_rb2D.velocity.y}\n" +
+        //debugtxt.text = $"Speed: {_rb2D.velocity.y}\n" +
         //               $"Magnt: {_rb2D.velocity.magnitude}\n" +
         //               $"Fix: {_rb2D.velocity * ejectForce * Time.fixedDeltaTime}";
 
 
-        if (_rb2D.velocity.y < 0)
+        //if (_rb2D.velocity.magnitude > 0 && !_levelManager.playerControl.IsPlayerInCheckPoint())
+        //{
+        //    StartTweenScale();
+        //}
+        //else
+        //{
+        //    StopTweenScale();
+        //}
+
+        if (_rb2D.velocity.y < 0 && _levelManager.playerControl.IsPlayerInCheckPoint())
         {
             //_rb2D.velocity = new Vector2(_rb2D.velocity.x, (fallSpeed));
             SetGravity.On(_rb2D, fallSpeed);
+
         }
         else
         {
@@ -130,6 +156,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void EjectTweenStart()
+    {
+        scaleID_1 = _rb2D.gameObject.LeanScale(new Vector3(initialScale.x, initialScale.y - 0.4f, initialScale.z), 0.15f)
+            .setEase(LeanTweenType.easeInOutQuart)
+            .setOnComplete(EjectTweenStop)
+            .pause()
+            .id;
+
+        if (!LeanTween.isTweening(scaleID_1))
+        {
+            LeanTween.resume(scaleID_1);
+        }
+
+
+        Debug.Log($"Pivot is : {gameObject.GetComponent<SpriteRenderer>().sprite.pivot}");
+    }
+
+    void EjectTweenStop()
+    {
+        scaleID_2 = _rb2D.gameObject.LeanScale(new Vector3(initialScale.x, initialScale.y, initialScale.z), 0.10f).setEase(LeanTweenType.easeInOutQuart).id;
+    }
+    
     public class SetGravity
     {
 
@@ -321,6 +369,8 @@ public class PlayerController : MonoBehaviour
 
         FindObjectOfType<AudioManager>().Play("Jump");
         //_rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
+
+        EjectTweenStart();
     }
 
 
@@ -443,9 +493,60 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        FindObjectOfType<AudioManager>().Play("Bounce");
+        FindObjectOfType<AudioManager>().IsPlaying("Bounce", (callback) =>
+        {
+            if (!callback) FindObjectOfType<AudioManager>().Play("Bounce");
+        });
+
+
+
+
+
+            gameObject.LeanScaleY(initialScale.y - 0.25f, 0.15f).setEase(_type).setOnComplete(() =>
+            {
+                gameObject.LeanScaleY(initialScale.y, 0.15f).setEase(_type2);
+            });
+
+
+        if (collision.collider.tag == "Boundary")
+        {
+            Debug.Log("boundary hit");
+        }
     }
 
+
+    
+    public void Z_ScaleTest(float t)
+    {
+        // LeanTween.scale(_rb2D.gameObject, new Vector3(initialScale.x, initialScale.y - 0.25f, initialScale.z), t);
+        gameObject.LeanScaleY(initialScale.y - 0.20f, t).setEase(_type).setOnComplete(() =>
+        {
+            gameObject.LeanScaleY(initialScale.y, t).setEase(_type2);
+        });
+    }
+
+    public void Z_UnScaleTest(float t)
+    {
+        //LeanTween.scale(_rb2D.gameObject, new Vector3(initialScale.x, initialScale.y + 0.25f, initialScale.z), t);
+
+
+    }
+
+    public void Z_SetTweenType()
+    {
+        int val = comboBox.value;
+        string txt = comboBox.options[val].text;
+
+        Enum.TryParse(txt, out _type);
+        Debug.Log($"Parsed Enum 1 {_type}");
+
+
+        int val2 = comboBox2.value;
+        string txt2 = comboBox2.options[val2].text;
+
+        Enum.TryParse(txt, out _type2);
+        Debug.Log($"Parsed Enum 2 {_type2}");
+    }
 
 
     void GetRotAccordingtoVelocity()

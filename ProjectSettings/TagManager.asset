@@ -15,6 +15,7 @@ TagManager:
   - Release
   - Laser
   - Platform Non-Destructable
+  - Wood
   layers:
   - Default
   - TransparentFX

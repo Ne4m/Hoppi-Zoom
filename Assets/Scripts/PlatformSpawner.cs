@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class PlatformSpawner : MonoBehaviour
 {
@@ -76,14 +77,16 @@ public class PlatformSpawner : MonoBehaviour
     int randomNumber;
     int lastNumber;
     int maxAttempts = 5;
-
+    System.Random rnd = new System.Random();
     public int selectUniqueRandomNumber(int limit)
     {
 
         for (int i = 0; randomNumber == lastNumber && i < maxAttempts; i++)
         {
-            randomNumber = Random.Range(0, limit);
+
+            randomNumber = rnd.Next(0, limit);
         }
+
         lastNumber = randomNumber;
 
         //if(randomNumber > 10) Debug.LogWarning($"Generated Number {randomNumber} \n");
@@ -105,7 +108,7 @@ public class PlatformSpawner : MonoBehaviour
         for (int i=0; i < platformsSpawnCap.Length; i++)
         {
            
-            platformToSpawn = platformList[selectUniqueRandomNumber(platformList.Count)];
+            platformToSpawn = platformList[selectUniqueRandomNumber(platformListArr.Length-1)];
 
             newPlatform = Instantiate(platformToSpawn) as GameObject;
             lastSpawnedPlatform = newPlatform;

@@ -53,4 +53,12 @@ public class AudioManager : MonoBehaviour
         s.source.volume = volume;
         s.source.pitch = pitch;
     }
+
+    public void IsPlaying(string name, Action<bool> callback)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null) return;
+
+        callback(s.source.isPlaying);
+    }
 }

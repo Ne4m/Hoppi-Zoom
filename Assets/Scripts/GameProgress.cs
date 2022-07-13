@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,14 +38,39 @@ public class GameProgress : MonoBehaviour
     }
     enum SpriteNames
     {
-        Clouds = 5,
-        Stars = 6,
+        Clouds = 4,
+        Stars = 123,
         Planets = 10
     }
 
     enum BackGroundThresholds
     {
-        BG_1,
+
+
+        //p2 = 25,
+        //p3 = 50,
+        //p4 = 75,
+        //p5 = 100,
+        //p6 = 125,
+        //p7 = 150,
+        //p8 = 250,
+        //p9 = 500,
+        //p10 = 1000,
+        //p11 = 1500,
+        //p12 = 2000
+
+
+        p2 = 2,
+        p3 = 3,
+        p4 = 4,
+        p5 = 5,
+        p6 = 6,
+        p7 = 7,
+        p8 = 8,
+        p9 = 9,
+        p10 = 10,
+        p11 = 11,
+        p12 = 12
 
     }
 
@@ -57,6 +83,7 @@ public class GameProgress : MonoBehaviour
         levelManager = GetComponent<LevelManager>();
         messager = GetComponent<UIMessager>();
 
+
     }
 
     int randomNumber;
@@ -67,7 +94,7 @@ public class GameProgress : MonoBehaviour
 
         for (int i = 0; randomNumber == lastNumber && i < maxAttempts; i++)
         {
-            randomNumber = Random.Range(0, limit);
+            randomNumber = UnityEngine.Random.Range(0, limit);
         }
         lastNumber = randomNumber;
 
@@ -83,22 +110,20 @@ public class GameProgress : MonoBehaviour
         int point = levelManager.playerControl.getPoint();
 
 
-
-        if (point >= last.BgPoint + backgroundChangeThreshold)
+        // MANIPULATING BACKGROUNDS BASED ON BG ENUM THRESHOLDS
+        foreach (var bg in Enum.GetValues(typeof(BackGroundThresholds)))
         {
-            bgChangeCounter++;
-            if (bgChangeCounter > spritesToChange.Length-1) return;
 
+            if (point == (int)bg)
+            {
+                var number = Convert.ToInt32(bg.ToString().Substring(1));
+                background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[number - 2];
+                background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[number - 2];
 
-            background1.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
-            background2.GetComponent<SpriteRenderer>().sprite = spritesToChange[bgChangeCounter];
-
-
-
-            last.BgPoint = point;
-
-            //messager.startMsg($"Area Level Changed!", 2, Vector3.zero);
+            }
         }
+
+
 
         if (point >= last.SpeedPoint + speedChangeThreshold)
         {
@@ -106,8 +131,8 @@ public class GameProgress : MonoBehaviour
             // PLATFORMS SPEED MANIPULATION BASED ON EARNED POINTS
             last.SpeedPoint = point;
 
-            speedIncrease += Random.Range(0.01f, 0.1f);
-            rotateSpeedIncrease += Random.Range(0.1f, 1f);
+            speedIncrease += UnityEngine.Random.Range(0.01f, 0.1f);
+            rotateSpeedIncrease += UnityEngine.Random.Range(0.1f, 1f);
 
             //messager.startMsg($"Area Speed Increased!", 2, Vector3.zero);
         }
@@ -119,7 +144,7 @@ public class GameProgress : MonoBehaviour
                 loaded.Spawner = SpawnerNames.Cloudsets.ToString();
                 loaded.Sprite = SpriteNames.Clouds.ToString();
                 break;
-            case var _ when bgChangeCounter == spritesToChange.Length-1: // point >= (int)SpriteNames.Clouds &&  point <= (int)SpriteNames.Planets
+            case var _ when point >= (int)SpriteNames.Planets: //bgChangeCounter == spritesToChange.Length-1: // point >= (int)SpriteNames.Clouds &&  point <= (int)SpriteNames.Planets
                 loaded.Spawner = SpawnerNames.Cloudsets.ToString();
                 loaded.Sprite = SpriteNames.Planets.ToString();
                 break;
