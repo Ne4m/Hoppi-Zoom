@@ -14,6 +14,10 @@ public class Shooting : MonoBehaviour
     [SerializeField] private int maxAmmo = 3;
     [SerializeField] private int currentAmmo = 3;
 
+    [SerializeField] private float ammoRechargeTime = 5f;
+    [SerializeField] private int rechargedAmmoAmount = 1;
+
+    private string ammoReceiveMsg = "Replenished!";
     UIMessager messager;
 
     void Start()
@@ -22,6 +26,15 @@ public class Shooting : MonoBehaviour
         messager = gameObject.GetComponent<UIMessager>();
 
         currentAmmo = maxAmmo;
+
+        if (Perks.instance.IsRechargingAmmo())
+        {
+            StartCoroutine(AmmoRecharge());
+        }
+        else
+        {
+            StopCoroutine(AmmoRecharge());
+        }
     }
 
   
@@ -35,6 +48,22 @@ public class Shooting : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator AmmoRecharge()
+    {
+        while (Perks.instance.IsRechargingAmmo())
+        {
+            if(levelManager.playerControl.IsPlayerInCheckPoint() && levelManager.playerControl.getPoint() > 1)
+            {
+                ammoReceiveMsg = "Recharged!";
+                AddAmmo(rechargedAmmoAmount);
+
+                yield return new WaitForSeconds(ammoRechargeTime);
+            }
+
+            yield return new WaitForSeconds(0);
+        }
     }
 
 
@@ -67,14 +96,20 @@ public class Shooting : MonoBehaviour
     {
         currentAmmo = maxAmmo;
 
-        messager.startMsg($"All Ammo Replenished!", 2, Vector3.zero);
+        messager.startMsg($"All Ammo {ammoReceiveMsg}", 2, Vector3.zero);
+        ammoReceiveMsg = "Received!";
     }
 
     public void AddAmmo(int amount)
     {
         if (currentAmmo == maxAmmo) return;
 
-        currentAmmo += amount;
+        if(currentAmmo + amount > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
+        else currentAmmo += amount;
+
 
         messager.startMsg($"{amount} Ammo Received!", 2, Vector3.zero);
     }

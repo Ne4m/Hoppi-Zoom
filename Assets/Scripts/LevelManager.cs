@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour
     UIMessager messager;
     UI_Animations uiAnimations;
 
+
     public static LevelManager instance;
 
     //public struct Test
@@ -272,6 +273,7 @@ public class LevelManager : MonoBehaviour
         shooting.SetMaxAmmo(SPrefs.GetInt("playerAmmo", 1));
 
         uiAnimations = UI_Animations.instance;
+
 
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
@@ -478,9 +480,9 @@ public class LevelManager : MonoBehaviour
 
 
 
-        if (playerControl.getPoint() % 3 == 0)
+        if (playerControl.getPoint() % Perks.instance.GetAmmoRewardThreshold() == 0)
         {
-            shooting.AddAmmo(1);
+            shooting.AddAmmo(Perks.instance.GetAmmoReward());
 
         }
     }

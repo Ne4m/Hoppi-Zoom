@@ -135,12 +135,12 @@ public class MainMenu_Controller : MonoBehaviour
         if (music_ON)
         {
             musicButton.image.sprite = musicOnImg;
-            FindObjectOfType<AudioManager>().VolumeControl("Main", 0.25f, 1.55f);
+            FindObjectOfType<AudioManager>().VolumeControl("Main", 0.25f, 1.0f);
         }
         else
         {
             musicButton.image.sprite = musicOffImg;
-            FindObjectOfType<AudioManager>().VolumeControl("Main", 0f, 1.55f);
+            FindObjectOfType<AudioManager>().VolumeControl("Main", 0f, 1.0f);
         }
         
     }

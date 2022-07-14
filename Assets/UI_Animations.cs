@@ -11,6 +11,9 @@ public class UI_Animations : MonoBehaviour
     [SerializeField] private GameObject title;
     [SerializeField] private GameObject titleBackground;
     [SerializeField] private GameObject fireworks;
+    [SerializeField] private GameObject containerMovePoint;
+
+    private Vector3 containerMovePointVecs;
 
     private Vector3 startPos;
     public float rotateSpeed = 1f;
@@ -32,6 +35,7 @@ public class UI_Animations : MonoBehaviour
     private void Start()
     {
 
+        containerMovePointVecs = containerMovePoint.GetComponent<RectTransform>().position;
 
         startPos = titleContainer.GetComponent<RectTransform>().position;
        // 
@@ -40,7 +44,7 @@ public class UI_Animations : MonoBehaviour
 
     public void SetAnimations()
     {
-        titleContainer.LeanMove(new Vector3(720, 2350, 0), 1.25f).setEase(LeanTweenType.easeOutBounce).setOnComplete(ActivateFireworks).setIgnoreTimeScale(true);
+        titleContainer.LeanMove(containerMovePointVecs, 1.25f).setEase(LeanTweenType.easeOutBounce).setOnComplete(ActivateFireworks).setIgnoreTimeScale(true);
         title.LeanRotate(new Vector3(0f, 0f, 358f), 0.5f).setLoopPingPong().setRotateLocal().setIgnoreTimeScale(true);
 
         if (isHS)

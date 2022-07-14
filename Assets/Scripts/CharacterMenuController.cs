@@ -228,6 +228,7 @@ public class CharacterMenuController : MonoBehaviour
         {
             titleText.text = "SELECTED CHARACTER";
             titleText.color = Color.green;
+
         }
         //else
         //{
@@ -247,20 +248,24 @@ public class CharacterMenuController : MonoBehaviour
                 setHpByPercentage(50);
                 setSpeedByPercentage(50);
                 setAmmoByPercentage(0);
+
+                Perks.instance.SetActivePerk(PerkList.DEFAULT_NONE);
                 break;
             case 1:
 
                 setHpByPercentage(75);
                 setSpeedByPercentage(35);
-
                 setAmmoByPercentage(35);
+
+                Perks.instance.SetSelectedCharacterPerk(PerkList.REFUND_AMMO);
                 break;
             case 2:
 
                 setHpByPercentage(100);
                 setSpeedByPercentage(50);
-
                 setAmmoByPercentage(100);
+
+                Perks.instance.SetSelectedCharacterPerk(PerkList.AMMO_RECHARGE);
                 break;
             case 3:
 

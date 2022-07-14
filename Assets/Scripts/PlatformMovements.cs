@@ -236,7 +236,7 @@ public class PlatformMovements : MonoBehaviour
 
         void MoveLinear()
         {
-            tweenProperties.destinationCoords += tr.position;
+            tweenProperties.destinationCoords += tr.localPosition;
 
             LeanTween.moveLocal(gameObject, tweenProperties.destinationCoords, 0f)
                  .setLoopType(tweenProperties.isPingPongLinearMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
