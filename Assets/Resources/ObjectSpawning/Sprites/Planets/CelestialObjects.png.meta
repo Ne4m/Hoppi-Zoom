@@ -56,6 +56,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -87,9 +89,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -171,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 923c435e77e88be30800000000000000
-      internalID: 4519518871663985449
+      internalID: 5994275585877690731
       vertices: []
       indices: 
       edges: []
@@ -711,6 +716,33 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      CelestialObjects_19: -7958700945294971768
+      CelestialObjects_14: 8516180259996658169
+      CelestialObjects_17: 2255459018434927989
+      CelestialObjects_9: -8169790608347111050
+      CelestialObjects_5: 2108950699465493383
+      CelestialObjects_20: -5631156788377735482
+      CelestialObjects_22: 3704678035012771462
+      CelestialObjects_12: 3436399624490136125
+      CelestialObjects_16: 2561722028575424384
+      CelestialObjects_1: 5994275585877690731
+      CelestialObjects_26: -7191423501990630808
+      CelestialObjects_18: -655248991383421947
+      CelestialObjects_23: -2419764413493369297
+      CelestialObjects_4: 5145774931494969807
+      CelestialObjects_24: -120627282722031859
+      CelestialObjects_11: -6970575990612153500
+      CelestialObjects_13: 5424052872766482582
+      CelestialObjects_3: 4764904786231306360
+      CelestialObjects_8: 4081543301678191023
+      CelestialObjects_10: 1486043848406091610
+      CelestialObjects_15: 1158281529177622174
+      CelestialObjects_25: 1737312000958490015
+      CelestialObjects_6: -878775300250748510
+      CelestialObjects_2: 7276018992636381005
+      CelestialObjects_21: -2227334624769414652
+      CelestialObjects_7: 228813063816687610
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

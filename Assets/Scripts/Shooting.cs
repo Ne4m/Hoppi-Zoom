@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
@@ -14,11 +15,19 @@ public class Shooting : MonoBehaviour
     [SerializeField] private int maxAmmo = 3;
     [SerializeField] private int currentAmmo = 3;
 
+    [SerializeField] private Image progressBarContainer;
+    [SerializeField] private Image progressBar;
     [SerializeField] private float ammoRechargeTime = 5f;
     [SerializeField] private int rechargedAmmoAmount = 1;
 
+    private float lastRechargeTime;
+
+
+    private RectTransform canvasRect;
     private string ammoReceiveMsg = "Replenished!";
     UIMessager messager;
+
+
 
     void Start()
     {
@@ -27,17 +36,14 @@ public class Shooting : MonoBehaviour
 
         currentAmmo = maxAmmo;
 
-        if (Perks.instance.IsRechargingAmmo())
-        {
-            StartCoroutine(AmmoRecharge());
-        }
-        else
-        {
-            StopCoroutine(AmmoRecharge());
-        }
+        canvasRect = progressBarContainer.GetComponent<RectTransform>();
+
+        DisableRechargeBar();
+
     }
 
-  
+
+    public int timeI = 0;
     void Update()
     {
         if ((Input.GetKey(KeyCode.Space) || Input.touchCount == 2) && levelManager.playerControl.IsPlayerInCheckPoint() && !levelManager.playerControl.isPlayerDead())
@@ -48,22 +54,66 @@ public class Shooting : MonoBehaviour
             }
         }
 
-    }
 
-    IEnumerator AmmoRecharge()
-    {
-        while (Perks.instance.IsRechargingAmmo())
+        if (Perks.instance != null && Perks.instance.CanRechargeAmmo())
         {
-            if(levelManager.playerControl.IsPlayerInCheckPoint() && levelManager.playerControl.getPoint() > 1)
+            if (levelManager.playerControl.getPoint() > 0 && !IsFullAmmo())
             {
-                ammoReceiveMsg = "Recharged!";
-                AddAmmo(rechargedAmmoAmount);
+                if(Time.time > 1f + lastRechargeTime)
+                {
 
-                yield return new WaitForSeconds(ammoRechargeTime);
+                    progressBar.fillAmount += (1 / ammoRechargeTime);
+
+                    if(progressBar.fillAmount > 0.9f)
+                    {
+                        if (!IsFullAmmo())
+                        {
+                            ammoReceiveMsg = "Recharged!";
+                            AddAmmo(rechargedAmmoAmount);
+                        }
+                        DisableRechargeBar();
+                    }
+
+
+                    lastRechargeTime = Time.time;
+                }
+
+                EnableRechargeBar();
             }
 
-            yield return new WaitForSeconds(0);
+            //if (canvasRect.gameObject.activeSelf)
+            //{
+            //    var canvasFollow = new Vector3(transform.position.x, transform.position.y - 0.4879446f, transform.position.z);
+            //    var canvElemCanvasPosition = GetCanvasPositionOfWorld(canvasFollow);
+            //    canvasRect.position = canvElemCanvasPosition;
+            //}
         }
+    }
+
+    public void EnableRechargeBar()
+    {
+        canvasRect.gameObject.SetActive(true);
+    }
+
+    public void DisableRechargeBar()
+    {
+        canvasRect.gameObject.SetActive(false);
+        progressBar.fillAmount = 0;
+    }
+
+    public Vector2 GetWorldPoisitionOfCanvas(RectTransform element)
+    {
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(element, element.position, Camera.main, out var result);
+
+        return result;
+    }
+
+    public Vector3 GetCanvasPositionOfWorld(Vector3 coords)
+    {
+        var result = RectTransformUtility.WorldToScreenPoint(Camera.main, coords);
+
+        return result;
     }
 
 
@@ -92,12 +142,15 @@ public class Shooting : MonoBehaviour
     }
 
 
+    public bool IsFullAmmo()
+    {
+        return (GetCurrentAmmo() >= GetMaxAmmo());
+    }
     public void ReplenishAmmo()
     {
         currentAmmo = maxAmmo;
 
-        messager.startMsg($"All Ammo {ammoReceiveMsg}", 2, Vector3.zero);
-        ammoReceiveMsg = "Received!";
+        messager.startMsg($"All Ammo Replenished!", 2, Vector3.zero);
     }
 
     public void AddAmmo(int amount)
@@ -111,7 +164,8 @@ public class Shooting : MonoBehaviour
         else currentAmmo += amount;
 
 
-        messager.startMsg($"{amount} Ammo Received!", 2, Vector3.zero);
+        messager.startMsg($"{amount} Ammo {ammoReceiveMsg}", 2, Vector3.zero);
+        ammoReceiveMsg = "Received!";
     }
 
     public int GetCurrentAmmo()

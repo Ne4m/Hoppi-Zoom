@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using GooglePlayGames;
 using TMPro;
 
+
 public class MainMenu_Controller : MonoBehaviour
 {
 
@@ -16,6 +17,12 @@ public class MainMenu_Controller : MonoBehaviour
     [Header("Canvas UI Buttons")] 
     [SerializeField] private Button characterMenuBack;
     [SerializeField] private Button shopMenuBack;
+
+    [Header("Quit Prompt Dialogue")]
+    [SerializeField] GameObject quitPromptContainer;
+    [SerializeField] TMP_Text quitGameText;
+    [SerializeField] private Button yesBtn, noBtn;
+    private bool isAtMainMenu;
     
     [Header("Canvas UI Objects")] 
     [SerializeField] private GameObject mainMenu;
@@ -59,10 +66,14 @@ public class MainMenu_Controller : MonoBehaviour
         instance = this;
 
         // Canvas UI Elements Stuff
-        canvasBackMainMenu();
+        //canvasBackMainMenu();
         
         if(!(characterMenuBack is null)) characterMenuBack.onClick.AddListener(canvasBackMainMenu);
         if(!(shopMenuBack is null)) shopMenuBack.onClick.AddListener(canvasBackMainMenu);
+
+        // Quit Prompt Dialogue Stuff
+        if (yesBtn is not null) yesBtn.onClick.AddListener(yesBtn_Clicked);
+        if (noBtn is not null) noBtn.onClick.AddListener(noBtn_Clicked);
 
         // Info Page Stuff
         if(!(closeInfoPageButton is null)) closeInfoPageButton.onClick.AddListener(closeInfoPageButtonClicked);
@@ -96,6 +107,31 @@ public class MainMenu_Controller : MonoBehaviour
             usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
 
 
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+
+
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isAtMainMenu) ExitGameConfirmation();
+        }
+    }
+
+    void ExitGameConfirmation()
+    {
+        quitPromptContainer.gameObject.SetActive(true);
+    }
+
+    private void yesBtn_Clicked()
+    {
+        Application.Quit();
+    }
+
+    private void noBtn_Clicked()
+    {
+        quitPromptContainer.gameObject.SetActive(false);
     }
 
     private void changeActive_Menu(string s)
@@ -193,25 +229,34 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(false);
+                isAtMainMenu = true;
                 break;
             case "character":
                 mainMenu.SetActive(false);
                 characterMenu.SetActive(true);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(false);
+                isAtMainMenu = false;
                 break;
             case "shop":
                 mainMenu.SetActive(false);
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(true);
                 accessoryMenu.SetActive(false);
+                isAtMainMenu = false;
                 break;
             case "accessory":
                 mainMenu.SetActive(false);
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(true);
+                isAtMainMenu = false;
                 break;
+        }
+
+        if (!isAtMainMenu)
+        {
+            noBtn_Clicked();
         }
     }
 

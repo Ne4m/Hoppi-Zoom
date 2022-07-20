@@ -41,6 +41,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -72,9 +74,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -165,7 +170,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3e0578a7c630acd60800000000000000
-      internalID: 7911139459876737251
+      internalID: 7625256360695834132
       vertices: []
       indices: 
       edges: []
@@ -186,7 +191,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 73037c73fefc580f0800000000000000
-      internalID: -1115256706364395465
+      internalID: -1154798898636784517
       vertices: []
       indices: 
       edges: []
@@ -207,7 +212,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3b0c23c90237069f0800000000000000
-      internalID: -477254976604553037
+      internalID: -5827302307143314055
       vertices: []
       indices: 
       edges: []
@@ -228,7 +233,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4c3339f60b29e6940800000000000000
-      internalID: 5291327898690728900
+      internalID: -3910023927959529659
       vertices: []
       indices: 
       edges: []
@@ -249,7 +254,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7eb2d350cd782ec80800000000000000
-      internalID: -8294918184612582425
+      internalID: 7911139459876737251
       vertices: []
       indices: 
       edges: []
@@ -264,6 +269,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      cloud10: -5827302307143314055
+      cloud12: 7911139459876737251
+      cloud11: -3910023927959529659
+      cloud8: 7625256360695834132
+      cloud9: -1154798898636784517
+      cloud7: 8287873616420496286
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

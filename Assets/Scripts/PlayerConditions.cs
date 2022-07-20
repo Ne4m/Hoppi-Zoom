@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -13,6 +14,10 @@ public class PlayerConditions : MonoBehaviour
     SpriteRenderer sr;
 
     [SerializeField] private GameObject playerSkins;
+    [SerializeField] private GameObject healthBarContainer;
+    [SerializeField] private GameObject healthBarGreenFill;
+    [SerializeField] private float damageToBarTime;
+    private Image healthBar;
 
     [Header("Values")]
     [SerializeField] private float gracePeriod;
@@ -31,7 +36,9 @@ public class PlayerConditions : MonoBehaviour
         rb = tr.GetComponent<Rigidbody2D>();
         sr = tr.GetComponent<SpriteRenderer>();
 
+        healthBar = healthBarGreenFill.GetComponent<Image>();
 
+        healthBarContainer.gameObject.SetActive(false);
     }
 
 
@@ -40,7 +47,7 @@ public class PlayerConditions : MonoBehaviour
         if (collision.collider.tag.Contains("Spike"))
         {
             Debug.Log("Got Hit By A Spike!! [COLLISION] \n" + transform.tag);
-            blinkCharacter();
+            DamageCharacter();
         }
     }
 
@@ -49,19 +56,19 @@ public class PlayerConditions : MonoBehaviour
         if (collision.CompareTag("Spike"))
         {
             Debug.Log("Got Hit By A Spike!! [TRIGGER]\n" + transform.tag);
-            blinkCharacter();
+            DamageCharacter();
         }
 
         if (collision.CompareTag("Laser"))
         {
             Debug.Log("Got Hit By A Laser! [TRIGGER]\n" + transform.tag);
-            blinkCharacter();
+            DamageCharacter();
         }
 
         if (collision.CompareTag("Wood"))
         {
             Debug.Log("Got Hit By A Wood [TRIGGER]\n" + transform.tag);
-            blinkCharacter();
+            DamageCharacter();
         }
     }
 
@@ -74,19 +81,45 @@ public class PlayerConditions : MonoBehaviour
             StartCoroutine(gracePeriodTask());
             StartCoroutine(gracePeriodCountdown());
         }
+
+        var currentHealthRatio = (levelManager.playerControl.getHealth() / levelManager.playerControl.getMaxHealth());
+        healthBar.fillAmount = Mathf.MoveTowards(healthBar.fillAmount, currentHealthRatio, damageToBarTime * Time.deltaTime);
+        if (levelManager.playerControl.isPlayerDead()) healthBar.fillAmount = 0f;
+
+        var canvasFollow = new Vector3(transform.position.x, transform.position.y + 0.7879446f, transform.position.z);
+        var canvElemCanvasPosition = GetCanvasPositionOfWorld(canvasFollow);
+        healthBarContainer.GetComponent<RectTransform>().position = canvElemCanvasPosition;
     }
 
-    public void blinkCharacter()
+    //private void OnGUI()
+    //{
+    //    if (healthBarContainer.gameObject.activeSelf)
+    //    {
+    //    }
+
+
+    //}
+
+    public Vector3 GetCanvasPositionOfWorld(Vector3 coords)
+    {
+        var result = RectTransformUtility.WorldToScreenPoint(Camera.main, coords);
+
+        return result;
+    }
+
+    public void DamageCharacter()
     {
         if (!graceEnabled)
         {
+            healthBarContainer.gameObject.SetActive(true);
+
             levelManager.playerControl.damage(100);
             graceEnabled = !graceEnabled;
-            Debug.Log(graceEnabled ? "Grace Enabled" : "Grace Disabled");
+            //Debug.Log(graceEnabled ? "Grace Enabled" : "Grace Disabled");
             return;
         }
 
-        Debug.LogWarning("Already on grace period!");
+        //Debug.LogWarning("Already on grace period!");
 
     }
 
@@ -97,6 +130,8 @@ public class PlayerConditions : MonoBehaviour
         {
             routineStarted = true;
             yield return new WaitForSeconds(gracePeriod);
+
+            healthBarContainer.gameObject.SetActive(false);
             graceEnabled = false;
             routineStarted = false;
         }

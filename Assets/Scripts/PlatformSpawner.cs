@@ -9,6 +9,8 @@ public class PlatformSpawner : MonoBehaviour
     public List<GameObject> platformList;
     public GameObject[] platformListArr;
 
+    public (GameObject[] easy, GameObject[] normal, GameObject[] hard) platformArray;
+
     private Transform tr;
 
     [SerializeField]
@@ -24,26 +26,58 @@ public class PlatformSpawner : MonoBehaviour
     [Header("Platform Sprites")]
     [SerializeField] private Sprite platformSprites;
 
+    LevelManager lm;
+
     void Start()
     {
         tr = GetComponent<Transform>();
+        lm = LevelManager.instance;
 
-        platformListArr = Resources.LoadAll<GameObject>("Platforms");
-        platformList = platformListArr.ToList();
+
+        platformArray.easy = Resources.LoadAll<GameObject>("Platforms/1_Easy");
+        platformArray.normal = Resources.LoadAll<GameObject>("Platforms/2_Normal");
+        platformArray.hard = Resources.LoadAll<GameObject>("Platforms/3_Hard");
+
+        platformListArr = platformArray.easy;
+        //platformList = platformListArr.ToList();
 
         //for(int i=0; i < platformListArr.Length; i++)
         //{
         //    Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
         //}
 
-        Debug.Log($"Total Platform Count {platformList.Count}");
+        //Debug.Log($"Total Platform Count {platformList.Count}");
        // StartCoroutine(ExampleCoroutine());
     }
+
+    //private void OnDrawGizmos()
+    //{
+        
+    //    if (platformListArr.Length < 1)
+    //    {
+    //        platformListArr = Resources.LoadAll<GameObject>("Platforms");
+    //    }
+
+    //    Debug.Log($"Platform count: {platformListArr.Length}");
+    //}
+
+
 
 
     void Update()
     {
-        
+        if(lm.playerControl.getPoint() > 4 && lm.playerControl.getPoint() < 10)
+        {
+            platformListArr = platformArray.normal;
+            Debug.Log("Loaded Normal Platforms");
+        }
+        else if (lm.playerControl.getPoint() >= 10)
+        {
+            platformListArr = platformArray.hard;
+            Debug.Log("Loaded Hard Platform");
+        }
+
+
     }
 
     IEnumerator ExampleCoroutine()
@@ -108,7 +142,7 @@ public class PlatformSpawner : MonoBehaviour
         for (int i=0; i < platformsSpawnCap.Length; i++)
         {
            
-            platformToSpawn = platformList[selectUniqueRandomNumber(platformListArr.Length-1)];
+            platformToSpawn = platformListArr[selectUniqueRandomNumber(platformListArr.Length-1)];
 
             newPlatform = Instantiate(platformToSpawn) as GameObject;
             lastSpawnedPlatform = newPlatform;

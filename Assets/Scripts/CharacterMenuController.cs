@@ -43,6 +43,8 @@ public class CharacterMenuController : MonoBehaviour
     private Image characterImg;
     private Sprite[] characterSkins;
 
+    private PerkList lastPerk;
+
     MainMenu_Controller mainMenu;
 
     void Start()
@@ -81,7 +83,7 @@ public class CharacterMenuController : MonoBehaviour
         if (!(selectButton is null)) selectButton.onClick.AddListener(selectButtonClicked);
         if (!(unlockButton is null)) unlockButton.onClick.AddListener(unlockButtonClicked);
 
-        
+
     }
 
     private void LockAllCharacters()
@@ -101,7 +103,9 @@ public class CharacterMenuController : MonoBehaviour
         int number = Convert.ToInt32(currencyText.text);
         if (number > 9999999)
         {
-            number = 9999999;
+            // Cheating Flush the whole currency & quit.
+            SPrefs.SetInt("gameCurrency", 0);
+            Application.Quit();
         }
     }
 
@@ -110,15 +114,17 @@ public class CharacterMenuController : MonoBehaviour
         if(Input.touchCount > 0) TouchControl(Input.touches[0]);
 
 
-        if (Application.platform == RuntimePlatform.Android)
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-
-                mainMenu.canvasBackMainMenu();
-            }
+            mainMenu.canvasBackMainMenu();
         }
+
 
         RefreshCurrency();
 
@@ -250,6 +256,7 @@ public class CharacterMenuController : MonoBehaviour
                 setAmmoByPercentage(0);
 
                 Perks.instance.SetActivePerk(PerkList.DEFAULT_NONE);
+                lastPerk = PerkList.DEFAULT_NONE;
                 break;
             case 1:
 
@@ -258,6 +265,7 @@ public class CharacterMenuController : MonoBehaviour
                 setAmmoByPercentage(35);
 
                 Perks.instance.SetSelectedCharacterPerk(PerkList.REFUND_AMMO);
+                lastPerk = PerkList.REFUND_AMMO;
                 break;
             case 2:
 
@@ -266,6 +274,7 @@ public class CharacterMenuController : MonoBehaviour
                 setAmmoByPercentage(100);
 
                 Perks.instance.SetSelectedCharacterPerk(PerkList.AMMO_RECHARGE);
+                lastPerk = PerkList.AMMO_RECHARGE;
                 break;
             case 3:
 
@@ -273,6 +282,8 @@ public class CharacterMenuController : MonoBehaviour
                 setSpeedByPercentage(30);
 
                 setAmmoByPercentage(45);
+
+                lastPerk = PerkList.DEFAULT_NONE;
                 break;
             case 4:
 
@@ -280,6 +291,8 @@ public class CharacterMenuController : MonoBehaviour
                 setSpeedByPercentage(100);
 
                 setAmmoByPercentage(45);
+
+                lastPerk = PerkList.DEFAULT_NONE;
                 break;
             case 5:
 
@@ -287,6 +300,8 @@ public class CharacterMenuController : MonoBehaviour
                 setSpeedByPercentage(80);
 
                 setAmmoByPercentage(50);
+
+                lastPerk = PerkList.DEFAULT_NONE;
                 break;
         }
     }
@@ -345,6 +360,7 @@ public class CharacterMenuController : MonoBehaviour
     private void setCurrentIndex(int index)
     {
         SPrefs.SetInt("LastSelectedCharacterIndex", index);
+        SPrefs.SetString("LastSelectedPerk", lastPerk.ToString());
         SPrefs.Save();
     }
 

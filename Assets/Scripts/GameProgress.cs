@@ -21,11 +21,10 @@ public class GameProgress : MonoBehaviour
 
 
     float speedChangeThreshold = 5;
-    float backgroundChangeThreshold = 10;
 
     private float speedIncrease;
     private float rotateSpeedIncrease;
-    private int bgChangeCounter = 0;
+
     //string loadedSprite = string.Empty;
     //string loadedSpawner = string.Empty;
 

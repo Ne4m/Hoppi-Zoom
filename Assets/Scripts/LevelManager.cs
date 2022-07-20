@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
-
-
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,13 +17,16 @@ public class LevelManager : MonoBehaviour
     private GameObject new_CheckPoint;
     private GameObject last_CheckPoint;
 
+    [Header ("Playable Area Out of Bounds Check")]
+    private float screenWidth, screenHeight, screenDistance;
+    [SerializeField] private GameObject playableArea;
+    [SerializeField] private float playableAreaOffset = 0.35f;
 
+
+    [Header ("Misc")]
     [SerializeField] Button shootButton;
-
     public GameObject blurScreen;
-
     [SerializeField] private GameObject deathScreen;
-
     [SerializeField] private float spawnDistance = 10;
 
 
@@ -45,9 +47,16 @@ public class LevelManager : MonoBehaviour
 
     [Header ("Text Boxes")]
     [SerializeField] private TMP_Text point_text;
-    [SerializeField] private TMP_Text death_text;
+    [SerializeField] private TMP_Text endgameScore_text;
+    [SerializeField] private TMP_Text endgameEarnedGold_text;
     [SerializeField] private TMP_Text health_text;
     [SerializeField] private TMP_Text debug_text;
+
+
+    [Header("Gold Paid Continue")]
+    [SerializeField] private Button goldContinueButton;
+    [SerializeField] private TMP_Text goldContinuePriceText;
+    private int goldContinuePrice;
 
     private bool isINCP;
 
@@ -123,9 +132,9 @@ public class LevelManager : MonoBehaviour
             return this.isInCP;
         }
 
-        public void setPlayerDeadStatus(bool isDead)
+        public void setPlayerDeadStatus(bool _isDead)
         {
-            this.isDead = isDead;
+            isDead = _isDead;
         }
 
         public bool isPlayerDead()
@@ -274,34 +283,22 @@ public class LevelManager : MonoBehaviour
 
         uiAnimations = UI_Animations.instance;
 
-
+        if (goldContinueButton != null) goldContinueButton.onClick.AddListener(GoldContinueButton_Clicked);
         //Button btn = dieButton.GetComponent<Button>();
         // btn.onClick.AddListener(bringDeathMenu);
         //point_text = GameObject.Find("Player Point Text").GetComponent<TMP_Text>();
 
         playerControl.setPlayerDeadStatus(false);
+        health_text.gameObject.SetActive(true);
+        point_text.gameObject.SetActive(true);
 
-        //Social.localUser.Authenticate(
-        //        (bool success) =>
-        //        {
 
-        //        }
-        //    );
 
-        //Social.localUser.Authenticate( (bool success) => {
 
-        //    if (success)
-        //    {
-        //        Debug.Log("AUTHENTICATION SUCCESSFULL!!");
-        //        debug_text.text = Social.localUser.userName;
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("AUTHENTICATION FAILED!!!");
-        //    }
-        //});
+        screenHeight = Screen.height;
+        screenWidth = Screen.width;
 
-        //playerControl.setPoint(SPrefs.GetInt("point", 0));
+       // InvokeRepeating("OutOfBoundsCheck", 1f, 1f);
 
         // Update Player Controller Variables On Start
 
@@ -309,13 +306,55 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
     }
 
+    private void OutOfBoundsCheck()
+    {
 
+        //var result = RectTransformUtility.WorldToScreenPoint(Camera.main, playableArea.transform.position);
+        ////var distance = MathF.Sqrt(MathF.Pow(result.x, 2) + MathF.Pow(result.y, 2));
+
+        //var characterPos = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        //var charDistance = Vector3.Distance(characterPos, result);
+        // Screen Height 2960 Width: 1440
+
+
+        //Debug.Log($"Character Pos {characterPos}, Distance to Mid Point {charDistance}\n" +
+        //          $"Middle Point Screen Pos: {result}, Distance to mid {distance}");
+
+        //if(charDistance > result.y)
+        //{
+        //    ResetPlayerPosition();
+        //}
+
+       // Vector3 cameraPos = Camera.main.transform.position;
+        Vector2 screenSize;
+        screenSize.x = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0))) * 0.5f; //Grab the world-space position values of the start and end positions of the screen, then calculate the distance between them and store it as half, since we only need half that value for distance away from the camera to the edge
+        screenSize.y = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height))) * 0.5f;
+
+        var playableAreaCollider = playableArea.GetComponent<BoxCollider2D>();
+        playableAreaCollider.size = new Vector3((screenSize.x * 2) + playableAreaOffset, (screenSize.y * 6) + playableAreaOffset, 0f);
+
+
+
+       // Debug.Log($"Bounds: {playableAreaCollider.size} || {playableAreaCollider.size.x} || {screenSize.x}");
+
+
+        if (playableAreaCollider.bounds.Contains(player.transform.position))
+        {
+            Debug.Log("IN BOUNDS!!");
+        }
+        else
+        {
+            Debug.Log("OUT OF BOUNDS!!");
+            ResetPlayerPosition();
+        }
+    }
 
 
 
 
     void Update()
     {
+        OutOfBoundsCheck();
 
         //playerControl.addPoint(5);
         //Debug.Log("Current Point is: " + playerControl.getPoint().ToString());
@@ -353,7 +392,7 @@ public class LevelManager : MonoBehaviour
 
     public void checkDeathMenu()
     {
-        if (Input.GetKey(KeyCode.T) && !playerControl.isPlayerDead()) // Future Death Detection
+        if ((Input.GetKey(KeyCode.T) || Input.touchCount == 3) && !playerControl.isPlayerDead()) // Future Death Detection
         {
             bringDeathMenu();
         }
@@ -377,14 +416,20 @@ public class LevelManager : MonoBehaviour
         {
             deathScreen.SetActive(true);
             blurScreen.SetActive(true);
+
+            health_text.gameObject.SetActive(false);
+            point_text.gameObject.SetActive(false);
         }
 
-        death_text = GameObject.Find("Score Point").GetComponent<TMP_Text>();
-        death_text.text = playerControl.getPoint().ToString();
-        Debug.Log("Button Score:" + death_text.text);
+        //death_text = GameObject.Find("Score Point").GetComponent<TMP_Text>();
+        endgameScore_text.text = playerControl.getPoint().ToString();
+        Debug.Log("Button Score:" + endgameScore_text.text);
 
 
         currentCurrency = (playerControl.getPoint() * earnPercent) / 100;
+
+        endgameEarnedGold_text.text = currentCurrency.ToString();
+
         //debug_text.text = currentCurrency.ToString();
 
         Debug.Log($"Currency Earned {currentCurrency}");
@@ -405,24 +450,31 @@ public class LevelManager : MonoBehaviour
             uiAnimations.SetHighScoreState(false);
         }
 
+        var hpBar = GameObject.Find("HealthBar-Container");
+        if (hpBar != null) hpBar.SetActive(false);
 
         uiAnimations.SwitchTitleImage();
         uiAnimations.SetAnimations();
+
+        RefreshTotalCurrency();
+
+        goldContinuePrice = (currentCurrency >= totalCurrency ? (currentCurrency / 2) : (totalCurrency / 2));
+        goldContinuePriceText.text = goldContinuePrice.ToString();
 
         PauseGame();
     }
 
     public void onContinue()
     {
-        rb2D.velocity = Vector2.zero;
-        rb2D.angularVelocity = 0f;
-        rb2D.transform.position = lastCheckpoint;
+        ResetPlayerPosition();
         //player.position = lastCheckpoint;
 
         //shootButton.gameObject.SetActive(true);
 
         deathScreen.SetActive(false);
         blurScreen.SetActive(false);
+        health_text.gameObject.SetActive(true);
+        point_text.gameObject.SetActive(true);
 
         playerControl.setHealth(playerControl.getMaxHealth());
         playerControl.setPlayerDeadStatus(false);
@@ -432,6 +484,30 @@ public class LevelManager : MonoBehaviour
 
         uiAnimations.ResetAnimations();
         ResumeGame();
+    }
+
+    public void ResetPlayerPosition()
+    {
+        Debug.Log("Resetting player position..");
+        rb2D.velocity = Vector2.zero;
+        rb2D.angularVelocity = 0f;
+        rb2D.transform.position = lastCheckpoint;
+    }
+
+    private void GoldContinueButton_Clicked()
+    {
+        if(totalCurrency >= goldContinuePrice)
+        {
+            totalCurrency -= goldContinuePrice;
+            SPrefs.SetInt("gameCurrency", totalCurrency);
+            onContinue();
+
+        }
+    }
+
+    private void RefreshTotalCurrency()
+    {
+        totalCurrency = SPrefs.GetInt("gameCurrency", 0);
     }
 
     public void goBackMainMenu()
@@ -479,12 +555,15 @@ public class LevelManager : MonoBehaviour
 
 
 
-
-        if (playerControl.getPoint() % Perks.instance.GetAmmoRewardThreshold() == 0)
+        if(Perks.instance != null)
         {
-            shooting.AddAmmo(Perks.instance.GetAmmoReward());
+            if (playerControl.getPoint() % Perks.instance.GetAmmoRewardThreshold() == 0)
+            {
+                shooting.AddAmmo(Perks.instance.GetAmmoReward());
 
+            }
         }
+
     }
 
 

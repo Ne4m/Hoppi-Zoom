@@ -116,6 +116,12 @@ public class PlatformMovements : MonoBehaviour
         public bool isPingPongMove = true;
         public LeanTweenType moveEaseType;
 
+        [Header("Spline Move Variables")]
+        public GameObject[] splineMovePoints;
+        public bool useSplinePoints;
+        public int allocationSize;
+
+
         [Header("Liner Move Variables")]
         public float linearMoveSpeed;
         public Vector3 destinationCoords;
@@ -157,7 +163,8 @@ public class PlatformMovements : MonoBehaviour
             ROTATE,
             FADE,
             SCALE,
-            COLOR
+            COLOR,
+            SPLINE_MOVE
         }
 
         public BEHAVIOUR[] BEHAVIOURS;
@@ -180,6 +187,9 @@ public class PlatformMovements : MonoBehaviour
                     break;
                 case TweenProps.BEHAVIOUR.LINEAR_MOVE:
                     MoveLinear();
+                    break;
+                case TweenProps.BEHAVIOUR.SPLINE_MOVE:
+                    MoveSpline();
                     break;
                 case TweenProps.BEHAVIOUR.ROTATE:
                     Rotate();
@@ -222,7 +232,7 @@ public class PlatformMovements : MonoBehaviour
             {
                 //Debug.Log($"Move Vector is ({i}) : {moveVec[i]}");
 
-                moveVec[i] += tr.position;
+                moveVec[i] += tr.localPosition;
             }
 
 
@@ -232,6 +242,85 @@ public class PlatformMovements : MonoBehaviour
                 .setEase(tweenProperties.moveEaseType).id;
 
             // LeanTween.drawBezierPath(moveVec[0], moveVec[1], moveVec[2], moveVec[3], 5f);
+        }
+
+        void MoveSpline()
+        {
+            // Moving Stuff
+
+            if (!tweenProperties.useSplinePoints)
+            {
+                tweenProperties.allocationSize = (4 + tweenProperties.movePoints.Length);
+            }
+            else
+            {
+                tweenProperties.allocationSize = (4 + tweenProperties.splineMovePoints.Length);
+
+            }
+
+
+            Vector3[] moveVec = new Vector3[tweenProperties.allocationSize];
+
+
+            if (tweenProperties.startPoint == Vector3.zero)
+            {
+                moveVec[0] = GetLocalPos();
+                moveVec[1] = GetLocalPos();
+            }
+            else
+            {
+                moveVec[0] = tweenProperties.startPoint;
+                moveVec[1] = tweenProperties.startPoint;
+            }
+
+
+            if(tweenProperties.endPoint == Vector3.zero)
+            {
+                moveVec[tweenProperties.allocationSize - 1] = GetLocalPos();
+                moveVec[tweenProperties.allocationSize - 2] = GetLocalPos();
+            }
+            else
+            {
+                moveVec[tweenProperties.allocationSize - 1] = tweenProperties.endPoint;
+                moveVec[tweenProperties.allocationSize - 2] = tweenProperties.endPoint;
+            }
+
+
+
+
+
+
+                for (int i = 2; i < tweenProperties.allocationSize - 2; i++)
+            {
+                if(tweenProperties.useSplinePoints)
+                {
+                    moveVec[i] = tweenProperties.splineMovePoints[i - 2].transform.position;
+                }
+                else
+                {
+                    moveVec[i] = tweenProperties.movePoints[i - 2];
+                }
+            }
+
+            // Adjusting Pivot Positions
+            //for (int i = 0; i < moveVec.Length; i++)
+            //{
+            //    //Debug.Log($"Move Vector is ({i}) : {moveVec[i]}");
+
+            //    moveVec[i] += tr.localPosition;
+            //}
+
+
+            int _id = LeanTween.moveSplineLocal(gameObject, moveVec, 0f)
+                .setLoopType(tweenProperties.isPingPongMove ? LeanTweenType.pingPong : LeanTweenType.notUsed)
+                .setSpeed(tweenProperties.moveSpeed)
+                .setEase(tweenProperties.moveEaseType).id;
+        }
+
+        Vector3 GetLocalPos()
+        {
+
+            return tr.localPosition;
         }
 
         void MoveLinear()
@@ -286,12 +375,20 @@ public class PlatformMovements : MonoBehaviour
                     if(!tweenProperties.isFaded)
                     {
                         tweenProperties.isFaded = true;
-                        if(tweenProperties.disableCollision) tr.GetComponent<Collider2D>().enabled = false;
+                        if (tweenProperties.disableCollision)
+                        {
+                            if (tr.GetComponent<Collider2D>() != null)  tr.GetComponent<Collider2D>().enabled = false;
+                        }
                     }
                     else
                     {
                         tweenProperties.isFaded = false;
-                        tr.GetComponent<Collider2D>().enabled = true;
+
+                        if(tr.GetComponent<Collider2D>() != null)
+                        {
+                            tr.GetComponent<Collider2D>().enabled = true;
+                        }
+
                     }
                 });
         }

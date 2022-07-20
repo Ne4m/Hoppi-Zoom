@@ -82,8 +82,11 @@ public class PlayerController : MonoBehaviour
             tr.gameObject.SetActive(false);
             crosshair.gameObject.SetActive(false);
 
-            shooting.SetShootingPoint(crosshair.transform);
+            if(inputMode == 1) shooting.SetShootingPoint(crosshair.transform);
+           // else shooting.SetShootingPoint(tr);
         }
+
+
 
         initialScale = _rb2D.gameObject.transform.localScale;
 
@@ -103,12 +106,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Debug.Log("Z: " + transform.rotation.z +"\n");
-
-        //if (tr.rotation.z == -0.0008726012) atMid = true;
         
 
-        if (Input.GetKey(KeyCode.R) || Input.touchCount == 3)
+        if (Input.GetKey(KeyCode.R) || Input.touchCount == 2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -117,34 +117,23 @@ public class PlayerController : MonoBehaviour
 
  
 
-        if (Application.platform == RuntimePlatform.Android)
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
+
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-
-                BackButtonPressed();
+            BackButtonPressed();
                 
-            }
         }
+
 
         CheckJumpInput();
 
-        //debugtxt.text = $"Speed: {_rb2D.velocity.y}\n" +
-        //               $"Magnt: {_rb2D.velocity.magnitude}\n" +
-        //               $"Fix: {_rb2D.velocity * ejectForce * Time.fixedDeltaTime}";
 
-
-        //if (_rb2D.velocity.magnitude > 0 && !_levelManager.playerControl.IsPlayerInCheckPoint())
-        //{
-        //    StartTweenScale();
-        //}
-        //else
-        //{
-        //    StopTweenScale();
-        //}
-
-        if (_rb2D.velocity.y < 0 && _levelManager.playerControl.IsPlayerInCheckPoint())
+        if (_rb2D.velocity.y < 0 && !_levelManager.playerControl.IsPlayerInCheckPoint())
         {
             //_rb2D.velocity = new Vector2(_rb2D.velocity.x, (fallSpeed));
             SetGravity.On(_rb2D, fallSpeed);
@@ -158,19 +147,17 @@ public class PlayerController : MonoBehaviour
 
     void EjectTweenStart()
     {
-        scaleID_1 = _rb2D.gameObject.LeanScale(new Vector3(initialScale.x, initialScale.y - 0.4f, initialScale.z), 0.15f)
+        _rb2D.gameObject.LeanScale(new Vector3(initialScale.x, initialScale.y - 0.4f, initialScale.z), 0.25f)
             .setEase(LeanTweenType.easeInOutQuart)
-            .setOnComplete(EjectTweenStop)
-            .pause()
-            .id;
+            .setOnComplete(EjectTweenStop);
 
-        if (!LeanTween.isTweening(scaleID_1))
-        {
-            LeanTween.resume(scaleID_1);
-        }
+        //if (!LeanTween.isTweening(scaleID_1))
+        //{
+        //    LeanTween.resume(scaleID_1);
+        //}
 
 
-        Debug.Log($"Pivot is : {gameObject.GetComponent<SpriteRenderer>().sprite.pivot}");
+       // Debug.Log($"Pivot is : {gameObject.GetComponent<SpriteRenderer>().sprite.pivot}");
     }
 
     void EjectTweenStop()
@@ -215,46 +202,23 @@ public class PlayerController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), Vector2.zero);
             Vector2 direction = Camera.main.ScreenToWorldPoint(touch.position) - crosshair.transform.position; // 
 
-            //var tempPos = direction;
-            //tempPos = new Vector3(Mathf.Abs(tempPos.x), Mathf.Abs(tempPos.y));
             direction.Normalize();
 
             if (hit.collider != null && hit.collider.tag == "NoTouch")
             {
 
-                //Vector2 pos = Camera.main.ScreenToWorldPoint(touch.position);
-
-                //crosshair.transform.position = new Vector3(pos.x, pos.y + 3, crosshair.transform.position.z);
-                //crosshair.gameObject.SetActive(true);
-
                 if(inputMode == 1)
                 {
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                    //crosshair.transform.rotation = Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1)); // tr  * Time.fixedDeltaTime * 50f
-
                     var tempRot = Quaternion.Slerp(crosshair.transform.rotation, Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1)), Time.deltaTime * shootingRotVal);
                     crosshair.transform.rotation = tempRot;
 
-                    //crosshair.transform.Rotate(Vector3.forward, (angle + arrowTouchRotateOffset * -1) * Time.fixedDeltaTime * shootingRotVal);
-
-                    //var newRot = Quaternion.Slerp(crosshair.transform.rotation, tr.rotation, Time.fixedDeltaTime);
-                    //crosshair.transform.rotation = newRot;
-
-                    //tr.gameObject.SetActive(true);
-
-
-                    
-
-
-                    //debugtxt.text = tr.rotation.ToString();
-                    Debug.Log("Target name: " + hit.collider.name + " " + hit.collider.tag);
                     if (!touchEnded)
                     {
                         if (!crosshair.gameObject.activeSelf)
                         {
                             crosshair.gameObject.SetActive(true);
                             shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 143);
-                            Debug.Log("I'm here!!");
 
                         }
 
@@ -262,18 +226,54 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        //if (tr.rotation.w >= 0.75f)
-                        //{
-
-                        //}
-
-
-                        tr.gameObject.SetActive(false);
                         crosshair.gameObject.SetActive(false);
                         shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
                         holdingShoot = false;
 
                         shooting.SendShoot();
+                    }
+                }
+                else if(inputMode == 2)
+                {
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var tempRot = Quaternion.Slerp(crosshair.transform.rotation, Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1)), Time.deltaTime * shootingRotVal);
+                    crosshair.transform.rotation = tempRot;
+
+
+                    //debugtxt.gameObject.SetActive(true);
+                    //debugtxt.text = crosshair.transform.rotation.ToString();
+
+                    if (!touchEnded)
+                    {
+                        if (!crosshair.gameObject.activeSelf)
+                        {
+                            crosshair.gameObject.SetActive(true);
+                            shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 143);
+
+                        }
+
+                        holdingShoot = true;
+                    }
+                    else // Jump here
+                    {
+                        crosshair.gameObject.SetActive(false);
+                        shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
+                        holdingShoot = false;
+
+                        //shooting.SendShoot();
+                        var rotationW = crosshair.transform.rotation.w;
+                        if (rotationW > 0)
+                        {
+                            if(rotationW > 0.75f)
+                                JumpPlayerMode2();
+                        }
+                        else
+                        {
+                            if (rotationW < -0.75f)
+                                JumpPlayerMode2();
+                        }
+
+
                     }
                 }
                 else
@@ -301,8 +301,10 @@ public class PlayerController : MonoBehaviour
                     holdingShoot = false;
                     tr.gameObject.SetActive(false);
                     crosshair.gameObject.SetActive(false);
+
                     return;
                 }
+
             }
 
             
@@ -322,6 +324,24 @@ public class PlayerController : MonoBehaviour
                     JumpPlayer();
                 }
                 //Debug.Log($"Touched @ {tr.rotation}");
+            }
+
+
+            if (inputMode == 2 && !holdingShoot)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                tr.rotation = Quaternion.Euler(Vector3.forward * (angle + arrowTouchRotateOffset * -1));
+
+
+                if (Time.time > jumpRate + lastJump && tr.rotation.w >= 0.75f)
+                {
+                    tr.gameObject.SetActive(false);
+                    crosshair.gameObject.SetActive(false);
+                    shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
+
+                    //JumpPlayer();
+                    shooting.SendShoot();
+                }
             }
 
             if (inputMode == 0 && !holdingShoot)
@@ -363,6 +383,28 @@ public class PlayerController : MonoBehaviour
 
         _rb2D.AddForce(vectorUp * ejectForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
         _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
+        _rb2D.MoveRotation(_slowRot);
+
+        lastJump = Time.time;
+
+        FindObjectOfType<AudioManager>().Play("Jump");
+        //_rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
+
+        EjectTweenStart();
+    }
+
+    public void JumpPlayerMode2()
+    {
+
+        Vector3 vectorUp = crosshair.transform.TransformDirection(Vector2.up);
+
+        _levelManager.playerControl.setPlayerCheckPoint(false);
+        arrowiks.SetActive(false);
+
+
+
+        _rb2D.AddForce(vectorUp * ejectForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        _slowRot = Quaternion.Slerp(transform.rotation, crosshair.transform.rotation, Time.fixedDeltaTime * playerRotSpeed);
         _rb2D.MoveRotation(_slowRot);
 
         lastJump = Time.time;
@@ -508,10 +550,10 @@ public class PlayerController : MonoBehaviour
             });
 
 
-        if (collision.collider.tag == "Boundary")
-        {
-            Debug.Log("boundary hit");
-        }
+        //if (collision.collider.tag == "Boundary")
+        //{
+        //    Debug.Log("boundary hit");
+        //}
     }
 
 

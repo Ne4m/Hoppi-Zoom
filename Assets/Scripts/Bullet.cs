@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Platform"))
+        if (collision.CompareTag("Platform") || collision.CompareTag("Wood"))
         {
             Debug.Log($"Hit platform : {collision.gameObject.name}");
 
@@ -78,6 +78,13 @@ public class Bullet : MonoBehaviour
 
 
         }
+        else if (collision.CompareTag("Chain"))
+        {
+            Chain.CutMe(collision.gameObject);
+            Destroy(gameObject);
+        }
+
+
     }
 
 }
