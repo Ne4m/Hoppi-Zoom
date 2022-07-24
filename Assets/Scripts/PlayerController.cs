@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     Shooting shooting;
 
+    [SerializeField] private float checkPointPlaceOffset;
     [SerializeField] private float arrowTouchRotateOffset = -90f;
     [SerializeField] private float inputModeOffset;
 
@@ -510,8 +511,8 @@ public class PlayerController : MonoBehaviour
             _rb2D.angularVelocity = 0f;
             SetGravity.Off(_rb2D);
 
-            Vector3 kek = new Vector3(_rb2D.transform.position.x, collision.transform.position.y, 0);
-            _rb2D.transform.SetPositionAndRotation(kek, Quaternion.identity);
+            Vector3 placedPoint = new Vector3(_rb2D.transform.position.x, collision.transform.position.y + checkPointPlaceOffset, 0);
+            _rb2D.transform.SetPositionAndRotation(placedPoint, Quaternion.identity);
 
 
 

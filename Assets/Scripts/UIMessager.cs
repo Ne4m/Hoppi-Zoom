@@ -12,6 +12,9 @@ public class UIMessager : MonoBehaviour
     public float duration;
     public string messageText;
 
+    bool isRunning = false;
+    Coroutine msgCoroutine;
+
     private void Start()
     {
 
@@ -20,11 +23,19 @@ public class UIMessager : MonoBehaviour
 
     public void startMsg(string msg, float duration, Vector3 pos)
     {
-        StartCoroutine(CreateMessage(msg, duration, pos));
+
+        if(msgCoroutine != null && isRunning)
+        {
+            StopCoroutine(msgCoroutine);
+        }
+
+        msgCoroutine = StartCoroutine(CreateMessage(msg, duration, pos));
     }
 
     public IEnumerator CreateMessage(string msg, float duration, Vector3 pos)
     {
+        isRunning = true;
+
         if (pos != Vector3.zero)
         {
             transform.position = pos;
@@ -40,6 +51,7 @@ public class UIMessager : MonoBehaviour
         text.text = string.Empty;
         text.gameObject.SetActive(false);
 
+        isRunning = false;
     }
 
 }

@@ -30,11 +30,36 @@ public class ApplySkin : MonoBehaviour
     {
         //skinNameText.text = transform.GetChild(2).GetComponent<Image>().sprite.name;
 
-        int spritePrice = Convert.ToInt32(transform.GetChild(1).GetComponent<TMP_Text>().text);
-        var spriteName = transform.GetChild(2).GetComponent<Image>().sprite.name;
+        int spritePrice = 0;
+        if (transform.GetChild(1).transform.gameObject.activeSelf)
+        {
+            spritePrice = Convert.ToInt32(transform.GetChild(1).GetComponent<TMP_Text>().text);
+            SPrefs.SetInt("LastClickedSkinPrice", spritePrice);
+            SPrefs.Save();
+        }
+
+        var _sprite = transform.GetChild(2).GetComponent<Image>().sprite;
+        var spriteName = _sprite.name;
+        SPrefs.SetString("LastClickedSkin", spriteName);
+        skinManager.SetLastClickedSprite(_sprite);
 
         skinManager.SetTitleText(spriteName);
 
-        SPrefs.SetInt("CurrentSkinPrice", spritePrice);
+        skinManager.CheckUnequipAction(spriteName, unequipped =>
+        {
+            if (!unequipped)
+            {
+                skinManager.ManageAppliedSkin(spriteName);
+                skinManager.RefreshUI();
+            }
+        });
+
+        
+
+        //skinManager.SetLastClickedSkin(spriteName);
+
+
+
+
     }
 }

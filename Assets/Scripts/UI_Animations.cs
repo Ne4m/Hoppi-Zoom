@@ -122,7 +122,7 @@ public class UI_Animations : MonoBehaviour
 
     private void GoBackMenuButton_Clicked()
     {
-       AdsManager.instance.IncreaseInterstitialTriggerCounter(1);
+        AdsManager.instance.IncreaseInterstitialTriggerCounter(1);
         LevelManager.instance.goBackMainMenu();
 
     }

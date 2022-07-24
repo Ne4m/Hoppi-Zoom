@@ -532,6 +532,7 @@ MonoBehaviour:
   currencyTxt: {fileID: 0}
   backBtn: {fileID: 0}
   isUI: 0
+  titleText: {fileID: 0}
   characterSkins: []
   selectedCharacter: {fileID: 0}
   characterHat: {fileID: 773276666}
@@ -540,8 +541,15 @@ MonoBehaviour:
   characterBodyImg: {fileID: 0}
   hatContainer: {fileID: 0}
   bodyContainer: {fileID: 0}
-  characterAllHeadAccessories: []
-  characterAllBodyAccessories: []
+  tabClickedOffset: 0
+  tabParent: {fileID: 0}
+  tabBases: []
+  tabButtons: []
+  tabStartPositions: []
+  btnClicked_Sprite: {fileID: 0}
+  btnUnclicked_Sprite: {fileID: 0}
+  skinAreaPanel: {fileID: 0}
+  accessoryContainer_Prefab: {fileID: 0}
 --- !u!114 &73175936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13716,7 +13724,7 @@ PrefabInstance:
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
@@ -13911,6 +13919,11 @@ PrefabInstance:
       objectReference: {fileID: 880455500}
     - target: {fileID: 8308591490057635706, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
+      propertyPath: checkPointPlaceOffset
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8308591490057635706, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
       propertyPath: arrowTouchRotateOffset
       value: 90
       objectReference: {fileID: 0}
@@ -13932,7 +13945,7 @@ PrefabInstance:
     - target: {fileID: 8308591490057635707, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Offset.y
-      value: -0.017899275
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 8308591490057635716, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
