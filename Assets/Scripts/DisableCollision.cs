@@ -23,20 +23,24 @@ public class DisableCollision : MonoBehaviour
 
             try
             {
-                objectsToDisableWith = GameObject.FindGameObjectsWithTag(objectTags[i]);
+                if (GameObject.FindGameObjectsWithTag(objectTags[i]) != null)
+                    objectsToDisableWith = GameObject.FindGameObjectsWithTag(objectTags[i]);
             }
             catch(Exception e)
             {
-                Debug.Log($"Exception : {e.Message}");
+                Debug.Log($"Exception : {e.Message} Null Tag {objectTags[i]}");
             }
 
 
 
             foreach(GameObject obj in objectsToDisableWith)
             {
-                var isIgnored = Physics2D.GetIgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                if(obj.GetComponent<Collider2D>() != null){
+                    var isIgnored = Physics2D.GetIgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-                if(!isIgnored) Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+                    if (!isIgnored) Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+                }
+
                 
             }
 

@@ -291,16 +291,16 @@ public class PlatformMovements : MonoBehaviour
 
 
                 for (int i = 2; i < tweenProperties.allocationSize - 2; i++)
-            {
-                if(tweenProperties.useSplinePoints)
                 {
-                    moveVec[i] = tweenProperties.splineMovePoints[i - 2].transform.position;
+                    if(tweenProperties.useSplinePoints)
+                    {
+                        moveVec[i] = tweenProperties.splineMovePoints[i - 2].transform.localPosition;
+                    }
+                    else
+                    {
+                        moveVec[i] = tweenProperties.movePoints[i - 2];
+                    }
                 }
-                else
-                {
-                    moveVec[i] = tweenProperties.movePoints[i - 2];
-                }
-            }
 
             // Adjusting Pivot Positions
             //for (int i = 0; i < moveVec.Length; i++)
@@ -341,6 +341,8 @@ public class PlatformMovements : MonoBehaviour
                  .setLoopType(tweenProperties.isPingPongRotation ? LeanTweenType.pingPong : LeanTweenType.notUsed)
                  .setSpeed(tweenProperties.rotateSpeed)
                  .setEase(tweenProperties.rotateEaseType);
+
+           
 
             //LeanTween.rotateAroundLocal(gameObject, new Vector3(0, 0, 60), -60f, 1f).setLoopPingPong();
         }

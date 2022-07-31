@@ -54,4 +54,39 @@ public class UIMessager : MonoBehaviour
         isRunning = false;
     }
 
+
+    public void startMsgv2(string msg, float duration, Vector3 pos, Color color)
+    {
+
+        if (msgCoroutine != null && isRunning)
+        {
+            StopCoroutine(msgCoroutine);
+        }
+
+        msgCoroutine = StartCoroutine(CreateMessagev2(msg, duration, pos, color));
+    }
+
+    public IEnumerator CreateMessagev2(string msg, float duration, Vector3 pos, Color color)
+    {
+        isRunning = true;
+
+        if (pos != Vector3.zero)
+        {
+            transform.position = pos;
+        }
+
+        text.gameObject.SetActive(true);
+        text.text = msg;
+        text.color = color;
+
+        //rb.velocity = Vector2.down * speed;
+
+        yield return new WaitForSeconds(duration);
+
+        text.text = string.Empty;
+        text.gameObject.SetActive(false);
+
+        isRunning = false;
+    }
+
 }

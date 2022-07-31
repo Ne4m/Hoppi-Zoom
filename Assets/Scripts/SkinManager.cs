@@ -58,7 +58,7 @@ public class SkinManager : MonoBehaviour
     [SerializeField] private GameObject skinAreaPanel;
     [SerializeField] private GameObject accessoryContainer_Prefab;
     private List<GameObject> lastInstantiatedSkins = new List<GameObject>();
-    private string skinPath = "Hats";
+    private string skinPath;
     private string lastClickedSkinName;
 
     [Header("SKIN UNLOCK AREA")]
@@ -72,7 +72,8 @@ public class SkinManager : MonoBehaviour
 
     private Sprite lastClickedSkinSprite;
     private Color32 NONE_COLOR = new Color32(255, 255, 255, 0);
-    private bool onStart;
+
+
     [SerializeField] private UIMessager messager;
 
     private enum HAT_SKINS
@@ -109,7 +110,8 @@ public class SkinManager : MonoBehaviour
     {
         skin_torso = 131,
         skin_torso_blue = 1345,
-        skin_torso_black = 222
+        skin_torso_black = 222,
+        skin_sun_glasses = 150
 
     }
 
@@ -117,13 +119,13 @@ public class SkinManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        onStart = true;
-
 
     }
 
     void Start()
     {
+        lockEveryItems();
+
         messager = gameObject.GetComponent<UIMessager>();
 
         if (backBtn != null) backBtn.onClick.AddListener(BackBtn_Clicked);
@@ -132,7 +134,7 @@ public class SkinManager : MonoBehaviour
 
         if (isUI) InitializeBottomContainer();
 
-       // lockEveryItems();
+        // lockEveryItems();
         //SPrefs.DeleteKey("PlayerHead");
         //SPrefs.DeleteKey("PlayerBody");
 
@@ -143,6 +145,7 @@ public class SkinManager : MonoBehaviour
         //UnequipBodyAccessory();
         //UnequipHeadAccessory();
 
+        skinPath = SPrefs.GetString("LastSkinPath", "Hats");
 
         RefreshUI();
         var head = SPrefs.GetString("PlayerHead", "none");
@@ -155,22 +158,28 @@ public class SkinManager : MonoBehaviour
 
     private void Update()
     {
-        if(isUI) currencyTxt.text = SPrefs.GetInt("gameCurrency", 0).ToString();
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isUI)
         {
-            if (unlockSkin_Panel.transform.gameObject.activeSelf)
+            currencyTxt.text = SPrefs.GetInt("gameCurrency", 0).ToString();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                unlockSkin_Panel.transform.gameObject.SetActive(false);
-            }
-            else
-            {
-                transform.gameObject.SetActive(false);
-            }
+                if (unlockSkin_Panel.transform.gameObject.activeSelf)
+                {
+                    unlockSkin_Panel.transform.gameObject.SetActive(false);
+                }
+                else
+                {
+                    transform.gameObject.SetActive(false);
+                    BackBtn_Clicked();
+                }
 
 
+            }
         }
+
+
+
 
 
        // RefreshUI();
@@ -239,9 +248,11 @@ public class SkinManager : MonoBehaviour
         {
             case 0:
                 skinPath = "Hats";
+                SPrefs.SetString("LastSkinPath", skinPath);
                 break;
             case 1:
                 skinPath = "Hairs";
+                SPrefs.SetString("LastSkinPath", skinPath);
                 break;
             case 2:
                 skinPath = "Body";
@@ -350,6 +361,7 @@ public class SkinManager : MonoBehaviour
 
         RefreshTabContent(typeof(HAT_SKINS), 0);
 
+
         SkinMenu_TabBtnClicked(0);
 
     }
@@ -360,6 +372,7 @@ public class SkinManager : MonoBehaviour
 
 
         RefreshTabContent(typeof(HAIR_SKINS), 1);
+
 
         SkinMenu_TabBtnClicked(1);
     }
@@ -538,6 +551,7 @@ public class SkinManager : MonoBehaviour
 
 
             characterHatImg.color = new Color32(255, 255, 255, 255);
+            Debug.Log($"Skinpath before error {skinPath} and item name {itemName}");
             characterHatImg.sprite = Resources.Load<Sprite>($"Accessories/{skinPath}/{itemName}");
             characterHat.GetComponent<RectTransform>().pivot = characterHatImg.sprite.pivot / characterHatImg.sprite.rect.size;
 
@@ -632,13 +646,15 @@ public class SkinManager : MonoBehaviour
         var skinName = SPrefs.GetString("LastClickedSkin", "none");
         Debug.Log($"Unlock request for {skinName} received!");
 
-        var currency = 500; // IMPLEMENT FROM PLAY STORE LATER
+        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
+        var price = SPrefs.GetInt("LastClickedSkinPrice");
 
-        if(currency >= SPrefs.GetInt("LastClickedSkinPrice"))
+        if (currency >= price)
         {
-            currency -= SPrefs.GetInt("LastClickedSkinPrice");
+            currency -= price;
 
             SPrefs.SetBool($"skin_{skinName}_locked", false);
+            SPrefs.SetInt("gameCurrency", currency);
             Debug.Log($"Unlocked {skinName}");
             SPrefs.Save();
 
@@ -646,11 +662,11 @@ public class SkinManager : MonoBehaviour
             ManageAppliedSkin(skinName);
             RefreshUI();
 
-            messager.startMsg($"Successfully Unlocked {skinTitle.text} {currency}", 2f, Vector3.zero);
+            messager.startMsg($"Successfully Unlocked {skinTitle.text} {price}", 2f, Vector3.zero);
         }
         else
         {
-            messager.startMsg("UNSUFFICIENT FUNDS!", 2f, Vector3.zero);
+            messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
         }
 
 
@@ -659,13 +675,46 @@ public class SkinManager : MonoBehaviour
 
     private void AdUnlockButton_Clicked()
     {
+        AdsManager.instance.DisplayRewardedAd();
+    }
+
+    public void ApplySkinAdDiscount()
+    {
+        var skinName = SPrefs.GetString("LastClickedSkin", "none");
+        Debug.Log($"Unlock request for {skinName} received!");
+
+        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
+        var discountedPrice = (int)(SPrefs.GetInt("LastClickedSkinPrice") * 0.5);
+        if (currency >= discountedPrice)
+        {
+            currency -= discountedPrice;
+
+            SPrefs.SetBool($"skin_{skinName}_locked", false);
+            SPrefs.SetInt("gameCurrency", currency);
+            Debug.Log($"Unlocked {skinName}");
+            SPrefs.Save();
+
+            unlockSkin_Panel.transform.gameObject.SetActive(false);
+            ManageAppliedSkin(skinName);
+            RefreshUI();
+
+            messager.startMsg($"Successfully Unlocked {skinTitle.text} For {discountedPrice} Stars", 2f, Vector3.zero);
+        }
+
+
         unlockSkin_Panel.transform.gameObject.SetActive(false);
+    }
+
+    public void ApplySkinAdDiscount_Error()
+    {
+        messager.startMsgv2("An Error Occured!", 2f, Vector3.zero, Color.red);
     }
 
     public void SetTitleText(string txt)
     {
         titleText.text = txt;
     }
+
 
 
     public void SetLastClickedSkin(string name)

@@ -550,6 +550,13 @@ MonoBehaviour:
   btnUnclicked_Sprite: {fileID: 0}
   skinAreaPanel: {fileID: 0}
   accessoryContainer_Prefab: {fileID: 0}
+  unlockSkin_Panel: {fileID: 0}
+  unlockButton: {fileID: 0}
+  adUnlockButton: {fileID: 0}
+  skinImage: {fileID: 0}
+  priceText: {fileID: 0}
+  skinTitle: {fileID: 0}
+  messager: {fileID: 0}
 --- !u!114 &73175936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13703,18 +13710,18 @@ PrefabInstance:
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.434
+      value: 4.86
       objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.25044444
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6f0121aceaac49744900bd4d19dbdb7b,
+      objectReference: {fileID: 21300000, guid: 2a474726fb8e0b54ca6b80799eb9f055,
         type: 3}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
@@ -13724,23 +13731,24 @@ PrefabInstance:
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.512
+      value: 4.51
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.512
+      value: 4.56
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: aceeb2d1a5c63c24f958ea72711e0526,
+        type: 3}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_SortingOrder
@@ -13749,11 +13757,46 @@ PrefabInstance:
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610218157884583271, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610218157884583271, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610218157884583271, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610218157884583271, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6625796852153242909, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817176750201330926, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817176750201330926, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817176750201330926, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8308591488171499213, guid: f6a28820b4afda5418e74dddccf8fed9,

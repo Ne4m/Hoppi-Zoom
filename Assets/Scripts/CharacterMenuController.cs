@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Random = UnityEngine.Random;
+using System.Threading.Tasks;
 
 public class CharacterMenuController : MonoBehaviour
 {
-    private string[] playableCharacters = {"Blue Guy (Default)", "Green", "Grey", "Orange", "Purple", "Red", "Yellow"}; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
+    private string[] playableCharacters = {"Blue (Default)", "Green", "Grey", "Orange", "Purple", "Red", "Yellow"}; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
     private string[] unlockedCharacters;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
     private float characterHealth, characterSpeed;
@@ -27,7 +28,7 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private Button swipeLeftButton;
     [SerializeField] private Button swipeRightButton;
     [SerializeField] private Button selectButton;
-    [SerializeField] private Button unlockButton;
+
 
     [Header("Character Bars")] 
     [SerializeField] private Slider healthBar;
@@ -39,6 +40,33 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text currencyText;
 
+    [Header("Perks Window Properties")]
+    [SerializeField] private GameObject perksContainer;
+    [SerializeField] private TMP_Text perksDescription;
+    [SerializeField] private Image perksImage;
+    [SerializeField] private Button perksImageBtn;
+
+    [Header ("Unlock Character Properties")]
+    private int baseSkinPrice = 250;
+    private double unlockMultiplier = 0.20;
+    [SerializeField] private Button unlockButton;
+    [SerializeField] private TMP_Text unlockCost;
+    [SerializeField] private GameObject unlockPriceContainer;
+
+    [Header("Unlock Confirmation Dialogue")]
+    [SerializeField] private GameObject unlockConfirmationContainer;
+    [SerializeField] private TMP_Text oldPrice;
+    [SerializeField] private TMP_Text newPrice;
+    [SerializeField] private Button unlockConfirmation_YesBtn;
+    [SerializeField] private Button unlockConfirmation_NoBtn;
+
+    private bool isUnlockContainerActive;
+    private UIMessager messager;
+
+
+    private Coroutine showPerkDescription;
+    private bool isShowing = false;
+
 
     private Image characterImg;
     private Sprite[] characterSkins;
@@ -47,12 +75,49 @@ public class CharacterMenuController : MonoBehaviour
 
     MainMenu_Controller mainMenu;
 
+
+    public string PerksDescription
+    {
+        get => perksDescription.text;
+        set
+        {
+            perksDescription.text = "<mark=#F3930079>" + value + "</mark>";
+        }
+    }
+
+    public string PerksImage
+    {
+        get => perksImage.sprite.name;
+        set
+        {
+            if(perksImage.gameObject.activeSelf)
+                perksImage.sprite = Resources.Load<Sprite>($"Perks/{value}");
+        }
+    }
+
+    private void Awake()
+    {
+
+        //baseSkinPrice = SPrefs.GetInt("currentBaseSkinPrice", baseSkinPrice);
+    }
+
     void Start()
     {
+        /// REMOVE ON LAUNCH
+        /// 
+        SPrefs.SetInt("gameCurrency", 50000);
+        SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
+        /// 
+        messager = GetComponent<UIMessager>();
+
+        if (perksImageBtn != null) perksImageBtn.onClick.AddListener(perksImgBtn_Clicked);
+
+        if (unlockConfirmation_YesBtn != null) unlockConfirmation_YesBtn.onClick.AddListener(UnlockConfirmation_YesBtn_Clicked);
+        if (unlockConfirmation_NoBtn != null) unlockConfirmation_NoBtn.onClick.AddListener(UnlockConfirmation_NoBtn_Clicked);
 
         characterImg = characterOnScreen.GetComponent<Image>();
         characterSkins = Resources.LoadAll<Sprite>("Characters");
-        mainMenu = GetComponent<MainMenu_Controller>();
+        mainMenu = MainMenu_Controller.instance;
         unlockedCharacters = new string[characterSkins.Length];
 
 
@@ -100,6 +165,8 @@ public class CharacterMenuController : MonoBehaviour
     {
         currencyText.text = SPrefs.GetInt("gameCurrency", 0).ToString();
 
+        unlockCost.text = baseSkinPrice.ToString();
+
         int number = Convert.ToInt32(currencyText.text);
         if (number > 9999999)
         {
@@ -125,7 +192,7 @@ public class CharacterMenuController : MonoBehaviour
             mainMenu.canvasBackMainMenu();
         }
 
-
+        isUnlockContainerActive = unlockConfirmationContainer.gameObject.activeSelf;
         RefreshCurrency();
 
     }
@@ -181,27 +248,111 @@ public class CharacterMenuController : MonoBehaviour
     {
         if (unlockedCharacters[currentCharacterIndex] == "unlocked") return;
 
-        UnlockCharacter(currentCharacterIndex);
-        updateCharacter(currentCharacterIndex);
 
+
+        RequestCharacterUnlock();
+
+    }
+
+    private void RequestCharacterUnlock()
+    {
+        baseSkinPrice = SPrefs.GetInt("currentBaseSkinPrice", baseSkinPrice);
+
+        var currency = SPrefs.GetInt("gameCurrency", 0);
+
+        if (currency >= baseSkinPrice)
+        {
+            oldPrice.text = baseSkinPrice.ToString();
+            newPrice.text = (baseSkinPrice / 2).ToString();
+            unlockConfirmationContainer.gameObject.SetActive(true);
+        }
+        else
+        {
+            messager.startMsgv2("Insufficient Stars!", 2f, Vector3.zero, Color.red);
+        }
+    }
+
+    private void UnlockConfirmation_YesBtn_Clicked()
+    {
+        AdsManager.instance.DisplayRewardedAd();
+
+    }
+
+    private void UnlockConfirmation_NoBtn_Clicked()
+    {
+
+
+        ManageUnlockPrice(baseSkinPrice, (isDone) =>
+        {
+            if (isDone)
+            {
+                UnlockCharacter(currentCharacterIndex);
+                updateCharacter(currentCharacterIndex);
+                unlockConfirmationContainer.gameObject.SetActive(false);
+
+            }
+        });
+
+
+    }
+
+    public void ApplyAdDiscount()
+    {
+        ManageUnlockPrice((int) (baseSkinPrice * 0.5), (isDone) =>
+        {
+            if (isDone)
+            {
+                UnlockCharacter(currentCharacterIndex);
+                updateCharacter(currentCharacterIndex);
+
+                unlockConfirmationContainer.gameObject.SetActive(false);
+
+            }
+        });
+
+    }
+
+    public void ApplyAdDiscount_Error()
+    {
+        messager.startMsgv2("An Error Occured!", 3f, Vector3.zero, Color.red);
+    }
+
+    private void ManageUnlockPrice(int price, Action<bool> callback)
+    {
+        var balance = SPrefs.GetInt("gameCurrency", 0);
+
+        balance -= price;
+
+        SPrefs.SetInt("gameCurrency", balance);
+        SPrefs.Save();
+
+        messager.startMsg($"UNLOCKED CHARACTER! FOR {price} STARS", 3f, Vector3.zero);
+        callback(true);
     }
 
     private void swipeLeftButtonClicked()
     {
-        if (currentCharacterIndex > minCharacterIndex)
+        if (!isUnlockContainerActive)
         {
-            currentCharacterIndex--;
-            updateCharacter(currentCharacterIndex);
+            if (currentCharacterIndex > minCharacterIndex)
+            {
+                currentCharacterIndex--;
+                updateCharacter(currentCharacterIndex);
+            }
         }
     }
 
     private void swipeRightButtonClicked()
     {
-        if (currentCharacterIndex < maxCharacterIndex)
+        if (!isUnlockContainerActive)
         {
-            currentCharacterIndex++;
-            updateCharacter(currentCharacterIndex);
+            if (currentCharacterIndex < maxCharacterIndex)
+            {
+                currentCharacterIndex++;
+                updateCharacter(currentCharacterIndex);
+            }
         }
+
     }
 
     private void updateCharacter(int index)
@@ -218,7 +369,8 @@ public class CharacterMenuController : MonoBehaviour
             titleText.color = Color.grey;
 
             selectButton.gameObject.SetActive(false);
-            unlockButton.gameObject.SetActive(true);
+            //unlockButton.gameObject.SetActive(true);
+            unlockPriceContainer.gameObject.SetActive(true);
         }
         else
         {
@@ -227,7 +379,8 @@ public class CharacterMenuController : MonoBehaviour
             titleText.color = Color.white;
 
             selectButton.gameObject.SetActive(true);
-            unlockButton.gameObject.SetActive(false);
+            //unlockButton.gameObject.SetActive(false);
+            unlockPriceContainer.gameObject.SetActive(false);
         }
 
         if (currentCharacterIndex == getCurrentIndex())
@@ -247,6 +400,8 @@ public class CharacterMenuController : MonoBehaviour
         // speedBar.value = number;
         // Debug.Log($"Random Number: {number}");
 
+        if (!perksContainer.gameObject.activeSelf) perksContainer.gameObject.SetActive(true);
+
         switch (index)
         {
             case 0:
@@ -257,6 +412,8 @@ public class CharacterMenuController : MonoBehaviour
 
                 Perks.instance.SetActivePerk(PerkList.DEFAULT_NONE);
                 lastPerk = PerkList.DEFAULT_NONE;
+
+                perksContainer.gameObject.SetActive(false);
                 break;
             case 1:
 
@@ -264,8 +421,8 @@ public class CharacterMenuController : MonoBehaviour
                 setSpeedByPercentage(35);
                 setAmmoByPercentage(35);
 
-                Perks.instance.SetSelectedCharacterPerk(PerkList.REFUND_AMMO);
-                lastPerk = PerkList.REFUND_AMMO;
+                Perks.instance.SetSelectedCharacterPerk(PerkList.FASTER_BULLETS);
+                lastPerk = PerkList.FASTER_BULLETS;
                 break;
             case 2:
 
@@ -280,10 +437,10 @@ public class CharacterMenuController : MonoBehaviour
 
                 setHpByPercentage(80);
                 setSpeedByPercentage(30);
-
                 setAmmoByPercentage(45);
 
-                lastPerk = PerkList.DEFAULT_NONE;
+                Perks.instance.SetSelectedCharacterPerk(PerkList.CHANCE_TO_PHASE);
+                lastPerk = PerkList.CHANCE_TO_PHASE;
                 break;
             case 4:
 
@@ -292,7 +449,8 @@ public class CharacterMenuController : MonoBehaviour
 
                 setAmmoByPercentage(45);
 
-                lastPerk = PerkList.DEFAULT_NONE;
+                Perks.instance.SetSelectedCharacterPerk(PerkList.TAKE_LESS_DAMAGE);
+                lastPerk = PerkList.TAKE_LESS_DAMAGE;
                 break;
             case 5:
 
@@ -301,9 +459,49 @@ public class CharacterMenuController : MonoBehaviour
 
                 setAmmoByPercentage(50);
 
-                lastPerk = PerkList.DEFAULT_NONE;
+                Perks.instance.SetSelectedCharacterPerk(PerkList.CHANCE_TO_HEAL_ON_HIT);
+                lastPerk = PerkList.CHANCE_TO_HEAL_ON_HIT;
+                break;
+
+            case 6:
+
+                setHpByPercentage(45);
+                setSpeedByPercentage(80);
+
+                setAmmoByPercentage(50);
+
+                Perks.instance.SetSelectedCharacterPerk(PerkList.LONGER_GRACE_PERIOD);
+                lastPerk = PerkList.LONGER_GRACE_PERIOD;
                 break;
         }
+
+        
+        PerksImage = Perks.instance.LastPerkImage; //SPrefs.GetString("LastPerkImageName", "none");
+    }
+
+    private void perksImgBtn_Clicked()
+    {
+        if(isShowing && showPerkDescription != null)
+        {
+            StopCoroutine(showPerkDescription);
+        }
+
+        showPerkDescription = StartCoroutine(ShowPerksDescription());
+
+
+    }
+
+    private IEnumerator ShowPerksDescription()
+    {
+        isShowing = true;
+
+        PerksDescription = Perks.instance.LastPerkDescription;
+        perksDescription.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.25f);
+
+        perksDescription.gameObject.SetActive(false);
+        isShowing = false;
     }
 
     private void adjustCharacterStats(int type, float percentage)
@@ -374,6 +572,12 @@ public class CharacterMenuController : MonoBehaviour
     {
         unlockedCharacters[index] = "unlocked";
         SPrefs.SetString("character_" + index, "unlocked");
+      //  SPrefs.Save();
+
+        baseSkinPrice += (int)(baseSkinPrice * unlockMultiplier);
+        SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
         SPrefs.Save();
     }
+
+
 }

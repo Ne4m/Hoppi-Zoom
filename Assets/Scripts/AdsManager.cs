@@ -23,6 +23,15 @@ public class AdsManager : MonoBehaviour
 
     private int interstitialTriggerCounter = 0;
 
+    private string mainMenuActiveUI;
+
+
+    public string MainMenuActiveUI
+    {
+        get => mainMenuActiveUI;
+        set => mainMenuActiveUI = value;
+    }
+
     //private enum AD_Location
     //{
     //    MainMenu,
@@ -92,7 +101,14 @@ public class AdsManager : MonoBehaviour
                     Debug.Log("Requested Banner!");
                 }
 
-
+                if(MainMenuActiveUI == "character")
+                {
+                    RequestRewarded_CharacterUnlock();
+                }
+                else if(MainMenuActiveUI == "accessory")
+                {
+                    RequestRewarded_SkinUnlock();
+                }
 
             }
             else if (bannerView != null)
@@ -216,6 +232,81 @@ public class AdsManager : MonoBehaviour
         rewardedAd.Destroy();
         RequestRewarded();
     }
+
+
+    // CHARRACTER UNLOCK 
+    #region CHARACTER UNLOCK
+    private void RequestRewarded_CharacterUnlock()
+    {
+        Debug.Log("Requesting Rewarded...");
+
+        rewardedAd = new RewardedAd(rewardedId);
+
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed_CharacterUnlock;
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward_CharacterUnlock;
+        rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow_CharacterUnlock;
+
+        AdRequest requestRewarded = new AdRequest.Builder().Build();
+
+        rewardedAd.LoadAd(requestRewarded);
+
+        // if (rewardedAd.IsLoaded()) Debug.Log("Rewarded Ad Is Loaded!");
+    }
+
+    public void HandleUserEarnedReward_CharacterUnlock(object sender, EventArgs args)
+    {
+        Debug.Log("REWARD FROM CHARACTER UNLOCK");
+        FindObjectOfType<CharacterMenuController>().ApplyAdDiscount();
+    }
+
+    public void HandleRewardedAdClosed_CharacterUnlock(object sender, EventArgs args)
+    {
+        rewardedAd.Destroy();
+        RequestRewarded_CharacterUnlock();
+    }
+
+    public void HandleRewardedAdFailedToShow_CharacterUnlock(object sender, EventArgs args)
+    {
+        FindObjectOfType<CharacterMenuController>().ApplyAdDiscount_Error();
+    }
+    #endregion
+
+    #region SKIN UNLOCK
+    private void RequestRewarded_SkinUnlock()
+    {
+        Debug.Log("Requesting Rewarded...");
+
+        rewardedAd = new RewardedAd(rewardedId);
+
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed_SkinUnlock;
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward_SkinUnlock;
+        rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow_SkinUnlock;
+
+        AdRequest requestRewarded = new AdRequest.Builder().Build();
+
+        rewardedAd.LoadAd(requestRewarded);
+
+        // if (rewardedAd.IsLoaded()) Debug.Log("Rewarded Ad Is Loaded!");
+    }
+
+    public void HandleUserEarnedReward_SkinUnlock(object sender, EventArgs args)
+    {
+        Debug.Log("REWARD FROM SKIN MANAGER UNLOCK");
+        FindObjectOfType<SkinManager>().ApplySkinAdDiscount();
+    }
+
+    public void HandleRewardedAdClosed_SkinUnlock(object sender, EventArgs args)
+    {
+        rewardedAd.Destroy();
+        RequestRewarded_SkinUnlock();
+    }
+
+    public void HandleRewardedAdFailedToShow_SkinUnlock(object sender, EventArgs args)
+    {
+        FindObjectOfType<SkinManager>().ApplySkinAdDiscount_Error();
+    }
+    #endregion
+
 
 
 

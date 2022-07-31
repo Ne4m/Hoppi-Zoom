@@ -222,6 +222,9 @@ public class MainMenu_Controller : MonoBehaviour
 
     private void canvasChangeUI(string IN)
     {
+
+        AdsManager.instance.MainMenuActiveUI = IN;
+
         switch (IN)
         {
             case "main":

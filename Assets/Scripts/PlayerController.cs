@@ -133,8 +133,12 @@ public class PlayerController : MonoBehaviour
 
         CheckJumpInput();
 
+        debugtxt.gameObject.SetActive(true);
+        debugtxt.text = _rb2D.velocity.magnitude.ToString();
 
-        if (_rb2D.velocity.y < 0 && !_levelManager.playerControl.IsPlayerInCheckPoint())
+        bool isInCP = _levelManager.playerControl.IsPlayerInCheckPoint();
+
+        if (_rb2D.velocity.y < 0 && !isInCP)
         {
             //_rb2D.velocity = new Vector2(_rb2D.velocity.x, (fallSpeed));
             SetGravity.On(_rb2D, fallSpeed);
@@ -143,6 +147,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             SetGravity.Off(_rb2D);
+        }
+
+        if(_rb2D.velocity.magnitude <= 0f && !isInCP && _levelManager.playerControl.getPoint() > 0)
+        {
+            if(Time.time > lastJump + 5f)
+            {
+                _levelManager.ResetPlayerPosition();
+            }
         }
     }
 

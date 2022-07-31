@@ -11,16 +11,16 @@ public enum PerkList
     REFUND_AMMO,
     CHANCE_TO_PHASE,
     TAKE_LESS_DAMAGE,
-    CHEAT_DEATH,
     MOVE_HORIZONTAL,
     CHANCE_TO_HEAL_ON_HIT,
-    DOUBLE_SHOT,
+    FASTER_BULLETS,
+    LONGER_GRACE_PERIOD,
     AMMO_RECHARGE
 }
 
 public class Perks : MonoBehaviour
 {
-    [HideInInspector]public static Perks instance;
+    [HideInInspector] public static Perks instance;
 
 
     private PerkList chosenPerk;
@@ -31,11 +31,26 @@ public class Perks : MonoBehaviour
 
     private bool rechargesAmmo = false;
 
+    private string lastPerkDescription, lastPerkImageName;
+
+    public string LastPerkDescription
+    {
+        get => lastPerkDescription;
+        set => lastPerkDescription = value;
+    }
+
+    public string LastPerkImage
+    {
+        get => lastPerkImageName;
+        set => lastPerkImageName = value;
+    }
+
 
 
     void Awake()
     {
-        if(instance == null)
+
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -44,6 +59,7 @@ public class Perks : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     void Start()
@@ -60,6 +76,7 @@ public class Perks : MonoBehaviour
         // Don't need this in final release but for development purposes it can stay for now.
         SetActivePerk(chosenPerk);
 
+        //characterMenuController.SetPerksDescription("TEST 123");
     }
 
     void Update()
@@ -69,6 +86,8 @@ public class Perks : MonoBehaviour
 
     public void SetActivePerk(PerkList PERKS)
     {
+        SetDefaultValues();
+
 
         switch (PERKS)
         {
@@ -76,41 +95,64 @@ public class Perks : MonoBehaviour
             case PerkList.REFUND_AMMO:
                 SetAmmoRewardThreshold(3);
                 SetAmmoReward(1);
+
+
+                SetPerkDescription("Gains Ammo More Frequently");
+                SetPerkImageName("FasterBullets");
                 break;
 
 
             case PerkList.AMMO_RECHARGE:
                 EnableAmmoRecharge();
+
+                SetPerkDescription("Ammo Recharges Overtime");
+                SetPerkImageName("AmmoRecharge");
                 break;
 
 
             case PerkList.CHANCE_TO_PHASE:
 
+
+                SetPerkDescription("Chance To Phase Through Objects");
+                SetPerkImageName("Phasing");
                 break;
 
 
             case PerkList.TAKE_LESS_DAMAGE:
 
-                break;
 
-
-            case PerkList.CHEAT_DEATH:
-
+                SetPerkDescription("Takes Less Damage");
+                SetPerkImageName("TakeLessDmg");
                 break;
 
 
             case PerkList.MOVE_HORIZONTAL:
 
+
+                SetPerkDescription("Can Move Horizontally On Checkpoints");
+                SetPerkImageName("MoveHorizontal");
                 break;
 
 
             case PerkList.CHANCE_TO_HEAL_ON_HIT:
 
+
+                SetPerkDescription("Chance To Heal On Kill");
+                SetPerkImageName("ChanceToHealOnKill");
                 break;
 
 
-            case PerkList.DOUBLE_SHOT:
+            case PerkList.FASTER_BULLETS:
 
+                SetPerkDescription("Your Bullets Travel Faster");
+                SetPerkImageName("FasterBullets");
+                break;
+
+            case PerkList.LONGER_GRACE_PERIOD:
+
+
+                SetPerkDescription("Longer Grace Period");
+                SetPerkImageName("LongerGracePeriod");
                 break;
 
             case PerkList.DEFAULT_NONE:
@@ -166,6 +208,10 @@ public class Perks : MonoBehaviour
 
     public void SetDefaultValues()
     {
+        SetPerkDescription("none");
+        SetPerkImageName("none");
+
+
         SetAmmoRewardThreshold(6);
         SetAmmoReward(1);
         DisableAmmoRecharge();
@@ -177,4 +223,20 @@ public class Perks : MonoBehaviour
         Debug.Log($"Chosen Perk: {chosenPerk}");
 
     }
+
+
+    private void SetPerkDescription(string value)
+    {
+        // SPrefs.SetString("LastPerkDescription", value);
+        LastPerkDescription = value;
+
+    }
+
+    private void SetPerkImageName(string value)
+    {
+        // SPrefs.SetString("LastPerkImageName", value);
+
+        LastPerkImage = value;
+    }
+
 }
