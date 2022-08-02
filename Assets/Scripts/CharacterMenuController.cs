@@ -103,11 +103,9 @@ public class CharacterMenuController : MonoBehaviour
 
     void Start()
     {
-        /// REMOVE ON LAUNCH
-        /// 
-        SPrefs.SetInt("gameCurrency", 50000);
-        SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
-        /// 
+
+
+
         messager = GetComponent<UIMessager>();
 
         if (perksImageBtn != null) perksImageBtn.onClick.AddListener(perksImgBtn_Clicked);
@@ -125,7 +123,7 @@ public class CharacterMenuController : MonoBehaviour
         SPrefs.SetString("character_" + 0, "unlocked");
         SPrefs.Save();
         
-        LockAllCharacters();
+
 
         for (int i = 0; i < characterSkins.Length; i++)
         {
@@ -149,6 +147,13 @@ public class CharacterMenuController : MonoBehaviour
         if (!(unlockButton is null)) unlockButton.onClick.AddListener(unlockButtonClicked);
 
 
+
+        /// REMOVE ON LAUNCH
+        /// 
+
+        LockAllCharacters();
+        SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
+        /// 
     }
 
     private void LockAllCharacters()
@@ -237,6 +242,9 @@ public class CharacterMenuController : MonoBehaviour
         titleText.color = Color.green;
         setCurrentIndex(currentCharacterIndex);
 
+        // bronu s2m
+
+        Perks.instance.EnableActivePerk();
 
         SPrefs.SetFloat("playerHealth", characterHealth);
         SPrefs.SetFloat("playerSpeed", characterSpeed);
@@ -274,7 +282,7 @@ public class CharacterMenuController : MonoBehaviour
 
     private void UnlockConfirmation_YesBtn_Clicked()
     {
-        AdsManager.instance.DisplayRewardedAd();
+        AdsManager.instance.DisplayRewardedAd_CharacterUnlock();
 
     }
 
@@ -314,7 +322,7 @@ public class CharacterMenuController : MonoBehaviour
 
     public void ApplyAdDiscount_Error()
     {
-        messager.startMsgv2("An Error Occured!", 3f, Vector3.zero, Color.red);
+        messager.startMsgv2("An Error Occured!", 1f, Vector3.zero, Color.red);
     }
 
     private void ManageUnlockPrice(int price, Action<bool> callback)
@@ -326,7 +334,7 @@ public class CharacterMenuController : MonoBehaviour
         SPrefs.SetInt("gameCurrency", balance);
         SPrefs.Save();
 
-        messager.startMsg($"UNLOCKED CHARACTER! FOR {price} STARS", 3f, Vector3.zero);
+        messager.startMsgv2($"CHARACTER UNLOCKED!", 1f, Vector3.zero, Color.green);
         callback(true);
     }
 
@@ -439,8 +447,8 @@ public class CharacterMenuController : MonoBehaviour
                 setSpeedByPercentage(30);
                 setAmmoByPercentage(45);
 
-                Perks.instance.SetSelectedCharacterPerk(PerkList.CHANCE_TO_PHASE);
-                lastPerk = PerkList.CHANCE_TO_PHASE;
+                Perks.instance.SetSelectedCharacterPerk(PerkList.MOVE_HORIZONTAL);
+                lastPerk = PerkList.MOVE_HORIZONTAL;
                 break;
             case 4:
 

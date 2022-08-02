@@ -16,6 +16,7 @@ public class MobileUtils : MonoBehaviour
 
     void Start()
     {
+
         StartCoroutine(FPS());
 
         //var pacing = PlayerSettings.Android.optimizedFramePacing;
@@ -30,9 +31,12 @@ public class MobileUtils : MonoBehaviour
 
         //}
 
-       // Debug.Log($"Screen Refresh {Screen.currentResolution.refreshRate}");
+        // Debug.Log($"Screen Refresh {Screen.currentResolution.refreshRate}");
+
+        OnDemandRendering.renderFrameInterval = 1;
 
     }
+
 
     private IEnumerator FPS()
     {
@@ -47,18 +51,6 @@ public class MobileUtils : MonoBehaviour
                 Application.targetFrameRate = Screen.currentResolution.refreshRate;
 
             }
-
-            if (LevelManager.instance.playerControl.isPlayerDead())
-            {
-                Debug.Log("Player Is DEAD!");
-                OnDemandRendering.renderFrameInterval = 2;
-            }
-            else
-            {
-                OnDemandRendering.renderFrameInterval = 1;
-            }
-
-
 
 
             // Capture frame-per-second

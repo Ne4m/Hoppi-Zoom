@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,6 +40,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotateSpeed = 100;
     [SerializeField] private float fallSpeed = 1.5f;
     [SerializeField] private float playerRotSpeed = 10;
+    [SerializeField] private float horizontalMovespeed;
+
+    [Header("Move Horizontal Buttons")]
+    [SerializeField] private Button moveLeftButton;
+    [SerializeField] private Button moveRightButton;
 
     public TMP_Text debugtxt;
 
@@ -62,6 +68,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+        if (moveLeftButton != null) moveLeftButton.onClick.AddListener(MoveLeftButton_Clicked);
+        if (moveRightButton != null) moveRightButton.onClick.AddListener(MoveRightButton_Clicked);
+
         _rb2D = GetComponent<Rigidbody2D>();
 
         //LM = gameObject.AddComponent(typeof(LevelManager)) as LevelManager;
@@ -105,6 +115,16 @@ public class PlayerController : MonoBehaviour
         comboBox2.AddOptions(LeanTween.GetTweenTypes());
     }
 
+    private void MoveLeftButton_Clicked()
+    {
+        MoveHorizontal("left");
+    }
+
+    private void MoveRightButton_Clicked()
+    {
+        MoveHorizontal("right");
+    }
+
     void Update()
     {
         
@@ -133,10 +153,11 @@ public class PlayerController : MonoBehaviour
 
         CheckJumpInput();
 
-        debugtxt.gameObject.SetActive(true);
-        debugtxt.text = _rb2D.velocity.magnitude.ToString();
+        //debugtxt.gameObject.SetActive(true);
+        //debugtxt.text = _rb2D.velocity.magnitude.ToString();
 
         bool isInCP = _levelManager.playerControl.IsPlayerInCheckPoint();
+        var point = _levelManager.playerControl.getPoint();
 
         if (_rb2D.velocity.y < 0 && !isInCP)
         {
@@ -149,12 +170,61 @@ public class PlayerController : MonoBehaviour
             SetGravity.Off(_rb2D);
         }
 
-        if(_rb2D.velocity.magnitude <= 0f && !isInCP && _levelManager.playerControl.getPoint() > 0)
+        if(_rb2D.velocity.magnitude <= 0f && !isInCP && point > 0)
         {
             if(Time.time > lastJump + 5f)
             {
                 _levelManager.ResetPlayerPosition();
             }
+        }
+
+         
+        if(isInCP && Perks.instance.CanMoveHorizontally && point > 0)
+        {
+
+            moveLeftButton.gameObject.SetActive(true);
+            moveRightButton.gameObject.SetActive(true);
+
+        }
+        else
+        {
+            moveLeftButton.gameObject.SetActive(false);
+            moveRightButton.gameObject.SetActive(false);
+        }
+
+    }
+
+    public void MoveHorizontal(string position)
+    {
+
+        var targetPos = transform.position;
+        var offSet = 1f;
+        var step = horizontalMovespeed * Time.deltaTime;
+
+        if (position == "left") // moving left
+        {
+
+            targetPos = new Vector3(targetPos.x - offSet, targetPos.y, targetPos.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+            FindObjectOfType<AudioManager>().Play("Move");
+        }
+        else if(position == "right") // moving right
+        {
+
+            targetPos = new Vector3(targetPos.x + offSet, targetPos.y, targetPos.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+            FindObjectOfType<AudioManager>().Play("Move");
+        }
+
+        if (transform.rotation != Quaternion.identity)
+        {
+
+            _levelManager.ResetPlayerPosition();
+            transform.rotation = Quaternion.identity;
+
+            transform.position = new Vector3(transform.position.x, transform.position.y + .248f, transform.position.z);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +22,24 @@ public class Bullet : MonoBehaviour
 
     private Vector3 startPosition;
 
+
+    public float BulletSpeed
+    {
+        get => bulletSpeed;
+        set
+        {
+            bulletSpeed = value;
+            Debug.Log($"Bullet Speed is set to {bulletSpeed}");
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
 
+
+        BulletSpeed = Perks.instance.BulletSpeed;
 
         startPosition = tr.position;
     }
@@ -72,10 +86,22 @@ public class Bullet : MonoBehaviour
             }
 
             Instantiate(particleFX, transform.position, Quaternion.identity);
-
             Destroy(collision.gameObject);
             Destroy(gameObject);
 
+            if (Perks.instance.ChanceToHeal)
+            {
+                var rnd = Random.Range(0, 100);
+
+                if(rnd < 25)
+                {
+                    var perc = Perks.instance.HealPercentage;
+                    FindObjectOfType<PlayerConditions>().HealthbarShow = true;
+                    LevelManager.instance.playerControl.percentageHeal(perc);
+                }
+
+
+            }
 
         }
         else if (collision.CompareTag("Chain"))
@@ -86,5 +112,7 @@ public class Bullet : MonoBehaviour
 
 
     }
+
+
 
 }

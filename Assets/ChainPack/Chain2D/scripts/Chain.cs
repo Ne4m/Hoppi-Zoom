@@ -237,7 +237,11 @@ public class Chain : MonoBehaviour
         coilACheck();
         coilBCheck();
 
+        CheckSnappedAnFalling();
+
         updateBreak();
+
+
     }
 
     // Катушка работает только, если есть привязка к А
@@ -1088,6 +1092,24 @@ public class Chain : MonoBehaviour
             }
         }
     }
+
+    public void CheckSnappedAnFalling()
+    {
+        for (int i = 0; i < links.Count; i++)
+        {
+            if (A.gameObject == null) return;
+            if (B.gameObject == null) return;
+
+            var link1 = links[i].hingle1_IsActiveAndConnectedTo(A.GetComponent<Rigidbody2D>());
+            var link2 = links[i].hingle1_IsActiveAndConnectedTo(B.GetComponent<Rigidbody2D>());
+
+            if (!link1 && !link2)
+            {
+                Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), links[i].rb2D.transform.GetComponent<Collider2D>(), true);
+            }
+        }
+    }
+
 
 
     // статический метод, который определяет является ли переданный объект звеном

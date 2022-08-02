@@ -24,6 +24,8 @@ public class UI_Animations : MonoBehaviour
 
     [SerializeField] private Button goBackMenuButton;
 
+    [SerializeField] private Button doubleEarningButton;
+
     private Vector3 containerMovePointVecs;
 
     private Vector3 startPos;
@@ -56,6 +58,9 @@ public class UI_Animations : MonoBehaviour
         if (!(continueButton is null)) continueButton.onClick.AddListener(continueButton_Clicked);
         if (!(goldPaidContinueButton is null)) goldPaidContinueButton.onClick.AddListener(goldPaidContinueButton_Clicked);
         if (!(goBackMenuButton is null)) goBackMenuButton.onClick.AddListener(GoBackMenuButton_Clicked);
+        if (!(doubleEarningButton is null)) doubleEarningButton.onClick.AddListener(DoubleEarningButton_Clicked);
+
+        doubleEarningButton.interactable = true;
 
         containerMovePointVecs = containerMovePoint.GetComponent<RectTransform>().position;
 
@@ -66,6 +71,22 @@ public class UI_Animations : MonoBehaviour
         startPosition.FreeContinue = watchAdButton.transform.position;
         startPosition.PaidContinue = goldPaidContinueButton.transform.position;
 
+    }
+
+    private void DoubleEarningButton_Clicked()
+    {
+        doubleEarningButton.interactable = false;
+        AdsManager.instance.DisplayRewardedAd_DoubleEarn();
+    }
+
+    public void GiveEarningButtonReward()
+    {
+
+    }
+
+    public void EarningButtonReward_Error()
+    {
+        Debug.Log("An error occured while doubling points!!");
     }
 
     private void goldPaidContinueButton_Clicked()
@@ -155,7 +176,13 @@ public class UI_Animations : MonoBehaviour
             title.LeanScale(new Vector3(_scale.x + 0.7796129f, _scale.y + 0.7796129f, _scale.z + 0.7796129f), 3f).setLoopPingPong().setEase(LeanTweenType.easeInOutElastic).setIgnoreTimeScale(true);
             LeanTween.rotateAroundLocal(titleBackground, Vector3.back, 360, rotateSpeed).setLoopClamp().setIgnoreTimeScale(true);
         }
-        
+
+        var btnScale = doubleEarningButton.transform.localScale;
+        var btnScaleOffset = 0.025f;
+        doubleEarningButton.gameObject.LeanScale(new Vector3(btnScale.x + btnScaleOffset, btnScale.y + btnScaleOffset, btnScale.z + btnScaleOffset), 2.15f)
+            .setLoopType(LeanTweenType.linear)
+            .setEase(LeanTweenType.easeShake)
+            .setIgnoreTimeScale(true);
 
     }
 

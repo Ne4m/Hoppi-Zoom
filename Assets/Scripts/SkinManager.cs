@@ -69,6 +69,12 @@ public class SkinManager : MonoBehaviour
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private TMP_Text skinTitle;
 
+    private Coroutine DistributeAdReward;
+    private bool isAdRewardTaskRunning = false;
+
+    private int discountedPrice;
+    private int lastSkinPrice;
+    private string lastSkinName;
 
     private Sprite lastClickedSkinSprite;
     private Color32 NONE_COLOR = new Color32(255, 255, 255, 0);
@@ -124,7 +130,7 @@ public class SkinManager : MonoBehaviour
 
     void Start()
     {
-        lockEveryItems();
+        //lockEveryItems();
 
         messager = gameObject.GetComponent<UIMessager>();
 
@@ -434,6 +440,8 @@ public class SkinManager : MonoBehaviour
                     Tab3_Button_Clicked();
                     break;
             }
+
+
         }
         else
         {
@@ -624,90 +632,115 @@ public class SkinManager : MonoBehaviour
        // ManageAppliedSkin(skinName);
     }
 
+    private void MakeTransaction(int price)
+    {
+        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER;
+        currency -= price;
+        SPrefs.SetInt("gameCurrency", currency);
+        SPrefs.Save();
+    }
+
+    private void UnlockSkin(string name)
+    {
+        SPrefs.SetBool($"skin_{name}_locked", false);
+        SPrefs.Save();
+
+        Debug.Log($"Unlocked {name}");
+    }
+
     public void ShowUnlockPanel(Sprite image, string name, int price)
     {
-        //[SerializeField] private GameObject unlockSkin_Panel;
-        //[SerializeField] private Button unlockButton;
-        //[SerializeField] private Button adUnlockButton;
-        //[SerializeField] private Image skinImage;
-        //[SerializeField] private TMP_Text priceText;
-        //[SerializeField] private TMP_Text skinTitle;
 
-        unlockSkin_Panel.transform.gameObject.SetActive(true);
-        Debug.Log($"Image name: {image.name}");
-        skinImage.sprite = image;
-        priceText.text = price.ToString();
-        skinTitle.text = name;
+        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
+
+        if(currency >= price)
+        {
+            unlockSkin_Panel.transform.gameObject.SetActive(true);
+            Debug.Log($"Image name: {image.name}");
+            skinImage.sprite = image;
+            priceText.text = price.ToString();
+            skinTitle.text = name;
+
+            discountedPrice = price / 2;
+
+            lastSkinPrice = price;
+            lastSkinName = name;
+        }
+        else
+        {
+            messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
+            unlockSkin_Panel.transform.gameObject.SetActive(false);
+        }
+
 
     }
 
     private void UnlockButton_Clicked()
     {
-        var skinName = SPrefs.GetString("LastClickedSkin", "none");
-        Debug.Log($"Unlock request for {skinName} received!");
+        Debug.Log($"Unlock request for {lastSkinName} received!");
 
-        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
-        var price = SPrefs.GetInt("LastClickedSkinPrice");
+        unlockSkin_Panel.transform.gameObject.SetActive(false);
 
-        if (currency >= price)
-        {
-            currency -= price;
-
-            SPrefs.SetBool($"skin_{skinName}_locked", false);
-            SPrefs.SetInt("gameCurrency", currency);
-            Debug.Log($"Unlocked {skinName}");
-            SPrefs.Save();
-
-            unlockSkin_Panel.transform.gameObject.SetActive(false);
-            ManageAppliedSkin(skinName);
-            RefreshUI();
-
-            messager.startMsg($"Successfully Unlocked {skinTitle.text} {price}", 2f, Vector3.zero);
-        }
-        else
-        {
-            messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
-        }
-
+        UnlockSkin(lastSkinName);
+        MakeTransaction(lastSkinPrice);
+        ManageAppliedSkin(lastSkinName);
+        RefreshUI();
 
 
     }
 
     private void AdUnlockButton_Clicked()
     {
-        AdsManager.instance.DisplayRewardedAd();
+
+        AdsManager.instance.DisplayRewardedAd_SkinUnlock();
     }
 
     public void ApplySkinAdDiscount()
     {
-        var skinName = SPrefs.GetString("LastClickedSkin", "none");
-        Debug.Log($"Unlock request for {skinName} received!");
+        Debug.Log($"Unlock request for {lastSkinName} received!");
 
-        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
-        var discountedPrice = (int)(SPrefs.GetInt("LastClickedSkinPrice") * 0.5);
-        if (currency >= discountedPrice)
-        {
-            currency -= discountedPrice;
+        if (isAdRewardTaskRunning) StopCoroutine(DistributeAdReward);
+        DistributeAdReward = StartCoroutine(GetAdRewardTask());
+    }
 
-            SPrefs.SetBool($"skin_{skinName}_locked", false);
-            SPrefs.SetInt("gameCurrency", currency);
-            Debug.Log($"Unlocked {skinName}");
-            SPrefs.Save();
+    private IEnumerator GetAdRewardTask()
+    {
 
-            unlockSkin_Panel.transform.gameObject.SetActive(false);
-            ManageAppliedSkin(skinName);
-            RefreshUI();
+        isAdRewardTaskRunning = true;
 
-            messager.startMsg($"Successfully Unlocked {skinTitle.text} For {discountedPrice} Stars", 2f, Vector3.zero);
-        }
-
-
+        UnlockSkin(lastSkinName);
+        MakeTransaction(discountedPrice);
+        ManageAppliedSkin(lastSkinName);
         unlockSkin_Panel.transform.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        RefreshContent();
+
+        messager.startMsg("UNLOCKED!", 1f, Vector3.zero);
+        isAdRewardTaskRunning = false;
+    }
+
+    private void RefreshContent()
+    {
+
+        switch (GetSkinPath())
+        {
+            case "Hats":
+                Tab1_Button_Clicked();
+                break;
+            case "Hairs":
+                Tab2_Button_Clicked();
+                break;
+            case "Body":
+                Tab3_Button_Clicked();
+                break;
+        }
     }
 
     public void ApplySkinAdDiscount_Error()
     {
-        messager.startMsgv2("An Error Occured!", 2f, Vector3.zero, Color.red);
+        Debug.Log("An Error Occured! SkinAdUnlock");
     }
 
     public void SetTitleText(string txt)

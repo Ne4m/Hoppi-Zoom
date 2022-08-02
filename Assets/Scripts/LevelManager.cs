@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     [Header("Currency Stuff")]
     [SerializeField] private int earnPercent;
     [SerializeField] private int totalCurrency;
-    [SerializeField] private int currentCurrency;
+    [SerializeField] private int currentCurrency = 0;
 
     [SerializeField]
     private GameObject playerEjectorArrow;
@@ -58,7 +58,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text goldContinuePriceText;
     private int goldContinuePrice;
 
-    private bool isINCP;
 
     //[SerializeField]
     //private int point = 0;
@@ -108,12 +107,21 @@ public class LevelManager : MonoBehaviour
         private float speed;
         private float rotateSpeed;
 
-        public playerInfo(float maxHealth, float speed, float rotateSpeed)
+        private int dmgReduction = 0;
+
+        public playerInfo(float maxHealth, float speed, float rotateSpeed, int dmgReduction)
         {
             this.currentHealth = maxHealth;
             this.maxHealth = maxHealth;
             this.speed = speed;
             this.rotateSpeed = rotateSpeed;
+            this.dmgReduction = dmgReduction;
+        }
+
+        public int DamageReduction
+        {
+            get => dmgReduction;
+            set => dmgReduction = value;
         }
 
         public bool IsPlayerInCheckPoint()
@@ -230,12 +238,18 @@ public class LevelManager : MonoBehaviour
 
         public void damage(float amount)
         {
+            amount = amount - (amount * DamageReduction/100);
+
             if(amount > maxHealth)
             {
                 this.setHealth(0);
             }
 
-            if(amount > 0 && amount < maxHealth) setHealth(currentHealth-amount);
+            if(amount > 0 && amount < maxHealth)
+            {
+                setHealth(currentHealth - amount);
+
+            }
         }
 
         // Game Restart
@@ -257,7 +271,8 @@ public class LevelManager : MonoBehaviour
 
         playerControl = new playerInfo(SPrefs.GetFloat("playerHealth", 1000),
                                        SPrefs.GetFloat("playerSpeed", 1000),
-                                       SPrefs.GetFloat("rotateSpeed", 100));
+                                       SPrefs.GetFloat("rotateSpeed", 100),
+                                       Perks.instance.DamageReduction);
 
         playerControl.setPlayerCheckPoint(true);
         playerControl.setPoint(0);
@@ -304,6 +319,8 @@ public class LevelManager : MonoBehaviour
 
         playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
+
+
     }
 
     private void OutOfBoundsCheck()
@@ -374,6 +391,8 @@ public class LevelManager : MonoBehaviour
                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
                             $"AMMO: {shooting.GetCurrentAmmo()}");
 
+
+        
     }
 
     public void getHit(float amount)
@@ -406,7 +425,7 @@ public class LevelManager : MonoBehaviour
 
     public void bringDeathMenu()
     {
-        
+
         playerControl.setPlayerDeadStatus(true);
         player.GetComponent<SpriteRenderer>().enabled = false;
         if (playerEjectorArrow != null) playerEjectorArrow.SetActive(false);
@@ -426,8 +445,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Button Score:" + endgameScore_text.text);
 
 
-        currentCurrency = (playerControl.getPoint() * earnPercent) / 100;
-
+        currentCurrency += (playerControl.getPoint() * earnPercent) / 100;
         endgameEarnedGold_text.text = currentCurrency.ToString();
 
         //debug_text.text = currentCurrency.ToString();
@@ -464,8 +482,18 @@ public class LevelManager : MonoBehaviour
         PauseGame();
     }
 
+    public void DoubleEarnedCurrency()
+    {
+        currentCurrency *= 2;
+
+        endgameEarnedGold_text.text = currentCurrency.ToString();
+
+        goBackMainMenu();
+    }
+
     public void onContinue()
     {
+
         ResetPlayerPosition();
         //player.position = lastCheckpoint;
 
@@ -500,6 +528,7 @@ public class LevelManager : MonoBehaviour
         {
             totalCurrency -= goldContinuePrice;
             SPrefs.SetInt("gameCurrency", totalCurrency);
+            SPrefs.Save();
             onContinue();
 
         }

@@ -104,7 +104,7 @@ public class MainMenu_Controller : MonoBehaviour
     {
 
 
-            usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
+          //  usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
 
 
         //if (Application.platform == RuntimePlatform.Android)
@@ -253,6 +253,8 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(true);
+                accessoryMenu.TryGetComponent<SkinManager>(out SkinManager skinManager);
+                skinManager.RefreshUI();
                 isAtMainMenu = false;
                 break;
         }

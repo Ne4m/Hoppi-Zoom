@@ -39,42 +39,30 @@ public class PlatformSpawner : MonoBehaviour
         platformArray.hard = Resources.LoadAll<GameObject>("Platforms/3_Hard");
 
         platformListArr = platformArray.easy;
-        //platformList = platformListArr.ToList();
-
-        //for(int i=0; i < platformListArr.Length; i++)
-        //{
-        //    Debug.Log($"Loaded platform No {i+1}: {platformListArr[i].name}\n");
-        //}
-
-        //Debug.Log($"Total Platform Count {platformList.Count}");
-       // StartCoroutine(ExampleCoroutine());
+ 
     }
-
-    //private void OnDrawGizmos()
-    //{
-        
-    //    if (platformListArr.Length < 1)
-    //    {
-    //        platformListArr = Resources.LoadAll<GameObject>("Platforms");
-    //    }
-
-    //    Debug.Log($"Platform count: {platformListArr.Length}");
-    //}
-
 
 
 
     void Update()
     {
-        if(lm.playerControl.getPoint() > 4 && lm.playerControl.getPoint() < 10)
+        if(lm.playerControl.getPoint() > 25 && lm.playerControl.getPoint() < 50)
         {
-            platformListArr = platformArray.normal;
-            Debug.Log("Loaded Normal Platforms");
+            if(platformListArr != platformArray.normal)
+            {
+                platformListArr = platformArray.normal;
+                Debug.Log("Loaded Normal Platforms");
+            }
+
         }
-        else if (lm.playerControl.getPoint() >= 10)
+        else if (lm.playerControl.getPoint() >= 50)
         {
-            platformListArr = platformArray.hard;
-            Debug.Log("Loaded Hard Platform");
+            if(platformListArr != platformArray.hard)
+            {
+                platformListArr = platformArray.hard;
+                Debug.Log("Loaded Hard Platform");
+            }
+
         }
 
 

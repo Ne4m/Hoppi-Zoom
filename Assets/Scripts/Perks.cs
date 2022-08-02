@@ -29,7 +29,15 @@ public class Perks : MonoBehaviour
     private int ammoRewardThreshold = 6;
     private int ammoReward = 1;
 
+    private int healPercentage = 10;
+
     private bool rechargesAmmo = false;
+    private bool canMoveHorizontally = false;
+    private bool chanceToHealOnDestruction = false;
+
+    private float fasterBulletValue;
+    private float longerGracePeriodValue;
+    private int dmgReductionPercent;
 
     private string lastPerkDescription, lastPerkImageName;
 
@@ -45,7 +53,41 @@ public class Perks : MonoBehaviour
         set => lastPerkImageName = value;
     }
 
+    public float BulletSpeed
+    {
+        get => fasterBulletValue;
+        set => fasterBulletValue = value;
+    }
 
+    public float GracePeriod
+    {
+        get => longerGracePeriodValue;
+        set => longerGracePeriodValue = value;
+    }
+
+    public int DamageReduction
+    {
+        get => dmgReductionPercent;
+        set => dmgReductionPercent = value;
+    }
+
+    public bool CanMoveHorizontally
+    {
+        get => canMoveHorizontally;
+        set => canMoveHorizontally = value;
+    }
+
+    public bool ChanceToHeal
+    {
+        get => chanceToHealOnDestruction;
+        set => chanceToHealOnDestruction = value;
+    }
+
+    public float HealPercentage
+    {
+        get => healPercentage;
+        private set { }
+    }
 
     void Awake()
     {
@@ -66,18 +108,20 @@ public class Perks : MonoBehaviour
     {
 
 
-        //foreach (var PERK in Enum.GetValues(typeof(PerkList)))
-        //{
-        //}
+
         string lastPerkStr = SPrefs.GetString("LastSelectedPerk", PerkList.DEFAULT_NONE.ToString());
         Enum.TryParse(lastPerkStr, out chosenPerk);
-       // Debug.Log($"CHOSEN PERK BY HAND IS {lastPerkStr} & {chosenPerk}");
+       
 
         // Don't need this in final release but for development purposes it can stay for now.
         SetActivePerk(chosenPerk);
+        EnableActivePerk();
 
-        //characterMenuController.SetPerksDescription("TEST 123");
+
     }
+
+
+    Action EnabledPerk;
 
     void Update()
     {
@@ -93,9 +137,13 @@ public class Perks : MonoBehaviour
         {
 
             case PerkList.REFUND_AMMO:
-                SetAmmoRewardThreshold(3);
-                SetAmmoReward(1);
 
+
+                EnabledPerk = () =>
+                {
+                    SetAmmoRewardThreshold(3);
+                    SetAmmoReward(1);
+                };
 
                 SetPerkDescription("Gains Ammo More Frequently");
                 SetPerkImageName("FasterBullets");
@@ -103,7 +151,11 @@ public class Perks : MonoBehaviour
 
 
             case PerkList.AMMO_RECHARGE:
-                EnableAmmoRecharge();
+
+                EnabledPerk = () =>
+                {
+                    EnableAmmoRecharge();
+                };
 
                 SetPerkDescription("Ammo Recharges Overtime");
                 SetPerkImageName("AmmoRecharge");
@@ -112,6 +164,10 @@ public class Perks : MonoBehaviour
 
             case PerkList.CHANCE_TO_PHASE:
 
+                EnabledPerk = () =>
+                {
+
+                };
 
                 SetPerkDescription("Chance To Phase Through Objects");
                 SetPerkImageName("Phasing");
@@ -120,6 +176,10 @@ public class Perks : MonoBehaviour
 
             case PerkList.TAKE_LESS_DAMAGE:
 
+                EnabledPerk = () =>
+                {
+                    DamageReduction = 40; // %40 Percent Less Damage
+                };
 
                 SetPerkDescription("Takes Less Damage");
                 SetPerkImageName("TakeLessDmg");
@@ -128,6 +188,10 @@ public class Perks : MonoBehaviour
 
             case PerkList.MOVE_HORIZONTAL:
 
+                EnabledPerk = () =>
+                {
+                    CanMoveHorizontally = true;
+                };
 
                 SetPerkDescription("Can Move Horizontally On Checkpoints");
                 SetPerkImageName("MoveHorizontal");
@@ -136,13 +200,23 @@ public class Perks : MonoBehaviour
 
             case PerkList.CHANCE_TO_HEAL_ON_HIT:
 
+                EnabledPerk = () =>
+                {
+                    ChanceToHeal = true;
+                };
 
-                SetPerkDescription("Chance To Heal On Kill");
+                SetPerkDescription("Chance To Heal On Destruction");
                 SetPerkImageName("ChanceToHealOnKill");
                 break;
 
 
             case PerkList.FASTER_BULLETS:
+
+
+                EnabledPerk = () =>
+                {
+                    BulletSpeed = 2250f;
+                };
 
                 SetPerkDescription("Your Bullets Travel Faster");
                 SetPerkImageName("FasterBullets");
@@ -151,7 +225,14 @@ public class Perks : MonoBehaviour
             case PerkList.LONGER_GRACE_PERIOD:
 
 
-                SetPerkDescription("Longer Grace Period");
+
+                EnabledPerk = () =>
+                {
+                    GracePeriod = 2.5f;
+                };
+
+
+                SetPerkDescription("Longer Grace Period After Getting Hit");
                 SetPerkImageName("LongerGracePeriod");
                 break;
 
@@ -163,6 +244,12 @@ public class Perks : MonoBehaviour
                 SetDefaultValues();
                 break;
         }
+    }
+
+    public void EnableActivePerk()
+    {
+
+        EnabledPerk?.Invoke();
     }
 
     #region REFUND_AMMO PERK
@@ -208,6 +295,13 @@ public class Perks : MonoBehaviour
 
     public void SetDefaultValues()
     {
+
+        BulletSpeed = 850f;
+        GracePeriod = 1.25f;
+        DamageReduction = 0;
+        CanMoveHorizontally = false;
+        ChanceToHeal = false;
+
         SetPerkDescription("none");
         SetPerkImageName("none");
 
