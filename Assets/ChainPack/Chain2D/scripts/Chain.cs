@@ -237,7 +237,7 @@ public class Chain : MonoBehaviour
         coilACheck();
         coilBCheck();
 
-        CheckSnappedAnFalling();
+        CheckSnappedAndFalling();
 
         updateBreak();
 
@@ -1093,7 +1093,7 @@ public class Chain : MonoBehaviour
         }
     }
 
-    public void CheckSnappedAnFalling()
+    public void CheckSnappedAndFalling()
     {
         for (int i = 0; i < links.Count; i++)
         {
@@ -1106,6 +1106,7 @@ public class Chain : MonoBehaviour
             if (!link1 && !link2)
             {
                 Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), links[i].rb2D.transform.GetComponent<Collider2D>(), true);
+                Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), B.GetComponent<Collider2D>(), true);
             }
         }
     }

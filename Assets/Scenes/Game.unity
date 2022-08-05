@@ -4134,14 +4134,14 @@ MonoBehaviour:
   sounds:
   - name: Shoot
     clip: {fileID: 8300000, guid: b520d4569a05af84280d0f29ec781f88, type: 3}
-    volume: 1
+    volume: 0.815
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Bounce
     clip: {fileID: 8300000, guid: ab4e621685bbdf849a49d63fd2ace977, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 1.16
     loop: 0
     source: {fileID: 0}
   - name: Jump
@@ -4152,8 +4152,26 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Move
     clip: {fileID: 8300000, guid: f118b43de8f27434fb77a54c594a941b, type: 3}
-    volume: 0.5
+    volume: 0.3
+    pitch: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: Destruction
+    clip: {fileID: 8300000, guid: 6426c78469dd13549a71c01c2d32c5f1, type: 3}
+    volume: 1
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Invalid
+    clip: {fileID: 8300000, guid: 5c7ae21982c01c342a0ae01f9aab8b0a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Checkpoint
+    clip: {fileID: 8300000, guid: dcf994b07f2418448a8374bee3d9741d, type: 3}
+    volume: 0.35
+    pitch: 2.65
     loop: 0
     source: {fileID: 0}
 --- !u!1 &632280105
@@ -14562,45 +14580,43 @@ PrefabInstance:
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.x
-      value: 4.86
+      value: 0.7335849
       objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.y
-      value: 5.5
+      value: 0.8301887
       objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2a474726fb8e0b54ca6b80799eb9f055,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 166822749688623186, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.x
-      value: 4.51
+      value: 0.456
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Size.y
-      value: 4.56
+      value: 0.456
       objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: aceeb2d1a5c63c24f958ea72711e0526,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_SortingOrder
@@ -14609,7 +14625,7 @@ PrefabInstance:
     - target: {fileID: 683518613341250177, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6610218157884583271, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
@@ -15074,6 +15090,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774137051624914277, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6a28820b4afda5418e74dddccf8fed9, type: 3}

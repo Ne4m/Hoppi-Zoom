@@ -131,7 +131,7 @@ public class Shooting : MonoBehaviour
 
     public void Shoot()
     {
-        if (currentAmmo <= 0) return;
+       // if (currentAmmo <= 0) return;
 
         Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 

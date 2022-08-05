@@ -82,12 +82,15 @@ public class Bullet : MonoBehaviour
             if (!canDestroy)
             {
                 Destroy(gameObject);
+                AudioManager.instance.Play("Invalid");
                 return;
             }
 
             Instantiate(particleFX, transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
             Destroy(gameObject);
+
+            AudioManager.instance.Play("Destruction");
 
             if (Perks.instance.ChanceToHeal)
             {

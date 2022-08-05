@@ -207,7 +207,14 @@ public class PlayerController : MonoBehaviour
             targetPos = new Vector3(targetPos.x - offSet, targetPos.y, targetPos.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
-            FindObjectOfType<AudioManager>().Play("Move");
+            //FindObjectOfType<AudioManager>().Play("Move");
+
+            AudioManager.instance.IsPlaying("Move", (cb) =>
+            {
+                if (cb) return;
+
+                AudioManager.instance.Play("Move");
+            });
         }
         else if(position == "right") // moving right
         {
@@ -215,7 +222,14 @@ public class PlayerController : MonoBehaviour
             targetPos = new Vector3(targetPos.x + offSet, targetPos.y, targetPos.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
-            FindObjectOfType<AudioManager>().Play("Move");
+            //FindObjectOfType<AudioManager>().Play("Move");
+
+            AudioManager.instance.IsPlaying("Move", (cb) =>
+            {
+                if (cb) return;
+
+                AudioManager.instance.Play("Move");
+            });
         }
 
         if (transform.rotation != Quaternion.identity)
@@ -604,7 +618,12 @@ public class PlayerController : MonoBehaviour
 
             //transform.rotation = Quaternion.identity;
 
+            AudioManager.instance.IsPlaying("Checkpoint", isPlaying =>
+            {
+                if (isPlaying) return;
 
+                AudioManager.instance.Play("Checkpoint");
+            });
         }
 
         // if (collision.CompareTag("Background"))

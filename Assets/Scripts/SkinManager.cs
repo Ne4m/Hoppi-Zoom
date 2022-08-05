@@ -84,7 +84,7 @@ public class SkinManager : MonoBehaviour
 
     private enum HAT_SKINS
     {
-        skin_purple_hat = 128,
+        skin_sun_glasses = 150,
         skin_50sMilitary = 100,
         skin_50sNurse = 200,
         skin_antlers = 300,
@@ -106,9 +106,17 @@ public class SkinManager : MonoBehaviour
 
     private enum HAIR_SKINS
     {
-        skin_hair_1 = 100,
-        skin_hair_2 = 200,
-        skin_hair_3 = 1300
+        skin_hair1 = 100,
+        skin_hair2 = 200,
+        skin_hair3 = 1300,
+        skin_hair4 = 100,
+        skin_hair5 = 200,
+        skin_hair6 = 100,
+        skin_hair7 = 100,
+        skin_hair8 = 100,
+        skin_hair9= 100,
+        skin_hair10 = 100,
+        skin_hair11 = 100
 
     }
 
@@ -117,7 +125,8 @@ public class SkinManager : MonoBehaviour
         skin_torso = 131,
         skin_torso_blue = 1345,
         skin_torso_black = 222,
-        skin_sun_glasses = 150
+        skin_nurse_body = 100,
+        skin_duck = 100
 
     }
 
@@ -572,6 +581,7 @@ public class SkinManager : MonoBehaviour
 
     }
 
+
     private void EquipBodyAccessory(string itemName)
     {
         if (itemName == "none")
@@ -591,6 +601,18 @@ public class SkinManager : MonoBehaviour
             characterBodyImg.color = new Color32(255, 255, 255, 255);
             characterBodyImg.sprite = Resources.Load<Sprite>($"Accessories/Body/{itemName}");
             characterBody.GetComponent<RectTransform>().pivot = characterBodyImg.sprite.pivot / characterBodyImg.sprite.rect.size;
+
+            if(itemName == "duck")
+            {
+                characterBodyImg.transform.localScale = new Vector3(0.9728624f, 0.9728624f, 0.9728624f);
+                characterBodyImg.transform.localPosition = new Vector3(6f, 6f, 0f);
+            }
+            else
+            {
+                characterBodyImg.transform.localScale = new Vector3(0.5262983f, 0.5262983f, 0.5262983f);
+                characterBodyImg.transform.localPosition = new Vector3(2f, 6f, 0f);
+
+            }
 
             SPrefs.SetString("PlayerBody", itemName);
             SPrefs.Save();
