@@ -79,6 +79,8 @@ public class SkinManager : MonoBehaviour
     private Sprite lastClickedSkinSprite;
     private Color32 NONE_COLOR = new Color32(255, 255, 255, 0);
 
+    private bool canShowPanel = true;
+
 
     [SerializeField] private UIMessager messager;
 
@@ -143,7 +145,7 @@ public class SkinManager : MonoBehaviour
 
     void Start()
     {
-        //lockEveryItems();
+        lockEveryItems();
 
         messager = gameObject.GetComponent<UIMessager>();
 
@@ -698,27 +700,30 @@ public class SkinManager : MonoBehaviour
 
     public void ShowUnlockPanel(Sprite image, string name, int price)
     {
-
-        var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
-
-        if(currency >= price)
+        if (canShowPanel)
         {
-            unlockSkin_Panel.transform.gameObject.SetActive(true);
-            Debug.Log($"Image name: {image.name}");
-            skinImage.sprite = image;
-            priceText.text = price.ToString();
-            skinTitle.text = name;
+            var currency = SPrefs.GetInt("gameCurrency", 0); // IMPLEMENT FROM PLAY STORE LATER
 
-            discountedPrice = price / 2;
+            if (currency >= price)
+            {
+                unlockSkin_Panel.transform.gameObject.SetActive(true);
+                Debug.Log($"Image name: {image.name}");
+                skinImage.sprite = image;
+                priceText.text = price.ToString();
+                skinTitle.text = name;
 
-            lastSkinPrice = price;
-            lastSkinName = name;
+                discountedPrice = price / 2;
+
+                lastSkinPrice = price;
+                lastSkinName = name;
+            }
+            else
+            {
+                messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
+                unlockSkin_Panel.transform.gameObject.SetActive(false);
+            }
         }
-        else
-        {
-            messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
-            unlockSkin_Panel.transform.gameObject.SetActive(false);
-        }
+
 
 
     }
@@ -760,13 +765,15 @@ public class SkinManager : MonoBehaviour
         MakeTransaction(discountedPrice);
         ManageAppliedSkin(lastSkinName);
         unlockSkin_Panel.transform.gameObject.SetActive(false);
+        canShowPanel = false;
 
         yield return new WaitForSeconds(2f);
 
         RefreshContent();
 
-        messager.startMsg("UNLOCKED!", 1f, Vector3.zero);
+        messager.startMsg(I18n.Fields["T_UI_SKIN_UNLOCKED"], 1f, Vector3.zero);
         isAdRewardTaskRunning = false;
+        canShowPanel = true;
     }
 
     private void RefreshContent()
