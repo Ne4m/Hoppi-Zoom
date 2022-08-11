@@ -11,18 +11,23 @@ using TMPro;
 public class MainMenu_Controller : MonoBehaviour
 {
 
-    private string playerModelSkin;
-    private string playerArrowSkin;
+    [SerializeField] private Text messager;
 
     [Header("Canvas UI Buttons")] 
     [SerializeField] private Button characterMenuBack;
     [SerializeField] private Button shopMenuBack;
 
+
+    [Header("Language Page Stuff")]
+    [SerializeField] private Button languagePageCallButton;
+    [SerializeField] private GameObject languagePage;
+    [SerializeField] private Button languagePageBack;
+
     [Header("Quit Prompt Dialogue")]
     [SerializeField] GameObject quitPromptContainer;
     [SerializeField] TMP_Text quitGameText;
     [SerializeField] private Button yesBtn, noBtn;
-    private bool isAtMainMenu;
+    private bool isAtMainMenu = true;
     
     [Header("Canvas UI Objects")] 
     [SerializeField] private GameObject mainMenu;
@@ -33,6 +38,7 @@ public class MainMenu_Controller : MonoBehaviour
     [Header ("Info Page Stuff")]
     [SerializeField] private GameObject infoPage;
     [SerializeField] private Button closeInfoPageButton;
+    [SerializeField] private TMP_Text infoPageText;
 
     [Header("Middle Buttons")] 
     [SerializeField] private Button playButton;
@@ -51,6 +57,7 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private Button musicButton;
     [SerializeField] private Button shareButton;
     [SerializeField] private Button infoButton;
+    [SerializeField] private Button languageButton;
 
     [Header("Username Google Play Test")]
     [SerializeField] private TMP_Text usernameTxt;
@@ -70,6 +77,18 @@ public class MainMenu_Controller : MonoBehaviour
         
         if(!(characterMenuBack is null)) characterMenuBack.onClick.AddListener(canvasBackMainMenu);
         if(!(shopMenuBack is null)) shopMenuBack.onClick.AddListener(canvasBackMainMenu);
+
+        if (!(languagePageBack is null)) languagePageBack.onClick.AddListener(() =>
+        {
+            languagePage.SetActive(false);
+        });
+
+        if (!(languagePageCallButton is null)) languagePageCallButton.onClick.AddListener(() =>
+        {
+            languagePage.SetActive(true);
+        });
+
+        languagePageCallButton.gameObject.SetActive(true);
 
         // Quit Prompt Dialogue Stuff
         if (yesBtn is not null) yesBtn.onClick.AddListener(yesBtn_Clicked);
@@ -91,12 +110,15 @@ public class MainMenu_Controller : MonoBehaviour
         if (!(musicButton is null)) musicButton.onClick.AddListener(changeMusicButton);
         if(!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
         if(!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
+        if (!(languageButton is null)) languageButton.onClick.AddListener(languageButtonClicked);
 
         PlayGamesPlatform.DebugLogEnabled = true;
         platform = PlayGamesPlatform.Activate();
 
         FindObjectOfType<AudioManager>().Play("Main");
     }
+
+    
 
 
     // Update is called once per frame
@@ -115,7 +137,37 @@ public class MainMenu_Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isAtMainMenu) ExitGameConfirmation();
+            
+
+            if (infoPage.gameObject.activeSelf)
+            {
+                infoPage.SetActive(false);
+                canvasChangeUI("main");
+            }
+            else if (languagePage.gameObject.activeSelf)
+            {
+                languagePage.SetActive(false);
+                canvasChangeUI("main");
+            }
+            else if(isAtMainMenu) ExitGameConfirmation();
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(AdsManager.instance.BannerActive)
+        {
+            AdsManager.instance.BannerActive = false;
         }
     }
 
@@ -191,9 +243,14 @@ public class MainMenu_Controller : MonoBehaviour
         print("Clicked Share Button!\n");
     }
 
+    private void languageButtonClicked()
+    {
+
+    }
     private void infoButtonClicked()
     {
         infoPage.SetActive(true);
+        infoPageText.text = I18n.Fields["T_UI_INFO_PAGE"];
         print("Clicked Info Button!\n");
     }
 
@@ -224,6 +281,9 @@ public class MainMenu_Controller : MonoBehaviour
     {
 
         AdsManager.instance.MainMenuActiveUI = IN;
+        languagePageCallButton.gameObject.SetActive(false);
+        languagePage.gameObject.SetActive(false);
+        messager.gameObject.SetActive(false);
 
         switch (IN)
         {
@@ -233,6 +293,7 @@ public class MainMenu_Controller : MonoBehaviour
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(false);
                 isAtMainMenu = true;
+                languagePageCallButton.gameObject.SetActive(true);
                 break;
             case "character":
                 mainMenu.SetActive(false);
@@ -267,6 +328,7 @@ public class MainMenu_Controller : MonoBehaviour
 
     public void canvasBackMainMenu()
     {
+
         canvasChangeUI("main");
     }
 

@@ -27,7 +27,10 @@ public class Shooting : MonoBehaviour
     private string ammoReceiveMsg = "Replenished!";
     UIMessager messager;
 
-
+    private void Awake()
+    {
+        ammoReceiveMsg = I18n.Fields["T_REPLENISHED"];
+    }
 
     void Start()
     {
@@ -68,7 +71,7 @@ public class Shooting : MonoBehaviour
                     {
                         if (!IsFullAmmo())
                         {
-                            ammoReceiveMsg = "Recharged!";
+                            ammoReceiveMsg = I18n.Fields["T_RECHARGED"]; //"Recharged!";
                             AddAmmo(rechargedAmmoAmount);
                         }
                         DisableRechargeBar();
@@ -150,7 +153,7 @@ public class Shooting : MonoBehaviour
     {
         currentAmmo = maxAmmo;
 
-        messager.startMsg($"All Ammo Replenished!", 2, Vector3.zero);
+        messager.startMsg($"{I18n.Fields["T_AMMO_REPLENISHED"]}" , 2, Vector3.zero);
     }
 
     public void AddAmmo(int amount)
@@ -164,8 +167,8 @@ public class Shooting : MonoBehaviour
         else currentAmmo += amount;
 
 
-        messager.startMsg($"{amount} Ammo {ammoReceiveMsg}", 2, Vector3.zero);
-        ammoReceiveMsg = "Received!";
+        messager.startMsg($"{amount} {I18n.Fields["T_AMMO_SHOOTING"]} {ammoReceiveMsg}", 2, Vector3.zero);
+        ammoReceiveMsg = I18n.Fields["T_AMMO_RECEIVED"]; // Received!"
     }
 
     public int GetCurrentAmmo()

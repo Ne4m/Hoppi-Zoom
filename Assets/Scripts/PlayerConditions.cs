@@ -179,6 +179,14 @@ public class PlayerConditions : MonoBehaviour
     {
         while (graceEnabled)
         {
+            AudioManager.instance.IsPlaying("GotHit", cb =>
+            {
+                if (!cb)
+                {
+                    AudioManager.instance.Play("GotHit");
+                }
+            });
+
             srColor = new Color(186, 186, 186);
             sr.color = srColor;
             sr.enabled = false;

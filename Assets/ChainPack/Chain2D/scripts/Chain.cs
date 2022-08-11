@@ -1121,6 +1121,7 @@ public class Chain : MonoBehaviour
         if (link != null)
         {
             gameObject.GetComponent<HingeJoint2D>().enabled = false;
+            AudioManager.instance.Play("Cut");
         }
     }
 }

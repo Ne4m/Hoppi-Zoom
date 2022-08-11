@@ -145,7 +145,7 @@ public class Perks : MonoBehaviour
                     SetAmmoReward(1);
                 };
 
-                SetPerkDescription("Gains Ammo More Frequently");
+                SetPerkDescription(I18n.Fields["T_GAIN_AMMO_MORE_FREQUENTLY"]);
                 SetPerkImageName("FasterBullets");
                 break;
 
@@ -157,7 +157,7 @@ public class Perks : MonoBehaviour
                     EnableAmmoRecharge();
                 };
 
-                SetPerkDescription("Ammo Recharges Overtime");
+                SetPerkDescription(I18n.Fields["T_AMMO_RECHARGES_OVER_TIME"]);
                 SetPerkImageName("AmmoRecharge");
                 break;
 
@@ -169,7 +169,7 @@ public class Perks : MonoBehaviour
 
                 };
 
-                SetPerkDescription("Chance To Phase Through Objects");
+                SetPerkDescription(I18n.Fields["T_CHANCE_TO_PHASE"]);
                 SetPerkImageName("Phasing");
                 break;
 
@@ -181,7 +181,7 @@ public class Perks : MonoBehaviour
                     DamageReduction = 40; // %40 Percent Less Damage
                 };
 
-                SetPerkDescription("Takes Less Damage");
+                SetPerkDescription(I18n.Fields["T_TAKE_LESS_DAMAGE"]);
                 SetPerkImageName("TakeLessDmg");
                 break;
 
@@ -193,7 +193,7 @@ public class Perks : MonoBehaviour
                     CanMoveHorizontally = true;
                 };
 
-                SetPerkDescription("Can Move Horizontally On Checkpoints");
+                SetPerkDescription(I18n.Fields["T_MOVE_HORIZONTALLY"]);
                 SetPerkImageName("MoveHorizontal");
                 break;
 
@@ -205,7 +205,7 @@ public class Perks : MonoBehaviour
                     ChanceToHeal = true;
                 };
 
-                SetPerkDescription("Chance To Heal On Destruction");
+                SetPerkDescription(I18n.Fields["T_CHANCE_TO_HEAL"]);
                 SetPerkImageName("ChanceToHealOnKill");
                 break;
 
@@ -218,7 +218,7 @@ public class Perks : MonoBehaviour
                     BulletSpeed = 2250f;
                 };
 
-                SetPerkDescription("Your Bullets Travel Faster");
+                SetPerkDescription(I18n.Fields["T_FASTER_BULLETS"]);
                 SetPerkImageName("FasterBullets");
                 break;
 
@@ -232,7 +232,7 @@ public class Perks : MonoBehaviour
                 };
 
 
-                SetPerkDescription("Longer Grace Period After Getting Hit");
+                SetPerkDescription(I18n.Fields["T_LONGER_GRACE_PERIOD"]);
                 SetPerkImageName("LongerGracePeriod");
                 break;
 

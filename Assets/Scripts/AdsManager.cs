@@ -46,6 +46,12 @@ public class AdsManager : MonoBehaviour
 
     private bool isBannerActive = false;
 
+    public bool BannerActive
+    {
+        get => isBannerActive;
+        set => isBannerActive = value;
+    }
+
     private void Awake()
     {
         if(instance == null)

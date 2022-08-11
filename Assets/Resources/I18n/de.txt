@@ -1,0 +1,57 @@
+// @MAIN MENU
+T_UI_Text_Character=charakter
+T_UI_Text_Shop=shop
+T_UI_Text_Skins=skins
+T_UI_INFO_PAGE=ABOUT\n\nHOPPI ZOOM!\n\nB8MZ Games 2022
+T_QUIT_GAME_PROMPT=Das Spiel aufgeben?
+T_UI_LANGUAGE_PAGE_TITLE=SPRACHE
+
+// @CHARACTER MENU
+T_CHARACTER_TITLE_CHOOSE=Wählen Sie Ihren Charakter
+T_CHARACTER_TITLE_LOCKED=gesperrtes zeichen
+T_CHARACTER_TITLE_SELECTED=ausgewähltes zeichen
+T_HEALTH=Gesundheit
+T_SPEED=Geschwindigkeit
+T_AMMO=Munition
+T_CHARACTER_UNLOCK_TITLE=Achten Sie auf eine Anzeige für einen RIESIGEN Rabatt!
+T_YES=Ja
+T_NO=Nein
+T_UI_TEXT_UNLOCKBUTTON=entsperren
+T_UI_TEXT_SELECTBUTTON=Wählen Sie
+T_INSUFFICIENT_STARS=Unzureichende Währung!
+T_AN_ERROR_OCCURED=Es ist ein Fehler aufgetreten!
+T_CHARACTER_UNLOCKED=CHARAKTER FREIGESCHALTET!
+
+// @SKIN UNLOCK MENU
+T_UI_UNLOCK_SKIN=KAUFEN
+T_UI_50_PERCENT_OFF=%50 OFF
+
+// @PERKS DESCRIPTIONS
+T_GAIN_AMMO_MORE_FREQUENTLY=Erhalten Sie häufiger Munition
+T_AMMO_RECHARGES_OVER_TIME=Nachladen von Munition im Laufe der Zeit
+T_CHANCE_TO_PHASE=Fähigkeit, durch Objekte hindurchzugehen
+T_TAKE_LESS_DAMAGE=Weniger Schaden erleiden
+T_MOVE_HORIZONTALLY=Horizontale Bewegung an Kontrollpunkten möglich
+T_CHANCE_TO_HEAL=Gelegenheit zur Heilung, wenn es Zerstörung gibt
+T_FASTER_BULLETS=Ihre Geschosse fliegen schneller
+T_LONGER_GRACE_PERIOD=Längere Schutzfrist nach einer Verletzung
+
+
+// GAME SCENE
+T_HEALTH_GAME=GESUNDHEIT
+T_AMMO_GAME=MUNITION
+T_SCORE_GAME=PUNKTESTAND
+T_AMMO_REPLENISHED=Die Munition wird wieder aufgefüllt!
+T_AMMO_RECEIVED=Adquirido
+T_AMMO_SHOOTING=Municion
+T_REPLENISHED=Reabastecido
+T_RECHARGED=Recargado
+
+// END SCREEN
+T_CONTINUE=CONTINUAR ?
+T_YOUR_SCORE=SU PUNTUACION
+T_GOLD_EARNED=GANADO
+T_BACK_TO_MAIN_MENU=Volver al menu principal
+T_GOT_ZOOMED=you got\nZOOM'd
+T_GOT_HIGH_SCORE=NUEVA PUNTUACIoN\nMÁXIMA!!!
+T_ENDGAME_AD_CONTINUE=GRATIS

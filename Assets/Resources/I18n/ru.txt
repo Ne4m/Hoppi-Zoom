@@ -1,0 +1,57 @@
+// @MAIN MENU
+T_UI_Text_Character=персонаж
+T_UI_Text_Shop=магазин
+T_UI_Text_Skins=косметика
+T_UI_INFO_PAGE=ABOUT\n\nHOPPI ZOOM!\n\nB8MZ Games 2022
+T_QUIT_GAME_PROMPT=Выход?
+T_UI_LANGUAGE_PAGE_TITLE=Язык
+
+// @CHARACTER MENU
+T_CHARACTER_TITLE_CHOOSE=ВЫБЕРИТЕ СВОЕГО ПЕРСОНАЖА
+T_CHARACTER_TITLE_LOCKED=ЗАБЛОКИРОВАННЫЙ ПЕРСОНАЖ
+T_CHARACTER_TITLE_SELECTED=АКТИВНЫЙ ПЕРСОНАЖ
+T_HEALTH=Здоровье
+T_SPEED=Скорость
+T_AMMO=Боеприпасы
+T_CHARACTER_UNLOCK_TITLE=Regardez les publicites pour prix reduit
+T_YES=Да
+T_NO=Нет
+T_UI_TEXT_UNLOCKBUTTON=разблокировать
+T_UI_TEXT_SELECTBUTTON=выберите
+T_INSUFFICIENT_STARS=Недостаточно валюты!
+T_AN_ERROR_OCCURED=Произошла ошибка!
+T_CHARACTER_UNLOCKED=ПЕРСОНАЖ РАЗБЛОКИРОВАН!
+
+// @SKIN UNLOCK MENU
+T_UI_UNLOCK_SKIN=КУПИТЬ
+T_UI_50_PERCENT_OFF=%50 OFF
+
+// @PERKS DESCRIPTIONS
+T_GAIN_AMMO_MORE_FREQUENTLY=Чаще зарабатывайте боеприпасы
+T_AMMO_RECHARGES_OVER_TIME=Перезарядка боеприпасов с течением времени
+T_CHANCE_TO_PHASE=Шанс пройти сквозь объекты
+T_TAKE_LESS_DAMAGE=Получает меньше повреждений
+T_MOVE_HORIZONTALLY=Возможность горизонтального перемещения по контрольной точке
+T_CHANCE_TO_HEAL=Шанс на исцеление, когда происходит разрушение
+T_FASTER_BULLETS=Ваши снаряды летят быстрее
+T_LONGER_GRACE_PERIOD=Более длительный льготный период после удара
+
+
+// GAME SCENE
+T_HEALTH_GAME=ЗДОРОВЬЕ
+T_AMMO_GAME=БОЕПРИПАСЫ
+T_SCORE_GAME=СЧЕТ
+T_AMMO_REPLENISHED=Все боеприпасы пополнены!
+T_AMMO_RECEIVED=Полученный
+T_AMMO_SHOOTING=Боеприпасы
+T_REPLENISHED=Пополнение
+T_RECHARGED=Перезагружено
+
+// END SCREEN
+T_CONTINUE=ПРОДОЛЖАТЬ ?
+T_YOUR_SCORE=ВАША ОЦЕНКА
+T_GOLD_EARNED=Заработано
+T_BACK_TO_MAIN_MENU=Назад к главному меню
+T_GOT_ZOOMED=you got\nZOOM'd
+T_GOT_HIGH_SCORE=НОВЫЙ ВЫСОКИЙ\nРЕЗУЛЬТАТ!!!
+T_ENDGAME_AD_CONTINUE=БЕСПЛАТНО

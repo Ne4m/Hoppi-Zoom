@@ -227,12 +227,12 @@ public class UI_Animations : MonoBehaviour
         if (isHS)
         {
             // title.GetComponent<Image>().sprite = titleImages[0];
-            titleText.text = "NEW HIGH\nSCORE!!!";
+            titleText.text = I18n.Fields["T_GOT_HIGH_SCORE"]; //"NEW HIGH\nSCORE!!!";
             return;
         }
 
         // title.GetComponent<Image>().sprite = titleImages[1];
-        titleText.text = "you got\nZOOM'd";
+        titleText.text = I18n.Fields["T_GOT_ZOOMED"]; //"you got\nZOOM'd";
     }
 
     public void SetHighScoreState(bool hs)

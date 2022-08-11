@@ -87,6 +87,7 @@ public class SkinManager : MonoBehaviour
         skin_sun_glasses = 150,
         skin_50sMilitary = 100,
         skin_50sNurse = 200,
+        skin_panda_mask = 100,
         skin_antlers = 300,
         skin_army = 400,
         skin_baseballCap = 500,
@@ -100,7 +101,7 @@ public class SkinManager : MonoBehaviour
         skin_captains = 500,
         skin_classicFedora = 220,
         skin_cowboy = 234,
-        skin_cowboy_hat = 51
+        skin_woodenHat = 100
 
     }
 
@@ -126,7 +127,10 @@ public class SkinManager : MonoBehaviour
         skin_torso_blue = 1345,
         skin_torso_black = 222,
         skin_nurse_body = 100,
-        skin_duck = 100
+        skin_duck = 100,
+        skin_fire_shorts = 100,
+        skin_panda_shorts = 100,
+        skin_wooden_armor = 100
 
     }
 
@@ -485,7 +489,6 @@ public class SkinManager : MonoBehaviour
 
     private void BackBtn_Clicked()
     {
-
         MainMenu_Controller mainMenu;
         mainMenu = MainMenu_Controller.instance;
         mainMenu.canvasBackMainMenu();
@@ -572,6 +575,24 @@ public class SkinManager : MonoBehaviour
             characterHatImg.sprite = Resources.Load<Sprite>($"Accessories/{skinPath}/{itemName}");
             characterHat.GetComponent<RectTransform>().pivot = characterHatImg.sprite.pivot / characterHatImg.sprite.rect.size;
 
+
+            if(itemName == "sun_glasses")
+            {
+                characterHatImg.transform.localPosition = new Vector3(5f, 1182f, 0f);
+                characterHatImg.transform.localScale = new Vector3(0.5098782f, 0.5098782f, 0.5098782f);
+            }
+            else if(itemName == "panda_mask")
+            {
+                characterHatImg.transform.localPosition = new Vector3(-8f, 1053f, 0f);
+                characterHatImg.transform.localScale = new Vector3(0.582311f, 0.582311f, 0.582311f);
+            }
+            else
+            {
+                characterHatImg.transform.localPosition = new Vector3(5f, 1053f, 0f);
+                characterHatImg.transform.localScale = new Vector3(0.5098782f, 0.5098782f, 0.5098782f);
+            }
+
+
             SPrefs.SetString("PlayerHead", itemName);
             SPrefs.Save();
 
@@ -606,6 +627,11 @@ public class SkinManager : MonoBehaviour
             {
                 characterBodyImg.transform.localScale = new Vector3(0.9728624f, 0.9728624f, 0.9728624f);
                 characterBodyImg.transform.localPosition = new Vector3(6f, 6f, 0f);
+            }
+            else if (itemName == "panda_shorts")
+            {
+                characterBodyImg.transform.localScale = new Vector3(0.5449293f, 0.5449293f, 0.5449293f);
+                characterBodyImg.transform.localPosition = new Vector3(2f, 30f, 0f);
             }
             else
             {

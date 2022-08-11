@@ -193,7 +193,6 @@ public class CharacterMenuController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
             mainMenu.canvasBackMainMenu();
         }
 
@@ -238,7 +237,7 @@ public class CharacterMenuController : MonoBehaviour
     {
         // 
         Debug.Log($"Current Index = {currentCharacterIndex}");
-        titleText.text = "SELECTED CHARACTER";
+        titleText.text = I18n.Fields["T_CHARACTER_TITLE_SELECTED"];
         titleText.color = Color.green;
         setCurrentIndex(currentCharacterIndex);
 
@@ -276,7 +275,7 @@ public class CharacterMenuController : MonoBehaviour
         }
         else
         {
-            messager.startMsgv2("Insufficient Stars!", 2f, Vector3.zero, Color.red);
+            messager.startMsgv2(I18n.Fields["T_INSUFFICIENT_STARS"], 2f, Vector3.zero, Color.red);
         }
     }
 
@@ -322,7 +321,7 @@ public class CharacterMenuController : MonoBehaviour
 
     public void ApplyAdDiscount_Error()
     {
-        messager.startMsgv2("An Error Occured!", 1f, Vector3.zero, Color.red);
+        messager.startMsgv2(I18n.Fields["T_AN_ERROR_OCCURED"], 1f, Vector3.zero, Color.red);
     }
 
     private void ManageUnlockPrice(int price, Action<bool> callback)
@@ -334,7 +333,7 @@ public class CharacterMenuController : MonoBehaviour
         SPrefs.SetInt("gameCurrency", balance);
         SPrefs.Save();
 
-        messager.startMsgv2($"CHARACTER UNLOCKED!", 1f, Vector3.zero, Color.green);
+        messager.startMsgv2(I18n.Fields["T_CHARACTER_UNLOCKED"], 1f, Vector3.zero, Color.green);
         callback(true);
     }
 
@@ -373,7 +372,7 @@ public class CharacterMenuController : MonoBehaviour
         if (unlockedCharacters[index] == "locked")
         {
             //characterImg.color = Color.black;
-            titleText.text = "LOCKED CHARACTER";
+            titleText.text = I18n.Fields["T_CHARACTER_TITLE_LOCKED"]; // "LOCKED CHARACTER";
             titleText.color = Color.grey;
 
             selectButton.gameObject.SetActive(false);
@@ -383,7 +382,7 @@ public class CharacterMenuController : MonoBehaviour
         else
         {
             characterImg.color = Color.white;
-            titleText.text = "choose your character";
+            titleText.text = I18n.Fields["T_CHARACTER_TITLE_CHOOSE"]; //"choose your character";
             titleText.color = Color.white;
 
             selectButton.gameObject.SetActive(true);
@@ -393,7 +392,7 @@ public class CharacterMenuController : MonoBehaviour
 
         if (currentCharacterIndex == getCurrentIndex())
         {
-            titleText.text = "SELECTED CHARACTER";
+            titleText.text = I18n.Fields["T_CHARACTER_TITLE_SELECTED"]; //"SELECTED CHARACTER";
             titleText.color = Color.green;
 
         }

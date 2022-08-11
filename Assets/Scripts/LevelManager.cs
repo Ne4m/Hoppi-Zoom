@@ -382,17 +382,16 @@ public class LevelManager : MonoBehaviour
             print("High Score Cleared");
         }
 
-            point_text.text = ("Score: " + playerControl.getPoint().ToString());
+            point_text.text = ($"{I18n.Fields["T_SCORE_GAME"]}: {playerControl.getPoint().ToString()}");
 
         playerLevel = playerControl.getLevel();
         checkDeathMenu();
 
-        health_text.text = ($"HP: {playerControl.getHealth()}\n" +
-                            $"SPEED: {playerControl.getPlayerSpeed()}\n" +
-                            $"AMMO: {shooting.GetCurrentAmmo()}");
+        health_text.text = ($"{I18n.Fields["T_HEALTH_GAME"]}: {playerControl.getHealth()}\n" +
+                            $"{I18n.Fields["T_AMMO_GAME"]}: {shooting.GetCurrentAmmo()}"); //                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
 
 
-        
+
     }
 
     public void getHit(float amount)
@@ -438,6 +437,7 @@ public class LevelManager : MonoBehaviour
 
             health_text.gameObject.SetActive(false);
             point_text.gameObject.SetActive(false);
+            messager.HideMessage();
         }
 
         //death_text = GameObject.Find("Score Point").GetComponent<TMP_Text>();
@@ -465,6 +465,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            AudioManager.instance.Play("Death");
             uiAnimations.SetHighScoreState(false);
         }
 

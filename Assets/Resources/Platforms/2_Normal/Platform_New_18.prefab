@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 7931696028253088467}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 7931696028439474574}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 7931696028545701245}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 7931696028624739332}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1003,7 +1003,7 @@ GameObject:
   - component: {fileID: 7931696028678255355}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 7931696028851294017}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,7 +1692,7 @@ MonoBehaviour:
     prefabIdPrev: 0
     rb2D: {fileID: 7931696029613729442}
     hingleJoint_1: {fileID: 7931696029613729445}
-    hingleJoint_2: {fileID: 24896170355146415}
+    hingleJoint_2: {fileID: 4162306258767416831}
   _prefabsListWidths:
   - 0.41
   rbSettings:
@@ -1723,7 +1723,7 @@ GameObject:
   - component: {fileID: 7931696029359779121}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1894,7 +1894,7 @@ GameObject:
   - component: {fileID: 7931696029493621731}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2065,7 +2065,7 @@ GameObject:
   - component: {fileID: 7931696029511080576}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2236,7 +2236,7 @@ GameObject:
   - component: {fileID: 7931696029588944872}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2407,7 +2407,7 @@ GameObject:
   - component: {fileID: 7931696029606809359}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2576,10 +2576,10 @@ GameObject:
   - component: {fileID: 7931696029613729442}
   - component: {fileID: 7931696029613729445}
   - component: {fileID: 7931696029613729444}
-  - component: {fileID: 24896170355146415}
+  - component: {fileID: 4162306258767416831}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2734,7 +2734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4753492fed9de40a8b3d0dae3402ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!233 &24896170355146415
+--- !u!233 &4162306258767416831
 HingeJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2774,7 +2774,7 @@ GameObject:
   - component: {fileID: 7931696029652218460}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2998,7 +2998,7 @@ GameObject:
   - component: {fileID: 7931696029666721877}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3169,7 +3169,7 @@ GameObject:
   - component: {fileID: 7931696029766452456}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3340,7 +3340,7 @@ GameObject:
   - component: {fileID: 7931696029909357239}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3511,7 +3511,7 @@ GameObject:
   - component: {fileID: 7931696029947343328}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3735,7 +3735,7 @@ GameObject:
   - component: {fileID: 7931696030088700721}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3906,7 +3906,7 @@ GameObject:
   - component: {fileID: 7931696030093202405}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4077,7 +4077,7 @@ GameObject:
   - component: {fileID: 7931696030134028096}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4248,7 +4248,7 @@ GameObject:
   - component: {fileID: 7931696030284747901}
   m_Layer: 0
   m_Name: ropeLink(Clone)
-  m_TagString: Untagged
+  m_TagString: Chain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4997,6 +4997,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442896698501487170, guid: 1d5bdd1d2509dc041b0cf931e86d4801,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6147561885349299828, guid: 1d5bdd1d2509dc041b0cf931e86d4801,
         type: 3}

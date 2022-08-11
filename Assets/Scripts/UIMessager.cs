@@ -91,4 +91,14 @@ public class UIMessager : MonoBehaviour
         isRunning = false;
     }
 
+    public void HideMessage()
+    {
+
+        if (msgCoroutine != null && isRunning)
+        {
+            StopCoroutine(msgCoroutine);
+            text.gameObject.SetActive(false);
+        }
+    }
+
 }
