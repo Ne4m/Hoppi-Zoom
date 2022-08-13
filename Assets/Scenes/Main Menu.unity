@@ -5341,6 +5341,7 @@ MonoBehaviour:
   shareButton: {fileID: 1724896953}
   infoButton: {fileID: 1265385137}
   languageButton: {fileID: 527707284}
+  showLeaderBoardButton: {fileID: 1276093490}
   usernameTxt: {fileID: 877035223}
 --- !u!114 &420676058
 MonoBehaviour:

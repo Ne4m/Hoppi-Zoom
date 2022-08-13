@@ -595,8 +595,6 @@ struct EaseTypeDelegate_t731A985425250B1DB3EC8DD69CA4644BD2DCF7CC;
 struct U3CU3Ec_t92E1C3254A82FB4B3427037E6DF1EE17896E6A8A;
 // LevelManager/playerInfo
 struct playerInfo_tE4706F1F40963C428B7991B9C98F2FAF635ACCE5;
-// MainMenu_Controller/<>c
-struct U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043;
 // UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 struct CullStateChangedEvent_t6073CD0D951EC1256BF74B8F9107D68FC89B99B8;
 // MobileUtils/<FPS>d__5
@@ -707,7 +705,6 @@ IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec__DisplayClass5_0_tDD85608198A296C2C97868D2
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec__DisplayClass6_0_t181AAFA51155A93676051B979945909777364917_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_t06EC6C227CBBC3D4549A2060FBF9079E93037959_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_t573714D0F4A8020AA5706EF5484FD5F787729F5F_il2cpp_TypeInfo_var;
-IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_t92E1C3254A82FB4B3427037E6DF1EE17896E6A8A_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_tDF3F4C31627421E5FE0F1F54307DBCD1E529F5E4_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_tE9600BBB527064E4B3B45B75B652179923448334_il2cpp_TypeInfo_var;
@@ -935,6 +932,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_characterButtonClicked_
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_closeInfoPageButtonClicked_m6E1F013D1CBD73B5877170E752C0D725CCD519B0_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_infoButtonClicked_m59E2867BEB84030F38A8828E29EB76A28A58912D_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_languageButtonClicked_m8F2DE32EF3041E59155F7D5CA2C034A390EABD5F_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_leaderBoardButtonClicked_m427A492C8BBA2BBC380BBF9F963D2A67670BEDC0_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_noBtn_Clicked_mCA2263AE6E8DD381CB0D4BB0710B72E4923A8CFA_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_playButtonClicked_mF5DA5E817944B7400B4C7A3A8B91EEC50650B571_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* MainMenu_Controller_shareButtonClicked_m3A622AEB7A5B01C78D70F49C9BC540547E954ED3_RuntimeMethod_var;
@@ -969,7 +967,6 @@ IL2CPP_EXTERN_C const RuntimeMethod* U3CShowPerksDescriptionU3Ed__68_System_Coll
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3CDrawLineU3Eb__7_0_mD82804B53E46BF030441F38F991CAE7FDEC127AE_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3CSetActivePerkU3Eb__42_2_m630668AA3944D5FBF194F68D09AAB18D5EEAC185_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3CStartU3Eb__22_0_m94C32C2460C267133A30D494F3B76171C609B8CE_RuntimeMethod_var;
-IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3CStartU3Eb__37_2_m1F3166BBC2A222E9147EBD88244D252BE05F7D30_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3CbringDeathMenuU3Eb__52_0_m023A9DFC6D233D32ADAC730E8216FD44247E99F0_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec_U3Cplayer_EnteredCheckpointU3Eb__60_0_m86481328CB7CCAE2895A91A0756A6FF99D74B80A_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* U3CU3Ec__DisplayClass11_0_U3CCheckAchievementStatusU3Eb__0_mEE7C4662CC7452D30026820572FBBCBDEC8F513B_RuntimeMethod_var;
@@ -1578,19 +1575,6 @@ struct playerInfo_tE4706F1F40963C428B7991B9C98F2FAF635ACCE5  : public RuntimeObj
 	float ___rotateSpeed_8;
 	// System.Int32 LevelManager/playerInfo::dmgReduction
 	int32_t ___dmgReduction_9;
-};
-
-// MainMenu_Controller/<>c
-struct U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043  : public RuntimeObject
-{
-};
-
-struct U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields
-{
-	// MainMenu_Controller/<>c MainMenu_Controller/<>c::<>9
-	U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* ___U3CU3E9_0;
-	// UnityEngine.Events.UnityAction MainMenu_Controller/<>c::<>9__37_2
-	UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* ___U3CU3E9__37_2_1;
 };
 
 // MobileUtils/<FPS>d__5
@@ -7060,6 +7044,8 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void AdsManager_set_BannerActive_
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AudioManager_VolumeControl_mE24D39F12C05200955E8420FD2D7804EB9FAA86E (AudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B* __this, String_t* ___name0, float ___volume1, float ___pitch2, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Social::ShowAchievementsUI()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Social_ShowAchievementsUI_m5EE97D05EFAE81B9F03BB62076E03D5B7EBE576D (const RuntimeMethod* method) ;
+// System.Void UnityEngine.Social::ShowLeaderboardUI()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Social_ShowLeaderboardUI_m8599A85948BEE851E98BB5F7CB502614199B0FF3 (const RuntimeMethod* method) ;
 // System.Void MainMenu_Controller::changeScene()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_changeScene_m62C93DD5446338228E8B839443F33D6B366D20B1 (MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452* __this, const RuntimeMethod* method) ;
 // System.Void AdsManager::set_MainMenuActiveUI(System.String)
@@ -7073,10 +7059,6 @@ inline bool GameObject_TryGetComponent_TisSkinManager_t7E8A0E0EAB55AB42EAC626803
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SkinManager_RefreshUI_m205B4F819194C52BAC54E515F3E510A952E3BBC5 (SkinManager_t7E8A0E0EAB55AB42EAC626803361EB583D15D9D0* __this, const RuntimeMethod* method) ;
 // System.Void MainMenu_Controller::noBtn_Clicked()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_noBtn_Clicked_mCA2263AE6E8DD381CB0D4BB0710B72E4923A8CFA (MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452* __this, const RuntimeMethod* method) ;
-// System.Void MainMenu_Controller/<>c::.ctor()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_mFB7F6C7AB7A027F3562F194A6DB0B335976E1ED4 (U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* __this, const RuntimeMethod* method) ;
-// System.Void UnityEngine.Social::ShowLeaderboardUI()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Social_ShowLeaderboardUI_m8599A85948BEE851E98BB5F7CB502614199B0FF3 (const RuntimeMethod* method) ;
 // System.Collections.IEnumerator MobileUtils::FPS()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MobileUtils_FPS_mB626D19878E6068ACCBA1206F2844C5A96B177EE (MobileUtils_t563B1B70B28F91CBD404FC5DC8A5B1E4F46D7AEC* __this, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Rendering.OnDemandRendering::set_renderFrameInterval(System.Int32)
@@ -18154,6 +18136,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_Start_mF4FF0C88E9B69
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_closeInfoPageButtonClicked_m6E1F013D1CBD73B5877170E752C0D725CCD519B0_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_infoButtonClicked_m59E2867BEB84030F38A8828E29EB76A28A58912D_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_languageButtonClicked_m8F2DE32EF3041E59155F7D5CA2C034A390EABD5F_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_leaderBoardButtonClicked_m427A492C8BBA2BBC380BBF9F963D2A67670BEDC0_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_noBtn_Clicked_mCA2263AE6E8DD381CB0D4BB0710B72E4923A8CFA_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_playButtonClicked_mF5DA5E817944B7400B4C7A3A8B91EEC50650B571_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_shareButtonClicked_m3A622AEB7A5B01C78D70F49C9BC540547E954ED3_RuntimeMethod_var);
@@ -18162,16 +18145,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_Start_mF4FF0C88E9B69
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MainMenu_Controller_yesBtn_Clicked_m8B475295216B2CFE24AEDF82A5657FDADF6D0107_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_FindObjectOfType_TisAudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B_mCC0D0DA78E4CF17310F610815EF121FAB87E2538_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec_U3CStartU3Eb__37_2_m1F3166BBC2A222E9147EBD88244D252BE05F7D30_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral3F86111F44D66C543B732847E04E3C2A5B38BB3D);
 		s_Il2CppMethodInitialized = true;
 	}
-	UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* G_B35_0 = NULL;
-	ButtonClickedEvent_t8EA72E90B3BD1392FB3B3EF167D5121C23569E4C* G_B35_1 = NULL;
-	UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* G_B34_0 = NULL;
-	ButtonClickedEvent_t8EA72E90B3BD1392FB3B3EF167D5121C23569E4C* G_B34_1 = NULL;
 	{
 		// instance = this;
 		((MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452_StaticFields*)il2cpp_codegen_static_fields_for(MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452_il2cpp_TypeInfo_var))->___instance_40 = __this;
@@ -18545,66 +18522,34 @@ IL_0241:
 
 IL_0265:
 	{
-		// if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(() =>
+		// if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(leaderBoardButtonClicked);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_66 = __this->___showLeaderBoardButton_35;
 		if (!L_66)
 		{
-			goto IL_029c;
+			goto IL_0289;
 		}
 	}
 	{
-		// if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(() =>
-		// {
-		//     if (!GooglePlayServices.instance.GooglePlayConnection)
-		//     {
-		//         GooglePlayServices.instance.Authenticate();
-		//     }
-		//     Social.ShowLeaderboardUI();
-		// 
-		// });
+		// if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(leaderBoardButtonClicked);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_67 = __this->___showLeaderBoardButton_35;
 		NullCheck(L_67);
 		ButtonClickedEvent_t8EA72E90B3BD1392FB3B3EF167D5121C23569E4C* L_68;
 		L_68 = Button_get_onClick_m701712A7F7F000CC80D517C4510697E15722C35C_inline(L_67, NULL);
-		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var);
-		UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* L_69 = ((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9__37_2_1;
-		UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* L_70 = L_69;
-		G_B34_0 = L_70;
-		G_B34_1 = L_68;
-		if (L_70)
-		{
-			G_B35_0 = L_70;
-			G_B35_1 = L_68;
-			goto IL_0297;
-		}
-	}
-	{
-		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var);
-		U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* L_71 = ((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9_0;
-		UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* L_72 = (UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7*)il2cpp_codegen_object_new(UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7_il2cpp_TypeInfo_var);
-		NullCheck(L_72);
-		UnityAction__ctor_mC53E20D6B66E0D5688CD81B88DBB34F5A58B7131(L_72, L_71, (intptr_t)((void*)U3CU3Ec_U3CStartU3Eb__37_2_m1F3166BBC2A222E9147EBD88244D252BE05F7D30_RuntimeMethod_var), NULL);
-		UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* L_73 = L_72;
-		((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9__37_2_1 = L_73;
-		Il2CppCodeGenWriteBarrier((void**)(&((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9__37_2_1), (void*)L_73);
-		G_B35_0 = L_73;
-		G_B35_1 = G_B34_1;
+		UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7* L_69 = (UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7*)il2cpp_codegen_object_new(UnityAction_t11A1F3B953B365C072A5DCC32677EE1796A962A7_il2cpp_TypeInfo_var);
+		NullCheck(L_69);
+		UnityAction__ctor_mC53E20D6B66E0D5688CD81B88DBB34F5A58B7131(L_69, __this, (intptr_t)((void*)MainMenu_Controller_leaderBoardButtonClicked_m427A492C8BBA2BBC380BBF9F963D2A67670BEDC0_RuntimeMethod_var), NULL);
+		NullCheck(L_68);
+		UnityEvent_AddListener_m8AA4287C16628486B41DA41CA5E7A856A706D302(L_68, L_69, NULL);
 	}
 
-IL_0297:
-	{
-		NullCheck(G_B35_1);
-		UnityEvent_AddListener_m8AA4287C16628486B41DA41CA5E7A856A706D302(G_B35_1, G_B35_0, NULL);
-	}
-
-IL_029c:
+IL_0289:
 	{
 		// FindObjectOfType<AudioManager>().Play("Main");
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
-		AudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B* L_74;
-		L_74 = Object_FindObjectOfType_TisAudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B_mCC0D0DA78E4CF17310F610815EF121FAB87E2538(Object_FindObjectOfType_TisAudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B_mCC0D0DA78E4CF17310F610815EF121FAB87E2538_RuntimeMethod_var);
-		NullCheck(L_74);
-		AudioManager_Play_mB69D5512DD0ECB0B853CD681D2282DC78844DE4F(L_74, _stringLiteral3F86111F44D66C543B732847E04E3C2A5B38BB3D, NULL);
+		AudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B* L_70;
+		L_70 = Object_FindObjectOfType_TisAudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B_mCC0D0DA78E4CF17310F610815EF121FAB87E2538(Object_FindObjectOfType_TisAudioManager_t4BE66A4A0E184D85AF74C37BC93BFBEC52953C7B_mCC0D0DA78E4CF17310F610815EF121FAB87E2538_RuntimeMethod_var);
+		NullCheck(L_70);
+		AudioManager_Play_mB69D5512DD0ECB0B853CD681D2282DC78844DE4F(L_70, _stringLiteral3F86111F44D66C543B732847E04E3C2A5B38BB3D, NULL);
 		// }
 		return;
 	}
@@ -19004,6 +18949,41 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_languageButtonClicke
 		return;
 	}
 }
+// System.Void MainMenu_Controller::leaderBoardButtonClicked()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_leaderBoardButtonClicked_m427A492C8BBA2BBC380BBF9F963D2A67670BEDC0 (MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452* __this, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		// if (!GooglePlayServices.instance.GooglePlayConnection)
+		GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF* L_0 = ((GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_StaticFields*)il2cpp_codegen_static_fields_for(GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var))->___instance_4;
+		NullCheck(L_0);
+		bool L_1;
+		L_1 = GooglePlayServices_get_GooglePlayConnection_mD8281325ED9C2882FED274F070773927185FEEE5_inline(L_0, NULL);
+		if (L_1)
+		{
+			goto IL_0016;
+		}
+	}
+	{
+		// GooglePlayServices.instance.Authenticate();
+		GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF* L_2 = ((GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_StaticFields*)il2cpp_codegen_static_fields_for(GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var))->___instance_4;
+		NullCheck(L_2);
+		GooglePlayServices_Authenticate_mFD4D63A9C10BE3B853FDEC1A8EDF7CF68253D7B4(L_2, NULL);
+	}
+
+IL_0016:
+	{
+		// Social.ShowLeaderboardUI();
+		Social_ShowLeaderboardUI_m8599A85948BEE851E98BB5F7CB502614199B0FF3(NULL);
+		// }
+		return;
+	}
+}
 // System.Void MainMenu_Controller::infoButtonClicked()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_infoButtonClicked_m59E2867BEB84030F38A8828E29EB76A28A58912D (MainMenu_Controller_t9F5D4DB9739FD7A0F805247EB93CCAA4D055C452* __this, const RuntimeMethod* method) 
 {
@@ -19376,75 +19356,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainMenu_Controller_U3CStartU3Eb__37_1_m
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___languagePage_8;
 		NullCheck(L_0);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_0, (bool)1, NULL);
-		// });
-		return;
-	}
-}
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-// System.Void MainMenu_Controller/<>c::.cctor()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m550E5FF773B476A1FAD619D76BFB650244449488 (const RuntimeMethod* method) 
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var);
-		s_Il2CppMethodInitialized = true;
-	}
-	{
-		U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* L_0 = (U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043*)il2cpp_codegen_object_new(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var);
-		NullCheck(L_0);
-		U3CU3Ec__ctor_mFB7F6C7AB7A027F3562F194A6DB0B335976E1ED4(L_0, NULL);
-		((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9_0 = L_0;
-		Il2CppCodeGenWriteBarrier((void**)(&((U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043_il2cpp_TypeInfo_var))->___U3CU3E9_0), (void*)L_0);
-		return;
-	}
-}
-// System.Void MainMenu_Controller/<>c::.ctor()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_mFB7F6C7AB7A027F3562F194A6DB0B335976E1ED4 (U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* __this, const RuntimeMethod* method) 
-{
-	{
-		Object__ctor_mE837C6B9FA8C6D5D109F4B2EC885D79919AC0EA2(__this, NULL);
-		return;
-	}
-}
-// System.Void MainMenu_Controller/<>c::<Start>b__37_2()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec_U3CStartU3Eb__37_2_m1F3166BBC2A222E9147EBD88244D252BE05F7D30 (U3CU3Ec_t7B30B555A3BCD03900823AABB820BE3973ECE043* __this, const RuntimeMethod* method) 
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var);
-		s_Il2CppMethodInitialized = true;
-	}
-	{
-		// if (!GooglePlayServices.instance.GooglePlayConnection)
-		GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF* L_0 = ((GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_StaticFields*)il2cpp_codegen_static_fields_for(GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var))->___instance_4;
-		NullCheck(L_0);
-		bool L_1;
-		L_1 = GooglePlayServices_get_GooglePlayConnection_mD8281325ED9C2882FED274F070773927185FEEE5_inline(L_0, NULL);
-		if (L_1)
-		{
-			goto IL_0016;
-		}
-	}
-	{
-		// GooglePlayServices.instance.Authenticate();
-		GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF* L_2 = ((GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_StaticFields*)il2cpp_codegen_static_fields_for(GooglePlayServices_t3544CA3FE26C51C30C7C892876AE84A9317E2BDF_il2cpp_TypeInfo_var))->___instance_4;
-		NullCheck(L_2);
-		GooglePlayServices_Authenticate_mFD4D63A9C10BE3B853FDEC1A8EDF7CF68253D7B4(L_2, NULL);
-	}
-
-IL_0016:
-	{
-		// Social.ShowLeaderboardUI();
-		Social_ShowLeaderboardUI_m8599A85948BEE851E98BB5F7CB502614199B0FF3(NULL);
 		// });
 		return;
 	}

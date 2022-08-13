@@ -112,22 +112,15 @@ public class MainMenu_Controller : MonoBehaviour
         if (!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
         if (!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
         if (!(languageButton is null)) languageButton.onClick.AddListener(languageButtonClicked);
-        if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(() =>
-        {
-            if (!GooglePlayServices.instance.GooglePlayConnection)
-            {
-                GooglePlayServices.instance.Authenticate();
-            }
-            Social.ShowLeaderboardUI();
-
-        });
-
+        if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(leaderBoardButtonClicked);
         //PlayGamesPlatform.DebugLogEnabled = true;
         //platform = PlayGamesPlatform.Activate();
 
 
         FindObjectOfType<AudioManager>().Play("Main");
     }
+
+
 
 
 
@@ -265,6 +258,17 @@ public class MainMenu_Controller : MonoBehaviour
     {
 
     }
+
+    private void leaderBoardButtonClicked()
+    {
+        if (!GooglePlayServices.instance.GooglePlayConnection)
+        {
+            GooglePlayServices.instance.Authenticate();
+        }
+        Social.ShowLeaderboardUI();
+    }
+
+
     private void infoButtonClicked()
     {
         infoPage.SetActive(true);
