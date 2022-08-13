@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
 using System;
 
@@ -17,13 +16,13 @@ public class LevelManager : MonoBehaviour
     private GameObject new_CheckPoint;
     private GameObject last_CheckPoint;
 
-    [Header ("Playable Area Out of Bounds Check")]
+    [Header("Playable Area Out of Bounds Check")]
     private float screenWidth, screenHeight, screenDistance;
     [SerializeField] private GameObject playableArea;
     [SerializeField] private float playableAreaOffset = 0.35f;
 
 
-    [Header ("Misc")]
+    [Header("Misc")]
     [SerializeField] Button shootButton;
     public GameObject blurScreen;
     [SerializeField] private GameObject deathScreen;
@@ -39,13 +38,13 @@ public class LevelManager : MonoBehaviour
     private GameObject playerEjectorArrow;
 
     #region Level Stuff
-    [Header ("Level Stuff")]
+    [Header("Level Stuff")]
     [SerializeField] private int playerLevel;
     [SerializeField] private int perPointToLevelThreshold = 5;
     [SerializeField] private int levelMultiplier = 2;
     #endregion
 
-    [Header ("Text Boxes")]
+    [Header("Text Boxes")]
     [SerializeField] private TMP_Text point_text;
     [SerializeField] private TMP_Text endgameScore_text;
     [SerializeField] private TMP_Text endgameEarnedGold_text;
@@ -62,7 +61,7 @@ public class LevelManager : MonoBehaviour
     //[SerializeField]
     //private int point = 0;
 
-    [Header ("Cloud Spawn Stuff")]
+    [Header("Cloud Spawn Stuff")]
     private GameObject[] cloudSpawnerCap = new GameObject[2];
     [SerializeField] private GameObject cloudSpawner;
     [SerializeField] private float cloudSpawnDistance;
@@ -212,19 +211,19 @@ public class LevelManager : MonoBehaviour
         {
             return maxHealth;
         }
-        
+
         public void setHealth(float hp)
         {
             currentHealth = hp;
 
-            if(currentHealth < 0) currentHealth = 0;
-            if(currentHealth > maxHealth) currentHealth = maxHealth;
+            if (currentHealth < 0) currentHealth = 0;
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
         }
 
         public void heal(float amount)
         {
             if (amount > maxHealth) setHealth(maxHealth);
-            else if (amount > 0 && amount < maxHealth) setHealth(currentHealth+amount);
+            else if (amount > 0 && amount < maxHealth) setHealth(currentHealth + amount);
         }
 
         public void percentageHeal(float percentage)
@@ -238,14 +237,14 @@ public class LevelManager : MonoBehaviour
 
         public void damage(float amount)
         {
-            amount = amount - (amount * DamageReduction/100);
+            amount = amount - (amount * DamageReduction / 100);
 
-            if(amount > maxHealth)
+            if (amount > maxHealth)
             {
                 this.setHealth(0);
             }
 
-            if(amount > 0 && amount < maxHealth)
+            if (amount > 0 && amount < maxHealth)
             {
                 setHealth(currentHealth - amount);
 
@@ -266,8 +265,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
 
         playerControl = new playerInfo(SPrefs.GetFloat("playerHealth", 1000),
                                        SPrefs.GetFloat("playerSpeed", 1000),
@@ -313,12 +310,13 @@ public class LevelManager : MonoBehaviour
         screenHeight = Screen.height;
         screenWidth = Screen.width;
 
-       // InvokeRepeating("OutOfBoundsCheck", 1f, 1f);
+        // InvokeRepeating("OutOfBoundsCheck", 1f, 1f);
 
         // Update Player Controller Variables On Start
 
         playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
+
 
 
     }
@@ -342,7 +340,7 @@ public class LevelManager : MonoBehaviour
         //    ResetPlayerPosition();
         //}
 
-       // Vector3 cameraPos = Camera.main.transform.position;
+        // Vector3 cameraPos = Camera.main.transform.position;
         Vector2 screenSize;
         screenSize.x = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0))) * 0.5f; //Grab the world-space position values of the start and end positions of the screen, then calculate the distance between them and store it as half, since we only need half that value for distance away from the camera to the edge
         screenSize.y = Vector2.Distance(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)), Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height))) * 0.5f;
@@ -352,7 +350,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-       // Debug.Log($"Bounds: {playableAreaCollider.size} || {playableAreaCollider.size.x} || {screenSize.x}");
+        // Debug.Log($"Bounds: {playableAreaCollider.size} || {playableAreaCollider.size.x} || {screenSize.x}");
 
 
         if (playableAreaCollider.bounds.Contains(player.transform.position))
@@ -382,7 +380,7 @@ public class LevelManager : MonoBehaviour
             print("High Score Cleared");
         }
 
-            point_text.text = ($"{I18n.Fields["T_SCORE_GAME"]}: {playerControl.getPoint().ToString()}");
+        point_text.text = ($"{I18n.Fields["T_SCORE_GAME"]}: {playerControl.getPoint().ToString()}");
 
         playerLevel = playerControl.getLevel();
         checkDeathMenu();
@@ -416,7 +414,7 @@ public class LevelManager : MonoBehaviour
         }
 
 
-        if(!playerControl.isPlayerDead() && playerControl.getHealth() <= 0)
+        if (!playerControl.isPlayerDead() && playerControl.getHealth() <= 0)
         {
             bringDeathMenu();
         }
@@ -451,8 +449,17 @@ public class LevelManager : MonoBehaviour
         //debug_text.text = currentCurrency.ToString();
 
         Debug.Log($"Currency Earned {currentCurrency}");
-       // debug_text.text = currentCurrency.ToString();
+        // debug_text.text = currentCurrency.ToString();
 
+
+        if (GooglePlayServices.instance.GooglePlayConnection)
+        {
+            Social.ReportScore(playerControl.getPoint(), GPGSIds.leaderboard_score, (success) =>
+            {
+                if (success) Debug.Log("Leaderboard update successfull!");
+                else Debug.Log("There was an error while updating the leaderboard!");
+            });
+        }
 
         // SAVE PLAYER STATS HERE
         if (playerControl.getPoint() > SPrefs.GetInt("highScore", 0))
@@ -525,7 +532,7 @@ public class LevelManager : MonoBehaviour
 
     private void GoldContinueButton_Clicked()
     {
-        if(totalCurrency >= goldContinuePrice)
+        if (totalCurrency >= goldContinuePrice)
         {
             totalCurrency -= goldContinuePrice;
             SPrefs.SetInt("gameCurrency", totalCurrency);
@@ -552,6 +559,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+
     public void restartGame()
     {
         currentCurrency = 0;
@@ -573,10 +581,20 @@ public class LevelManager : MonoBehaviour
 
     public void player_EnteredCheckpoint()
     {
-        if(new_CheckPoint != null) lastCheckpoint = new_CheckPoint.transform.position;
+        if (new_CheckPoint != null) lastCheckpoint = new_CheckPoint.transform.position;
 
         spawn_NextCheckpoint();
         playerControl.addPoint(1);
+
+        if (GooglePlayServices.instance.GooglePlayConnection)
+        {
+
+            Social.ReportProgress("CgkIuYDT178fEAIQBA", 100.0f, (bool success) => {
+            });
+
+        }
+
+
         checkLevelStatus();
 
 
@@ -585,7 +603,7 @@ public class LevelManager : MonoBehaviour
 
 
 
-        if(Perks.instance != null)
+        if (Perks.instance != null)
         {
             if (playerControl.getPoint() % Perks.instance.GetAmmoRewardThreshold() == 0)
             {
@@ -638,7 +656,7 @@ public class LevelManager : MonoBehaviour
         new_CheckPoint = Instantiate(checkPoint_Prefab) as GameObject;
         new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + spawnDistance, 0);
         new_CheckPoint.tag = "Checkpoint";
-        new_CheckPoint.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,125);
+        new_CheckPoint.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 125);
         new_CheckPoint.GetComponent<SpriteRenderer>().sortingOrder = -1;
 
 

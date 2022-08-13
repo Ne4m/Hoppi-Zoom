@@ -13,7 +13,7 @@ public class MainMenu_Controller : MonoBehaviour
 
     [SerializeField] private Text messager;
 
-    [Header("Canvas UI Buttons")] 
+    [Header("Canvas UI Buttons")]
     [SerializeField] private Button characterMenuBack;
     [SerializeField] private Button shopMenuBack;
 
@@ -28,40 +28,41 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] TMP_Text quitGameText;
     [SerializeField] private Button yesBtn, noBtn;
     private bool isAtMainMenu = true;
-    
-    [Header("Canvas UI Objects")] 
+
+    [Header("Canvas UI Objects")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject characterMenu;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject accessoryMenu;
 
-    [Header ("Info Page Stuff")]
+    [Header("Info Page Stuff")]
     [SerializeField] private GameObject infoPage;
     [SerializeField] private Button closeInfoPageButton;
     [SerializeField] private TMP_Text infoPageText;
 
-    [Header("Middle Buttons")] 
+    [Header("Middle Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button characterButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private Button accessoriesButton;
-    
+
     [Header("Down Menu IMG Resources")]
     [SerializeField] private Sprite audioOnImg;
-    [SerializeField] private  Sprite audioOffImg;
-    [SerializeField] private  Sprite musicOnImg;
-    [SerializeField] private  Sprite musicOffImg;
+    [SerializeField] private Sprite audioOffImg;
+    [SerializeField] private Sprite musicOnImg;
+    [SerializeField] private Sprite musicOffImg;
 
-    [Header("Down Menu Buttons")] 
+    [Header("Down Menu Buttons")]
     [SerializeField] private Button audioButton;
     [SerializeField] private Button musicButton;
     [SerializeField] private Button shareButton;
     [SerializeField] private Button infoButton;
     [SerializeField] private Button languageButton;
+    [SerializeField] private Button showLeaderBoardButton;
 
     [Header("Username Google Play Test")]
     [SerializeField] private TMP_Text usernameTxt;
-    
+
     private bool audio_ON, music_ON;
 
     PlayGamesPlatform platform;
@@ -74,9 +75,9 @@ public class MainMenu_Controller : MonoBehaviour
 
         // Canvas UI Elements Stuff
         //canvasBackMainMenu();
-        
-        if(!(characterMenuBack is null)) characterMenuBack.onClick.AddListener(canvasBackMainMenu);
-        if(!(shopMenuBack is null)) shopMenuBack.onClick.AddListener(canvasBackMainMenu);
+
+        if (!(characterMenuBack is null)) characterMenuBack.onClick.AddListener(canvasBackMainMenu);
+        if (!(shopMenuBack is null)) shopMenuBack.onClick.AddListener(canvasBackMainMenu);
 
         if (!(languagePageBack is null)) languagePageBack.onClick.AddListener(() =>
         {
@@ -95,12 +96,12 @@ public class MainMenu_Controller : MonoBehaviour
         if (noBtn is not null) noBtn.onClick.AddListener(noBtn_Clicked);
 
         // Info Page Stuff
-        if(!(closeInfoPageButton is null)) closeInfoPageButton.onClick.AddListener(closeInfoPageButtonClicked);
+        if (!(closeInfoPageButton is null)) closeInfoPageButton.onClick.AddListener(closeInfoPageButtonClicked);
 
         // Middle Menu Stuff
         if (!(playButton is null)) playButton.onClick.AddListener(playButtonClicked);
-        if(!(characterButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
-        if(!(shopButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
+        if (!(characterButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
+        if (!(shopButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
         if (!(accessoriesButton is null)) accessoriesButton.onClick.AddListener(accessoryButtonClicked);
 
         // Down Menu Stuff
@@ -108,17 +109,27 @@ public class MainMenu_Controller : MonoBehaviour
         music_ON = true;
         if (!(audioButton is null)) audioButton.onClick.AddListener(changeAudioButton);
         if (!(musicButton is null)) musicButton.onClick.AddListener(changeMusicButton);
-        if(!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
-        if(!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
+        if (!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
+        if (!(infoButton is null)) infoButton.onClick.AddListener(infoButtonClicked);
         if (!(languageButton is null)) languageButton.onClick.AddListener(languageButtonClicked);
+        if (!(showLeaderBoardButton is null)) showLeaderBoardButton.onClick.AddListener(() =>
+        {
+            if (!GooglePlayServices.instance.GooglePlayConnection)
+            {
+                GooglePlayServices.instance.Authenticate();
+            }
+            Social.ShowLeaderboardUI();
 
-        PlayGamesPlatform.DebugLogEnabled = true;
-        platform = PlayGamesPlatform.Activate();
+        });
+
+        //PlayGamesPlatform.DebugLogEnabled = true;
+        //platform = PlayGamesPlatform.Activate();
+
 
         FindObjectOfType<AudioManager>().Play("Main");
     }
 
-    
+
 
 
     // Update is called once per frame
@@ -126,7 +137,7 @@ public class MainMenu_Controller : MonoBehaviour
     {
 
 
-          //  usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
+        //  usernameTxt.text = ($"({platform.IsAuthenticated()} {platform.GetUserDisplayName()})");
 
 
         //if (Application.platform == RuntimePlatform.Android)
@@ -137,7 +148,7 @@ public class MainMenu_Controller : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+
 
             if (infoPage.gameObject.activeSelf)
             {
@@ -149,7 +160,7 @@ public class MainMenu_Controller : MonoBehaviour
                 languagePage.SetActive(false);
                 canvasChangeUI("main");
             }
-            else if(isAtMainMenu) ExitGameConfirmation();
+            else if (isAtMainMenu) ExitGameConfirmation();
         }
     }
 
@@ -165,7 +176,7 @@ public class MainMenu_Controller : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(AdsManager.instance.BannerActive)
+        if (AdsManager.instance.BannerActive)
         {
             AdsManager.instance.BannerActive = false;
         }
@@ -190,14 +201,15 @@ public class MainMenu_Controller : MonoBehaviour
     {
         if (s == "Main")
         {
-            
-        }else if (s == "Shop")
+
+        }
+        else if (s == "Shop")
         {
-            
+
         }
         else
         {
-            
+
         }
     }
 
@@ -230,7 +242,7 @@ public class MainMenu_Controller : MonoBehaviour
             musicButton.image.sprite = musicOffImg;
             FindObjectOfType<AudioManager>().VolumeControl("Main", 0f, 1.0f);
         }
-        
+
     }
 
     private void closeInfoPageButtonClicked()
@@ -241,6 +253,12 @@ public class MainMenu_Controller : MonoBehaviour
     private void shareButtonClicked()
     {
         print("Clicked Share Button!\n");
+
+        if (!GooglePlayServices.instance.GooglePlayConnection)
+        {
+            GooglePlayServices.instance.Authenticate();
+        }
+        Social.ShowAchievementsUI();
     }
 
     private void languageButtonClicked()
