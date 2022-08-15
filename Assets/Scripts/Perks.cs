@@ -107,25 +107,70 @@ public class Perks : MonoBehaviour
     void Start()
     {
 
-
-
         string lastPerkStr = SPrefs.GetString("LastSelectedPerk", PerkList.DEFAULT_NONE.ToString());
         Enum.TryParse(lastPerkStr, out chosenPerk);
-       
+
 
         // Don't need this in final release but for development purposes it can stay for now.
+        //EnableActivePerk();
+
         SetActivePerk(chosenPerk);
-        EnableActivePerk();
-
-
+        
     }
 
 
-    Action EnabledPerk;
+    private Action EnabledPerk;
 
-    void Update()
+    public void AddPerk(Action action)
+    {
+        EnabledPerk -= action;
+        EnabledPerk += action;
+    }
+
+    public void RemovePerk(Action action)
+    {
+        EnabledPerk -= action;
+    }
+
+    public void ConfigurePerk_AmmoReward()
+    {
+        SetAmmoRewardThreshold(3);
+        SetAmmoReward(1);
+    }
+
+    public void ConfigurePerk_AmmoRecharge()
+    {
+        EnableAmmoRecharge();
+    }
+
+    public void ConfigurePerk_ChanceToPhase()
     {
 
+    }
+
+    public void ConfigurePerk_TakeLessDamage()
+    {
+        DamageReduction = 40; // %40 Percent Less Damage
+    }
+
+    public void ConfigurePerk_MoveHorizontal()
+    {
+        CanMoveHorizontally = true;
+    }
+
+    public void ConfigurePerk_ChanceToHeal()
+    {
+        ChanceToHeal = true;
+    }
+
+    public void ConfigurePerk_FasterBullets()
+    {
+        BulletSpeed = 2250f;
+    }
+
+    public void ConfigurePerk_LongerGracePeriod()
+    {
+        GracePeriod = 2.5f;
     }
 
     public void SetActivePerk(PerkList PERKS)
@@ -139,11 +184,7 @@ public class Perks : MonoBehaviour
             case PerkList.REFUND_AMMO:
 
 
-                EnabledPerk = () =>
-                {
-                    SetAmmoRewardThreshold(3);
-                    SetAmmoReward(1);
-                };
+                EnabledPerk = ConfigurePerk_AmmoReward;
 
                 SetPerkDescription(I18n.Fields["T_GAIN_AMMO_MORE_FREQUENTLY"]);
                 SetPerkImageName("FasterBullets");
@@ -152,10 +193,7 @@ public class Perks : MonoBehaviour
 
             case PerkList.AMMO_RECHARGE:
 
-                EnabledPerk = () =>
-                {
-                    EnableAmmoRecharge();
-                };
+                EnabledPerk = ConfigurePerk_AmmoRecharge;
 
                 SetPerkDescription(I18n.Fields["T_AMMO_RECHARGES_OVER_TIME"]);
                 SetPerkImageName("AmmoRecharge");
@@ -164,10 +202,7 @@ public class Perks : MonoBehaviour
 
             case PerkList.CHANCE_TO_PHASE:
 
-                EnabledPerk = () =>
-                {
-
-                };
+                EnabledPerk = ConfigurePerk_ChanceToPhase;
 
                 SetPerkDescription(I18n.Fields["T_CHANCE_TO_PHASE"]);
                 SetPerkImageName("Phasing");
@@ -176,10 +211,7 @@ public class Perks : MonoBehaviour
 
             case PerkList.TAKE_LESS_DAMAGE:
 
-                EnabledPerk = () =>
-                {
-                    DamageReduction = 40; // %40 Percent Less Damage
-                };
+                EnabledPerk = ConfigurePerk_TakeLessDamage;
 
                 SetPerkDescription(I18n.Fields["T_TAKE_LESS_DAMAGE"]);
                 SetPerkImageName("TakeLessDmg");
@@ -188,10 +220,7 @@ public class Perks : MonoBehaviour
 
             case PerkList.MOVE_HORIZONTAL:
 
-                EnabledPerk = () =>
-                {
-                    CanMoveHorizontally = true;
-                };
+                EnabledPerk = ConfigurePerk_MoveHorizontal;
 
                 SetPerkDescription(I18n.Fields["T_MOVE_HORIZONTALLY"]);
                 SetPerkImageName("MoveHorizontal");
@@ -200,10 +229,7 @@ public class Perks : MonoBehaviour
 
             case PerkList.CHANCE_TO_HEAL_ON_HIT:
 
-                EnabledPerk = () =>
-                {
-                    ChanceToHeal = true;
-                };
+                EnabledPerk = ConfigurePerk_ChanceToHeal;
 
                 SetPerkDescription(I18n.Fields["T_CHANCE_TO_HEAL"]);
                 SetPerkImageName("ChanceToHealOnKill");
@@ -213,10 +239,7 @@ public class Perks : MonoBehaviour
             case PerkList.FASTER_BULLETS:
 
 
-                EnabledPerk = () =>
-                {
-                    BulletSpeed = 2250f;
-                };
+                EnabledPerk = ConfigurePerk_FasterBullets;
 
                 SetPerkDescription(I18n.Fields["T_FASTER_BULLETS"]);
                 SetPerkImageName("FasterBullets");
@@ -225,11 +248,7 @@ public class Perks : MonoBehaviour
             case PerkList.LONGER_GRACE_PERIOD:
 
 
-
-                EnabledPerk = () =>
-                {
-                    GracePeriod = 2.5f;
-                };
+                EnabledPerk = ConfigurePerk_LongerGracePeriod;
 
 
                 SetPerkDescription(I18n.Fields["T_LONGER_GRACE_PERIOD"]);
@@ -248,8 +267,8 @@ public class Perks : MonoBehaviour
 
     public void EnableActivePerk()
     {
-
         EnabledPerk?.Invoke();
+
     }
 
     #region REFUND_AMMO PERK

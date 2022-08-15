@@ -14,6 +14,7 @@ public class SkinManager : MonoBehaviour
     public static SkinManager instance;
 
     [SerializeField] private TMP_Text currencyTxt;
+    [SerializeField] private Button addCurrencyButton;
     [SerializeField] private Button backBtn;
     [SerializeField] private bool isUI;
 
@@ -152,6 +153,11 @@ public class SkinManager : MonoBehaviour
         if (backBtn != null) backBtn.onClick.AddListener(BackBtn_Clicked);
         if (unlockButton != null) unlockButton.onClick.AddListener(UnlockButton_Clicked);
         if (adUnlockButton != null) adUnlockButton.onClick.AddListener(AdUnlockButton_Clicked);
+
+        if (addCurrencyButton != null) addCurrencyButton.onClick.AddListener(() =>
+        {
+            MainMenu_Controller.instance.ChangeCanvas("shop");
+        });
 
         if (isUI) InitializeBottomContainer();
 
@@ -719,7 +725,15 @@ public class SkinManager : MonoBehaviour
             }
             else
             {
-                messager.startMsgv2("UNSUFFICIENT FUNDS!", 2f, Vector3.zero, Color.red);
+                messager.startMsgv2(I18n.Fields["T_INSUFFICIENT_STARS"], 2f, Vector3.zero, Color.red);
+                AudioManager.instance.IsPlaying("Insufficient", (cb) =>
+                {
+                    if (!cb)
+                    {
+                        AudioManager.instance.Play("Insufficient");
+                    }
+                });
+
                 unlockSkin_Panel.transform.gameObject.SetActive(false);
             }
         }

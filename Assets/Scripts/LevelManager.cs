@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text endgameScore_text;
     [SerializeField] private TMP_Text endgameEarnedGold_text;
     [SerializeField] private TMP_Text health_text;
+    [SerializeField] private TMP_Text ammo_text;
     [SerializeField] private TMP_Text debug_text;
 
 
@@ -277,6 +278,8 @@ public class LevelManager : MonoBehaviour
         instance = this;
 
         totalCurrency = SPrefs.GetInt("gameCurrency", 0);
+
+
     }
 
     // Start is called before the first frame update
@@ -316,7 +319,6 @@ public class LevelManager : MonoBehaviour
 
         playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
-
 
 
     }
@@ -380,13 +382,15 @@ public class LevelManager : MonoBehaviour
             print("High Score Cleared");
         }
 
-        point_text.text = ($"{I18n.Fields["T_SCORE_GAME"]}: {playerControl.getPoint().ToString()}");
+        point_text.text = ($"<size=85%>{I18n.Fields["T_SCORE_GAME"]}</size>\n<size=175%>{playerControl.getPoint().ToString()}</size>");
 
         playerLevel = playerControl.getLevel();
         checkDeathMenu();
 
-        health_text.text = ($"{I18n.Fields["T_HEALTH_GAME"]}: {playerControl.getHealth()}\n" +
-                            $"{I18n.Fields["T_AMMO_GAME"]}: {shooting.GetCurrentAmmo()}"); //                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
+        health_text.text = $"{I18n.Fields["T_HEALTH_GAME"]}: {playerControl.getHealth()}";
+        ammo_text.text = $"{I18n.Fields["T_AMMO_GAME"]}: {shooting.GetCurrentAmmo()}";
+
+        //                             $"SPEED: {playerControl.getPlayerSpeed()}\n" +
 
 
 
@@ -586,7 +590,7 @@ public class LevelManager : MonoBehaviour
         spawn_NextCheckpoint();
         playerControl.addPoint(1);
 
-        if (GooglePlayServices.instance.GooglePlayConnection)
+        if (GooglePlayServices.instance != null && GooglePlayServices.instance.GooglePlayConnection)
         {
 
             Social.ReportProgress("CgkIuYDT178fEAIQBA", 100.0f, (bool success) => {

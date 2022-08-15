@@ -132,9 +132,12 @@ public class Chain : MonoBehaviour
     //свойство контроля некоторыми параметрми цепи в игровом режиме для пользотеля
     public ChainController chainController { get; private set; }
 
+
+   // public static Chain instance;
     void Awake()
     {
         chainController = new ChainController(this);
+        //instance = this;
     }
 
     void Start()
@@ -1095,22 +1098,28 @@ public class Chain : MonoBehaviour
 
     public void CheckSnappedAndFalling()
     {
-        for (int i = 0; i < links.Count; i++)
+
+        if(A.gameObject != null)
         {
-            if (A.gameObject == null) return;
-            if (B.gameObject == null) return;
 
-            var link1 = links[i].hingle1_IsActiveAndConnectedTo(A.GetComponent<Rigidbody2D>());
-            var link2 = links[i].hingle1_IsActiveAndConnectedTo(B.GetComponent<Rigidbody2D>());
-
-            if (!link1 && !link2)
+            for(int i=0; i<links.Count; i++)
             {
-                Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), links[i].rb2D.transform.GetComponent<Collider2D>(), true);
-                Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), B.GetComponent<Collider2D>(), true);
+                if(links[i].obj.GetComponent<HingeJoint2D>().enabled == false)
+                {
+                    var index = i;
+
+                    for (int j = index; j < linksCount; j++)
+                    {
+                        Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), links[j].rb2D.transform.GetComponent<Collider2D>(), true);
+                    }
+
+                    if (B.gameObject != null) Physics2D.IgnoreCollision(FindObjectOfType<PlayerController>().GetComponent<Collider2D>(), B.GetComponent<Collider2D>(), true);
+                }
             }
+
+        
         }
     }
-
 
 
     // статический метод, который определяет является ли переданный объект звеном
@@ -1122,9 +1131,13 @@ public class Chain : MonoBehaviour
         {
             gameObject.GetComponent<HingeJoint2D>().enabled = false;
             AudioManager.instance.Play("Cut");
+
         }
     }
+
+
 }
+
 
 
 //Базовый класс звена, для простоты манипуляции со звеном.

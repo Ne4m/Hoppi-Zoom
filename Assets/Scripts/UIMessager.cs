@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class UIMessager : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
-    [SerializeField] private Text text2;
+    [SerializeField] private TMP_Text text2;
+    [SerializeField] private GameObject container;
 
     public Vector3 startPos;
     public float speed;
@@ -16,10 +17,19 @@ public class UIMessager : MonoBehaviour
 
     bool isRunning = false;
     Coroutine msgCoroutine;
+    private bool isContainerNull;
 
     private void Start()
     {
 
+        if(container == null)
+        {
+            isContainerNull = true;
+        }
+        else
+        {
+            isContainerNull = false;
+        }
 
     }
 
@@ -77,6 +87,11 @@ public class UIMessager : MonoBehaviour
             transform.position = pos;
         }
 
+        if (!isContainerNull)
+        {
+            container.gameObject.SetActive(true);
+        }
+
         text2.gameObject.SetActive(true);
         text2.text = msg;
         text2.color = color;
@@ -84,6 +99,11 @@ public class UIMessager : MonoBehaviour
         //rb.velocity = Vector2.down * speed;
 
         yield return new WaitForSeconds(duration);
+
+        if (!isContainerNull)
+        {
+            container.gameObject.SetActive(false);
+        }
 
         text2.text = string.Empty;
         text2.gameObject.SetActive(false);

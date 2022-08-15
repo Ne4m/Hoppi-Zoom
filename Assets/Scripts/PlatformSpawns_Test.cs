@@ -44,6 +44,7 @@ public class PlatformSpawns_Test : MonoBehaviour
         var tmpIndex = Convert.ToInt32(setIndexNumberTxt.text);
         if(tmpIndex >= 0 &&  tmpIndex < platforms.Length)
         {
+            indexNumber = tmpIndex;
             SpawnPlatform(tmpIndex);
         }
 

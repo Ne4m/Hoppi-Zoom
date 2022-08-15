@@ -33,7 +33,7 @@ public class MobileUtils : MonoBehaviour
 
         // Debug.Log($"Screen Refresh {Screen.currentResolution.refreshRate}");
 
-        OnDemandRendering.renderFrameInterval = 1;
+        //OnDemandRendering.renderFrameInterval = 0;
 
     }
 

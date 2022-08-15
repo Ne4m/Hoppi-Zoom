@@ -28,6 +28,7 @@ public class CharacterMenuController : MonoBehaviour
     [SerializeField] private Button swipeLeftButton;
     [SerializeField] private Button swipeRightButton;
     [SerializeField] private Button selectButton;
+    [SerializeField] private Button addCurrencyButton;
 
 
     [Header("Character Bars")] 
@@ -113,6 +114,11 @@ public class CharacterMenuController : MonoBehaviour
         if (unlockConfirmation_YesBtn != null) unlockConfirmation_YesBtn.onClick.AddListener(UnlockConfirmation_YesBtn_Clicked);
         if (unlockConfirmation_NoBtn != null) unlockConfirmation_NoBtn.onClick.AddListener(UnlockConfirmation_NoBtn_Clicked);
 
+        if (addCurrencyButton != null) addCurrencyButton.onClick.AddListener(() =>
+        {
+            MainMenu_Controller.instance.ChangeCanvas("shop");
+        });
+
         characterImg = characterOnScreen.GetComponent<Image>();
         characterSkins = Resources.LoadAll<Sprite>("Characters");
         mainMenu = MainMenu_Controller.instance;
@@ -122,8 +128,9 @@ public class CharacterMenuController : MonoBehaviour
         //Default Character
         SPrefs.SetString("character_" + 0, "unlocked");
         SPrefs.Save();
-        
 
+
+        
 
         for (int i = 0; i < characterSkins.Length; i++)
         {
@@ -150,7 +157,7 @@ public class CharacterMenuController : MonoBehaviour
 
         /// REMOVE ON LAUNCH
         /// 
-
+        SPrefs.SetInt("gameCurrency", 500);
         LockAllCharacters();
         SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
         /// 
@@ -183,7 +190,7 @@ public class CharacterMenuController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.touchCount > 0) TouchControl(Input.touches[0]);
+        if(Input.touchCount > 0) TouchControl(Input.GetTouch(0));
 
 
         //if (Application.platform == RuntimePlatform.Android)
@@ -201,14 +208,17 @@ public class CharacterMenuController : MonoBehaviour
 
     }
 
-    Vector2 lastPos;
+    Vector2 initialPos = Vector2.zero;
+    Vector2 lastPos = Vector2.zero;
+
     private void TouchControl(Touch touch)
     {
+
 
         switch (touch.phase)
         {
             case TouchPhase.Began:
-                lastPos = touch.position;
+                initialPos = touch.position;
                 break;
             case TouchPhase.Moved:
                 
@@ -217,7 +227,9 @@ public class CharacterMenuController : MonoBehaviour
                 break;
             case TouchPhase.Ended:
 
-                Vector2 delta = touch.position - lastPos;
+                lastPos = touch.position;
+
+                Vector2 delta = (lastPos - initialPos).normalized;
 
                 if (delta.x < 0) // Swiping Left!
                 {
@@ -242,8 +254,6 @@ public class CharacterMenuController : MonoBehaviour
         setCurrentIndex(currentCharacterIndex);
 
         // bronu s2m
-
-        Perks.instance.EnableActivePerk();
 
         SPrefs.SetFloat("playerHealth", characterHealth);
         SPrefs.SetFloat("playerSpeed", characterSpeed);
@@ -276,6 +286,13 @@ public class CharacterMenuController : MonoBehaviour
         else
         {
             messager.startMsgv2(I18n.Fields["T_INSUFFICIENT_STARS"], 2f, Vector3.zero, Color.red);
+            AudioManager.instance.IsPlaying("Insufficient", (cb) =>
+            {
+                if (!cb)
+                {
+                    AudioManager.instance.Play("Insufficient");
+                }
+            });
         }
     }
 

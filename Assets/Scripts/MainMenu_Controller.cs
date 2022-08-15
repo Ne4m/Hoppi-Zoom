@@ -11,7 +11,7 @@ using TMPro;
 public class MainMenu_Controller : MonoBehaviour
 {
 
-    [SerializeField] private Text messager;
+    [SerializeField] private TMP_Text messager;
 
     [Header("Canvas UI Buttons")]
     [SerializeField] private Button characterMenuBack;
@@ -117,7 +117,7 @@ public class MainMenu_Controller : MonoBehaviour
         //platform = PlayGamesPlatform.Activate();
 
 
-        FindObjectOfType<AudioManager>().Play("Main");
+        AudioManager.instance.Play("Main");
     }
 
 
@@ -278,6 +278,8 @@ public class MainMenu_Controller : MonoBehaviour
 
     private void playButtonClicked()
     {
+        Perks.instance.EnableActivePerk();
+
         changeScene();
     }
 
@@ -352,6 +354,11 @@ public class MainMenu_Controller : MonoBehaviour
     {
 
         canvasChangeUI("main");
+    }
+
+    public void ChangeCanvas(string str)
+    {
+        canvasChangeUI(str);
     }
 
     private void changeScene()
