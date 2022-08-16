@@ -546,7 +546,7 @@ RectTransform:
   m_Children:
   - {fileID: 34603882}
   m_Father: {fileID: 1252286681}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -679,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyTxt: {fileID: 0}
+  addCurrencyButton: {fileID: 0}
   backBtn: {fileID: 0}
   isUI: 0
   titleText: {fileID: 0}
@@ -4125,6 +4126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 631844740}
   - component: {fileID: 631844741}
+  - component: {fileID: 631844742}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -4220,6 +4222,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+--- !u!114 &631844742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631844739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb998b93a85d6db4fb0de675ed5f7082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &632280105
 GameObject:
   m_ObjectHideFlags: 0

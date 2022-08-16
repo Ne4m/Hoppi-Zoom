@@ -68,30 +68,23 @@ public class PlatformSpawner : MonoBehaviour
 
     }
 
-    IEnumerator ExampleCoroutine()
-    {
-        while (true)
-        {
-            spawnRandomPlatform();
-            yield return new WaitForSeconds(5);
-        }
-
-    }
-
     public void initiateSpawn()
     {
-       
-        if(initiatedCount != platformsSpawnCap.Length-1)
-        {
-            if (initiatedCount < 1)
-            {
-                spawnDistance = 5;
-                spawnRandomPlatform();
-            }
 
-            initiatedCount++;
-        }
-        else initiatedCount = 0;
+        //if(initiatedCount != platformsSpawnCap.Length-1)
+        //{
+        //    if (initiatedCount < 1)
+        //    {
+        //        spawnDistance = 5;
+        //        spawnRandomPlatform();
+        //    }
+
+        //    initiatedCount++;
+        //}
+        //else initiatedCount = 0;
+
+        spawnDistance = 5;
+        spawnRandomPlatform();
 
         //Debug.Log($"Initiated count {initiatedCount}\n");
     }
@@ -129,8 +122,9 @@ public class PlatformSpawner : MonoBehaviour
 
         for (int i=0; i < platformsSpawnCap.Length; i++)
         {
-           
-            platformToSpawn = platformListArr[selectUniqueRandomNumber(platformListArr.Length-1)];
+            var rndNumber = selectUniqueRandomNumber(platformListArr.Length);
+            //Debug.Log($"Spawn Random Number is: {rndNumber}");
+            platformToSpawn = platformListArr[rndNumber];
 
             newPlatform = Instantiate(platformToSpawn) as GameObject;
             lastSpawnedPlatform = newPlatform;
@@ -153,7 +147,10 @@ public class PlatformSpawner : MonoBehaviour
             //}
             //else
             //{
-            //    newPlatform.transform.GetComponent<SpriteRenderer>().sprite = platformSprites;
+            //        if(newPlatform.transform.tag == "Platform")
+            //        {
+            //          newPlatform.transform.GetComponent<SpriteRenderer>().sprite = platformSprites;
+            //      }
             //}
 
 
