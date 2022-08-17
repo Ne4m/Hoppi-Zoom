@@ -98,7 +98,6 @@ public class CharacterMenuController : MonoBehaviour
 
     private void Awake()
     {
-
         //baseSkinPrice = SPrefs.GetInt("currentBaseSkinPrice", baseSkinPrice);
     }
 

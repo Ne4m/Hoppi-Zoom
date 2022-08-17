@@ -294,7 +294,7 @@ public class LevelManager : MonoBehaviour
         shooting = gameObject.GetComponent<Shooting>();
         messager = gameObject.GetComponent<UIMessager>();
 
-        shooting.SetMaxAmmo(SPrefs.GetInt("playerAmmo", 1));
+        shooting.SetMaxAmmo(SPrefs.GetInt("playerAmmo", 3));
 
         uiAnimations = UI_Animations.instance;
 
@@ -357,11 +357,11 @@ public class LevelManager : MonoBehaviour
 
         if (playableAreaCollider.bounds.Contains(player.transform.position))
         {
-            Debug.Log("IN BOUNDS!!");
+            //Debug.Log("IN BOUNDS!!");
         }
         else
         {
-            Debug.Log("OUT OF BOUNDS!!");
+            //Debug.Log("OUT OF BOUNDS!!");
             ResetPlayerPosition();
         }
     }

@@ -34,6 +34,8 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private GameObject characterMenu;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject accessoryMenu;
+    [SerializeField] private GameObject upgradesMenu;
+
 
     [Header("Info Page Stuff")]
     [SerializeField] private GameObject infoPage;
@@ -45,6 +47,8 @@ public class MainMenu_Controller : MonoBehaviour
     [SerializeField] private Button characterButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private Button accessoriesButton;
+    [SerializeField] private Button upgradesButton;
+
 
     [Header("Down Menu IMG Resources")]
     [SerializeField] private Sprite audioOnImg;
@@ -103,6 +107,10 @@ public class MainMenu_Controller : MonoBehaviour
         if (!(characterButton is null)) characterButton.onClick.AddListener(characterButtonClicked);
         if (!(shopButton is null)) shopButton.onClick.AddListener(shopButtonClicked);
         if (!(accessoriesButton is null)) accessoriesButton.onClick.AddListener(accessoryButtonClicked);
+        if (!(upgradesButton is null)) upgradesButton.onClick.AddListener(() =>
+        {
+            ChangeCanvas("upgrades");
+        });
 
         // Down Menu Stuff
         audio_ON = true;
@@ -316,6 +324,7 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 isAtMainMenu = true;
                 languagePageCallButton.gameObject.SetActive(true);
                 break;
@@ -324,6 +333,7 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(true);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 isAtMainMenu = false;
                 break;
             case "shop":
@@ -331,6 +341,7 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(true);
                 accessoryMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 isAtMainMenu = false;
                 break;
             case "accessory":
@@ -338,8 +349,17 @@ public class MainMenu_Controller : MonoBehaviour
                 characterMenu.SetActive(false);
                 shopMenu.SetActive(false);
                 accessoryMenu.SetActive(true);
+                upgradesMenu.SetActive(false);
                 accessoryMenu.TryGetComponent<SkinManager>(out SkinManager skinManager);
                 skinManager.RefreshUI();
+                isAtMainMenu = false;
+                break;
+            case "upgrades":
+                mainMenu.SetActive(false);
+                characterMenu.SetActive(false);
+                shopMenu.SetActive(false);
+                accessoryMenu.SetActive(false);
+                upgradesMenu.SetActive(true);
                 isAtMainMenu = false;
                 break;
         }

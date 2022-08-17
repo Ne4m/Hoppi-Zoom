@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Platform") || collision.CompareTag("Wood"))
         {
-            Debug.Log($"Hit platform : {collision.gameObject.name}");
+            //Debug.Log($"Hit platform : {collision.gameObject.name}");
 
             
             if(collision.GetComponent<PlatformMovements>() != null)

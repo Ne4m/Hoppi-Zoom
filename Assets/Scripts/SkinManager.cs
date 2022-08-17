@@ -221,7 +221,7 @@ public class SkinManager : MonoBehaviour
 
                 SPrefs.SetBool($"{item.Name}_locked", true);
                 SPrefs.Save();
-                Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
+                //Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
             }
 
         foreach (FieldInfo item in typeof(HAIR_SKINS).GetFields())
@@ -229,7 +229,7 @@ public class SkinManager : MonoBehaviour
             {
                 SPrefs.SetBool($"{item.Name}_locked", true);
                 SPrefs.Save();
-                Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
+                //Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
             }
 
         foreach (FieldInfo item in typeof(BODY_SKINS).GetFields())
@@ -238,7 +238,7 @@ public class SkinManager : MonoBehaviour
 
                 SPrefs.SetBool($"{item.Name}_locked", true);
                 SPrefs.Save();
-                Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
+                //Debug.Log($"{item.Name} lock: {IsLocked(item.Name)}");
             }
 
     }

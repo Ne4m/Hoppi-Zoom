@@ -46,7 +46,7 @@ public class MainMenu_Animations : MonoBehaviour
         }
 
 
-        Debug.Log("New leaning is about to start");
+       // Debug.Log("New leaning is about to start");
 
         if (!LeanTween.isTweening(randomObject))
         {

@@ -60,28 +60,37 @@ public class Shooting : MonoBehaviour
 
         if (Perks.instance != null && Perks.instance.CanRechargeAmmo())
         {
-            if (levelManager.playerControl.getPoint() > 0 && !IsFullAmmo())
+            if (!IsFullAmmo())
             {
-                if(Time.time > 1f + lastRechargeTime)
+                if (levelManager.playerControl.getPoint() > 0)
                 {
-
-                    progressBar.fillAmount += (1 / ammoRechargeTime);
-
-                    if(progressBar.fillAmount > 0.9f)
+                    if (Time.time > 1f + lastRechargeTime)
                     {
-                        if (!IsFullAmmo())
+
+                        progressBar.fillAmount += (1 / ammoRechargeTime);
+
+
+                        if (progressBar.fillAmount > 0.9f)
                         {
-                            ammoReceiveMsg = I18n.Fields["T_RECHARGED"]; //"Recharged!";
-                            AddAmmo(rechargedAmmoAmount);
+                            if (!IsFullAmmo())
+                            {
+                                ammoReceiveMsg = I18n.Fields["T_RECHARGED"]; //"Recharged!";
+                                AddAmmo(rechargedAmmoAmount);
+                            }
+                            DisableRechargeBar();
                         }
-                        DisableRechargeBar();
+
+
+                        lastRechargeTime = Time.time;
                     }
 
-
-                    lastRechargeTime = Time.time;
+                    EnableRechargeBar();
                 }
-
-                EnableRechargeBar();
+            
+            }
+            else
+            {
+                DisableRechargeBar();
             }
 
             //if (canvasRect.gameObject.activeSelf)
@@ -183,6 +192,11 @@ public class Shooting : MonoBehaviour
 
     public void SetMaxAmmo(int amount)
     {
+        if(Perks.instance != null)
+        {
+            amount += Perks.instance.ExtraAmmo;
+        }
+
         this.maxAmmo = amount;
     }
 

@@ -351,7 +351,7 @@ public class PlatformMovements : MonoBehaviour
 
         void Scale()
         {
-            Debug.Log("SCALE BEHAVIOUR");
+           // Debug.Log("SCALE BEHAVIOUR");
 
             var initialScale = gameObject.transform.localScale;
 
@@ -365,7 +365,7 @@ public class PlatformMovements : MonoBehaviour
 
         void Fading()
         {
-            Debug.Log("FADE BEHAVIOUR");
+            //Debug.Log("FADE BEHAVIOUR");
 
             LeanTween.alpha(gameObject, tweenProperties.fadeAlphaMin, 0f)
                 .setLoopType(tweenProperties.isPingPongFading ? LeanTweenType.pingPong : LeanTweenType.notUsed)
@@ -397,7 +397,7 @@ public class PlatformMovements : MonoBehaviour
 
         void Color()
         {
-            Debug.Log("COLOR BEHAVIOUR");
+            //Debug.Log("COLOR BEHAVIOUR");
 
             LeanTween.color(gameObject, tweenProperties.color, 0)
                 .setLoopType(tweenProperties.isPingPongColorChange ? LeanTweenType.pingPong : LeanTweenType.notUsed)

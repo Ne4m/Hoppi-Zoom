@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using UnityEngine.Events;
 
 public enum PerkList
 {
@@ -15,8 +15,10 @@ public enum PerkList
     CHANCE_TO_HEAL_ON_HIT,
     FASTER_BULLETS,
     LONGER_GRACE_PERIOD,
-    AMMO_RECHARGE
+    AMMO_RECHARGE,
+    EXTRA_AMMO
 }
+
 
 public class Perks : MonoBehaviour
 {
@@ -40,6 +42,14 @@ public class Perks : MonoBehaviour
     private int dmgReductionPercent;
 
     private string lastPerkDescription, lastPerkImageName;
+
+    private int extraAmmo;
+
+    public int ExtraAmmo
+    {
+        get => extraAmmo;
+        set => extraAmmo = value;
+    }
 
     public string LastPerkDescription
     {
@@ -111,25 +121,58 @@ public class Perks : MonoBehaviour
         Enum.TryParse(lastPerkStr, out chosenPerk);
 
 
+        //LockAndDeactiveAllUpgradedPerks();
+
         // Don't need this in final release but for development purposes it can stay for now.
         //EnableActivePerk();
 
         SetActivePerk(chosenPerk);
-        
+
+
+        foreach (var perk in Enum.GetValues(typeof(PerkList)))
+        {
+
+            var active = SPrefs.GetBool($"{perk.ToString()}_activated", false);
+            Debug.Log($"Perk {perk} is {active}");
+
+            if (active)
+            {
+                PerkList _perk;
+                Enum.TryParse(perk.ToString(), out _perk);
+                ActivateUpgradePerks(_perk);
+            }
+        }
+
+    }
+
+    public void LockAndDeactiveAllUpgradedPerks()
+    {
+        foreach (var perk in Enum.GetValues(typeof(PerkList)))
+        {
+            SPrefs.SetBool($"{perk.ToString()}_locked", true);
+            SPrefs.SetBool($"{perk.ToString()}_activated", false);
+            SPrefs.Save();
+        }
     }
 
 
     private Action EnabledPerk;
+    private Action EnabledUpgradePerks;
 
     public void AddPerk(Action action)
     {
-        EnabledPerk -= action;
-        EnabledPerk += action;
+        EnabledUpgradePerks -= action;
+        EnabledUpgradePerks += action;
+    }
+
+    public void TestMethod(string str)
+    {
+        Debug.Log($"Test Method Invoked: {str}");
     }
 
     public void RemovePerk(Action action)
     {
-        EnabledPerk -= action;
+        EnabledUpgradePerks -= action;
     }
 
     public void ConfigurePerk_AmmoReward()
@@ -141,6 +184,11 @@ public class Perks : MonoBehaviour
     public void ConfigurePerk_AmmoRecharge()
     {
         EnableAmmoRecharge();
+    }
+
+    public void Configure_ExtraAmmo()
+    {
+        ExtraAmmo = 3;
     }
 
     public void ConfigurePerk_ChanceToPhase()
@@ -173,6 +221,129 @@ public class Perks : MonoBehaviour
         GracePeriod = 2.5f;
     }
 
+    public void ActivateUpgradePerks(PerkList perk)
+    {
+        switch (perk)
+        {
+            case PerkList.REFUND_AMMO:
+
+                AddPerk(ConfigurePerk_AmmoReward);
+                
+                break;
+            case PerkList.AMMO_RECHARGE:
+
+                AddPerk(ConfigurePerk_AmmoRecharge);
+                break;
+
+            case PerkList.CHANCE_TO_PHASE:
+
+                AddPerk(ConfigurePerk_ChanceToPhase);
+                break;
+
+            case PerkList.TAKE_LESS_DAMAGE:
+
+                AddPerk(ConfigurePerk_TakeLessDamage);
+                break;
+
+
+            case PerkList.MOVE_HORIZONTAL:
+
+                AddPerk(ConfigurePerk_MoveHorizontal);
+                break;
+
+
+            case PerkList.CHANCE_TO_HEAL_ON_HIT:
+
+                AddPerk(ConfigurePerk_ChanceToHeal);
+                break;
+
+
+            case PerkList.FASTER_BULLETS:
+
+                AddPerk(ConfigurePerk_FasterBullets);
+                break;
+
+            case PerkList.LONGER_GRACE_PERIOD:
+
+                AddPerk(ConfigurePerk_LongerGracePeriod);
+                break;
+
+            case PerkList.EXTRA_AMMO:
+
+                AddPerk(Configure_ExtraAmmo);
+                break;
+        }
+    }
+
+    public void RemoveUpgradePerks(PerkList perk)
+    {
+        switch (perk)
+        {
+            case PerkList.REFUND_AMMO:
+
+                RemovePerk(ConfigurePerk_AmmoReward);
+                SetAmmoRewardThreshold(6);
+                SetAmmoReward(1);
+
+                break;
+            case PerkList.AMMO_RECHARGE:
+
+                RemovePerk(ConfigurePerk_AmmoRecharge);
+                DisableAmmoRecharge();
+
+                break;
+
+            case PerkList.CHANCE_TO_PHASE:
+
+                RemovePerk(ConfigurePerk_ChanceToPhase);
+                // To be implemented
+
+                break;
+
+            case PerkList.TAKE_LESS_DAMAGE:
+
+                RemovePerk(ConfigurePerk_TakeLessDamage);
+                DamageReduction = 0;
+
+                break;
+
+
+            case PerkList.MOVE_HORIZONTAL:
+
+                RemovePerk(ConfigurePerk_MoveHorizontal);
+                CanMoveHorizontally = false;
+
+                break;
+
+
+            case PerkList.CHANCE_TO_HEAL_ON_HIT:
+
+                RemovePerk(ConfigurePerk_ChanceToHeal);
+                ChanceToHeal = false;
+
+                break;
+
+
+            case PerkList.FASTER_BULLETS:
+
+                RemovePerk(ConfigurePerk_FasterBullets);
+                BulletSpeed = 850f;
+
+                break;
+
+            case PerkList.LONGER_GRACE_PERIOD:
+
+                RemovePerk(ConfigurePerk_LongerGracePeriod);
+                GracePeriod = 1.25f;
+                break;
+
+            case PerkList.EXTRA_AMMO:
+                RemovePerk(Configure_ExtraAmmo);
+                ExtraAmmo = 0;
+                break;
+        }
+    }
+
     public void SetActivePerk(PerkList PERKS)
     {
         SetDefaultValues();
@@ -187,7 +358,7 @@ public class Perks : MonoBehaviour
                 EnabledPerk = ConfigurePerk_AmmoReward;
 
                 SetPerkDescription(I18n.Fields["T_GAIN_AMMO_MORE_FREQUENTLY"]);
-                SetPerkImageName("FasterBullets");
+                SetPerkImageName("GainAmmoFrequently.");
                 break;
 
 
@@ -267,6 +438,7 @@ public class Perks : MonoBehaviour
 
     public void EnableActivePerk()
     {
+        EnabledUpgradePerks?.Invoke();
         EnabledPerk?.Invoke();
 
     }

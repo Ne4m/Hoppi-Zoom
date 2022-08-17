@@ -157,7 +157,7 @@ public class AdsManager : MonoBehaviour
 
     private void RequestInterstitial()
     {
-        Debug.Log("Requesting Interstitial...");
+        //Debug.Log("Requesting Interstitial...");
 
         interstitialAd = new InterstitialAd(interstitialId);
 

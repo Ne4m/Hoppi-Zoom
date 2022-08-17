@@ -76,7 +76,7 @@ public class PlayerConditions : MonoBehaviour
     {
         if (collision.collider.tag.Contains("Spike"))
         {
-            Debug.Log("Got Hit By A Spike!! [COLLISION] \n" + transform.tag);
+            //Debug.Log("Got Hit By A Spike!! [COLLISION] \n" + transform.tag);
             DamageCharacter(100);
         }
     }
@@ -85,19 +85,19 @@ public class PlayerConditions : MonoBehaviour
     {
         if (collision.CompareTag("Spike"))
         {
-            Debug.Log("Got Hit By A Spike!! [TRIGGER]\n" + transform.tag);
+            //Debug.Log("Got Hit By A Spike!! [TRIGGER]\n" + transform.tag);
             DamageCharacter(150);
         }
 
         if (collision.CompareTag("Laser"))
         {
-            Debug.Log("Got Hit By A Laser! [TRIGGER]\n" + transform.tag);
+           // Debug.Log("Got Hit By A Laser! [TRIGGER]\n" + transform.tag);
             DamageCharacter(300);
         }
 
         if (collision.CompareTag("Wood"))
         {
-            Debug.Log("Got Hit By A Wood [TRIGGER]\n" + transform.tag);
+            //Debug.Log("Got Hit By A Wood [TRIGGER]\n" + transform.tag);
             DamageCharacter(75);
         }
     }

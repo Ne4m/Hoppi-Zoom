@@ -71,20 +71,18 @@ public class PlatformSpawner : MonoBehaviour
     public void initiateSpawn()
     {
 
-        //if(initiatedCount != platformsSpawnCap.Length-1)
-        //{
-        //    if (initiatedCount < 1)
-        //    {
-        //        spawnDistance = 5;
-        //        spawnRandomPlatform();
-        //    }
+        if (initiatedCount != platformsSpawnCap.Length - 1)
+        {
+            if (initiatedCount < 1)
+            {
+                spawnDistance = 5;
+                spawnRandomPlatform();
+            }
 
-        //    initiatedCount++;
-        //}
-        //else initiatedCount = 0;
+            initiatedCount++;
+        }
+        else initiatedCount = 0;
 
-        spawnDistance = 5;
-        spawnRandomPlatform();
 
         //Debug.Log($"Initiated count {initiatedCount}\n");
     }
