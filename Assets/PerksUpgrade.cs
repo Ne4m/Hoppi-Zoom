@@ -9,7 +9,14 @@ using System;
 public class PerksUpgrade : MonoBehaviour
 {
     private bool isActive = false;
-    private int basePrice = 500;
+    private int basePrice = 1000;
+    private int newPrice = 1000;
+
+    public int NewUpgradePrice
+    {
+        get => newPrice;
+        set => newPrice = value;
+    }
 
 
     [SerializeField] private Button chooseButton;
@@ -22,8 +29,12 @@ public class PerksUpgrade : MonoBehaviour
     [SerializeField] private Sprite statusImage;
     [SerializeField] private Sprite perkImage;
     [SerializeField] private string perkDescription;
-    [SerializeField] private int price;
+    private int price;
     [SerializeField] private bool isLocked = true;
+    private GameObject priceText;
+    private GameObject goldImage;
+    private GameObject perkDesc;
+
 
     [Header ("Lazy Stuff")]
     [SerializeField] private Sprite statusOnImg;
@@ -33,10 +44,15 @@ public class PerksUpgrade : MonoBehaviour
 
     void Start()
     {
+
+
         perkName = perk.ToString();
 
         isLocked = SPrefs.GetBool($"{perkName}_locked", true);
         isActive = SPrefs.GetBool($"{perkName}_activated", false);
+
+
+        NewUpgradePrice = SPrefs.GetInt("perkUpgradePrice", basePrice);
 
         if (!isLocked)
         {
@@ -51,7 +67,10 @@ public class PerksUpgrade : MonoBehaviour
                 statusImage = Resources.Load<Sprite>($"Perk Upgrades Stuff/PerkOff");
                 Perks.instance.RemovePerk(onChoose.Invoke);
             }
+
+
         }
+
 
         perkImage = Resources.Load<Sprite>($"Perk Upgrades Stuff/{perkName}");
 
@@ -59,10 +78,33 @@ public class PerksUpgrade : MonoBehaviour
         _transform = transform.GetChild(0).GetComponent<Transform>();
         _transform.GetChild(0).GetComponent<Image>().sprite = statusImage;
         _transform.GetChild(1).GetComponent<Image>().sprite = perkImage;
-        _transform.GetChild(2).GetComponent<TMP_Text>().text = I18n.Fields[perkDescription];
-        _transform.GetChild(3).GetComponent<TMP_Text>().text = price.ToString();
+        perkDesc = _transform.GetChild(2).gameObject;
+        perkDesc.GetComponent<TMP_Text>().text = I18n.Fields[perkDescription];
+        priceText = _transform.GetChild(3).gameObject;
+        _transform.GetChild(3).GetComponent<TMP_Text>().text = NewUpgradePrice.ToString();
+
+        goldImage = _transform.GetChild(4).gameObject;
 
         if (chooseButton != null) chooseButton.onClick.AddListener(ChooseButton_Clicked);
+
+
+    }
+
+    private void Update()
+    {
+        NewUpgradePrice = SPrefs.GetInt($"perkUpgradePrice", basePrice);
+
+        if (NewUpgradePrice >= basePrice)
+        {
+            _transform.GetChild(3).GetComponent<TMP_Text>().text = NewUpgradePrice.ToString();
+        }
+
+        if (!isLocked)
+        {
+            priceText.SetActive(false);
+            goldImage.SetActive(false);
+            perkDesc.transform.localPosition = new Vector3(perkDesc.transform.localPosition.x, 0f, perkDesc.transform.localPosition.z);
+        }
 
 
     }
@@ -84,7 +126,7 @@ public class PerksUpgrade : MonoBehaviour
             UpgradesController.instance.PerkName = perkName;
             UpgradesController.instance.PerkDescription = I18n.Fields[perkDescription];
             UpgradesController.instance.PerkImage = perkImage;
-            UpgradesController.instance.PriceText = price.ToString();
+            UpgradesController.instance.PriceText = NewUpgradePrice.ToString();
 
             UpgradesController.instance.LastInstance = this;
 

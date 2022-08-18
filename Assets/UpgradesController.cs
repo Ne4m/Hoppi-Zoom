@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UpgradesController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class UpgradesController : MonoBehaviour
     [SerializeField] private TMP_Text unlockPriceText;
     [SerializeField] private string perkName;
 
+    private int totalCurrency;
+    private int discountedPrice;
 
     public PerksUpgrade LastInstance
     {
@@ -80,18 +83,111 @@ public class UpgradesController : MonoBehaviour
 
     void Start()
     {
-        var totalCurrency = SPrefs.GetInt("gameCurrency", 0);
+
+
+        totalCurrency = SPrefs.GetInt("gameCurrency", 0);
         totalCurrencyText.text = totalCurrency.ToString();
 
-        if (unlockButton != null) unlockButton.onClick.AddListener(() =>
+        if (unlockButton != null) unlockButton.onClick.AddListener(UnlockButton_Clicked);
+        if (adUnlockButton != null) adUnlockButton.onClick.AddListener(AdUnlockButton_Clicked);
+    }
+
+    private void Update()
+    {
+        RefreshTotalCurrencyText();
+    }
+
+    private void UnlockButton_Clicked()
+    {
+
+        ValidatePrice(valid =>
         {
-            IsUnlockMenuActive = false;
-            SPrefs.SetBool($"{PerkName}_locked", false);
-
-            LastInstance.UpdateStatus(false);
-
-            Debug.Log($"Unlocked Upgrade! {PerkName}");
+            if (valid)
+            {
+                MakeTransaction(true, 50);
+                UnlockUpgrade();
+            }
+            else
+            {
+                Debug.Log("Not Enough Currency!!");
+            }
         });
+
+    }
+
+    private void AdUnlockButton_Clicked()
+    {
+        ValidatePrice(valid =>
+        {
+            if (valid)
+            {
+                AdsManager.instance.DisplayRewardedAd_UpgradeUnlock();
+            }
+            else
+            {
+                Debug.Log("Not Enough Currency!!");
+            }
+        });
+    }
+
+    private void ValidatePrice(Action<bool> callback)
+    {
+        RefreshTotalCurrencyText();
+
+        var price = SPrefs.GetInt("perkUpgradePrice", LastInstance.NewUpgradePrice);
+
+        if (totalCurrency >= price)
+        {
+            callback(true);
+        }
+        else
+        {
+            callback(false);
+        }
+    }
+
+    private void MakeTransaction(bool discounted, int discountPercentage)
+    {
+        var price = SPrefs.GetInt("perkUpgradePrice", LastInstance.NewUpgradePrice);
+
+        if (discounted)
+        {
+            discountedPrice = price - (int)(price * discountPercentage / 100);
+            Debug.Log("New Discounted Upgrade PRice is " + discountedPrice);
+
+            totalCurrency -= discountedPrice;
+        }
+        else
+        {
+            totalCurrency -= price;
+        }
+
+
+
+
+        price = price + (int)(price * 0.25f);
+
+        SPrefs.SetInt("gameCurrency", totalCurrency);
+        SPrefs.SetInt("perkUpgradePrice", price);
+        SPrefs.Save();
+
+        RefreshTotalCurrencyText();
+
+        Debug.Log($"Unlocked Upgrade! {PerkName}");
+
+    }
+
+    private void UnlockUpgrade()
+    {
+        IsUnlockMenuActive = false;
+        SPrefs.SetBool($"{PerkName}_locked", false);
+        LastInstance.UpdateStatus(false);
+    }
+
+    private void RefreshTotalCurrencyText()
+    {
+        totalCurrency = SPrefs.GetInt("gameCurrency", 0);
+        totalCurrencyText.text = totalCurrency.ToString();
     }
 
 }

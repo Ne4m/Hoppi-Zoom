@@ -19,6 +19,7 @@ public class AdsManager : MonoBehaviour
     private RewardedAd rewardedAd_DoubleEarn;
     private RewardedAd rewardedAd_SkinUnlock;
     private RewardedAd rewardedAd_CharacterUnlock;
+    private RewardedAd rewardedAd_UpgradeUnlock;
 
     public static AdsManager instance;
 
@@ -76,6 +77,7 @@ public class AdsManager : MonoBehaviour
 
         RequestRewarded_CharacterUnlock();
         RequestRewarded_SkinUnlock();
+        RequestRewarded_UpgradeUnlock();
     }
 
     private void Update()
@@ -369,6 +371,53 @@ public class AdsManager : MonoBehaviour
     public void HandleRewardedAdFailedToShow_SkinUnlock(object sender, EventArgs args)
     {
         SkinManager.instance.ApplySkinAdDiscount_Error();
+    }
+    #endregion
+
+    #region UPGRADE UNLOCK
+    private void RequestRewarded_UpgradeUnlock()
+    {
+        //Debug.Log("Requesting Rewarded...");
+
+        if (rewardedAd_UpgradeUnlock != null) rewardedAd_UpgradeUnlock.Destroy();
+
+        rewardedAd_UpgradeUnlock = new RewardedAd(rewardedId);
+
+        rewardedAd_UpgradeUnlock.OnAdClosed += HandleRewardedAdClosed_UpgradeUnlock;
+        rewardedAd_UpgradeUnlock.OnUserEarnedReward += HandleUserEarnedReward_UpgradeUnlock;
+        rewardedAd_UpgradeUnlock.OnAdFailedToShow += HandleRewardedAdFailedToShow_UpgradeUnlock;
+
+        AdRequest requestRewarded = new AdRequest.Builder().Build();
+
+        rewardedAd_UpgradeUnlock.LoadAd(requestRewarded);
+
+        // if (rewardedAd_SkinUnlock.IsLoaded()) Debug.Log("Rewarded Ad Is Loaded!");
+    }
+
+    public void DisplayRewardedAd_UpgradeUnlock()
+    {
+
+        if (rewardedAd_UpgradeUnlock.IsLoaded())
+        {
+            rewardedAd_UpgradeUnlock.Show();
+        }
+
+    }
+
+    public void HandleUserEarnedReward_UpgradeUnlock(object sender, EventArgs args)
+    {
+        Debug.Log("REWARD FROM UPGRADE CONTROLLER UNLOCK");
+        //SkinManager.instance.ApplySkinAdDiscount();
+    }
+
+    public void HandleRewardedAdClosed_UpgradeUnlock(object sender, EventArgs args)
+    {
+        RequestRewarded_UpgradeUnlock();
+    }
+
+    public void HandleRewardedAdFailedToShow_UpgradeUnlock(object sender, EventArgs args)
+    {
+        //SkinManager.instance.ApplySkinAdDiscount_Error();
     }
     #endregion
 

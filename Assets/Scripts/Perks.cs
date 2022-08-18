@@ -121,7 +121,7 @@ public class Perks : MonoBehaviour
         Enum.TryParse(lastPerkStr, out chosenPerk);
 
 
-        //LockAndDeactiveAllUpgradedPerks();
+        LockAndDeactiveAllUpgradedPerks();
 
         // Don't need this in final release but for development purposes it can stay for now.
         //EnableActivePerk();
@@ -133,7 +133,7 @@ public class Perks : MonoBehaviour
         {
 
             var active = SPrefs.GetBool($"{perk.ToString()}_activated", false);
-            Debug.Log($"Perk {perk} is {active}");
+            //Debug.Log($"Perk {perk} is {active}");
 
             if (active)
             {
@@ -149,8 +149,15 @@ public class Perks : MonoBehaviour
     {
         foreach (var perk in Enum.GetValues(typeof(PerkList)))
         {
+
+            Debug.Log($"UPGRADE PRICE !!! : : : {SPrefs.GetInt("perkUpgradePrice", 0)}");
+            SPrefs.DeleteKey("perkUpgradePrice");
+            Debug.Log($"UPGRADE PRICE !!! : : : {SPrefs.GetInt("perkUpgradePrice", 0)}");
+
             SPrefs.SetBool($"{perk.ToString()}_locked", true);
             SPrefs.SetBool($"{perk.ToString()}_activated", false);
+
+            Debug.Log("Lock and Deactivate Alll Upgrade PErks Method Active in Perks.cs!!");
             SPrefs.Save();
         }
     }

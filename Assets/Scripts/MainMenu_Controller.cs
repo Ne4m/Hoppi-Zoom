@@ -126,6 +126,7 @@ public class MainMenu_Controller : MonoBehaviour
 
 
         AudioManager.instance.Play("Main");
+
     }
 
 
