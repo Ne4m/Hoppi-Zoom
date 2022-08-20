@@ -56,3 +56,10 @@ T_BACK_TO_MAIN_MENU=Zuruck zum Hauptmenu
 T_GOT_ZOOMED=you got\nZOOM'd
 T_GOT_HIGH_SCORE=NEUER HIGH\nSCORE!!!
 T_ENDGAME_AD_CONTINUE=FREI
+
+// @PerksUpgrade Extra Perks Descriptions
+T_EXTRA_AMMO=Extra Munition
+
+// @TALENT UNLOCK MENU
+UI_UPGRADES_TITLE=TALENT SHOP
+T_UI_Text_Upgrade=verbesserungen

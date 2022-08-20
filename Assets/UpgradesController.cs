@@ -26,6 +26,10 @@ public class UpgradesController : MonoBehaviour
 
     private int totalCurrency;
     private int discountedPrice;
+    private Coroutine adDistributeCoroutine;
+    private bool isCoroutineRunning = false;
+
+    private UIMessager messager;
 
     public PerksUpgrade LastInstance
     {
@@ -79,6 +83,9 @@ public class UpgradesController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        TryGetComponent<UIMessager>(out UIMessager _msg);
+        messager = _msg;
     }
 
     void Start()
@@ -104,12 +111,21 @@ public class UpgradesController : MonoBehaviour
         {
             if (valid)
             {
-                MakeTransaction(true, 50);
+                MakeTransaction(false, 0);
                 UnlockUpgrade();
             }
             else
             {
                 Debug.Log("Not Enough Currency!!");
+                messager.startMsgv2(I18n.Fields["T_INSUFFICIENT_STARS"], 2f, Vector3.zero, Color.red);
+
+                AudioManager.instance.IsPlaying("Insufficient", (cb) =>
+                {
+                    if (!cb)
+                    {
+                        AudioManager.instance.Play("Insufficient");
+                    }
+                });
             }
         });
 
@@ -126,8 +142,38 @@ public class UpgradesController : MonoBehaviour
             else
             {
                 Debug.Log("Not Enough Currency!!");
+                messager.startMsgv2(I18n.Fields["T_INSUFFICIENT_STARS"], 2f, Vector3.zero, Color.red);
+
+                AudioManager.instance.IsPlaying("Insufficient", (cb) =>
+                {
+                    if (!cb)
+                    {
+                        AudioManager.instance.Play("Insufficient");
+                    }
+                });
             }
         });
+    }
+
+    public void AdUnlockDistributeReward()
+    {
+
+        if (isCoroutineRunning) StopCoroutine(adDistributeCoroutine);
+
+        adDistributeCoroutine = StartCoroutine(AdRewardDistribute());
+
+    }
+
+    private IEnumerator AdRewardDistribute()
+    {
+        isCoroutineRunning = true;
+        MakeTransaction(true, 50);
+
+        yield return new WaitForSeconds(2f);
+
+        UnlockUpgrade();
+
+        isCoroutineRunning = false;
     }
 
     private void ValidatePrice(Action<bool> callback)
@@ -142,6 +188,7 @@ public class UpgradesController : MonoBehaviour
         }
         else
         {
+            IsUnlockMenuActive = false;
             callback(false);
         }
     }
@@ -173,7 +220,7 @@ public class UpgradesController : MonoBehaviour
 
         RefreshTotalCurrencyText();
 
-        Debug.Log($"Unlocked Upgrade! {PerkName}");
+
 
     }
 
@@ -182,6 +229,9 @@ public class UpgradesController : MonoBehaviour
         IsUnlockMenuActive = false;
         SPrefs.SetBool($"{PerkName}_locked", false);
         LastInstance.UpdateStatus(false);
+
+        messager.startMsgv2(I18n.Fields["T_UI_SKIN_UNLOCKED"], 1.25f, Vector3.zero, Color.white);
+        Debug.Log($"Unlocked Upgrade! {PerkName}");
     }
 
     private void RefreshTotalCurrencyText()

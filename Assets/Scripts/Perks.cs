@@ -157,7 +157,7 @@ public class Perks : MonoBehaviour
             SPrefs.SetBool($"{perk.ToString()}_locked", true);
             SPrefs.SetBool($"{perk.ToString()}_activated", false);
 
-            Debug.Log("Lock and Deactivate Alll Upgrade PErks Method Active in Perks.cs!!");
+            Debug.LogWarning("Lock and Deactivate Alll Upgrade PErks Method Active in Perks.cs!!");
             SPrefs.Save();
         }
     }

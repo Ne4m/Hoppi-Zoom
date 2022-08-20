@@ -407,7 +407,11 @@ public class AdsManager : MonoBehaviour
     public void HandleUserEarnedReward_UpgradeUnlock(object sender, EventArgs args)
     {
         Debug.Log("REWARD FROM UPGRADE CONTROLLER UNLOCK");
-        //SkinManager.instance.ApplySkinAdDiscount();
+        
+        if(UpgradesController.instance != null)
+        {
+            UpgradesController.instance.AdUnlockDistributeReward();
+        }
     }
 
     public void HandleRewardedAdClosed_UpgradeUnlock(object sender, EventArgs args)

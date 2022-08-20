@@ -13,7 +13,6 @@ public class GooglePlayServices : MonoBehaviour
     private bool connectedToGooglePlay;
 
    [SerializeField] private TMP_Text debugtext;
-    [SerializeField] private TMP_Text debugtext2;
 
 
 
@@ -58,8 +57,8 @@ public class GooglePlayServices : MonoBehaviour
         {
             GooglePlayConnection = true;
 
-            debugtext.text = "Successfully Authenticated!";
-            debugtext2.text = $"Hello {Social.localUser.userName} ID : {Social.localUser.id}";
+            debugtext.text = "Successfully Authenticated!\n" +
+                             $"Hello {Social.localUser.userName}"; //  ID : {Social.localUser.id}
         }
         else
         {

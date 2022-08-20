@@ -146,7 +146,7 @@ public class SkinManager : MonoBehaviour
 
     void Start()
     {
-        lockEveryItems();
+       // lockEveryItems();
 
         messager = gameObject.GetComponent<UIMessager>();
 
@@ -162,6 +162,9 @@ public class SkinManager : MonoBehaviour
         if (isUI) InitializeBottomContainer();
 
         // lockEveryItems();
+        //Debug.LogWarning("lockEveryItems() method is running on SkinManager.cs start!!!");
+
+
         //SPrefs.DeleteKey("PlayerHead");
         //SPrefs.DeleteKey("PlayerBody");
 

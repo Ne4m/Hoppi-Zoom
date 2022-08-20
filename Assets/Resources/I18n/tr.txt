@@ -37,7 +37,6 @@ T_CHANCE_TO_HEAL=Yıkımlarda can doldurur.
 T_FASTER_BULLETS=Mermiler daha hızlı gider.
 T_LONGER_GRACE_PERIOD=Hasar aldığında daha uzun korunma süresi.
 
-
 // GAME SCENE
 T_HEALTH_GAME=CAN
 T_AMMO_GAME=MERMI
@@ -56,3 +55,10 @@ T_BACK_TO_MAIN_MENU=Ana Menuye Geri Git
 T_GOT_ZOOMED=MAALESEF\nZOOMLANDIN!
 T_GOT_HIGH_SCORE=YENI YUKSEK\nSKOR!!!
 T_ENDGAME_AD_CONTINUE=ÜCRETSİZ
+
+// @PerksUpgrade Extra Perks Descriptions
+T_EXTRA_AMMO=Ekstra Mermi
+
+// @TALENT UNLOCK MENU
+UI_UPGRADES_TITLE=YETENEK MAGAZASI
+T_UI_Text_Upgrade=yukseltme

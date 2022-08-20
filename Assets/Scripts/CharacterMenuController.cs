@@ -159,7 +159,7 @@ public class CharacterMenuController : MonoBehaviour
         SPrefs.SetInt("gameCurrency", 2500);
         LockAllCharacters();
         SPrefs.SetInt("currentBaseSkinPrice", baseSkinPrice);
-        Debug.Log("Lock All Characters Is Active @CharacterMenuController.cs Start !!!");
+        Debug.LogWarning("Lock All Characters Is Active @CharacterMenuController.cs Start !!!");
         /// 
     }
 

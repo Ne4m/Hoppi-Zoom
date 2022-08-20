@@ -3387,6 +3387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214962123}
+  - component: {fileID: 214962124}
   m_Layer: 5
   m_Name: UnlockConfirmation_Dialogue
   m_TagString: Untagged
@@ -3421,6 +3422,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 429.99997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &214962124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214962122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06c68e0f10aa534d8c5e7831481d286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &219103651
 GameObject:
   m_ObjectHideFlags: 0
@@ -4144,12 +4157,12 @@ GameObject:
   - component: {fileID: 245020305}
   - component: {fileID: 245020304}
   m_Layer: 5
-  m_Name: UI_Messager_Text (1)
+  m_Name: Empty Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &245020304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6876,12 +6889,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 288
+  m_fontSize: 280
   m_fontSizeBase: 288
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 288
+  m_fontSizeMax: 280
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6912,7 +6925,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -590.32587, y: -307.4235, z: -588.6613, w: -265.15677}
+  m_margin: {x: -730.67395, y: -233.66742, z: -758.704, w: -211.51556}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7420,6 +7433,7 @@ MonoBehaviour:
   languageButton: {fileID: 527707284}
   showLeaderBoardButton: {fileID: 1276093490}
   usernameTxt: {fileID: 877035223}
+  autoHideInstance: []
 --- !u!114 &420676058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9487,8 +9501,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -943.3792, y: -960.44543}
-  m_SizeDelta: {x: 2222.9998, y: 738.1054}
+  m_AnchoredPosition: {x: -1080.8948, y: -960.44543}
+  m_SizeDelta: {x: 2425.737, y: 738.105}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &556864453
 MonoBehaviour:
@@ -9556,7 +9570,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f24f1133aaa308a46b4509eea9bb88bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -9719,7 +9733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff9db9d91663b540816b125b778797c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1070053115}
+  text: {fileID: 315490879}
   text2: {fileID: 315490879}
   container: {fileID: 1255867477}
   startPos: {x: 0, y: 0, z: 0}
@@ -10930,7 +10944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugtext: {fileID: 1070053115}
-  debugtext2: {fileID: 245020304}
 --- !u!4 &662629779
 Transform:
   m_ObjectHideFlags: 0
@@ -12646,7 +12659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff9db9d91663b540816b125b778797c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1070053115}
+  text: {fileID: 315490879}
   text2: {fileID: 315490879}
   container: {fileID: 1255867477}
   startPos: {x: 0, y: 0, z: 0}
@@ -13269,12 +13282,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 299
+  m_fontSize: 280
   m_fontSizeBase: 288
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 299
+  m_fontSizeMax: 280
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -13305,7 +13318,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -590.32587, y: -307.4235, z: -588.6613, w: -265.15677}
+  m_margin: {x: -722.60474, y: -240.26285, z: -730.9973, w: -218.43628}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -13553,8 +13566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1043.2183, y: -2439.2727}
-  m_SizeDelta: {x: 2223, y: 738.1054}
+  m_AnchoredPosition: {x: 1095.9998, y: -2439.2727}
+  m_SizeDelta: {x: 2425.737, y: 738.105}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &817672817
 MonoBehaviour:
@@ -13622,7 +13635,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f24f1133aaa308a46b4509eea9bb88bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -13647,6 +13660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819297894}
+  - component: {fileID: 819297895}
   m_Layer: 5
   m_Name: UnlockSkin-Panel
   m_TagString: Untagged
@@ -13681,6 +13695,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &819297895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819297893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06c68e0f10aa534d8c5e7831481d286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &823176135
 GameObject:
   m_ObjectHideFlags: 0
@@ -17062,7 +17088,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec4452b34c5feb24a8dae18566dedd2b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -18080,7 +18106,7 @@ GameObject:
   - component: {fileID: 1070053116}
   - component: {fileID: 1070053115}
   m_Layer: 5
-  m_Name: UI_Messager_Text
+  m_Name: Authentication Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18738,6 +18764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169847999}
+  - component: {fileID: 1169848000}
   m_Layer: 5
   m_Name: Unlock-Panel
   m_TagString: Untagged
@@ -18772,6 +18799,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 950}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1169848000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169847998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06c68e0f10aa534d8c5e7831481d286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1180676409
 GameObject:
   m_ObjectHideFlags: 0
@@ -23114,8 +23153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 1043.2183, y: -2439.2727}
-  m_SizeDelta: {x: 2223, y: 738.1054}
+  m_AnchoredPosition: {x: 1096, y: -2439.2727}
+  m_SizeDelta: {x: 2425.737, y: 738.105}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1347941317
 MonoBehaviour:
@@ -23183,7 +23222,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f24f1133aaa308a46b4509eea9bb88bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -30496,8 +30535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -931.5792, y: -1405.8547}
-  m_SizeDelta: {x: 2222.9998, y: 738.1054}
+  m_AnchoredPosition: {x: -1068.0188, y: -1405.8547}
+  m_SizeDelta: {x: 2425.737, y: 738.105}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1846765966
 MonoBehaviour:
@@ -30577,7 +30616,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f24f1133aaa308a46b4509eea9bb88bf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -34998,7 +35037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff9db9d91663b540816b125b778797c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1070053115}
+  text: {fileID: 315490879}
   text2: {fileID: 315490879}
   container: {fileID: 1255867477}
   startPos: {x: 0, y: 0, z: 0}
@@ -35649,12 +35688,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 288
+  m_fontSize: 280
   m_fontSizeBase: 288
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 288
+  m_fontSizeMax: 280
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -35685,7 +35724,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -590.32587, y: -307.4235, z: -588.6613, w: -265.15677}
+  m_margin: {x: -744.2288, y: -231.50262, z: -717.3365, w: -212.5962}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -35960,7 +35999,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 299
+  m_fontSizeMax: 280
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

@@ -72,6 +72,9 @@ public class MainMenu_Controller : MonoBehaviour
     PlayGamesPlatform platform;
     public static MainMenu_Controller instance;
 
+    public List<UnlockPanelAutoHide> autoHideInstance;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,7 +117,7 @@ public class MainMenu_Controller : MonoBehaviour
 
         // Down Menu Stuff
         audio_ON = true;
-        music_ON = true;
+
         if (!(audioButton is null)) audioButton.onClick.AddListener(changeAudioButton);
         if (!(musicButton is null)) musicButton.onClick.AddListener(changeMusicButton);
         if (!(shareButton is null)) shareButton.onClick.AddListener(shareButtonClicked);
@@ -126,6 +129,17 @@ public class MainMenu_Controller : MonoBehaviour
 
 
         AudioManager.instance.Play("Main");
+        bool playMusic = SPrefs.GetBool("menuMusicOn", true);
+        music_ON = playMusic;
+
+        if (playMusic)
+        {
+            PlayMainMenuMusic(true);
+        }else
+        {
+            PlayMainMenuMusic(false);
+        }
+
 
     }
 
@@ -233,16 +247,35 @@ public class MainMenu_Controller : MonoBehaviour
     private void changeMusicButton()
     {
         music_ON = !music_ON;
+        SPrefs.SetBool("menuMusicOn", music_ON);
 
         if (music_ON)
         {
-            musicButton.image.sprite = musicOnImg;
-            FindObjectOfType<AudioManager>().VolumeControl("Main", 0.25f, 1.0f);
+            //musicButton.image.sprite = musicOnImg;
+            //AudioManager.instance.VolumeControl("Main", 0.25f, 1.0f);
+            PlayMainMenuMusic(true);
         }
         else
         {
+            //musicButton.image.sprite = musicOffImg;
+            //AudioManager.instance.VolumeControl("Main", 0f, 1.0f);
+            PlayMainMenuMusic(false);
+        }
+
+        SPrefs.Save();
+    }
+
+    private void PlayMainMenuMusic(bool play)
+    {
+        if (play)
+        {
+            AudioManager.instance.VolumeControl("Main", 0.25f, 1.0f);
+            musicButton.image.sprite = musicOnImg;
+        }
+        else
+        {
+            AudioManager.instance.VolumeControl("Main", 0f, 1.0f);
             musicButton.image.sprite = musicOffImg;
-            FindObjectOfType<AudioManager>().VolumeControl("Main", 0f, 1.0f);
         }
 
     }
@@ -368,6 +401,11 @@ public class MainMenu_Controller : MonoBehaviour
         if (!isAtMainMenu)
         {
             noBtn_Clicked();
+        }
+
+        foreach(var _instance in autoHideInstance)
+        {
+            _instance.UnlockPanelVisibility = false;
         }
     }
 

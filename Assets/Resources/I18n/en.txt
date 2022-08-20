@@ -36,8 +36,6 @@ T_MOVE_HORIZONTALLY=Can Move Horizontally On Checkpoints
 T_CHANCE_TO_HEAL=Chance To Heal On Destruction
 T_FASTER_BULLETS=Your Bullets Travel Faster
 T_LONGER_GRACE_PERIOD=Longer Grace Period After Getting Hit
-T_EXTRA_AMMO=Gain Extra Ammo
-
 
 // GAME SCENE
 T_HEALTH_GAME=HEALTH
@@ -59,6 +57,9 @@ T_GOT_HIGH_SCORE=NEW HIGH\nSCORE!!!
 T_ENDGAME_AD_CONTINUE=FREE
 
 
+// @PerksUpgrade Extra Perks Descriptions
+T_EXTRA_AMMO=Extra Ammo
+
 // @TALENT UNLOCK MENU
-UI_UPGRADES_TITLE=TALENT UPGRADES
+UI_UPGRADES_TITLE=TALENT SHOP
 T_UI_Text_Upgrade=upgrades
