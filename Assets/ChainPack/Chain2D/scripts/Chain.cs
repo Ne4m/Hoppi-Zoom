@@ -132,6 +132,9 @@ public class Chain : MonoBehaviour
     //свойство контроля некоторыми параметрми цепи в игровом режиме для пользотеля
     public ChainController chainController { get; private set; }
 
+    private string[] disableCollisionTags = { "Boundary", "PlayableArea" };
+    private GameObject[] objectsToDisableCollision;
+
 
    // public static Chain instance;
     void Awake()
@@ -146,6 +149,7 @@ public class Chain : MonoBehaviour
         {
             links[i].obj.transform.tag = "Chain";
         }
+
 
         subscribeLinksFromEditOnRemoveLinkHandler();
 

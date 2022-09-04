@@ -35,6 +35,13 @@ public class MobileUtils : MonoBehaviour
 
         //OnDemandRendering.renderFrameInterval = 0;
 
+        Debug.Log($"Screen Height is {Screen.currentResolution.height}\n" +
+                  $"Screen Width is {Screen.currentResolution.width}\n" +
+                  $"Screen Global Height {Screen.height}\n" +
+                  $"Screen Global Widthh {Screen.width}");
+
+        
+
     }
 
 
@@ -51,6 +58,8 @@ public class MobileUtils : MonoBehaviour
                 Application.targetFrameRate = Screen.currentResolution.refreshRate;
 
             }
+
+            
 
 
             // Capture frame-per-second
