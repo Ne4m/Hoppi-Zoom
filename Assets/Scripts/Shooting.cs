@@ -27,8 +27,11 @@ public class Shooting : MonoBehaviour
     private string ammoReceiveMsg = "Replenished!";
     UIMessager messager;
 
+    public static Shooting instance;
+
     private void Awake()
     {
+        instance = this;
         ammoReceiveMsg = I18n.Fields["T_REPLENISHED"];
     }
 
@@ -147,7 +150,9 @@ public class Shooting : MonoBehaviour
 
         Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 
-        FindObjectOfType<AudioManager>().Play("Shoot");
+        //FindObjectOfType<AudioManager>().Play("Shoot");
+
+        AudioManager.instance.Play("Shoot");
 
         lastShot = Time.time;
         currentAmmo--;

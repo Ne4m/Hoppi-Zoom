@@ -260,9 +260,14 @@ public class LevelManager : MonoBehaviour
             this.isInCP = true;
             this.currentHealth = maxHealth;
         }
+
     }
 
-
+    public void AddCurrentCurrency(int amount)
+    {
+        currentCurrency += amount;
+        messager.startMsg($"{I18n.Fields["T_GOLD_EARNED"]} {amount} {I18n.Fields["T_GOLD"]}", 2f, Vector3.zero);
+    }
 
     private void Awake()
     {
@@ -456,7 +461,7 @@ public class LevelManager : MonoBehaviour
         // debug_text.text = currentCurrency.ToString();
 
 
-        if (GooglePlayServices.instance.GooglePlayConnection)
+        if (GooglePlayServices.instance != null && GooglePlayServices.instance.GooglePlayConnection)
         {
             Social.ReportScore(playerControl.getPoint(), GPGSIds.leaderboard_score, (success) =>
             {
@@ -614,6 +619,15 @@ public class LevelManager : MonoBehaviour
                 shooting.AddAmmo(Perks.instance.GetAmmoReward());
 
             }
+        }
+
+        if(GiftSpawner.instance != null)
+        {
+            if(playerControl.getPoint() % GiftSpawner.instance.GiftSpawnThreshold == 0)
+            {
+                GiftSpawner.instance.Spawn();
+            }
+
         }
 
     }

@@ -57,6 +57,13 @@ public class PlayerConditions : MonoBehaviour
 
     Color srColor;
 
+    public static PlayerConditions instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         levelManager = this.GetComponent<LevelManager>();

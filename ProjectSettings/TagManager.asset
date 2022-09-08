@@ -21,6 +21,7 @@ TagManager:
   - Wind
   - Bottom
   - Chain
+  - Pickable
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - 
   - Background
   - Blur
-  - 
+  - Platform
   - 
   - 
   - 

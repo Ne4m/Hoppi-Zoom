@@ -17,37 +17,108 @@ public class GiftSpawner : MonoBehaviour
     private float lastNumber;
     private int maxAttempts = 5;
 
-    // Start is called before the first frame update
+    public static GiftSpawner instance;
+
+    private Vector3 spawnPos;
+    private GameObject spawnedObject;
+
+    private int giftSpawnThreshold = 2;
+
+    public int GiftSpawnThreshold
+    {
+        get
+        {
+            giftSpawnThreshold = UnityEngine.Random.Range(5, 25);
+            return giftSpawnThreshold;
+        }
+        private set { }
+    }
+
+    [SerializeField] private Camera mainCam;
+
+    public enum Pickables
+    {
+        AMMO,
+        HEALTH,
+        GOLD
+    }
+
+    private Pickables chosenPickable;
+
+    public Pickables ChosenPickable
+    {
+        get => chosenPickable;
+        set => chosenPickable = value;
+    }
+
+    private void Awake()
+    {
+
+       instance = this;
+
+    }
+
     void Start()
     {
 
-        debugtext.gameObject.SetActive(true);
+        //debugtext.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var _screen2 = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
+        //WaitForSeconds(0.25f, () =>
+        //{
 
+        //    SpawnObject();
 
-        var _screen = pointer.transform.position;
-        debugtext.text = ($"{_screen.x}, {_screen.y}\n" +
-                          $"{_screen2.x}, {_screen2.y}");
-
-
-        WaitForSeconds(3f, () =>
-        {
-            var _spawnX = selectUniqueRandomNumber(_screen2.x * -1, _screen2.x);
-            var _spawnY = selectUniqueRandomNumber(_screen2.y * -1, _screen2.y);
-
-            Debug.Log("Spawning new gift..");
-            spawnedGift.gameObject.transform.position = new Vector3(_spawnX, _spawnY, 0f);
-            Debug.Log($"Spawned new gift! in pos : {_spawnX}, {_spawnY}");
-
-        });
+        //});
 
     }
+
+    private void SpawnObject()
+    {
+        var number = UnityEngine.Random.Range(0, 3);
+
+        switch (number)
+        {
+            case 0:
+                ChosenPickable = Pickables.AMMO;
+                break;
+            case 1:
+                ChosenPickable = Pickables.HEALTH;
+                break;
+            case 2:
+                ChosenPickable = Pickables.GOLD;
+                break;
+        }
+
+        // Debug.Log($"Chosen Pickable: {ChosenPickable} Number: {number}");
+
+
+        spawnedObject = Instantiate(spawnedGift, SetSpawnPosition(), Quaternion.identity);
+        spawnedObject.tag = "Pickable";
+    }
+
+    private Vector3 SetSpawnPosition()
+    {
+        float height = 2f * Camera.main.orthographicSize;
+        float width = height * Camera.main.aspect;
+
+        var _screen = Camera.main.ViewportToWorldPoint(new Vector2(UnityEngine.Random.value, UnityEngine.Random.value)); // new Vector2(Screen.width, Screen.height)
+        //var _spawnX = selectUniqueRandomNumber(_screen.x * -1, _screen.x);
+        //var _spawnY = selectUniqueRandomNumber(_screen.y * -1, _screen.y);
+        var spawnPoint = new Vector3(_screen.x, _screen.y, 0f);
+
+        return spawnPoint;
+
+    }
+
+    public void Spawn()
+    {
+        SpawnObject();
+    }
+
 
     public float selectUniqueRandomNumber(float upperLimit, float floorLimit)
     {
