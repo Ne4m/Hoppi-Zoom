@@ -7,11 +7,16 @@ public class Pickable : MonoBehaviour
     private GameObject insideObject;
     private SpriteRenderer insideObjectSprite;
 
+    private Vector3 spawnPosition;
+    private Vector3 playerPosition;
+
     private GiftSpawner.Pickables chosenPickable;
     void Start()
     {
         insideObject = transform.GetChild(0).gameObject;
         insideObjectSprite = insideObject.GetComponent<SpriteRenderer>();
+
+        spawnPosition = transform.position;
 
         switch (GiftSpawner.instance.ChosenPickable)
         {
@@ -36,16 +41,24 @@ public class Pickable : MonoBehaviour
         //Debug.Log($"Log from Instantiated object: {GiftSpawner.instance.ChosenPickable}");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        var playerPosition = LevelManager.instance.transform.position;
+        var distance = Vector3.Distance(spawnPosition, playerPosition);
+
+
+        if (distance > 20f)
+        {
+            Destroy(gameObject);
+        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
+            AudioManager.instance.Play("Pickup");
             Destroy(gameObject);
 
             switch (chosenPickable)

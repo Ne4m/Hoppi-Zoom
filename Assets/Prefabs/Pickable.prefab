@@ -163,7 +163,7 @@ MonoBehaviour:
     isPingPongFading: 1
     scaleSpeed: 0.075
     scalePercent: 30
-    scaleEaseType: 0
+    scaleEaseType: 4
     isPingPongScaling: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     colorChangeSpeed: 0
