@@ -9,8 +9,8 @@ public class BuyGold : MonoBehaviour
     Button buyButton;
 
     [SerializeField] private float price;
-    [SerializeField] private float quantity;
-    [SerializeField] private float bonus;
+    [SerializeField] private int quantity;
+    [SerializeField] private int bonus;
 
     private TMP_Text priceText;
     private TMP_Text quantityText;
@@ -28,6 +28,9 @@ public class BuyGold : MonoBehaviour
         if (buyButton != null) buyButton.onClick.AddListener(() =>
         {
             Debug.Log($"Clicked {price} Button with bonus of {bonus}");
+
+            var totalQuant = quantity + bonus;
+            TransactionManager.instance.MakeTransaction(price, totalQuant);
         } );
     }
 

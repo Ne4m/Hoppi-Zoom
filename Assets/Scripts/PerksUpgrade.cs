@@ -27,7 +27,7 @@ public class PerksUpgrade : MonoBehaviour
     [SerializeField] private PerkList perk;
     private string perkName;
     [SerializeField] private Sprite statusImage;
-    [SerializeField] private Sprite perkImage;
+    private Sprite perkImage;
     [SerializeField] private string perkDescription;
     private int price;
     [SerializeField] private bool isLocked = true;

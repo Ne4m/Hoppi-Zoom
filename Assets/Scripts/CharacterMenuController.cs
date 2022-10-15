@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 public class CharacterMenuController : MonoBehaviour
 {
-    private string[] playableCharacters = {"Blue (Default)", "Green", "Grey", "Orange", "Purple", "Red", "Yellow"}; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
+    private string[] playableCharacters = {"Blue (Default)", "Green", "Grey", "Orange", "Purple", "Red", "Teal", "Yellow" }; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
     private string[] unlockedCharacters;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
     private float characterHealth, characterSpeed;
@@ -478,6 +478,16 @@ public class CharacterMenuController : MonoBehaviour
                 break;
             case 5:
 
+                setHpByPercentage(75);
+                setSpeedByPercentage(40);
+
+                setAmmoByPercentage(100);
+
+                Perks.instance.SetSelectedCharacterPerk(PerkList.CHEAT_DEATH);
+                lastPerk = PerkList.CHEAT_DEATH;
+                break;
+            case 6:
+
                 setHpByPercentage(45);
                 setSpeedByPercentage(80);
 
@@ -487,9 +497,9 @@ public class CharacterMenuController : MonoBehaviour
                 lastPerk = PerkList.CHANCE_TO_HEAL_ON_HIT;
                 break;
 
-            case 6:
+            case 7:
 
-                setHpByPercentage(45);
+                setHpByPercentage(50);
                 setSpeedByPercentage(80);
 
                 setAmmoByPercentage(50);

@@ -16,7 +16,8 @@ public enum PerkList
     FASTER_BULLETS,
     LONGER_GRACE_PERIOD,
     AMMO_RECHARGE,
-    EXTRA_AMMO
+    EXTRA_AMMO,
+    CHEAT_DEATH
 }
 
 
@@ -36,6 +37,7 @@ public class Perks : MonoBehaviour
     private bool rechargesAmmo = false;
     private bool canMoveHorizontally = false;
     private bool chanceToHealOnDestruction = false;
+    private bool cheatsDeath = false;
 
     private float fasterBulletValue;
     private float longerGracePeriodValue;
@@ -44,6 +46,8 @@ public class Perks : MonoBehaviour
     private string lastPerkDescription, lastPerkImageName;
 
     private int extraAmmo;
+
+
 
     public int ExtraAmmo
     {
@@ -97,6 +101,12 @@ public class Perks : MonoBehaviour
     {
         get => healPercentage;
         private set { }
+    }
+
+    public bool CheatsDeath
+    {
+        get => cheatsDeath;
+        set => cheatsDeath = value;
     }
 
     void Awake()
@@ -228,6 +238,11 @@ public class Perks : MonoBehaviour
         GracePeriod = 2.5f;
     }
 
+    public void ConfigurePerk_CheatDeath()
+    {
+        CheatsDeath = true;
+    }
+
     public void ActivateUpgradePerks(PerkList perk)
     {
         switch (perk)
@@ -278,6 +293,10 @@ public class Perks : MonoBehaviour
             case PerkList.EXTRA_AMMO:
 
                 AddPerk(Configure_ExtraAmmo);
+                break;
+
+            case PerkList.CHEAT_DEATH:
+                AddPerk(ConfigurePerk_CheatDeath);
                 break;
         }
     }
@@ -347,6 +366,11 @@ public class Perks : MonoBehaviour
             case PerkList.EXTRA_AMMO:
                 RemovePerk(Configure_ExtraAmmo);
                 ExtraAmmo = 0;
+                break;
+
+            case PerkList.CHEAT_DEATH:
+                RemovePerk(ConfigurePerk_CheatDeath);
+                CheatsDeath = false;
                 break;
         }
     }
@@ -433,6 +457,13 @@ public class Perks : MonoBehaviour
                 SetPerkImageName("LongerGracePeriod");
                 break;
 
+            case PerkList.CHEAT_DEATH:
+                EnabledPerk = ConfigurePerk_CheatDeath;
+
+                SetPerkDescription(I18n.Fields["T_CHEATS_DEATH"]);
+                SetPerkImageName("CheatsDeath");
+                break;
+
             case PerkList.DEFAULT_NONE:
                 SetDefaultValues();
                 break;
@@ -499,6 +530,7 @@ public class Perks : MonoBehaviour
         DamageReduction = 0;
         CanMoveHorizontally = false;
         ChanceToHeal = false;
+        CheatsDeath = false;
 
         SetPerkDescription("none");
         SetPerkImageName("none");

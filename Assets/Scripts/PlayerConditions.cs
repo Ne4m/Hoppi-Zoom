@@ -86,6 +86,11 @@ public class PlayerConditions : MonoBehaviour
             //Debug.Log("Got Hit By A Spike!! [COLLISION] \n" + transform.tag);
             DamageCharacter(100);
         }
+
+        if (collision.collider.tag.Contains("Ball"))
+        {
+            DamageCharacter(100);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -107,6 +112,7 @@ public class PlayerConditions : MonoBehaviour
             //Debug.Log("Got Hit By A Wood [TRIGGER]\n" + transform.tag);
             DamageCharacter(75);
         }
+
     }
 
 

@@ -36,7 +36,7 @@ T_MOVE_HORIZONTALLY=Peut se déplacer horizontalement sur le point de contrôle
 T_CHANCE_TO_HEAL=Chance de guérir quand il y a de destruction
 T_FASTER_BULLETS=Vos projectiles voyagent plus vite
 T_LONGER_GRACE_PERIOD=Période de grâce plus longue après avoir été touché
-
+T_CHEATS_DEATH=1 vie supplémentaire
 
 // GAME SCENE
 T_HEALTH_GAME=SANTE
@@ -63,3 +63,6 @@ T_EXTRA_AMMO=Munitions Supplementaires
 // @TALENT UNLOCK MENU
 UI_UPGRADES_TITLE=MAGASIN DE TALENTS
 T_UI_Text_Upgrade=ameliorations
+
+// @PICKABLES Strings
+T_GOLD=OR

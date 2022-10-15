@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 7931696028239206692}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,7 +1692,7 @@ MonoBehaviour:
     prefabIdPrev: 0
     rb2D: {fileID: 7931696029613729442}
     hingleJoint_1: {fileID: 7931696029613729445}
-    hingleJoint_2: {fileID: 3683080429718443001}
+    hingleJoint_2: {fileID: 2525966507395650340}
   _prefabsListWidths:
   - 0.41
   rbSettings:
@@ -2576,7 +2576,7 @@ GameObject:
   - component: {fileID: 7931696029613729442}
   - component: {fileID: 7931696029613729445}
   - component: {fileID: 7931696029613729444}
-  - component: {fileID: 3683080429718443001}
+  - component: {fileID: 2525966507395650340}
   m_Layer: 0
   m_Name: ropeLink(Clone)
   m_TagString: Chain
@@ -2734,7 +2734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4753492fed9de40a8b3d0dae3402ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!233 &3683080429718443001
+--- !u!233 &2525966507395650340
 HingeJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

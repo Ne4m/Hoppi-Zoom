@@ -419,14 +419,38 @@ public class LevelManager : MonoBehaviour
     {
         if ((Input.GetKey(KeyCode.T) || Input.touchCount == 3) && !playerControl.isPlayerDead()) // Future Death Detection
         {
-            bringDeathMenu();
+            if (Perks.instance.CheatsDeath)
+            {
+                CheatDeath();
+            }
+            else
+            {
+                bringDeathMenu();
+            }
         }
 
 
         if (!playerControl.isPlayerDead() && playerControl.getHealth() <= 0)
         {
-            bringDeathMenu();
+            if (Perks.instance.CheatsDeath)
+            {
+                CheatDeath();
+            }else
+            {
+                bringDeathMenu();
+            }
+
         }
+    }
+
+    private void CheatDeath()
+    {
+        PlayerConditions.instance.HealthbarShow = true;
+        percHeal(100);
+        Debug.Log("Death Cheated!");
+        messager.startMsg("CHEATED DEATH!", 3, Vector3.zero);
+        Perks.instance.CheatsDeath = false;
+        playerControl.setPlayerDeadStatus(false);
     }
 
     public void bringDeathMenu()
