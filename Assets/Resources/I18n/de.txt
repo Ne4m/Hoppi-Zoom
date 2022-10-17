@@ -58,6 +58,18 @@ T_GOT_HIGH_SCORE=NEUER HIGH\nSCORE!!!
 T_ENDGAME_AD_CONTINUE=FREI
 
 // @PerksUpgrade Extra Perks Descriptions
+T_GAIN_AMMO_MORE_FREQUENTLY_SHORT=Schnellerer Munitionsgewinn
+T_AMMO_RECHARGES_OVER_TIME_SHORT=Nachladen von Munition
+T_CHANCE_TO_PHASE_SHORT=Phasenlage
+T_TAKE_LESS_DAMAGE_SHORT=Verstärkte Verteidigung
+T_MOVE_HORIZONTALLY_SHORT=Horizontale Bewegung
+T_CHANCE_TO_HEAL_SHORT=Gelegenheit zur Heilung
+T_FASTER_BULLETS_SHORT=Schnellere Geschosse
+T_LONGER_GRACE_PERIOD_SHORT=Längere Schutzfrist
+T_CHEATS_DEATH_SHORT=Extra Leben
+T_EXTRA_AMMO_SHORT=Extra Munition
+
+// @PerksUpgrade Extra Perks Descriptions
 T_EXTRA_AMMO=Extra Munition
 
 // @TALENT UNLOCK MENU

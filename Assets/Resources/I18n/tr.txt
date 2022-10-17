@@ -59,11 +59,23 @@ T_GOT_HIGH_SCORE=YENI YUKSEK\nSKOR!!!
 T_ENDGAME_AD_CONTINUE=ÜCRETSİZ
 
 // @PerksUpgrade Extra Perks Descriptions
+T_GAIN_AMMO_MORE_FREQUENTLY_SHORT=Seri mermi kazanımı
+T_AMMO_RECHARGES_OVER_TIME_SHORT=Mermi şarjı
+T_CHANCE_TO_PHASE_SHORT=Objelerden geçme şansı.
+T_TAKE_LESS_DAMAGE_SHORT=Yüksek defans
+T_MOVE_HORIZONTALLY_SHORT=Yatay hareket
+T_CHANCE_TO_HEAL_SHORT=Can kazanma şansı
+T_FASTER_BULLETS_SHORT=Hızlı mermi
+T_LONGER_GRACE_PERIOD_SHORT=Korunma süresi
+T_CHEATS_DEATH_SHORT=Ekstra can
+T_EXTRA_AMMO_SHORT=Ekstra mermi
+
+// @PerksUpgrade Extra Perks Descriptions
 T_EXTRA_AMMO=Ekstra Mermi
 
 // @TALENT UNLOCK MENU
-UI_UPGRADES_TITLE=YETENEK MAGAZASI
-T_UI_Text_Upgrade=yukseltme
+UI_UPGRADES_TITLE=KABİLİYET MAĞAZASI
+T_UI_Text_Upgrade=kabiliyetler
 
 // @PICKABLES Strings
 T_GOLD=ALTIN
