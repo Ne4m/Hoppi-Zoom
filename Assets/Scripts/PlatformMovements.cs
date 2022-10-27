@@ -42,6 +42,9 @@ public class PlatformMovements : MonoBehaviour
 
     GameProgress gameProgress;
 
+    private float scaleRatio;
+
+
 
     void Start()
     {
@@ -53,9 +56,16 @@ public class PlatformMovements : MonoBehaviour
 
         //Debug.Log($"Platform Spawn Position Y : {platformStartPosition.y}");
 
+        if (Sprite_AutoRes.instance != null)
+        {
+            scaleRatio = Sprite_AutoRes.instance.scaleRatio;
+            objectProperties.startPositionX *= scaleRatio;
+            objectProperties.startPositionY *= scaleRatio;
+        }
+
         if (!hasChilds)
         {
-            if(objectProperties.setPosition) tr.position = SetPosition(transformTargetPos, !objectProperties.startPositionX.Equals(-1337) ? objectProperties.startPositionX : tr.position.x, !objectProperties.startPositionY.Equals(-1337) ? objectProperties.startPositionY : tr.position.y, tr.position.z);
+            if (objectProperties.setPosition) tr.position = SetPosition(transformTargetPos, !objectProperties.startPositionX.Equals(-1337) ? objectProperties.startPositionX : tr.position.x, !objectProperties.startPositionY.Equals(-1337) ? objectProperties.startPositionY : tr.position.y, tr.position.z);
         }
         else
         {
@@ -63,7 +73,7 @@ public class PlatformMovements : MonoBehaviour
 
             for (int i = 0; i < childrenProps.Count; i++)
             {
-                if(childrenProps[i].setPosition) tr.GetChild(i).position = SetPosition(transformTargetPos, !childrenProps[i].startPositionX.Equals(-1337) ? childrenProps[i].startPositionX : tr.GetChild(i).position.x, !childrenProps[i].startPositionY.Equals(-1337) ? childrenProps[i].startPositionY : tr.GetChild(i).position.y, tr.GetChild(i).position.z);
+                if (childrenProps[i].setPosition) tr.GetChild(i).position = SetPosition(transformTargetPos, !childrenProps[i].startPositionX.Equals(-1337) ? childrenProps[i].startPositionX : tr.GetChild(i).position.x, !childrenProps[i].startPositionY.Equals(-1337) ? childrenProps[i].startPositionY : tr.GetChild(i).position.y, tr.GetChild(i).position.z);
 
             }
         }
@@ -412,17 +422,18 @@ public class PlatformMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        scaleRatio = Sprite_AutoRes.instance.scaleRatio;
 
         if (!objectProperties.isSpecial)
         {
+
             if (objectProperties.moveable)
             {
 
                 if (objectProperties.moveableX)
                 {
-                    float boundaryX_Left = objectProperties.moveX[0];
-                    float boundaryX_Right = objectProperties.moveX[1];
+                    float boundaryX_Left = objectProperties.moveX[0] * scaleRatio;
+                    float boundaryX_Right = objectProperties.moveX[1] * scaleRatio;
 
                     if (!objectProperties.moveLocally)
                     {
@@ -435,7 +446,7 @@ public class PlatformMovements : MonoBehaviour
                             moveSpeed *= -1;
                         }
 
-                        tr.Translate(moveSpeed * Time.deltaTime, 0, 0, Space.World);
+                        tr.Translate(moveSpeed * Time.deltaTime * scaleRatio, 0, 0, Space.World);
                     }
                     else
                     {
@@ -448,7 +459,7 @@ public class PlatformMovements : MonoBehaviour
                             moveSpeed *= -1;
                         }
 
-                        tr.Translate(moveSpeed * Time.deltaTime, 0, 0);
+                        tr.Translate(moveSpeed * Time.deltaTime * scaleRatio, 0, 0);
                     }
 
 
@@ -456,8 +467,8 @@ public class PlatformMovements : MonoBehaviour
 
                 if (objectProperties.moveableY)
                 {
-                    float boundaryY_Up = objectProperties.moveY[0] + platformStartPosition.y;
-                    float boundaryY_Down = platformStartPosition.y + objectProperties.moveY[1];
+                    float boundaryY_Up = (objectProperties.moveY[0] + platformStartPosition.y) * scaleRatio;
+                    float boundaryY_Down = (platformStartPosition.y + objectProperties.moveY[1]) * scaleRatio;
 
                     //debugtxt.text = $"Local Pos: {tr.localPosition} \nGlobal Pos: {tr.position}";
 
@@ -472,7 +483,7 @@ public class PlatformMovements : MonoBehaviour
                             moveSpeed *= -1;
                         }
 
-                        tr.Translate(0, moveSpeed * Time.deltaTime, 0, Space.World);
+                        tr.Translate(0, moveSpeed * Time.deltaTime * scaleRatio, 0, Space.World);
                     }
                     else
                     {
@@ -485,7 +496,7 @@ public class PlatformMovements : MonoBehaviour
                             moveSpeed *= -1;
                         }
 
-                        tr.Translate(0, moveSpeed * Time.deltaTime, 0);
+                        tr.Translate(0, moveSpeed * Time.deltaTime * scaleRatio, 0);
                     }
 
 
@@ -534,40 +545,6 @@ public class PlatformMovements : MonoBehaviour
         #region Special Platforms Start
         else
         {
-            if (MovementTypeID == 3) // Platform_Spikey_Kinetic_[3]
-            {
-
-                if (specialChilds[0] != null)
-                {
-                    if (specialChilds[0].transform.position.x < -3.65)
-                    {
-                        specialMoveSpeed[0] *= -1;
-                    }
-                    else if (specialChilds[0].transform.position.x >= -1.48)
-                    {
-                        specialMoveSpeed[0] *= -1;
-                    }
-
-                    specialChilds[0].transform.Translate(-1 * specialMoveSpeed[0] * Time.deltaTime, 0, 0);
-                }
-
-                if (specialChilds[1] != null)
-                {
-                    if (specialChilds[1].transform.position.x < 1.48)
-                    {
-                        specialMoveSpeed[1] *= -1;
-                    }
-                    else if (specialChilds[1].transform.position.x >= 3.65)
-                    {
-                        specialMoveSpeed[1] *= -1;
-                    }
-
-                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime, 0, 0);
-                }
-
-
-
-            }
 
 
             if (MovementTypeID == 6) // Platform_Spikey_Bridge_Double_1_[6]
@@ -711,16 +688,16 @@ public class PlatformMovements : MonoBehaviour
 
                 if (specialChilds[1] != null)
                 {
-                    if (specialChilds[1].transform.position.x < 2.385)
+                    if (specialChilds[1].transform.position.x < 2.385 * scaleRatio)
                     {
                         specialMoveSpeed[1] *= -1;
                     }
-                    else if (specialChilds[1].transform.position.x > 3.50)
+                    else if (specialChilds[1].transform.position.x > 3.50 * scaleRatio)
                     {
                         specialMoveSpeed[1] *= -1;
                     }
 
-                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime * -1, 0, 0);
+                    specialChilds[1].transform.Translate(specialMoveSpeed[1] * Time.deltaTime * -1 * scaleRatio, 0, 0);
                 }
 
             }
@@ -728,20 +705,18 @@ public class PlatformMovements : MonoBehaviour
             if (MovementTypeID == 11) // Platform_Spikey_Bridge_3_[8]
             {
 
-                
-
                 if (specialChilds[0] != null)
                 {
-                    if (specialChilds[0].transform.position.x < -3.50)
+                    if (specialChilds[0].transform.position.x < -3.50 * scaleRatio)
                     {
                         specialMoveSpeed[0] *= -1;
                     }
-                    else if (specialChilds[0].transform.position.x > -2.385)
+                    else if (specialChilds[0].transform.position.x > -2.385 * scaleRatio)
                     {
                         specialMoveSpeed[0] *= -1;
                     }
 
-                    specialChilds[0].transform.Translate(specialMoveSpeed[0] * Time.deltaTime, 0, 0);
+                    specialChilds[0].transform.Translate(specialMoveSpeed[0] * Time.deltaTime * scaleRatio, 0, 0);
                 }
 
                 if (specialChilds[1] != null)

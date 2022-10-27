@@ -76,6 +76,7 @@ public class PlatformSpawns_Test : MonoBehaviour
         spawnedPlatform = Instantiate(spawn);
         spawnedPlatform.transform.position = new Vector3(0f, 0f, 0f);
         spawnedPlatform.tag = "Platform";
+        spawnedPlatform.transform.localScale *= Sprite_AutoRes.instance.scaleRatio;
 
 
         lastSpawnedPlatform = spawnedPlatform;

@@ -153,7 +153,7 @@ MonoBehaviour:
     canFade: 0
     fadeDuration: 0
     fadeSpeed: 0
-    setPosition: 1
+    setPosition: 0
     startPositionX: 1.65
     startPositionY: -1337
     startRotationX: 0
@@ -167,6 +167,9 @@ MonoBehaviour:
     endPoint: {x: 0, y: 0, z: 0}
     isPingPongMove: 1
     moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
     linearMoveSpeed: 0
     destinationCoords: {x: 0, y: 0, z: 0}
     isPingPongLinearMove: 1

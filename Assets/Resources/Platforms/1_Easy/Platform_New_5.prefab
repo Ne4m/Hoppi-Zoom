@@ -1,600 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8943767338341688901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978705302880513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 1
-  moveSpeed: 0.8
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
-    moveableY: 0
-    moveX:
-    - -0.84
-    - 0.84
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &4717135637287575880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978705625798031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 0
-  moveSpeed: 1
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 0
-    moveableX: 0
-    moveableY: 0
-    moveX:
-    - 0
-    - 0
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &3892842373409570770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978705685087074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 0
-  moveSpeed: 1
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 0
-    moveableX: 0
-    moveableY: 0
-    moveX:
-    - 0
-    - 0
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &8943767339100005891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978706088354214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 1
-  moveSpeed: 0.84
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
-    moveableY: 0
-    moveX:
-    - -0.84
-    - 0.84
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &8943767339314722702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978706513406215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 1
-  moveSpeed: 0.8
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
-    moveableY: 0
-    moveX:
-    - -0.84
-    - 0.84
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &8943767339552765276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978706722570247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 1
-  moveSpeed: 0.8
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
-    moveableY: 0
-    moveX:
-    - -0.84
-    - 0.84
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
---- !u!114 &8943767338690501917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2227978706938492103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementTypeID: 0
-  isTweenable: 0
-  isDestructable: 1
-  moveSpeed: 0.8
-  rotationSpeed: 1
-  specialRotationSpeed: []
-  specialMoveSpeed: []
-  specialChilds: []
-  objectProperties:
-    isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
-    moveableY: 0
-    moveX:
-    - -0.84
-    - 0.84
-    moveY:
-    - 0
-    - 0
-    rotatable: 0
-    startClockwise: 0
-    rotateFreely: 0
-    rotateAngle:
-    - 0
-    - 0
-    canFade: 0
-    fadeDuration: 0
-    fadeSpeed: 0
-    setPosition: 0
-    startPositionX: -1337
-    startPositionY: -1337
-    startRotationX: 0
-    startRotationY: 0
-    startRotationZ: 0
-    startRotationW: 0
-  tweenProperties:
-    moveSpeed: 0
-    startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
-    endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
-    moveEaseType: 0
-    linearMoveSpeed: 0
-    destinationCoords: {x: 0, y: 0, z: 0}
-    isPingPongLinearMove: 1
-    linearMoveEasyType: 0
-    rotateSpeed: 0
-    rotateAngle: 0
-    clockWise: 0
-    rotateEaseType: 0
-    isPingPongRotation: 1
-    fadeSpeed: 0
-    fadeAlphaMin: 0
-    disableCollision: 1
-    isFaded: 0
-    fadeEaseType: 0
-    isPingPongFading: 1
-    scaleSpeed: 0
-    scalePercent: 0
-    scaleEaseType: 0
-    isPingPongScaling: 1
-    color: {r: 0, g: 0, b: 0, a: 0}
-    colorChangeSpeed: 0
-    colorChangeEaseType: 0
-    isPingPongColorChange: 1
-    BEHAVIOURS: 
-  hasChilds: 0
-  childrenProps: []
-  debugtxt: {fileID: 0}
-  angle: 0
-  angle2: 0
-  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &8943767339283398334
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1886640198414885573}
   - {fileID: 1886640198355694632}
@@ -716,18 +122,106 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aed7f5f10f350e4aacf27711e101e69, type: 3}
---- !u!1 &2227978706938492103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
-    type: 3}
-  m_PrefabInstance: {fileID: 8943767338501411567}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1886640198594368864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363407663732787087, guid: 0aed7f5f10f350e4aacf27711e101e69,
     type: 3}
   m_PrefabInstance: {fileID: 8943767338501411567}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2227978706938492103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 8943767338501411567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8943767338690501917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978706938492103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 1
+  moveSpeed: 0.8
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 1
+    moveableX: 1
+    moveableY: 0
+    moveX:
+    - -0.84
+    - 0.84
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767338725451311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -812,18 +306,106 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aed7f5f10f350e4aacf27711e101e69, type: 3}
---- !u!1 &2227978706722570247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
-    type: 3}
-  m_PrefabInstance: {fileID: 8943767338725451311}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1886640199519576480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363407663732787087, guid: 0aed7f5f10f350e4aacf27711e101e69,
     type: 3}
   m_PrefabInstance: {fileID: 8943767338725451311}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2227978706722570247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 8943767338725451311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8943767339552765276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978706722570247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 1
+  moveSpeed: 1.6
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 1
+    moveableX: 1
+    moveableY: 0
+    moveX:
+    - -0.84
+    - 0.84
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767338951397167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,18 +490,106 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aed7f5f10f350e4aacf27711e101e69, type: 3}
---- !u!1 &2227978706513406215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
-    type: 3}
-  m_PrefabInstance: {fileID: 8943767338951397167}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1886640199041992864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363407663732787087, guid: 0aed7f5f10f350e4aacf27711e101e69,
     type: 3}
   m_PrefabInstance: {fileID: 8943767338951397167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2227978706513406215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 8943767338951397167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8943767339314722702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978706513406215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 1
+  moveSpeed: 0.8
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 1
+    moveableX: 1
+    moveableY: 0
+    moveX:
+    - -0.84
+    - 0.84
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767339366221710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,18 +674,106 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aed7f5f10f350e4aacf27711e101e69, type: 3}
---- !u!1 &2227978706088354214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
-    type: 3}
-  m_PrefabInstance: {fileID: 8943767339366221710}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1886640197475794945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363407663732787087, guid: 0aed7f5f10f350e4aacf27711e101e69,
     type: 3}
   m_PrefabInstance: {fileID: 8943767339366221710}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2227978706088354214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7130882483686336040, guid: 0aed7f5f10f350e4aacf27711e101e69,
+    type: 3}
+  m_PrefabInstance: {fileID: 8943767339366221710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8943767339100005891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978706088354214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 1
+  moveSpeed: 1.6
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 1
+    moveableX: 1
+    moveableY: 0
+    moveX:
+    - -0.84
+    - 0.84
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767339763197258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1102,6 +860,94 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8943767339763197258}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3892842373409570770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978705685087074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 0
+  moveSpeed: 1
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX:
+    - 0
+    - 0
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767339795260725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1272,6 +1118,94 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8943767339839009703}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4717135637287575880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978705625798031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 0
+  moveSpeed: 1
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 0
+    moveableX: 0
+    moveableY: 0
+    moveX:
+    - 0
+    - 0
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}
 --- !u!1001 &8943767340000146642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1605,3 +1539,91 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8943767340153792297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8943767338341688901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227978705302880513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79492d97432d8408016b823746c6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementTypeID: 0
+  isTweenable: 0
+  isDestructable: 1
+  moveSpeed: 0.8
+  rotationSpeed: 1
+  specialRotationSpeed: []
+  specialMoveSpeed: []
+  specialChilds: []
+  objectProperties:
+    isSpecial: 0
+    moveLocally: 1
+    moveable: 1
+    moveableX: 1
+    moveableY: 0
+    moveX:
+    - -0.84
+    - 0.84
+    moveY:
+    - 0
+    - 0
+    rotatable: 0
+    startClockwise: 0
+    rotateFreely: 0
+    rotateAngle:
+    - 0
+    - 0
+    canFade: 0
+    fadeDuration: 0
+    fadeSpeed: 0
+    setPosition: 0
+    startPositionX: -1337
+    startPositionY: -1337
+    startRotationX: 0
+    startRotationY: 0
+    startRotationZ: 0
+    startRotationW: 0
+  tweenProperties:
+    moveSpeed: 0
+    startPoint: {x: 0, y: 0, z: 0}
+    movePoints: []
+    endPoint: {x: 0, y: 0, z: 0}
+    isPingPongMove: 1
+    moveEaseType: 0
+    splineMovePoints: []
+    useSplinePoints: 0
+    allocationSize: 0
+    linearMoveSpeed: 0
+    destinationCoords: {x: 0, y: 0, z: 0}
+    isPingPongLinearMove: 1
+    linearMoveEasyType: 0
+    rotateSpeed: 0
+    rotateAngle: 0
+    clockWise: 0
+    rotateEaseType: 0
+    isPingPongRotation: 1
+    fadeSpeed: 0
+    fadeAlphaMin: 0
+    disableCollision: 1
+    isFaded: 0
+    fadeEaseType: 0
+    isPingPongFading: 1
+    scaleSpeed: 0
+    scalePercent: 0
+    scaleEaseType: 0
+    isPingPongScaling: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    colorChangeSpeed: 0
+    colorChangeEaseType: 0
+    isPingPongColorChange: 1
+    BEHAVIOURS: 
+  hasChilds: 0
+  childrenProps: []
+  debugtxt: {fileID: 0}
+  angle: 0
+  angle2: 0
+  platformStartEuler: {x: 0, y: 0, z: 0}

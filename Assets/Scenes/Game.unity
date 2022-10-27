@@ -4376,6 +4376,8 @@ GameObject:
   m_Component:
   - component: {fileID: 631844740}
   - component: {fileID: 631844741}
+  - component: {fileID: 631844743}
+  - component: {fileID: 631844744}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -4396,7 +4398,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &631844741
 MonoBehaviour:
@@ -4473,10 +4475,37 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Pickup
     clip: {fileID: 8300000, guid: 7189007fdd696d34ebb5b36bb2c912d2, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 1.1
     loop: 0
     source: {fileID: 0}
+--- !u!114 &631844743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631844739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e16df7a91f00804a8466c49be5df0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialDone: 0
+  touchToStartObj: {fileID: 3455346962663229803, guid: cb055e66c655a9c48826537d4541ac2e,
+    type: 3}
+--- !u!114 &631844744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631844739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb998b93a85d6db4fb0de675ed5f7082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &632280105
 GameObject:
   m_ObjectHideFlags: 0
@@ -5181,6 +5210,8 @@ MonoBehaviour:
   spritesToResize:
   - {fileID: 2021645480}
   - {fileID: 240770443}
+  debugtext: {fileID: 763156616}
+  scaleRatio: 0
 --- !u!114 &722024050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5557,7 +5588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &763156615
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14517,22 +14548,22 @@ PrefabInstance:
     - target: {fileID: 7624713639169172342, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.49019608
+      value: 0.6862745
       objectReference: {fileID: 0}
     - target: {fileID: 7624713639169172342, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.8113208
       objectReference: {fileID: 0}
     - target: {fileID: 7624713639169172342, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.8113208
       objectReference: {fileID: 0}
     - target: {fileID: 7624713639169172342, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8113208
       objectReference: {fileID: 0}
     - target: {fileID: 7624713639169172342, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
@@ -14543,11 +14574,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7624713639169172343, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7624713639169172343, guid: db59e0c85c19120449c876901393a92f,
         type: 3}
@@ -15602,6 +15633,12 @@ PrefabInstance:
       propertyPath: ejectForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8308591490057635706, guid: f6a28820b4afda5418e74dddccf8fed9,
+        type: 3}
+      propertyPath: moveCircle
+      value: 
+      objectReference: {fileID: 8373220477415565289, guid: 8e2268fc3cf60a34cb8547d3d0bcfd12,
+        type: 3}
     - target: {fileID: 8308591490057635706, guid: f6a28820b4afda5418e74dddccf8fed9,
         type: 3}
       propertyPath: backgrounds

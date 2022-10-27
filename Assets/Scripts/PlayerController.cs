@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private GameObject shootingArea;
+    [SerializeField] private GameObject moveCircle;
+    private GameObject moveCircleInstantiate;
     private SpriteRenderer shootingAreaSpriteRenderer;
     [SerializeField] private GameObject crosshair;
     [SerializeField] private float shootingRotVal;
@@ -296,7 +298,8 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.touches[0];
             bool touchEnded = touch.phase == TouchPhase.Ended;
 
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), Vector2.zero);
+            var touchWorldPos = Camera.main.ScreenToWorldPoint(touch.position);
+            RaycastHit2D hit = Physics2D.Raycast(touchWorldPos, Vector2.zero);
             Vector2 direction = Camera.main.ScreenToWorldPoint(touch.position) - crosshair.transform.position; // 
 
             direction.Normalize();
@@ -419,6 +422,7 @@ public class PlayerController : MonoBehaviour
                     shootingAreaSpriteRenderer.color = new Color32(140,140,140, 0);
 
                     JumpPlayer();
+                    SetTouchMovePoint(touchWorldPos);
                 }
                 //Debug.Log($"Touched @ {tr.rotation}");
             }
@@ -451,6 +455,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void SetTouchMovePoint(Vector2 pos)
+    {
+        if(moveCircleInstantiate != null)
+        {
+            Destroy(moveCircleInstantiate);
+        }
+        moveCircleInstantiate = Instantiate(moveCircle, pos, Quaternion.identity);
+    }
+
     private void FixedUpdate()
     {
         if(inputMode == 0 ) MoveArrow();
@@ -470,6 +483,7 @@ public class PlayerController : MonoBehaviour
 
     public void JumpPlayer()
     {
+        TutorialsManager.instance.EndFirstTutorial();
 
         Vector3 vectorUp = tr.TransformDirection(Vector2.up);
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 public class CharacterMenuController : MonoBehaviour
 {
-    private string[] playableCharacters = {"Blue (Default)", "Green", "Grey", "Orange", "Purple", "Red", "Teal", "Yellow" }; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
+    private string[] playableCharacters = {"Blue (Default)", "Green", "Grey", "Orange", "Purple", "Champion X-2", "Teal", "Yellow" }; //  "NewChar 1", "NewChar 2", "NewChar 3", "NewChar 4", "NewChar 5", "NewChar 6", "NewChar 7" 
     private string[] unlockedCharacters;
     private int currentCharacterIndex, maxCharacterIndex, minCharacterIndex;
     private float characterHealth, characterSpeed;

@@ -129,6 +129,7 @@ public class PlatformSpawner : MonoBehaviour
 
             newPlatform.transform.position = new Vector3(0, tr.position.y + spawnDistance, 0);
             newPlatform.tag = "Platform";
+            newPlatform.transform.localScale = newPlatform.transform.localScale * Sprite_AutoRes.instance.scaleRatio;
             spawnDistance += 10;
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Sprite_AutoRes : MonoBehaviour
 {
@@ -10,14 +11,37 @@ public class Sprite_AutoRes : MonoBehaviour
     [SerializeField]
     List<GameObject> spritesToResize = new List<GameObject>();
 
-    void Start()
-    {
+    [SerializeField] private TMP_Text debugtext;
 
+    public static Sprite_AutoRes instance;
+
+    private float fixedAspectRatio = 2.055556f;
+    private float currentRatio;
+    public float scaleRatio;
+
+    private void Awake()
+    {
+        instance = this;
+
+        UpdateRatio();
     }
 
     void Update()
     {
         scaleBackgroundIMG();
+
+        UpdateRatio();
+    }
+
+    private void UpdateRatio()
+    {
+        currentRatio = (float)Screen.height / (float)Screen.width;
+        scaleRatio = fixedAspectRatio / currentRatio;
+
+
+        debugtext.text = $"H:{Screen.currentResolution.height} W:{Screen.currentResolution.width} \n" +
+                         $"Current Ratio = {currentRatio}\n" +
+                         $"Golden Ratio = {scaleRatio}";
     }
 
     private void scaleBackgroundIMG()

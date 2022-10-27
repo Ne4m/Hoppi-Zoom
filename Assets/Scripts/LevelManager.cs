@@ -694,11 +694,10 @@ public class LevelManager : MonoBehaviour
     void spawn_NextCheckpoint()
     {
 
-
         new_CheckPoint = Instantiate(checkPoint_Prefab) as GameObject;
         new_CheckPoint.transform.position = new Vector3(0, new_CheckPoint.transform.position.y + spawnDistance, 0);
         new_CheckPoint.tag = "Checkpoint";
-        new_CheckPoint.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 125);
+        new_CheckPoint.GetComponent<SpriteRenderer>().color = new Color32(207, 207, 207, 145);
         new_CheckPoint.GetComponent<SpriteRenderer>().sortingOrder = -1;
 
 

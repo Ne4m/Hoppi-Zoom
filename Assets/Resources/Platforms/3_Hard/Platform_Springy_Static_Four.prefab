@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
-  isTweenable: 0
+  isTweenable: 1
   isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
@@ -135,13 +135,13 @@ MonoBehaviour:
   specialChilds: []
   objectProperties:
     isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
+    moveLocally: 0
+    moveable: 0
+    moveableX: 0
     moveableY: 0
     moveX:
-    - 0.5
-    - 1.5
+    - -1.5
+    - -0.5
     moveY:
     - 0
     - 0
@@ -162,11 +162,12 @@ MonoBehaviour:
     startRotationZ: 0
     startRotationW: 0
   tweenProperties:
-    moveSpeed: 0
+    moveSpeed: 1.25
     startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
+    movePoints:
+    - {x: -1, y: 0, z: 0}
     endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
+    isPingPongMove: 0
     moveEaseType: 0
     splineMovePoints: []
     useSplinePoints: 0
@@ -194,7 +195,7 @@ MonoBehaviour:
     colorChangeSpeed: 0
     colorChangeEaseType: 0
     isPingPongColorChange: 1
-    BEHAVIOURS: 
+    BEHAVIOURS: 01000000
   hasChilds: 0
   childrenProps: []
   debugtxt: {fileID: 0}
@@ -327,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementTypeID: 0
-  isTweenable: 0
+  isTweenable: 1
   isDestructable: 1
   moveSpeed: 1
   rotationSpeed: 1
@@ -336,9 +337,9 @@ MonoBehaviour:
   specialChilds: []
   objectProperties:
     isSpecial: 0
-    moveLocally: 1
-    moveable: 1
-    moveableX: 1
+    moveLocally: 0
+    moveable: 0
+    moveableX: 0
     moveableY: 0
     moveX:
     - -1.5
@@ -363,11 +364,12 @@ MonoBehaviour:
     startRotationZ: 0
     startRotationW: 0
   tweenProperties:
-    moveSpeed: 0
+    moveSpeed: 1.25
     startPoint: {x: 0, y: 0, z: 0}
-    movePoints: []
+    movePoints:
+    - {x: 1, y: 0, z: 0}
     endPoint: {x: 0, y: 0, z: 0}
-    isPingPongMove: 1
+    isPingPongMove: 0
     moveEaseType: 0
     splineMovePoints: []
     useSplinePoints: 0
@@ -395,7 +397,7 @@ MonoBehaviour:
     colorChangeSpeed: 0
     colorChangeEaseType: 0
     isPingPongColorChange: 1
-    BEHAVIOURS: 
+    BEHAVIOURS: 01000000
   hasChilds: 0
   childrenProps: []
   debugtxt: {fileID: 0}
