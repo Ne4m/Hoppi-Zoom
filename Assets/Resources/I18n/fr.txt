@@ -78,3 +78,7 @@ T_UI_Text_Upgrade=ameliorations
 
 // @PICKABLES Strings
 T_GOLD=OR
+
+// @TUTORIAL DESCRIPTIONS
+T_TUTORIAL1_TEXT=Toucher pour commencer a sauter
+T_TUTORIAL2_TEXT=Tournez et relachez pour tirer

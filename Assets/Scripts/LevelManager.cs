@@ -325,6 +325,8 @@ public class LevelManager : MonoBehaviour
         playerControl.setLevel(0);
         Debug.Log("Your Highest Score Was " + SPrefs.GetInt("highScore", 0));
 
+        TutorialsManager.instance.PlayTutorial(0);
+
 
     }
 
@@ -619,6 +621,7 @@ public class LevelManager : MonoBehaviour
         spawn_NextCheckpoint();
         playerControl.addPoint(1);
 
+
         if (GooglePlayServices.instance != null && GooglePlayServices.instance.GooglePlayConnection)
         {
 
@@ -653,6 +656,8 @@ public class LevelManager : MonoBehaviour
             }
 
         }
+
+        TutorialsManager.instance.PlayTutorial(1);
 
     }
 

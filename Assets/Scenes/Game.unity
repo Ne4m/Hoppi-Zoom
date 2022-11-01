@@ -4377,7 +4377,6 @@ GameObject:
   - component: {fileID: 631844740}
   - component: {fileID: 631844741}
   - component: {fileID: 631844743}
-  - component: {fileID: 631844744}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -4491,21 +4490,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e16df7a91f00804a8466c49be5df0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialDone: 0
-  touchToStartObj: {fileID: 3455346962663229803, guid: cb055e66c655a9c48826537d4541ac2e,
-    type: 3}
---- !u!114 &631844744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631844739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb998b93a85d6db4fb0de675ed5f7082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  tutorial:
+  - tutorialID: 0
+    tutorialName: Jumping Tutorial
+    tutorialDescription: Tutorial shows how touch to jump
+    isTutorialDone: 0
+    tutorialPrefab: {fileID: 3455346962663229803, guid: cb055e66c655a9c48826537d4541ac2e,
+      type: 3}
+  - tutorialID: 1
+    tutorialName: Shooting Tutorial
+    tutorialDescription: Tutorial shows how to shoot
+    isTutorialDone: 0
+    tutorialPrefab: {fileID: 3679818079797728313, guid: 2eb0e266beebd7d4d809b84200baa569,
+      type: 3}
 --- !u!1 &632280105
 GameObject:
   m_ObjectHideFlags: 0

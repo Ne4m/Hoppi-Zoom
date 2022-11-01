@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 3455346962904466206}
   m_Father: {fileID: 3455346962663229800}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -133,7 +133,7 @@ Transform:
   - {fileID: 3455346962594522082}
   - {fileID: 5172485529241667825}
   m_Father: {fileID: 3455346962663229800}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3455346961709065149
 MonoBehaviour:
@@ -427,8 +427,8 @@ Transform:
   m_LocalScale: {x: 0.94952977, y: 0.94952977, z: 0.94952977}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3455346961709065148}
   - {fileID: 3455346961339167025}
+  - {fileID: 3455346961709065148}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Touch to start jumping
+  m_text: Touch to Start Jumping
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -525,12 +525,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 115
-  m_fontSizeBase: 95
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 115
-  m_fontSizeMax: 128
+  m_fontSizeMin: 60
+  m_fontSizeMax: 90
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -91.449524, y: -132.094, z: -264.57605, w: -48.781372}
+  m_margin: {x: -522.174, y: -132.094, z: -689.6333, w: -48.781372}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

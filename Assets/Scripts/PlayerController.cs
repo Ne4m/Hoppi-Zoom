@@ -304,6 +304,8 @@ public class PlayerController : MonoBehaviour
 
             direction.Normalize();
 
+            TutorialsManager.instance.EndTutorial(1);
+
             if (hit.collider != null && hit.collider.tag == "NoTouch")
             {
 
@@ -393,6 +395,12 @@ public class PlayerController : MonoBehaviour
 
                 return;
             }
+            else if (holdingShoot && !touchEnded)  // Moved touching out of shooting circle so hide area
+            {
+                shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
+                tr.gameObject.SetActive(false);
+                crosshair.gameObject.SetActive(false);
+            }
             else
             {
                 if (touchEnded)
@@ -451,8 +459,8 @@ public class PlayerController : MonoBehaviour
             }
 
 
-
         }
+
     }
 
     private void SetTouchMovePoint(Vector2 pos)
@@ -483,7 +491,7 @@ public class PlayerController : MonoBehaviour
 
     public void JumpPlayer()
     {
-        TutorialsManager.instance.EndFirstTutorial();
+        TutorialsManager.instance.EndTutorial(0);
 
         Vector3 vectorUp = tr.TransformDirection(Vector2.up);
 

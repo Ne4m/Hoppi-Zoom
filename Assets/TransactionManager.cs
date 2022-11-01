@@ -17,16 +17,6 @@ public class TransactionManager : MonoBehaviour
         controller = ctrl;
     }
 
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
     
     public void MakeTransaction(float price, int quantity)
     {

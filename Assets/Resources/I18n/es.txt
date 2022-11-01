@@ -78,3 +78,7 @@ T_UI_Text_Upgrade=mejoras
 
 // @PICKABLES Strings
 T_GOLD=ORO
+
+// @TUTORIAL DESCRIPTIONS
+T_TUTORIAL1_TEXT=Tocar para empezar a saltar
+T_TUTORIAL2_TEXT=Girar y soltar para disparar

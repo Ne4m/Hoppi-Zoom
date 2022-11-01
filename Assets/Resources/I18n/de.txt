@@ -78,3 +78,7 @@ T_UI_Text_Upgrade=verbesserungen
 
 // @PICKABLES Strings
 T_GOLD=GOLD
+
+// @TUTORIAL DESCRIPTIONS
+T_TUTORIAL1_TEXT=Beruhren um zu springen
+T_TUTORIAL2_TEXT=Drehen und Loslassen zum Schießen
