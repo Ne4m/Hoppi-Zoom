@@ -680,7 +680,7 @@ MonoBehaviour:
     canFade: 0
     fadeDuration: 0
     fadeSpeed: 0
-    setPosition: 1
+    setPosition: 0
     startPositionX: 0
     startPositionY: -1337
     startRotationX: 0
