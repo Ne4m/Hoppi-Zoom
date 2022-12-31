@@ -63,20 +63,21 @@ public class PlatformMovements : MonoBehaviour
             objectProperties.startPositionY *= scaleRatio;
         }
 
-        if (!hasChilds)
-        {
-            if (objectProperties.setPosition) tr.position = SetPosition(transformTargetPos, !objectProperties.startPositionX.Equals(-1337) ? objectProperties.startPositionX : tr.position.x, !objectProperties.startPositionY.Equals(-1337) ? objectProperties.startPositionY : tr.position.y, tr.position.z);
-        }
-        else
-        {
-            tr.position = SetPosition(transformTargetPos, tr.position.x, tr.position.y, tr.position.z);
+        //if (!hasChilds)
+        //{
+        //    if (objectProperties.setPosition)
+        //        tr.position = SetPosition(transformTargetPos, !objectProperties.startPositionX.Equals(-1337) ? objectProperties.startPositionX : tr.position.x, !objectProperties.startPositionY.Equals(-1337) ? objectProperties.startPositionY : tr.position.y, tr.position.z);
+        //}
+        //else
+        //{
+        //    tr.position = SetPosition(transformTargetPos, tr.position.x, tr.position.y, tr.position.z);
 
-            for (int i = 0; i < childrenProps.Count; i++)
-            {
-                if (childrenProps[i].setPosition) tr.GetChild(i).position = SetPosition(transformTargetPos, !childrenProps[i].startPositionX.Equals(-1337) ? childrenProps[i].startPositionX : tr.GetChild(i).position.x, !childrenProps[i].startPositionY.Equals(-1337) ? childrenProps[i].startPositionY : tr.GetChild(i).position.y, tr.GetChild(i).position.z);
-
-            }
-        }
+        //    for (int i = 0; i < childrenProps.Count; i++)
+        //    {
+        //        if (childrenProps[i].setPosition)
+        //            tr.GetChild(i).position = SetPosition(transformTargetPos, !childrenProps[i].startPositionX.Equals(-1337) ? childrenProps[i].startPositionX : tr.GetChild(i).position.x, !childrenProps[i].startPositionY.Equals(-1337) ? childrenProps[i].startPositionY : tr.GetChild(i).position.y, tr.GetChild(i).position.z);
+        //    }
+        //}
 
         platformStartPosition = tr.position;
 
@@ -758,8 +759,8 @@ public class PlatformMovements : MonoBehaviour
         public float fadeDuration;
         public float fadeSpeed;
 
-        [Header ("Platform Starting Position")]
-        public bool setPosition;
+        [Header("Platform Starting Position")]
+        public bool setPosition = false;
 
         public float startPositionX = -1337;
         public float startPositionY = -1337;
