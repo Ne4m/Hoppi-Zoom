@@ -9,7 +9,7 @@ public class PlatformSpawner : MonoBehaviour
     public List<GameObject> platformList;
     public GameObject[] platformListArr;
 
-    public (GameObject[] easy, GameObject[] normal, GameObject[] hard) platformArray;
+    public (GameObject[] easy, GameObject[] normal, GameObject[] hard, GameObject[] uber) platformArray;
 
     private Transform tr;
 
@@ -38,6 +38,10 @@ public class PlatformSpawner : MonoBehaviour
         platformArray.normal = Resources.LoadAll<GameObject>("Platforms/2_Normal");
         platformArray.hard = Resources.LoadAll<GameObject>("Platforms/3_Hard");
 
+        var easyNormal = platformArray.easy.Union(platformArray.normal).ToArray();
+        var easyNormalHard = easyNormal.Union(platformArray.hard).ToArray();
+        platformArray.uber = easyNormalHard;
+
         platformListArr = platformArray.easy;
  
     }
@@ -46,7 +50,7 @@ public class PlatformSpawner : MonoBehaviour
 
     void Update()
     {
-        if(lm.playerControl.getPoint() > 25 && lm.playerControl.getPoint() < 50)
+        if(lm.playerControl.getPoint() >= 50 && lm.playerControl.getPoint() < 125)
         {
             if(platformListArr != platformArray.normal)
             {
@@ -55,12 +59,21 @@ public class PlatformSpawner : MonoBehaviour
             }
 
         }
-        else if (lm.playerControl.getPoint() >= 50)
+        else if (lm.playerControl.getPoint() >= 125 && lm.playerControl.getPoint() < 250)
         {
             if(platformListArr != platformArray.hard)
             {
                 platformListArr = platformArray.hard;
                 Debug.Log("Loaded Hard Platform");
+            }
+
+        }
+        else if (lm.playerControl.getPoint() >= 250)
+        {
+            if (platformListArr != platformArray.uber)
+            {
+                platformListArr = platformArray.uber;
+                Debug.Log("Loaded Uber Platform");
             }
 
         }

@@ -657,7 +657,11 @@ public class LevelManager : MonoBehaviour
 
         }
 
-        TutorialsManager.instance.PlayTutorial(1);
+        if(playerControl.getPoint() < 2)
+        {
+            TutorialsManager.instance.PlayTutorial(1);
+        }
+
 
     }
 

@@ -58,6 +58,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float arrowTouchRotateOffset = -90f;
     [SerializeField] private float inputModeOffset;
 
+    private bool canJump = true;
+
+    private bool CanJump
+    {
+        get => canJump;
+        set => canJump = value;
+    }
+
     private void Awake()
 	{
         inputMode = SPrefs.GetInt("ControlInput", 0);
@@ -304,7 +312,14 @@ public class PlayerController : MonoBehaviour
 
             direction.Normalize();
 
-            TutorialsManager.instance.EndTutorial(1);
+            if (!TutorialsManager.instance.IsTutorialDone(1) && _levelManager.playerControl.getPoint() == 1)
+            {
+                CanJump = false;
+            }
+            else
+            {
+                CanJump = true;
+            }
 
             if (hit.collider != null && hit.collider.tag == "NoTouch")
             {
@@ -323,11 +338,13 @@ public class PlayerController : MonoBehaviour
                             shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 143);
 
                         }
-
+                        //DRAGGIN DONE HERE
+                        TutorialsManager.instance.EndTutorial(1);
                         holdingShoot = true;
                     }
                     else
                     {
+                        // DRAG SHOOTING DONE HERE
                         crosshair.gameObject.SetActive(false);
                         shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
                         holdingShoot = false;
@@ -449,6 +466,8 @@ public class PlayerController : MonoBehaviour
                     shootingAreaSpriteRenderer.color = new Color32(140, 140, 140, 0);
 
                     //JumpPlayer();
+                    // Shooting Tutorial
+
                     shooting.SendShoot();
                 }
             }
@@ -491,25 +510,30 @@ public class PlayerController : MonoBehaviour
 
     public void JumpPlayer()
     {
-        TutorialsManager.instance.EndTutorial(0);
+        if (CanJump)
+        {
+            TutorialsManager.instance.EndTutorial(0);
 
-        Vector3 vectorUp = tr.TransformDirection(Vector2.up);
+            Vector3 vectorUp = tr.TransformDirection(Vector2.up);
 
-        _levelManager.playerControl.setPlayerCheckPoint(false);
-        arrowiks.SetActive(false);
+            _levelManager.playerControl.setPlayerCheckPoint(false);
+            arrowiks.SetActive(false);
 
 
 
-        _rb2D.AddForce(vectorUp * ejectForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
-        _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
-        _rb2D.MoveRotation(_slowRot);
+            _rb2D.AddForce(vectorUp * ejectForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            _slowRot = Quaternion.Slerp(transform.rotation, tr.rotation, Time.fixedDeltaTime * playerRotSpeed);
+            _rb2D.MoveRotation(_slowRot);
 
-        lastJump = Time.time;
+            lastJump = Time.time;
 
-        FindObjectOfType<AudioManager>().Play("Jump");
-        //_rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
+            FindObjectOfType<AudioManager>().Play("Jump");
+            //_rb2D.velocity = (vectorUp * ejectForce * Time.deltaTime);
 
-        EjectTweenStart();
+            EjectTweenStart();
+
+        }
+
     }
 
     public void JumpPlayerMode2()

@@ -37,39 +37,39 @@ public class GameProgress : MonoBehaviour
     }
     enum SpriteNames
     {
-        Clouds = 4,
+        Clouds = 75,
         Stars = 123,
-        Planets = 10
+        Planets = 500
     }
 
     enum BackGroundThresholds
     {
 
 
-        //p2 = 25,
-        //p3 = 50,
-        //p4 = 75,
-        //p5 = 100,
-        //p6 = 125,
-        //p7 = 150,
-        //p8 = 250,
-        //p9 = 500,
-        //p10 = 1000,
-        //p11 = 1500,
-        //p12 = 2000
+        p2 = 25,
+        p3 = 50, // EASY DIFF END - MEDIUM DIFF  START
+        p4 = 75,
+        p5 = 100,
+        p6 = 125, // MEDIUM DIFF  END - HARD DIFF START
+        p7 = 150,
+        p8 = 250, // HARD DIFF END - ALLL START - PLANETS BG START
+        p9 = 500,
+        p10 = 750,
+        p11 = 1000,
+        p12 = 1500
 
 
-        p2 = 2,
-        p3 = 3,
-        p4 = 4,
-        p5 = 5,
-        p6 = 6,
-        p7 = 7,
-        p8 = 8,
-        p9 = 9,
-        p10 = 10,
-        p11 = 11,
-        p12 = 12
+        //p2 = 2,
+        //p3 = 3,
+        //p4 = 4,
+        //p5 = 5,
+        //p6 = 6,
+        //p7 = 7,
+        //p8 = 8,
+        //p9 = 9,
+        //p10 = 10,
+        //p11 = 11,
+        //p12 = 12
 
     }
 
@@ -137,17 +137,33 @@ public class GameProgress : MonoBehaviour
         }
 
 
-        switch (point)
-        {
-            case var _ when point >= 0 && point < (int)SpriteNames.Clouds:
-                loaded.Spawner = SpawnerNames.Cloudsets.ToString();
-                loaded.Sprite = SpriteNames.Clouds.ToString();
-                break;
-            case var _ when point >= (int)SpriteNames.Planets: //bgChangeCounter == spritesToChange.Length-1: // point >= (int)SpriteNames.Clouds &&  point <= (int)SpriteNames.Planets
-                loaded.Spawner = SpawnerNames.Cloudsets.ToString();
-                loaded.Sprite = SpriteNames.Planets.ToString();
-                break;
+        //switch (point)
+        //{
+        //    case var _ when point >= (int)SpriteNames.Clouds && point < (int)SpriteNames.Planets:
+        //        loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+        //        loaded.Sprite = SpriteNames.Clouds.ToString();
+        //        break;
+        //    case var _ when point >= (int)SpriteNames.Planets: //bgChangeCounter == spritesToChange.Length-1: // point >= (int)SpriteNames.Clouds &&  point <= (int)SpriteNames.Planets
+        //        loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+        //        loaded.Sprite = SpriteNames.Planets.ToString();
+        //        break;
 
+        //}
+
+        if(point >= (int)SpriteNames.Clouds && point < (int)SpriteNames.Planets)
+        {
+            loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+            loaded.Sprite = SpriteNames.Clouds.ToString();
+        }
+        else if (point >= (int)SpriteNames.Planets)
+        {
+            loaded.Spawner = SpawnerNames.Cloudsets.ToString();
+            loaded.Sprite = SpriteNames.Planets.ToString();
+        }
+        else
+        {
+            loaded.Spawner = null;
+            loaded.Sprite = null;
         }
     }
 

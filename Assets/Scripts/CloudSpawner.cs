@@ -54,16 +54,23 @@ public class CloudSpawner : MonoBehaviour
 
         if (isSpawner)
         {
-            spawnerResource = Resources.LoadAll<GameObject>($"ObjectSpawning/Sets/{gameProgress.GetSpawnSets()}");
-            SpawnSpawner();
+            if(gameProgress.GetSpawnSets() != null)
+            {
+                spawnerResource = Resources.LoadAll<GameObject>($"ObjectSpawning/Sets/{gameProgress.GetSpawnSets()}");
+                SpawnSpawner();
+            }
+
         }
         else
         {
+            if(gameProgress.GetSkySprites() != null)
+            {
+                spritesArray = Resources.LoadAll<Sprite>($"ObjectSpawning/Sprites/{gameProgress.GetSkySprites()}");
 
-            spritesArray = Resources.LoadAll<Sprite>($"ObjectSpawning/Sprites/{gameProgress.GetSkySprites()}");
+                //Debug.Log($"Loaded Sprite : {loadedSprite} and Point is {point}");
+                SpawnSprites();
+            }
 
-            //Debug.Log($"Loaded Sprite : {loadedSprite} and Point is {point}");
-            SpawnSprites();
         }
 
 
