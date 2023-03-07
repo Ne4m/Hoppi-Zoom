@@ -235,8 +235,6 @@ struct SkinChangedDelegate_tA6D456E853D58AD2EF8A599F543C7E5BA8E94B98;
 struct ActionMethodDelegate_tE88025EB184988CC54961CA0853A56DDA2826048;
 // LTDescr/EaseTypeDelegate
 struct EaseTypeDelegate_t731A985425250B1DB3EC8DD69CA4644BD2DCF7CC;
-// LeanTween/<>c__DisplayClass194_0
-struct U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66;
 // LeanTween/<>c__DisplayClass195_0
 struct U3CU3Ec__DisplayClass195_0_tA033DF82150C0DC451111403266759556B051799;
 // LeanTween/<>c__DisplayClass196_0
@@ -612,17 +610,6 @@ struct U3CU3Ec_t573714D0F4A8020AA5706EF5484FD5F787729F5F_StaticFields
 	ActionMethodDelegate_tE88025EB184988CC54961CA0853A56DDA2826048* ___U3CU3E9__113_0_1;
 	// LTDescr/ActionMethodDelegate LTDescr/<>c::<>9__114_0
 	ActionMethodDelegate_tE88025EB184988CC54961CA0853A56DDA2826048* ___U3CU3E9__114_0_2;
-};
-
-// LeanTween/<>c__DisplayClass194_0
-struct U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66  : public RuntimeObject
-{
-	// LTDescr LeanTween/<>c__DisplayClass194_0::d
-	LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* ___d_0;
-	// System.Single LeanTween/<>c__DisplayClass194_0::smoothTime
-	float ___smoothTime_1;
-	// System.Single LeanTween/<>c__DisplayClass194_0::maxSpeed
-	float ___maxSpeed_2;
 };
 
 // LeanTween/<>c__DisplayClass195_0
@@ -2474,8 +2461,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Transform_tB27202C6F4E36D225EE28A13E4D662BF99
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* __this, const RuntimeMethod* method) ;
 // System.Single UnityEngine.Time::get_deltaTime()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D (const RuntimeMethod* method) ;
-// UnityEngine.Vector3 LeanSmooth::damp(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 LeanSmooth_damp_m1A5566D689152EB9897514A7167D938ABEE89A0E (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___current0, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___target1, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, const RuntimeMethod* method) ;
+// UnityEngine.Vector3 LeanSmooth::spring(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&,System.Single,System.Single,System.Single,System.Single,System.Single)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 LeanSmooth_spring_mEB50270E87D9B1AEBB91FD4D74BA364FE567A51A (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___current0, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___target1, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
 // System.Void LTDescrOptional::set_axis(UnityEngine.Vector3)
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void LTDescrOptional_set_axis_m93413DE64D9A4FE44B89C32703794E2E4267BB27_inline (LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___value0, const RuntimeMethod* method) ;
 // UnityEngine.Vector3 UnityEngine.Vector3::op_Addition(UnityEngine.Vector3,UnityEngine.Vector3)
@@ -2486,8 +2473,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Transform_set_localPosition_mDE1C997F7D7
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* __this, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Transform::set_position(UnityEngine.Vector3)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Transform_set_position_mA1A817124BB41B685043DED2A9BA48CDF37C4156 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___value0, const RuntimeMethod* method) ;
-// System.Single LeanSmooth::damp(System.Single,System.Single,System.Single&,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7 (float ___current0, float ___target1, float* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, const RuntimeMethod* method) ;
+// System.Single LeanSmooth::spring(System.Single,System.Single,System.Single&,System.Single,System.Single,System.Single,System.Single,System.Single)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float LeanSmooth_spring_mDFA5DE249CFE442EE36553D08AA0F039E2D1193E (float ___current0, float ___target1, float* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
 // System.Void LeanTweenExt::LeanSetLocalPosX(UnityEngine.Transform,System.Single)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void LeanTweenExt_LeanSetLocalPosX_m6F1FF221D6E85CEFF90FC5494A09F7AD53ED1881 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* ___transform0, float ___val1, const RuntimeMethod* method) ;
 // System.Void LeanTweenExt::LeanSetLocalPosY(UnityEngine.Transform,System.Single)
@@ -2506,8 +2493,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633 (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___value0, const RuntimeMethod* method) ;
 // UnityEngine.Color LeanTweenExt::LeanColor(UnityEngine.Transform)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F LeanTweenExt_LeanColor_mB6830EA450E342FC4125712D6CC8D115C603DCEC (Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* ___transform0, const RuntimeMethod* method) ;
-// UnityEngine.Color LeanSmooth::damp(UnityEngine.Color,UnityEngine.Color,UnityEngine.Color&,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F LeanSmooth_damp_m4D3187B8FDB04F0C1C61F0D9C65396B9A9BD22A8 (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___current0, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___target1, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, const RuntimeMethod* method) ;
+// UnityEngine.Color LeanSmooth::spring(UnityEngine.Color,UnityEngine.Color,UnityEngine.Color&,System.Single,System.Single,System.Single,System.Single,System.Single)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F LeanSmooth_spring_m31D22DB75599507566C7F589A28FDDFD35841896 (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___current0, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___target1, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
 // T UnityEngine.Component::GetComponent<UnityEngine.Renderer>()
 inline Renderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF* Component_GetComponent_TisRenderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF_mC91ACC92AD57CA6CA00991DAF1DB3830BCE07AF8 (Component_t39FBE53E5EFCF4409111FB22C15FF73717632EC3* __this, const RuntimeMethod* method)
 {
@@ -2517,12 +2504,6 @@ inline Renderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF* Component_GetComponen
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* Renderer_get_material_m5BA2A00816C4CC66580D4B2E409CF10718C15656 (Renderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF* __this, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Material::set_color(UnityEngine.Color)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Material_set_color_m5C32DEBB215FF9EE35E7B575297D8C2F29CC2A2D (Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___value0, const RuntimeMethod* method) ;
-// UnityEngine.Vector3 LeanSmooth::spring(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&,System.Single,System.Single,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 LeanSmooth_spring_mEB50270E87D9B1AEBB91FD4D74BA364FE567A51A (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___current0, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___target1, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
-// System.Single LeanSmooth::spring(System.Single,System.Single,System.Single&,System.Single,System.Single,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float LeanSmooth_spring_mDFA5DE249CFE442EE36553D08AA0F039E2D1193E (float ___current0, float ___target1, float* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
-// UnityEngine.Color LeanSmooth::spring(UnityEngine.Color,UnityEngine.Color,UnityEngine.Color&,System.Single,System.Single,System.Single,System.Single,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F LeanSmooth_spring_m31D22DB75599507566C7F589A28FDDFD35841896 (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___current0, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___target1, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, const RuntimeMethod* method) ;
 // UnityEngine.Vector3 LeanSmooth::bounceOut(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 LeanSmooth_bounceOut_mA2F6720605DF96AA8CEA7B6DDA265E636194143A (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___current0, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___target1, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___currentVelocity2, float ___smoothTime3, float ___maxSpeed4, float ___deltaTime5, float ___friction6, float ___accelRate7, float ___hitDamping8, const RuntimeMethod* method) ;
 // System.Single LeanSmooth::bounceOut(System.Single,System.Single,System.Single&,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)
@@ -3279,452 +3260,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void LTRect_set_rect_m994CB36B474BA1EDBD42F2CB6794E15E60F47E1B_inline (LTRect_tE59D1029540FDC2C553CB986B1E93E4EFF88B58D* __this, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___value0, const RuntimeMethod* method) ;
 // System.Single UnityEngine.Matrix4x4::get_Item(System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Matrix4x4_get_Item_m771C2EE3A3BFFBAC9F2AD07FFCAAF6146C1BE92A (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* __this, int32_t ___index0, const RuntimeMethod* method) ;
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Winvalid-offsetof"
-#pragma clang diagnostic ignored "-Wunused-variable"
-#endif
-// System.Void LeanTween/<>c__DisplayClass194_0::.ctor()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0__ctor_mCBDF5147844DC7668921CA5E4D6476E6520E9E87 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		Object__ctor_mE837C6B9FA8C6D5D109F4B2EC885D79919AC0EA2(__this, NULL);
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__0()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__0_m4C9157C78D09B8298DD3AC04FF3B008743872289 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.optional.axis = LeanSmooth.damp(d.optional.axis, d.toTrans.localPosition, ref d.fromInternal, smoothTime, maxSpeed, Time.deltaTime);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_1;
-		L_1 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_0, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_3;
-		L_3 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_2, NULL);
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = LTDescrOptional_get_axis_m596B339DE3B1E86022B61BF1A5432EC96C413EB1_inline(L_3, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_5 = __this->___d_0;
-		NullCheck(L_5);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_6;
-		L_6 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_5, NULL);
-		NullCheck(L_6);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_7;
-		L_7 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_6, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_8 = __this->___d_0;
-		NullCheck(L_8);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_9 = (&L_8->___fromInternal_27);
-		float L_10 = __this->___smoothTime_1;
-		float L_11 = __this->___maxSpeed_2;
-		float L_12;
-		L_12 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13;
-		L_13 = LeanSmooth_damp_m1A5566D689152EB9897514A7167D938ABEE89A0E(L_4, L_7, L_9, L_10, L_11, L_12, NULL);
-		NullCheck(L_1);
-		LTDescrOptional_set_axis_m93413DE64D9A4FE44B89C32703794E2E4267BB27_inline(L_1, L_13, NULL);
-		// d.trans.localPosition = d.optional.axis + d.toInternal;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_14 = __this->___d_0;
-		NullCheck(L_14);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_15 = L_14->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_16 = __this->___d_0;
-		NullCheck(L_16);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_17;
-		L_17 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_16, NULL);
-		NullCheck(L_17);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_18;
-		L_18 = LTDescrOptional_get_axis_m596B339DE3B1E86022B61BF1A5432EC96C413EB1_inline(L_17, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_19 = __this->___d_0;
-		NullCheck(L_19);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_20 = L_19->___toInternal_28;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_21;
-		L_21 = Vector3_op_Addition_m087D6F0EC60843D455F9F83D25FE42B2433AAD1D_inline(L_18, L_20, NULL);
-		NullCheck(L_15);
-		Transform_set_localPosition_mDE1C997F7D79C0885210B7732B4BA50EE7D73134(L_15, L_21, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__1()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__1_mF829B5A3F275D0F3DFD9CB843AF9DBF47CD3D513 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.optional.axis = LeanSmooth.damp(d.optional.axis, d.toTrans.position, ref d.fromInternal, smoothTime, maxSpeed, Time.deltaTime);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_1;
-		L_1 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_0, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_3;
-		L_3 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_2, NULL);
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = LTDescrOptional_get_axis_m596B339DE3B1E86022B61BF1A5432EC96C413EB1_inline(L_3, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_5 = __this->___d_0;
-		NullCheck(L_5);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_6;
-		L_6 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_5, NULL);
-		NullCheck(L_6);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_7;
-		L_7 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_6, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_8 = __this->___d_0;
-		NullCheck(L_8);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_9 = (&L_8->___fromInternal_27);
-		float L_10 = __this->___smoothTime_1;
-		float L_11 = __this->___maxSpeed_2;
-		float L_12;
-		L_12 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13;
-		L_13 = LeanSmooth_damp_m1A5566D689152EB9897514A7167D938ABEE89A0E(L_4, L_7, L_9, L_10, L_11, L_12, NULL);
-		NullCheck(L_1);
-		LTDescrOptional_set_axis_m93413DE64D9A4FE44B89C32703794E2E4267BB27_inline(L_1, L_13, NULL);
-		// d.trans.position = d.optional.axis + d.toInternal;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_14 = __this->___d_0;
-		NullCheck(L_14);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_15 = L_14->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_16 = __this->___d_0;
-		NullCheck(L_16);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_17;
-		L_17 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_16, NULL);
-		NullCheck(L_17);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_18;
-		L_18 = LTDescrOptional_get_axis_m596B339DE3B1E86022B61BF1A5432EC96C413EB1_inline(L_17, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_19 = __this->___d_0;
-		NullCheck(L_19);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_20 = L_19->___toInternal_28;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_21;
-		L_21 = Vector3_op_Addition_m087D6F0EC60843D455F9F83D25FE42B2433AAD1D_inline(L_18, L_20, NULL);
-		NullCheck(L_15);
-		Transform_set_position_mA1A817124BB41B685043DED2A9BA48CDF37C4156(L_15, L_21, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__2()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__2_mD1BE5C161161B1C87481DB4D00A7C095E97BEABA (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetLocalPosX(LeanSmooth.damp(d.trans.localPosition.x, d.toTrans.localPosition.x, ref d.fromInternal.x, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_3, NULL);
-		float L_5 = L_4.___x_2;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_7, NULL);
-		float L_9 = L_8.___x_2;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___x_2);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetLocalPosX_m6F1FF221D6E85CEFF90FC5494A09F7AD53ED1881(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__3()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__3_mEDC599F360E4A8EBFF1919A8086EEDB03687B5CF (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetLocalPosY(LeanSmooth.damp(d.trans.localPosition.y, d.toTrans.localPosition.y, ref d.fromInternal.y, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_3, NULL);
-		float L_5 = L_4.___y_3;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_7, NULL);
-		float L_9 = L_8.___y_3;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___y_3);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetLocalPosY_mB8B9AE753F005FAD2934B1E9DB64CA537D8F8AE1(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__4()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__4_m4D7B6BA9AE817DAA45CE85DB7FBC54C2C27C8713 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetLocalPosZ(LeanSmooth.damp(d.trans.localPosition.z, d.toTrans.localPosition.z, ref d.fromInternal.z, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_3, NULL);
-		float L_5 = L_4.___z_4;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_localPosition_mA9C86B990DF0685EA1061A120218993FDCC60A95(L_7, NULL);
-		float L_9 = L_8.___z_4;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___z_4);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetLocalPosZ_m71F81AF38CCA772527BBE88E056ED815234AB980(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__5()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__5_m85F5E53C558E748E076F321EB3073889B6C59540 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetPosX(LeanSmooth.damp(d.trans.position.x, d.toTrans.position.x, ref d.fromInternal.x, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_3, NULL);
-		float L_5 = L_4.___x_2;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_7, NULL);
-		float L_9 = L_8.___x_2;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___x_2);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetPosX_mE4B60972C40A1B6624CBB4328DA187C3777F55EC(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__6()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__6_mF3D756A2BB94A795502F9F85705847CD59625201 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetPosY(LeanSmooth.damp(d.trans.position.y, d.toTrans.position.y, ref d.fromInternal.y, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_3, NULL);
-		float L_5 = L_4.___y_3;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_7, NULL);
-		float L_9 = L_8.___y_3;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___y_3);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetPosY_m573601FE8F8DA1953A519D9E35543C18DB1BE444(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__7()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__7_mB197B997372821C5A1440C1EE27936158860FE74 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.LeanSetPosZ(LeanSmooth.damp(d.trans.position.z, d.toTrans.position.z, ref d.fromInternal.z, smoothTime, maxSpeed, Time.deltaTime));
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_3, NULL);
-		float L_5 = L_4.___z_4;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_7;
-		L_7 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_6, NULL);
-		NullCheck(L_7);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_7, NULL);
-		float L_9 = L_8.___z_4;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_10 = __this->___d_0;
-		NullCheck(L_10);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_11 = (&L_10->___fromInternal_27);
-		float* L_12 = (&L_11->___z_4);
-		float L_13 = __this->___smoothTime_1;
-		float L_14 = __this->___maxSpeed_2;
-		float L_15;
-		L_15 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		float L_16;
-		L_16 = LeanSmooth_damp_m9B4F47657780898021D6020104C6CA37552ED2D7(L_5, L_9, L_12, L_13, L_14, L_15, NULL);
-		LeanTweenExt_LeanSetPosZ_mDA1F3811D4081778A57E5AFBF77E89BC9E371F95(L_1, L_16, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__8()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__8_mF01CF57D3B592300CF0E8C21382CC0961F8ABC3A (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	{
-		// d.trans.localScale = LeanSmooth.damp(d.trans.localScale, d.toTrans.localScale, ref d.fromInternal, smoothTime, maxSpeed, Time.deltaTime);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_2 = __this->___d_0;
-		NullCheck(L_2);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_3 = L_2->___trans_26;
-		NullCheck(L_3);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Transform_get_localScale_m804A002A53A645CDFCD15BB0F37209162720363F(L_3, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_5 = __this->___d_0;
-		NullCheck(L_5);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_6;
-		L_6 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_5, NULL);
-		NullCheck(L_6);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_7;
-		L_7 = Transform_get_localScale_m804A002A53A645CDFCD15BB0F37209162720363F(L_6, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_8 = __this->___d_0;
-		NullCheck(L_8);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* L_9 = (&L_8->___fromInternal_27);
-		float L_10 = __this->___smoothTime_1;
-		float L_11 = __this->___maxSpeed_2;
-		float L_12;
-		L_12 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13;
-		L_13 = LeanSmooth_damp_m1A5566D689152EB9897514A7167D938ABEE89A0E(L_4, L_7, L_9, L_10, L_11, L_12, NULL);
-		NullCheck(L_1);
-		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_1, L_13, NULL);
-		// }; break;
-		return;
-	}
-}
-// System.Void LeanTween/<>c__DisplayClass194_0::<followDamp>b__9()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass194_0_U3CfollowDampU3Eb__9_m8E99F76EFA5CDE813FBA66948CE2BE8FFA0FE3D6 (U3CU3Ec__DisplayClass194_0_tE934B0F2A69D063251EC3D87F0586ECF05DFDD66* __this, const RuntimeMethod* method) 
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Component_GetComponent_TisRenderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF_mC91ACC92AD57CA6CA00991DAF1DB3830BCE07AF8_RuntimeMethod_var);
-		s_Il2CppMethodInitialized = true;
-	}
-	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
-	memset((&V_0), 0, sizeof(V_0));
-	{
-		// var col = LeanSmooth.damp(d.trans.LeanColor(), d.toTrans.LeanColor(), ref d.optional.color, smoothTime, maxSpeed, Time.deltaTime);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_0 = __this->___d_0;
-		NullCheck(L_0);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_1 = L_0->___trans_26;
-		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_2;
-		L_2 = LeanTweenExt_LeanColor_mB6830EA450E342FC4125712D6CC8D115C603DCEC(L_1, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_3 = __this->___d_0;
-		NullCheck(L_3);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_4;
-		L_4 = LTDescr_get_toTrans_m314168C83ED9A57023FFFDA93E7FB7FA0B61C407(L_3, NULL);
-		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_5;
-		L_5 = LeanTweenExt_LeanColor_mB6830EA450E342FC4125712D6CC8D115C603DCEC(L_4, NULL);
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_6 = __this->___d_0;
-		NullCheck(L_6);
-		LTDescrOptional_t2716C2DBA1D01796CD7686A39C923800FE612BCF* L_7;
-		L_7 = LTDescr_get_optional_mF660B76150E72D4203369421ED47FE30E1884801_inline(L_6, NULL);
-		NullCheck(L_7);
-		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_8 = (&L_7->___color_9);
-		float L_9 = __this->___smoothTime_1;
-		float L_10 = __this->___maxSpeed_2;
-		float L_11;
-		L_11 = Time_get_deltaTime_m7AB6BFA101D83E1D8F2EF3D5A128AEE9DDBF1A6D(NULL);
-		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_12;
-		L_12 = LeanSmooth_damp_m4D3187B8FDB04F0C1C61F0D9C65396B9A9BD22A8(L_2, L_5, L_8, L_9, L_10, L_11, NULL);
-		V_0 = L_12;
-		// d.trans.GetComponent<Renderer>().material.color = col;
-		LTDescr_t7D2535016B50E5B777CEA4DA359DF39A6C396696* L_13 = __this->___d_0;
-		NullCheck(L_13);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_14 = L_13->___trans_26;
-		NullCheck(L_14);
-		Renderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF* L_15;
-		L_15 = Component_GetComponent_TisRenderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF_mC91ACC92AD57CA6CA00991DAF1DB3830BCE07AF8(L_14, Component_GetComponent_TisRenderer_t320575F223BCB177A982E5DDB5DB19FAA89E7FBF_mC91ACC92AD57CA6CA00991DAF1DB3830BCE07AF8_RuntimeMethod_var);
-		NullCheck(L_15);
-		Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* L_16;
-		L_16 = Renderer_get_material_m5BA2A00816C4CC66580D4B2E409CF10718C15656(L_15, NULL);
-		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_17 = V_0;
-		NullCheck(L_16);
-		Material_set_color_m5C32DEBB215FF9EE35E7B575297D8C2F29CC2A2D(L_16, L_17, NULL);
-		// }; break;
-		return;
-	}
-}
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"

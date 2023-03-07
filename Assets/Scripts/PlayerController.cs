@@ -624,12 +624,35 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Checkpoint"))
         {
             _colliderCp = collision.GetComponent<Collider2D>();
-            if(cPInstanceID[0] == 0)
+            //if(cPInstanceID[0] == 0)
+            //{
+            //    cPInstanceID[0] = _colliderCp.GetInstanceID();
+            //    _levelManager.player_EnteredCheckpoint();
+            //}
+            //else if(cPInstanceID[1] == 0)
+            //{
+            //    cPInstanceID[1] = _colliderCp.GetInstanceID();
+            //    if (cPInstanceID[0] != cPInstanceID[1])
+            //    {
+            //        _levelManager.player_EnteredCheckpoint();
+            //    }
+            //}
+            //else if (cPInstanceID[0] != 0)
+            //{
+            //    cPInstanceID[0] = cPInstanceID[1];
+            //    cPInstanceID[1] = _colliderCp.GetInstanceID();
+            //    if (cPInstanceID[0] != cPInstanceID[1])
+            //    {
+            //        _levelManager.player_EnteredCheckpoint();
+            //    }
+            //}
+
+            if (cPInstanceID[0] == 0)
             {
                 cPInstanceID[0] = _colliderCp.GetInstanceID();
                 _levelManager.player_EnteredCheckpoint();
             }
-            else if(cPInstanceID[1] == 0)
+            else if (cPInstanceID[1] == 0)
             {
                 cPInstanceID[1] = _colliderCp.GetInstanceID();
                 if (cPInstanceID[0] != cPInstanceID[1])
@@ -637,15 +660,17 @@ public class PlayerController : MonoBehaviour
                     _levelManager.player_EnteredCheckpoint();
                 }
             }
-            else if (cPInstanceID[0] != 0)
+            else
             {
+                int oldInstanceID = cPInstanceID[0];
                 cPInstanceID[0] = cPInstanceID[1];
                 cPInstanceID[1] = _colliderCp.GetInstanceID();
-                if (cPInstanceID[0] != cPInstanceID[1])
+                if (cPInstanceID[0] != cPInstanceID[1] && oldInstanceID != cPInstanceID[1])
                 {
                     _levelManager.player_EnteredCheckpoint();
                 }
             }
+
 
             //Debug.Log("Collision: " + collision.gameObject.tag);
 

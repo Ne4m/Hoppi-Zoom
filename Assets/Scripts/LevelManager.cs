@@ -711,26 +711,52 @@ public class LevelManager : MonoBehaviour
 
 
 
+        //if (spawnedObjects[0] == null)
+        //{
+        //    spawnedObjects[0] = new_CheckPoint;
+        //    //just started man
+
+        //}
+        //else if (spawnedObjects[1] == null)
+        //{
+        //    new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[0].transform.position.y + spawnDistance, 0);
+        //    spawnedObjects[1] = new_CheckPoint;
+        //}
+        //else if (spawnedObjects[0] != null)
+        //{
+        //    Destroy(spawnedObjects[0]);
+
+        //    new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[1].transform.position.y + spawnDistance, 0);
+
+        //    spawnedObjects[0] = spawnedObjects[1];
+        //    spawnedObjects[1] = new_CheckPoint;
+        //}
+
         if (spawnedObjects[0] == null)
         {
             spawnedObjects[0] = new_CheckPoint;
-            //just started man
-
         }
         else if (spawnedObjects[1] == null)
         {
-            new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[0].transform.position.y + spawnDistance, 0);
+            PositionCheckpoint(new_CheckPoint, spawnedObjects[0].transform.position.y + spawnDistance);
             spawnedObjects[1] = new_CheckPoint;
         }
-        else if (spawnedObjects[0] != null)
+        else
         {
             Destroy(spawnedObjects[0]);
-
-            new_CheckPoint.transform.position = new Vector3(0, spawnedObjects[1].transform.position.y + spawnDistance, 0);
-
+            PositionCheckpoint(new_CheckPoint, spawnedObjects[1].transform.position.y + spawnDistance);
             spawnedObjects[0] = spawnedObjects[1];
             spawnedObjects[1] = new_CheckPoint;
         }
 
+ 
+
     }
+
+
+    void PositionCheckpoint(GameObject checkpoint, float yPosition)
+    {
+        checkpoint.transform.position = new Vector3(0, yPosition, 0);
+    }
+
 }
